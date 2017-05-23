@@ -36,7 +36,7 @@ static char * C:\Program Files\FreeCAD 0_15\Mod\Fasteners\wbicon_xpm[] = {
     def Initialize(self):
         "This function is executed when FreeCAD starts"
         import GazeboStlExport, MoveToCOM # import here all the needed files that create your FreeCAD commands
-        self.list = ['RC_GazeboStlExport', 'RC_MoveToCOM'] # A list of command names created in the line above
+        self.list = ['RC_GazeboStlExport', 'RC_MoveToCOM','RC_ExportSDF'] # A list of command names created in the line above
         self.appendToolbar("RobotCreator",self.list) # creates a new toolbar with your commands
         self.appendMenu("My New Menu",self.list) # creates a new menu
         self.appendMenu(["An existing Menu","My submenu"],self.list) # appends a submenu to an existing menu
