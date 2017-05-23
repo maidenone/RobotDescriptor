@@ -1,19 +1,3 @@
-from FreeCAD import Gui
-from FreeCAD import Base
-import FreeCAD, FreeCADGui, Part, os, math
-
-class GazeboStlExport:
-    """GazeboStlExport"""
-
-    def GetResources(self):
-        return {'Pixmap'  : 'OpenSCAD_Explode_Group', # the name of a svg file available in the resources
-                'Accel' : "Shift+S", # a default shortcut (optional)
-                'MenuText': "Gazebo STL export",
-                'ToolTip' : "Exports STL in meters normal unit is millimeter"}
-
-    def Activated(self):
-        print "Scaling mesh"
-	import Mesh,BuildRegularGeoms
 import os, sys, Mesh
 
 robotName = "testing"
@@ -27,6 +11,21 @@ if not os.path.exists(meshPath):
     os.makedirs(meshPath)
  
 #os.chdir(projectName)
+
+modelCFG = open(projPath+"model.config",'w')
+modelCFG.write('<?xml version=\"1.0\"?>\n')
+modelCFG.write('<model>\n')
+modelCFG.write('  <name>'+robotName+'</name>\n')
+modelCFG.write('  <version>1.0</version>\n')
+modelCFG.write('  <sdf version=\"1.5\">'+robotName+'.sdf</sdf>\n')
+modelCFG.write('  <author>\n')
+modelCFG.write('    <name>Optional: YOUR NAME</name>\n')
+modelCFG.write('    <email>Optional: YOUR EMAIL</email>\n')
+modelCFG.write('  </author>\n')
+modelCFG.write('  <description>\n')
+modelCFG.write('    a bot example\n')
+modelCFG.write('  </description>\n')
+modelCFG.write('</model>\n')
 
 sdfFile = open(projPath+robotName+'.sdf', 'w')
 sdfFile.write('<?xml version=\"1.0\"?>\n')
@@ -55,10 +54,10 @@ for obj in objs:
 		mesh.transform(mat)
 
 		#move origo to center of mass
-		mesh.Placement.move(com*-1)
+		#mesh.Placement.move(com*-1)
 
 		#save scaled and transformed mesh as stl
-		mesh = Mesh.read(meshPath+name+".stl")
+		#mesh.write(meshPath+name+".stl")
 
 		sdfFile.write('<link name=\"'+name+'\">\n')
 		sdfFile.write('<pose> ' + str(pos.Base[0]+com.x) + ' ' + str(pos.Base[1]+com.y) + ' ' + str(pos.Base[2]+com.z)+ ' ' + str(pos.Rotation.toEuler()[0]) + ' ' + str(pos.Rotation.toEuler()[1])+ ' ' + str(pos.Rotation.toEuler()[2])+'</pose>\n')
@@ -92,13 +91,4 @@ for obj in objs:
 sdfFile.write('</model>\n')
 sdfFile.write('</sdf>\n')
 
-sdfFile.close()nyArm/"+obj.Name+".stl"
-	App.ActiveDocument.removeObject("Mesh")
-        return
-
-    def IsActive(self):
-        """Here you can define if the command must be active or not (greyed) if certain conditions
-        are met or not. This function is optional."""
-        return True
-
-FreeCADGui.addCommand('RC_GazeboStlExport',GazeboStlExport()) 
+sdfFile.close()
