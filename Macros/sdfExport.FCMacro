@@ -1,7 +1,12 @@
 import os, sys, Mesh
 
+
+def float_to_str(f):
+    return '{:.20f}'.format(f)
+
+
 robotName = "testing"
-projPath = "/home/maiden/Projects/RobotCreator/"+robotName + "/"
+projPath = os.path.expanduser('~') + "/.gazebo/models/" + robotName + "/"
 meshPath = projPath + "meshes/"
 
 if not os.path.exists(projPath):
@@ -26,6 +31,7 @@ modelCFG.write('  <description>\n')
 modelCFG.write('    a bot example\n')
 modelCFG.write('  </description>\n')
 modelCFG.write('</model>\n')
+modelCFG.close()
 
 sdfFile = open(projPath+robotName+'.sdf', 'w')
 sdfFile.write('<?xml version=\"1.0\"?>\n')
@@ -41,6 +47,17 @@ for obj in objs:
 		inertia = obj.Shape.MatrixOfInertia
 		pos = obj.Shape.Placement
 
+		com *= 0.001
+		mass *= 0.001
+		#inertia.scale(App.Vector(0.001,0.001,0.001))
+		A11 = inertia.A11 * 0.000000001
+		A12 = inertia.A12 * 0.000000001
+		A13 = inertia.A13 * 0.000000001
+		A22 = inertia.A22 * 0.000000001
+		A23 = inertia.A23 * 0.000000001
+		A33 = inertia.A33 * 0.000000001
+		pos.Base *= 0.001
+
 		#export shape as mesh (stl)
 		obj.Shape.exportStl(meshPath+name+".stl")
 		#import stl and translate/scale
@@ -54,24 +71,24 @@ for obj in objs:
 		mesh.transform(mat)
 
 		#move origo to center of mass
-		#mesh.Placement.move(com*-1)
+		mesh.Placement.Base *= 0.001
 
 		#save scaled and transformed mesh as stl
-		#mesh.write(meshPath+name+".stl")
+		mesh.write(meshPath+name+".stl")
 
 		sdfFile.write('<link name=\"'+name+'\">\n')
 		sdfFile.write('<pose> ' + str(pos.Base[0]+com.x) + ' ' + str(pos.Base[1]+com.y) + ' ' + str(pos.Base[2]+com.z)+ ' ' + str(pos.Rotation.toEuler()[0]) + ' ' + str(pos.Rotation.toEuler()[1])+ ' ' + str(pos.Rotation.toEuler()[2])+'</pose>\n')
 		sdfFile.write('<inertial>\n')
 		sdfFile.write('<pose> ' + str(pos.Base[0]+com.x) + ' ' + str(pos.Base[1]+com.y) + ' ' + str(pos.Base[2]+com.z)+ ' ' + str(pos.Rotation.toEuler()[0]) + ' ' + str(pos.Rotation.toEuler()[1])+ ' ' + str(pos.Rotation.toEuler()[2])+'</pose>\n')
 		sdfFile.write('<inertia>\n')
-		sdfFile.write('<ixx>'+str(inertia.A11/1000)+'</ixx>\n')
-		sdfFile.write('<ixy>'+str(inertia.A12/1000)+'</ixy>\n')
-		sdfFile.write('<ixz>'+str(inertia.A13/1000)+'</ixz>\n')
-		sdfFile.write('<iyy>'+str(inertia.A22/1000)+'</iyy>\n')
-		sdfFile.write('<iyz>'+str(inertia.A23/1000)+'</iyz>\n')
-		sdfFile.write('<izz>'+str(inertia.A33/1000)+'</izz>\n')
+		sdfFile.write('<ixx>'+float_to_str(A11)+'</ixx>\n')
+		sdfFile.write('<ixy>'+float_to_str(A12)+'</ixy>\n')
+		sdfFile.write('<ixz>'+float_to_str(A13)+'</ixz>\n')
+		sdfFile.write('<iyy>'+float_to_str(A22)+'</iyy>\n')
+		sdfFile.write('<iyz>'+float_to_str(A23)+'</iyz>\n')
+		sdfFile.write('<izz>'+float_to_str(A33)+'</izz>\n')
 		sdfFile.write('</inertia>\n')
-		sdfFile.write('<mass>'+str(mass/1000)+'</mass>\n')
+		sdfFile.write('<mass>'+str(mass)+'</mass>\n')
 		sdfFile.write('</inertial>\n')
 		sdfFile.write('<collision name=\"collision\">\n')
 		sdfFile.write('<geometry>\n')
