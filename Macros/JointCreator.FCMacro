@@ -1,0 +1,39 @@
+import FreeCAD as App
+import FreeCADGui
+import FreeCAD
+import Part
+
+class Joint:
+  def __init__(self, obj,parent,child):
+    '''"App two point properties"'''
+    obj.addProperty("App::PropertyString","Parent","Joint").Parent = parent.Name
+    obj.addProperty("App::PropertyString","Child","Joint").Child = child.Name
+    obj.addProperty("App::PropertyAngle","Angle1","Joint","Angle1 of joint").Angle1 = 90
+    obj.addProperty("App::PropertyVector","axis","rotation","End point").axis=FreeCAD.Vector(1,0,0)
+    obj.Proxy = self
+
+  def execute(self, fp):
+    '''"Print a short message when doing a recomputation, this method is mandatory" '''
+    fp.Shape = Part.makeSphere(1)
+
+class ViewProviderJoint:
+  def __init__(self, obj):
+    ''' Set this object to the proxy object of the actual view provider '''
+    obj.ShapeColor=(1.0,0.0,0.0)
+    obj.Proxy = self
+
+  def getDefaultDisplayMode(self):
+    ''' Return the name of the default display mode. It must be defined in getDisplayModes. '''
+    return "Flat Lines"
+
+
+selection = Gui.Selection.getSelection()
+if len(selection) == 2:
+  j=FreeCAD.ActiveDocument.addObject("Part::FeaturePython","Joint")
+  Joint(j,selection[0],selection[1])
+  ViewProviderJoint(j.ViewObject)
+  App.ActiveDocument.recompute() 
+
+else:
+  print "Only support selection of two elements on two different objects"
+
