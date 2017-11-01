@@ -14,8 +14,7 @@ THIS PROJECT IS IN EARLY DEVELOPMENT (AKA it's not fully functional yet)
 * can only be exported as a hinge joint arond x axis for the momemnt  
 * GUI in progress  
   
-[![FreeCAD_RobotCreator_Workbench_Youtube_clip](https://img.youtube.com/vi/BKoqIrubiao/0.jpg)](https://www.youtube.com/watch?v=BKoqIrubiao)  
-**Note:** video produced **before** the scaling was implemented (FreeCAD exports in mm and gazebo imports in m).
+[![FreeCAD_RobotCreator_Workbench_Youtube_clip](https://img.youtube.com/vi/a7DPU1K4rS8/0.jpg)](https://www.youtube.com/watch?v=a7DPU1K4rS8)
 
 ## Feedback
 Please direct all feedback to the dedicated FreeCAD forum thread 
