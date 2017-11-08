@@ -5,7 +5,7 @@ import FreeCAD, FreeCADGui, Part, os, math
 class RobotCreator (Workbench):
 
     MenuText = "RobotCreator"
-    ToolTip = "A description of my workbench"
+    ToolTip = "A Workbench for robot creation and simulation"
     Icon = '''
 /* XPM */
 static char * C:\Program Files\FreeCAD 0_15\Mod\Fasteners\wbicon_xpm[] = {
@@ -35,11 +35,12 @@ static char * C:\Program Files\FreeCAD 0_15\Mod\Fasteners\wbicon_xpm[] = {
 
     def Initialize(self):
         "This function is executed when FreeCAD starts"
-        import GazeboStlExport, MoveToCOM # import here all the needed files that create your FreeCAD commands
-        self.list = ['RC_GazeboStlExport', 'RC_MoveToCOM','RC_ExportSDF'] # A list of command names created in the line above
+        import GazeboSDFExportStatic, GazeboSDFExport, CreateJoint # import here all the needed files that create your FreeCAD commands
+        self.list = ['RC_GazeboSDFExportStatic','RC_GazeboSDFExport', 'RC_CreateJoint'] # A list of command names created in the line above
         self.appendToolbar("RobotCreator",self.list) # creates a new toolbar with your commands
         self.appendMenu("My New Menu",self.list) # creates a new menu
         self.appendMenu(["An existing Menu","My submenu"],self.list) # appends a submenu to an existing menu
+	FreeCADGui.addIconPath( '~/.FreeCAD/Mod/RobotCreator/icons' )
     def Activated(self):
         "This function is executed when the workbench is activated"
         return
