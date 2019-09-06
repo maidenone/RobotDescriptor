@@ -1,3 +1,4 @@
+from __future__ import print_function
 import os, sys, Mesh
 
 def float_to_str(f):
@@ -47,7 +48,7 @@ modelCFG.write('  </description>\n')
 modelCFG.write('</model>\n')
 modelCFG.close()
 
-print "writing to file" + projPath+robotName+'.sdf'
+print("writing to file" + projPath+robotName+'.sdf')
 sdfFile = open(projPath+robotName+'.sdf', 'w')
 sdfFile.write('<?xml version=\"1.0\"?>\n')
 sdfFile.write('<sdf version=\"1.5\">\n')
@@ -55,9 +56,9 @@ sdfFile.write('<model name=\"'+robotName+'\">\n')
 
 objs = FreeCAD.ActiveDocument.Objects
 for obj in objs:
-  print obj.Name
+  print(obj.Name)
   if "Joint" in obj.Name:
-    print "Joint: " + obj.Name + " with label " + obj.Label+ " detected!"
+    print("Joint: " + obj.Name + " with label " + obj.Label+ " detected!")
     pos = obj.Shape.Placement
     pos.Base *= 0.001
     sdfFile.write(' <joint name="'+bodyLabelFromObjStr(obj.Parent)+bodyLabelFromObjStr(obj.Child)+'" type="revolute">\n')
@@ -70,7 +71,7 @@ for obj in objs:
     sdfFile.write(' </joint>\n')
 
   if obj.TypeId == 'PartDesign::Body' or obj.TypeId == 'Part::Box':
-    print "Link: " + obj.Name + " with label " + obj.Label+ " detected!"
+    print("Link: " + obj.Name + " with label " + obj.Label+ " detected!")
     name = obj.Label
     mass = obj.Shape.Mass
     inertia = obj.Shape.MatrixOfInertia
