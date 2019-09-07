@@ -12,7 +12,7 @@ class ExportSDF:
                 'ToolTip' : "Export Robot to SDF"}
 
     def Activated(self):
-	print "Exporting SDF file"
+	print("Exporting SDF file")
 	robotName = "testing"
 
 	sdfFile = open(robotName+'.sdf', 'w')
