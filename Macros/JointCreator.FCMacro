@@ -1,3 +1,4 @@
+from __future__ import print_function
 import FreeCAD as App
 import FreeCADGui
 import FreeCAD
@@ -81,10 +82,10 @@ class CreateHingeJointForm(QtGui.QDialog):
     self.close()
 
 def routine1():
-  print("create!")
+  print('create!')
 
 def routine2():
-  print("abort!")
+  print('abort!')
 
 class Joint:
   def __init__(self, obj,parent,child):
@@ -123,7 +124,7 @@ if len(selection) == 2:
     ViewProviderJoint(j.ViewObject)
     App.ActiveDocument.recompute() 
   elif form.retStatus==2:
-    print("abort!")
+    print('abort')
 
 else:
   print("Only support selection of two elements on two different objects")

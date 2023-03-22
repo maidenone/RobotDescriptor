@@ -1,3 +1,4 @@
+from __future__ import print_function
 import os, sys, Mesh
 
 def float_to_str(f):
@@ -48,6 +49,7 @@ modelCFG.write('</model>\n')
 modelCFG.close()
 
 print("writing to file" + projPath + robotName + ".sdf")
+
 sdfFile = open(projPath+robotName+'.sdf', 'w')
 sdfFile.write('<?xml version=\"1.0\"?>\n')
 sdfFile.write('<sdf version=\"1.5\">\n')
