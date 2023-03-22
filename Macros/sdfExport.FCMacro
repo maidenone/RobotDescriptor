@@ -48,7 +48,8 @@ modelCFG.write('  </description>\n')
 modelCFG.write('</model>\n')
 modelCFG.close()
 
-print("writing to file" + projPath+robotName+'.sdf')
+print("writing to file" + projPath + robotName + ".sdf")
+
 sdfFile = open(projPath+robotName+'.sdf', 'w')
 sdfFile.write('<?xml version=\"1.0\"?>\n')
 sdfFile.write('<sdf version=\"1.5\">\n')

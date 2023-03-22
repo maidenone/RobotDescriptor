@@ -40,7 +40,7 @@ static char * C:\Program Files\FreeCAD 0_15\Mod\Fasteners\wbicon_xpm[] = {
         self.appendToolbar("RobotCreator",self.list) # creates a new toolbar with your commands
         self.appendMenu("My New Menu",self.list) # creates a new menu
         self.appendMenu(["An existing Menu","My submenu"],self.list) # appends a submenu to an existing menu
-	FreeCADGui.addIconPath( '~/.FreeCAD/Mod/RobotCreator/icons' )
+    FreeCADGui.addIconPath("~/.FreeCAD/Mod/RobotCreator/icons")
     def Activated(self):
         "This function is executed when the workbench is activated"
         return
