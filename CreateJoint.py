@@ -87,10 +87,10 @@ class CreateHingeJointForm(QtGui.QDialog):
 		self.close()
 
 def routine1():
-	print 'create!'
+	print("create!")
 
 def routine2():
-	print 'abort!'
+	print("abort!")
 
 class Joint:
 	def __init__(self, obj,parent,child):
@@ -120,14 +120,14 @@ class CreateJoint:
 	"""RC_CreateJoint"""
 
 	def GetResources(self):
-		print FreeCAD.getUserAppDataDir()+"Mod" + "/RobotCreator/icons/createJoint.png"
+		print(FreeCAD.getUserAppDataDir()+"Mod" + "/RobotCreator/icons/createJoint.png")
 		return {'Pixmap'  : str(FreeCAD.getUserAppDataDir()+"Mod" + "/RobotCreator/icons/createJoint.png"), # the name of a svg file available in the resources
 			'Accel' : "Shift+j", # a default shortcut (optional)
 			'MenuText': "Create a joint",
 			'ToolTip' : "Create a joint"}
 
 	def Activated(self):
-		print "creating a joint"
+		print("creating a joint")
 
 		selection = Gui.Selection.getSelection()
 		if len(selection) == 2:
@@ -142,9 +142,9 @@ class CreateJoint:
 				ViewProviderJoint(j.ViewObject)
 				App.ActiveDocument.recompute() 
 			elif form.retStatus==2:
-				print 'abort'
+				print("abort!")
 		else:
-			print "Only support selection of two elements on two different objects"
+			print("Only support selection of two elements on two different objects")
 
 	def IsActive(self):
 		"""Here you can define if the command must be active or not (greyed) if certain conditions
