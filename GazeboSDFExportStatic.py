@@ -5,20 +5,20 @@ import Mesh,BuildRegularGeoms
 import os, sys, Mesh
 
 def float_to_str(f):
-  return '{:.20f}'.format(f)
+	return '{:.20f}'.format(f)
 
 def deg2rad(a):
-  return a*0.01745329252
+	return a*0.01745329252
 
 def str2obj(a):
-  return FreeCAD.ActiveDocument.getObject(a)
+	return FreeCAD.ActiveDocument.getObject(a)
 
 def bodyFromPad(a):
-  objs = FreeCAD.ActiveDocument.Objects
-  for obj in objs:
-    if obj.TypeId == 'PartDesign::Body':
-      if obj.hasObject(a):
-        return obj
+	objs = FreeCAD.ActiveDocument.Objects
+	for obj in objs:
+		if obj.TypeId == 'PartDesign::Body':
+			if obj.hasObject(a):
+				return obj
 
 def bodyLabelFromObjStr(a):
   b = str2obj(a)
@@ -30,7 +30,8 @@ class GazeboSDFExportStatic:
 	"""GazeboSDFExport"""
 
 	def GetResources(self):
-		return {'Pixmap' : str(FreeCAD.getUserAppDataDir()+"Mod" + "/RobotCreator/icons/SDFexportStatic.png"), # the name of a svg file available in the resources
+		__dirname__ = os.path.join(FreeCAD.getResourceDir(), "Mod", "RobotCreator")
+		return {'Pixmap' : str(__dirname__ + "/Resources/icons/SDFexportStatic.png"), # the name of a svg file available in the resources
 				'Accel' : "Shift+a", # a default shortcut (optional)
 				'MenuText': "Gazebo static SDF export",
 				'ToolTip' : "Exports static SDF to Gazebo"}

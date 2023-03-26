@@ -12,7 +12,13 @@ THIS PROJECT IS IN EARLY DEVELOPMENT (AKA it's not fully functional yet)
 **Joint export (in progress)**  
 * can create joints objects and move them around in FreeCAD  
 * can only be exported as a hinge joint arond x axis for the momemnt  
-* GUI in progress  
+* GUI in progress
+
+** Install **
+* Put the RobotCreator folder in your FreeCAD/Mod/ folder
+* Put the RobotCreator/Resources folder in your FreeCAD/share/Mod/ folder
+For developers:
+* For conviniance you can just create two symlinks from the location you checked out the code. 
   
 [![FreeCAD_RobotCreator_Workbench_Youtube_clip](https://img.youtube.com/vi/a7DPU1K4rS8/0.jpg)](https://www.youtube.com/watch?v=a7DPU1K4rS8)
 
