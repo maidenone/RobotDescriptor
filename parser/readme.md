@@ -34,4 +34,7 @@ illustration
 
 #Tasks 
  1.add an iterator method to be used when traversing the tree to find children e.g when model is called the parent  element needs to be identified the search needs to begin from the root hence an iterator to help in selecting the right elements to visit
- 2.
+ 
+
+NOTE: 
+    watch the ElemDict variable and Main_ElemDict

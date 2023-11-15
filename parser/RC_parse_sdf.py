@@ -31,6 +31,7 @@ class sdf_parse:
         ElemDict={};
         # append alement to  list 
         self.parent_stack.append(Element)
+        # set tag name 
         ElemDict["tag"]=Element.attrib["name"]
         #find all attributes and store them  in a list
         #this is due to some classes having multiple attributes 
@@ -91,8 +92,11 @@ class sdf_parse:
                 self.c_tree=self.parse_tree(self.c_dir)
                 self._c_root=self.c_tree.getroot()
                 ElemDict["children"].append(self.populate_structure(self._c_root))
-            else:
+            elif child.tag !=" description" and child.tag != "include":
                  ElemDict["children"].append(self.populate_structure(child))
+            else:
+                print("just found a new tag\n :",child.tag)
+        #remove last  element form list 
         self.parent_stack.pop()         
         return ElemDict   
         
