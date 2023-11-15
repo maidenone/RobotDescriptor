@@ -11,7 +11,7 @@ class sdf_parse:
         #initialize directory with the root.sdf
         self.root_dir=os.path.join(_dir,version,file)
         #create a dictionary 
-        self.ElemDict={}
+        self.Main_ElemDict={}
         #parse tree and store the result in local variable tree
         self.tree=self.parse_tree(self.root_dir)
         #get the root element 
@@ -19,14 +19,14 @@ class sdf_parse:
         #populate the dictionary with data 
         
         # call the tree with the parent  root element
-        self.populate_structure(self.root)
+        self.Main_ElemDict=self.populate_structure(self.root)
         
         #the first argument is the parent of the element
         #the second is the dictionary structure to store the data 
     def populate_structure(self,parent):
         #add elements to structure 
-        
-        self.ElemDict["tag"]=parent.attrib["name"]
+        ElemDict={};
+        ElemDict["tag"]=parent.attrib["name"]
         #find all attributes and store them  in a list
         #this is due to some classes having multiple attributes 
         #store attibute dictionary and descritpion in a tuple 
@@ -36,14 +36,14 @@ class sdf_parse:
             self._attr=[]
             description=result.find("description").text
             self._attr.append((result.attrib,description))
-        self.ElemDict["attributes"]=self._attr
-        self.ElemDict["value"]=parent.text
+        ElemDict["attributes"]=self._attr
+        ElemDict["value"]=parent.text
         
         #the parent node cannot have the root as itself 
         if self.root==parent:
-            self.ElemDict["parent"]=None
+            ElemDict["parent"]=None
         else:
-            self.ElemDict["parent"]=parent
+            ElemDict["parent"]=parent
             
         
         #some elements do not have default value and type so
@@ -52,21 +52,21 @@ class sdf_parse:
         
         #check fo type 
         if "type" in parent.attrib.keys:
-            self.ElemDict["type"]=parent.attrib["type"]
+            ElemDict["type"]=parent.attrib["type"]
         else:
-             self.ElemDict["type"]=None
+             ElemDict["type"]=None
 
         #check for default
         if "default" in parent.attrib.keys:
-            self.ElemDict["default"]=parent.attrib["default"]
+            ElemDict["default"]=parent.attrib["default"]
         else:
-             self.ElemDict["default"]=None
+             ElemDict["default"]=None
         
         #check for the required key 
         if "required" in parent.attrib.keys:
-            self.ElemDict["required"]=parent.attrib["required"]
+            ElemDict["required"]=parent.attrib["required"]
         else:
-             self.ElemDict["required"]=None
+             ElemDict["required"]=None
         #now   loop  through every other children and store their data in the 
         #data in the children field 
         for child in parent:
@@ -77,10 +77,10 @@ class sdf_parse:
                 #child tree aka c_tree
                 self.c_tree=self.parse_tree(self.c_dir)
                 self._c_root=self.c_tree.getroot()
-                self.ElemDict["children"].append(self.populate_structure(self._c_root))
+                ElemDict["children"].append(self.populate_structure(self._c_root))
             else:
-                 self.ElemDict["children"].append(self.populate_structure(parent))
-                
+                 ElemDict["children"].append(self.populate_structure(parent))
+        return ElemDict   
         
 # parse and return tree structure
     def parse_tree(self,dir):
@@ -90,4 +90,4 @@ class sdf_parse:
     #property to be called to get the element dictionary structure 
     @property
     def Tree(self):
-        return self.ElemDict
+        return self.Main_ElemDict
