@@ -4,9 +4,61 @@ import re
 #import FreeCAD 
 
 #_dir=os.path.join(FreeCAD.getUserAppDataDir(),"Mod","RobotCreator","Resources","formats","sdf")
-_dir='/home/mbayi/Documents/RobotCreator/Resources/formats/sdf'
-class Element_Attribute:
-    pass
+_dir=os.path.join(os.path.expanduser("~"),'Documents',"RobotCreator","Resources","formats","sdf")
+
+#this class will store element attributes to allow ease of access later 
+class Element_Attributes:
+    def __init__(self):
+        self._name=""
+        self._default=""
+        self._type=""
+        self._required=""
+        self._description=""
+        
+    #name property
+    @property
+    def name(self):
+       return self._name
+    @name.setter
+    def name(self,value):
+        self._name=value
+    
+    #type property
+    @property
+    def type(self):
+       return self._type
+    @type.setter
+    def type(self,value):
+        self._type=value
+    
+    #default property
+    @property
+    def default(self):
+       return self._default
+    @default.setter
+    def default(self,value):
+        self._default=value
+    
+    #required property
+    @property
+    def required(self):
+       return self._required
+    @required.setter
+    def required(self,value):
+        self._required=value
+    
+    #description property
+    @property
+    def description(self):
+       return self._description
+    @description.setter
+    def description(self,value):
+        self._description=value
+
+    #get a dictionary of all elements 
+    def exatract_all(self):
+        return {"name":self._name,"type":self._type,"default":self._default,"required":self._required,"description":self._description}
+    
 
 class sdf_parse:
     def __init__(self,version='1.7',file='root.sdf'):
@@ -54,9 +106,15 @@ class sdf_parse:
         #list to store class atrributes 
         self._attr=[]
         for result in Element.findall("attribute"):
+            e=Element_Attributes()
+            e.name=result.attrib["name"]
+            e.type=result.attrib["type"]
+            e.default=result.attrib["default"]
+            e.required=result.attrib["required"]
             #remove whitespaces ,tabs and newline characters
-            description=re.sub('\s+',' ',str(result.find("description").text).strip())
-            self._attr.append((result.attrib,description))
+            e.description=re.sub('\s+',' ',str(result.find("description").text).strip())
+            self._attr.append(e)
+        
         #check to see that attributes are not empty
         if len(self._attr)==0:
             ElemDict["attributes"]=None

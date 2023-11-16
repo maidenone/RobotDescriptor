@@ -5,11 +5,7 @@ illustration
 {
     tag: str  , element tag
 
-    attributes: a list of tuples  first element of the tuple is a dictionary   of 
-                the key value pairs of the attribute's atrribute , I hope that's not confusing
-                the second is a string of the attributes descriprion 
-                some elements have multiple attributes hence this representation 
-                the list
+    attributes: a list of Element_attribute class 
 
     parent: Element  ,link to parent element
 
