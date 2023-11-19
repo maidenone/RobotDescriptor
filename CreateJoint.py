@@ -120,9 +120,9 @@ class CreateJoint:
 	"""RC_CreateJoint"""
 
 	def GetResources(self):
-		__dirname__ = os.path.join(FreeCAD.getResourceDir(), "Mod", "RobotCreator")
+		__dirname__ = os.path.join(FreeCAD.getUserAppDataDir(), "Mod", "RobotCreator")
 		print(__dirname__+"/Resources/icons/createJoint.png")
-		return {'Pixmap'  : str(__dirname__ + "/Resources/icons/createJoint.png"), # the name of a svg file available in the resources
+		return {'Pixmap'  : str(__dirname__ + "/Resources/icons/joint.svg"), # the name of a svg file available in the resources
 			'Accel' : "Shift+j", # a default shortcut (optional)
 			'MenuText': "Create a joint",
 			'ToolTip' : "Create a joint"}

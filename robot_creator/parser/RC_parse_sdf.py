@@ -1,11 +1,11 @@
 import xml.etree.ElementTree as ET
 import os 
 import re
-#import FreeCAD 
+import FreeCAD 
 
-#_dir=os.path.join(FreeCAD.getUserAppDataDir(),"Mod","RobotCreator","Resources","formats","sdf")
+_dir=os.path.join(FreeCAD.getUserAppDataDir(),"Mod","robot_creator","Resources","formats","sdf")
 
-_dir=os.path.join(os.path.expanduser("~"),'Documents',"RobotCreator","Resources","formats","sdf")
+#_dir=os.path.join(os.path.expanduser("~"),'Documents',"RobotCreator","Resources","formats","sdf")
 
 #this class will store element attributes to allow ease of access later 
 class Element_Attributes:

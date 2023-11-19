@@ -30,7 +30,7 @@ class GazeboSDFExport:
 	"""GazeboSDFExport"""
 
 	def GetResources(self):
-		__dirname__ = os.path.join(FreeCAD.getResourceDir(), "Mod", "RobotCreator")
+		__dirname__ = os.path.join(FreeCAD.getUserAppDataDir(), "Mod", "RobotCreator")
 		return {'Pixmap' : str(__dirname__ + "/Resources/icons/SDFexport.png"), # the name of a svg file available in the resources
 				'Accel' : "Shift+S", # a default shortcut (optional)
 				'MenuText': "Gazebo SDF export",

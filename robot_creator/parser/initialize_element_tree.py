@@ -1,8 +1,6 @@
 from . import  RC_parse_sdf
 import xml.etree.ElementTree as ET
 
-INCLUDE_COMMENTS=False
- 
 class convdict_2_tree:
     def __init__(self):
         #initialize class
