@@ -3,13 +3,16 @@ import FreeCADGui
 import os 
 from PySide import QtGui,QtCore
 #directory to initilize icon 
-__dirname__ = os.path.join(FreeCAD.getUserAppDataDir(), "Mod", "RobotCreator")+"/robot_creator/icons/initialize.svg"
+__dirname__ = os.path.join(FreeCAD.getUserAppDataDir(), "Mod", "RobotDescriptor")+"/robot_descriptor/icons/initialize.svg"
 #class to store the selected properties
 class init_properties:
 	def __init__(self):
 		self._format='sdf'
-		self._version='1.7'
-
+		self._version='1.10'
+		#this will hold the entire sdf definition of the sdf file 
+		#as a dictionary which will then be converted into a .sdf file
+		self._elements={}
+  
 	@property
 	def format(self):
 		return self._format
@@ -23,6 +26,14 @@ class init_properties:
 	@version.setter
 	def version(self,value):
 		self._version=value
+  
+	@property
+	def elements(self):
+		return self._elements
+	#will be implemented later
+	@elements.setter
+	def elements(self,elem):
+		pass
 
 #
 class initialize_widget(QtGui.QWidget):
@@ -30,23 +41,19 @@ class initialize_widget(QtGui.QWidget):
 		super(initialize_widget,self).__init__()
 		self.initUI()
 	def initUI(self):
-		uipath=FreeCAD.getUserAppDataDir()+"/Mod/RobotCreator/robot_creator/ui/initialize.ui"
+		uipath=FreeCAD.getUserAppDataDir()+"/Mod/RobotDescriptor/robot_descriptor/forms/initialize.ui"
 		self.form=FreeCADGui.PySideUic.loadUi(uipath,self)
-		self.version_qbox=self.form.version_popup
 		self.format_qbox=self.form.format_popup
 		self.accpt_btn=self.form.accept_button
   
 #create callbacks (slots)
-		self.version_qbox.currentTextChanged.connect(self.version_qbox_cb)
+		
 		self.format_qbox.currentTextChanged.connect(self.format_qb_cb)
 		self.accpt_btn.clicked.connect(self.accpt_btn_cb)
 		self.form.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
 #set window size and initial position 
 		self.form.setGeometry(400,300,400,300)
-		self.form.show()
-	def version_qbox_cb(self):
-		self.version_item=self.version_qbox.currentText()
-		FreeCAD.Console.PrintMessage("version selection "+self.version_item+"\n")	
+		self.form.show()	
   
 	def format_qb_cb(self):
 #urdf isn not yet implemented  ensure urdf is not selected
@@ -67,15 +74,15 @@ class initialize_widget(QtGui.QWidget):
 			group=document.Robot_Description
 			group.isValid()
 			group.Proxy.format=self.format_qbox.currentText()
-			group.Proxy.version=self.version_qbox.currentText()
+			
 		except:
 			group =document.addObject("App::DocumentObjectGroupPython","Robot_Description")
 			group.Proxy=init_properties()
 			group.Proxy.format=self.format_qbox.currentText()
-			group.Proxy.version=self.version_qbox.currentText()
+			
 
 
-class RC_init:
+class RD_init:
     
     def GetResources(self):
         return {"Pixmap":__dirname__,"Accel":"shift+i","MenuText":"Initialization ","ToolTip":"initialize properties"}
@@ -87,4 +94,4 @@ class RC_init:
         return True
 
 
-FreeCADGui.addCommand('RC_initialize',RC_init()) 
+FreeCADGui.addCommand('RD_initialize',RD_init()) 

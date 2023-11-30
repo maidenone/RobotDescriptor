@@ -3,7 +3,7 @@ import os
 import re
 import FreeCAD 
 
-_dir=os.path.join(FreeCAD.getUserAppDataDir(),"Mod","robot_creator","Resources","formats","sdf")
+_dir=os.path.join(FreeCAD.getUserAppDataDir(),"Mod","robot_description","Resources","formats","sdf")
 
 #_dir=os.path.join(os.path.expanduser("~"),'Documents',"RobotCreator","Resources","formats","sdf")
 
@@ -62,7 +62,9 @@ class Element_Attributes:
     #get only the name and default value 
     def extract_main(self):
         return {"name":self._name,"default":self._default}
-        
+
+
+    
 #class to parse the sdf file and generate a dictioanary 
 class sdf_parse:
     def __init__(self,version='1.7',file='root.sdf'):
