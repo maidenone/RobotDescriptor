@@ -8,7 +8,7 @@ else:
 import xml.etree.ElementTree as ET
 
 class convdict_2_tree:
-    def __init__(self,sfile):
+    def __init__(self,sfile:str):
         #initialize class
         self.struct_class=RD_parse_sdf.sdf_parse(file=sfile)
         #get the dictionary structure
@@ -25,14 +25,13 @@ class convdict_2_tree:
     #create the root element 
     #this does not need other properties as it does not have them ,this I'm sure of 
     #so no need to add them
-    def create_root(self):
+    def create_root(self)->ET.Element:
         self._root_elem=ET.Element(self.structured["tag"])
         if self.structured["attributes"] != None:
             for attr in self.structured["attributes"]:
                 self._root_elem.set(attr.name,attr.attr_value)
         
-        
-    def construct_tree(self,parent_elem,st_lst):
+    def construct_tree(self,parent_elem:ET.Element,st_lst)->ET.Element:
         
         attr=dict()
         for child in st_lst:
@@ -46,10 +45,10 @@ class convdict_2_tree:
             if len(child["children"]) >0:
                 self.construct_tree(s,child["children"])
     @property
-    def get_tree(self):
+    def get_tree(self)->ET.ElementTree:
         return self.e_tree
     @property
-    def get_elements(self):
+    def get_elements(self)->ET.Element:
         return self._root_elem
     
 if __name__=="__main__":

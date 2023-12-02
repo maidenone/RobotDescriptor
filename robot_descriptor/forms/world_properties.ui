@@ -32,6 +32,9 @@
    <bool>false</bool>
   </property>
   <widget class="QTabWidget" name="world_tabs">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -52,8 +55,14 @@
      <height>900</height>
     </size>
    </property>
+   <property name="acceptDrops">
+    <bool>false</bool>
+   </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>1</number>
+   </property>
+   <property name="tabsClosable">
+    <bool>false</bool>
    </property>
    <widget class="QWidget" name="world_">
     <attribute name="title">
@@ -2145,6 +2154,21 @@ to zero if you want the min COR always to be used</string>
       </item>
      </layout>
     </widget>
+   </widget>
+   <widget class="QWidget" name="light_tab">
+    <attribute name="title">
+     <string>light</string>
+    </attribute>
+   </widget>
+   <widget class="QWidget" name="scene_tab">
+    <attribute name="title">
+     <string>scene</string>
+    </attribute>
+   </widget>
+   <widget class="QWidget" name="spherical_coordinates_tab">
+    <attribute name="title">
+     <string>spherical coordinates</string>
+    </attribute>
    </widget>
   </widget>
  </widget>

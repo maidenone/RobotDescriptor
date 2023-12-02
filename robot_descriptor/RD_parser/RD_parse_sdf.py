@@ -62,7 +62,7 @@ class sdf_parse:
         # call the tree with the parent  root element
         self.Main_ElemDict=self.populate_structure(self.root)
            
-    def populate_structure(self,Element):
+    def populate_structure(self,Element:ET.Element):
         #add elements to structure 
         ElemDict={}
 
