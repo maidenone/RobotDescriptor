@@ -1,20 +1,23 @@
 import xml.etree.ElementTree as ET
 import os 
-import re
-import FreeCAD 
 
-_dir=os.path.join(FreeCAD.getUserAppDataDir(),"Mod","robot_description","Resources","formats","sdf")
 
-#_dir=os.path.join(os.path.expanduser("~"),'Documents',"RobotCreator","Resources","formats","sdf")
+DEBUG=False
+
+
+if DEBUG==False:
+	import FreeCAD 
+	_dir=os.path.join(FreeCAD.getUserAppDataDir(),"Mod","RobotDescriptor","robot_descriptor","sdf")
+else:
+	_dir=os.path.join(os.path.expanduser("~"),'Documents/RobotDescriptor/robot_descriptor/sdf')
+
+
 
 #this class will store element attributes to allow ease of access later 
 class Element_Attributes:
     def __init__(self):
         self._name=""
         self._default=""
-        self._type=""
-        self._required=""
-        self._description=""
         
     #name property
     @property
@@ -24,50 +27,27 @@ class Element_Attributes:
     def name(self,value):
         self._name=value
     
-    #type property
-    @property
-    def type(self):
-       return self._type
-    @type.setter
-    def type(self,value):
-        self._type=value
-    
     #default property
     @property
-    def default(self):
+    def attr_value(self):
        return self._default
-    @default.setter
-    def default(self,value):
+    @attr_value.setter
+    def attr_value(self,value):
         self._default=value
-    
-    #required property
-    @property
-    def required(self):
-       return self._required
-    @required.setter
-    def required(self,value):
-        self._required=value
-    
+  
     #description property
-    @property
-    def description(self):
-       return self._description
-    @description.setter
-    def description(self,value):
-        self._description=value
 
     #get a dictionary of all elements 
-    def exatract_all(self):
-        return {"name":self._name,"type":self._type,"default":self._default,"required":self._required,"description":self._description}
+   
     #get only the name and default value 
-    def extract_main(self):
+    def get_all(self):
         return {"name":self._name,"default":self._default}
 
 
     
 #class to parse the sdf file and generate a dictioanary 
 class sdf_parse:
-    def __init__(self,version='1.7',file='root.sdf'):
+    def __init__(self,version='1.10',file='root.sdf'):
         #initialize directory with the root.sdf
         self.root_dir=os.path.join(_dir,version,file)
         self.version=version
@@ -78,12 +58,10 @@ class sdf_parse:
         #get the root element 
         self.root=self.tree.getroot()
         
-        
         #populate the dictionary with data 
         # call the tree with the parent  root element
         self.Main_ElemDict=self.populate_structure(self.root)
-        
-        
+           
     def populate_structure(self,Element):
         #add elements to structure 
         ElemDict={}
@@ -106,11 +84,7 @@ class sdf_parse:
         for result in Element.findall("attribute"):
             e=Element_Attributes()
             e.name=result.attrib["name"]
-            e.type=result.attrib["type"]
-            e.default=result.attrib["default"]
-            e.required=result.attrib["required"]
-            #remove whitespaces ,tabs and newline characters
-            e.description=re.sub('\s+',' ',str(result.find("description").text).strip())
+            e.attr_value=result.attrib["default"]
             self._attr.append(e)
         
         #check to see that attributes are not empty
@@ -122,22 +96,11 @@ class sdf_parse:
         #some elements do not have default value and type so
         #checking if the data exists first before adding it
         # None is used if the following keys are not part of the attributes 
-        #check fo type 
-        if "type" in dict(Element.attrib):
-            ElemDict["type"]=Element.attrib["type"]
-        else:
-             ElemDict["type"]=None
         #check for default
         if "default" in dict(Element.attrib):
-            ElemDict["default"]=Element.attrib["default"]
+                ElemDict["value"]=Element.attrib["default"]    
         else:
-             ElemDict["default"]=None
-        
-        #check for the required key 
-        if "required" in dict(Element.attrib):
-            ElemDict["required"]=Element.attrib["required"]
-        else:
-             ElemDict["required"]=None
+             ElemDict["value"]=None
         
         #create a children key
         ElemDict["children"]=[]
@@ -145,26 +108,15 @@ class sdf_parse:
         #data in the children field 
         for child in Element:
             if child.tag =="include":
-                #if model is 
-                file=child.attrib["filename"]
-                self.c_dir=os.path.join(_dir,self.version,file)
-            
-                #child tree aka c_tree
-                self.c_tree=self.parse_tree(self.c_dir)
-                self._c_root=self.c_tree.getroot()
-                _c=self.populate_structure(self._c_root)
-                #dont add empty dictionaries
-                #some elements will be skipped
-                if len(_c) !=0:
-                    ElemDict["children"].append(_c)
-                    
-            elif child.tag =="element":
+                #skip include elements for now 
+               pass             
+            elif child.tag =="element" and child.attrib["name"]!="include":
                 _c=self.populate_structure(child)
                 if len(_c) !=0:
                     ElemDict["children"].append(_c)
             #add description item 
             elif child.tag =="description":
-                ElemDict["description"]=re.sub('\s+',' ',str(child.text).strip())
+              pass
             else:
                pass 
            
@@ -181,6 +133,7 @@ class sdf_parse:
         return self.Main_ElemDict
      
 if __name__=="__main__":  
-    s=sdf_parse()
+    s=sdf_parse(file="world.sdf")
     d=s.data_structure
+    print(d)
     print("done with this stage hopefully")

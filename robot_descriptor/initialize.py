@@ -2,39 +2,32 @@ import FreeCAD
 import FreeCADGui
 import os 
 from PySide import QtGui,QtCore
+from parser import initialize_element_tree
 #directory to initilize icon 
 __dirname__ = os.path.join(FreeCAD.getUserAppDataDir(), "Mod", "RobotDescriptor")+"/robot_descriptor/icons/initialize.svg"
 #class to store the selected properties
-class init_properties:
-	def __init__(self):
-		self._format='sdf'
-		self._version='1.10'
-		#this will hold the entire sdf definition of the sdf file 
-		#as a dictionary which will then be converted into a .sdf file
-		self._elements={}
-  
-	@property
-	def format(self):
-		return self._format
-	@format.setter
-	def format(self,value):
-		self._format=value
 
-	@property
-	def version(self):
-		return self._version
-	@version.setter
-	def version(self,value):
-		self._version=value
-  
-	@property
-	def elements(self):
-		return self._elements
-	#will be implemented later
-	@elements.setter
-	def elements(self,elem):
-		pass
+_DESCRIPTION_FORMAT='sdf'
+_SDF_VERSION='1.10'
+#this will hold the entire sdf definition of the sdf file 
+#as a dictionary which will then be converted into a .sdf file
+class RD_properties:
+    def __init__(self):
+        self.description_format='sdf'
+        #this will hold the entire sdf definition of the sdf file 
+#as a dictionary which will then be converted into a .sdf file
+        self._element_tree=None
+    
+    @property 
+    def format(self):
+        return self.description_format
+    
+    @format.setter
+    def format(self,value):
+        self.description_format=value
 
+    
+    
 #
 class initialize_widget(QtGui.QWidget):
 	def __init__(self):
@@ -59,28 +52,38 @@ class initialize_widget(QtGui.QWidget):
 #urdf isn not yet implemented  ensure urdf is not selected
 		self.format_item=self.format_qbox.currentText()
 		if self.format_item=="urdf":
-			self.msg=QtGui.QMessageBox.information(self.form,"","urdf not yet supported switching to sdf")
+			self.msg=QtGui.QMessageBox.information(self.form,"","urdf is not yet supported switching to sdf")
 			self.format_qbox.setCurrentText("sdf")
 		else:
 			pass
 #button callback 
+
 	def accpt_btn_cb(self):
+		#ensure there is an active document
 		try:
 			document=FreeCAD.ActiveDocument
 		except:
 			FreeCAD.Console.PrintError("No active document found \n")
 			return
+# check to ensure  a document object exists, if it does not add it
+
 		try:
 			group=document.Robot_Description
 			group.isValid()
-			group.Proxy.format=self.format_qbox.currentText()
-			
+				
 		except:
 			group =document.addObject("App::DocumentObjectGroupPython","Robot_Description")
-			group.Proxy=init_properties()
-			group.Proxy.format=self.format_qbox.currentText()
-			
-
+			description_properties=RD_properties()
+			description_properties.format=self.format_qbox.currentText()
+			if description_properties.format=='sdf':
+				group.Proxy=description_properties
+	# create an element tree for the root node 
+				root_et=initialize_element_tree.convdict_2_tree("root.sdf").e_tree
+				group.Proxy._element_tree=root_et
+			else:
+				pass
+				
+				
 
 class RD_init:
     
@@ -91,7 +94,10 @@ class RD_init:
         self.init_c=initialize_widget()
         
     def IsActive(slef):
-        return True
+        if _DESCRIPTION_FORMAT=='sdf':
+            return True
+        else:
+            return False
 
 
 FreeCADGui.addCommand('RD_initialize',RD_init()) 

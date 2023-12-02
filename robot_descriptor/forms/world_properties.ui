@@ -1,0 +1,2153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>world_properties_form</class>
+ <widget class="QWidget" name="world_properties_form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>610</width>
+    <height>822</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>605</width>
+    <height>820</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>610</width>
+    <height>830</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>world properties</string>
+  </property>
+  <property name="toolTip">
+   <string/>
+  </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
+  <widget class="QTabWidget" name="world_tabs">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>571</width>
+     <height>801</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>571</width>
+     <height>700</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>610</width>
+     <height>900</height>
+    </size>
+   </property>
+   <property name="currentIndex">
+    <number>0</number>
+   </property>
+   <widget class="QWidget" name="world_">
+    <attribute name="title">
+     <string>world</string>
+    </attribute>
+    <widget class="QGroupBox" name="gravity_group">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>80</y>
+       <width>431</width>
+       <height>91</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>The gravity vector in m/s^2, expressed in a coordinate frame defined by the spherical_coordinates</string>
+     </property>
+     <property name="title">
+      <string>Gravity</string>
+     </property>
+     <widget class="QLabel" name="g_vec_x">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>57</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>x</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="g_vec_y">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>20</y>
+        <width>57</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>y</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="g_vec_z">
+      <property name="geometry">
+       <rect>
+        <x>300</x>
+        <y>20</y>
+        <width>57</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>z</string>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="gravity_x">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>40</y>
+        <width>81</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="frame">
+       <bool>false</bool>
+      </property>
+      <property name="decimals">
+       <number>4</number>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="gravity_y">
+      <property name="geometry">
+       <rect>
+        <x>151</x>
+        <y>40</y>
+        <width>81</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="frame">
+       <bool>false</bool>
+      </property>
+      <property name="decimals">
+       <number>4</number>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="gravity_z">
+      <property name="geometry">
+       <rect>
+        <x>291</x>
+        <y>40</y>
+        <width>81</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="frame">
+       <bool>false</bool>
+      </property>
+      <property name="decimals">
+       <number>4</number>
+      </property>
+      <property name="minimum">
+       <double>-100.000000000000000</double>
+      </property>
+      <property name="stepType">
+       <enum>QAbstractSpinBox::AdaptiveDecimalStepType</enum>
+      </property>
+      <property name="value">
+       <double>-9.810000000000000</double>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="atmosphere_group">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>460</y>
+       <width>421</width>
+       <height>201</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>atmosphere</string>
+     </property>
+     <widget class="QLabel" name="type">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>30</y>
+        <width>57</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>type</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="atm_type">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>30</y>
+        <width>131</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="frame">
+       <bool>false</bool>
+      </property>
+      <item>
+       <property name="text">
+        <string>adiabatic</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QDoubleSpinBox" name="doubleSpinBox">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>60</y>
+        <width>151</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="suffix">
+       <string>K</string>
+      </property>
+      <property name="decimals">
+       <number>5</number>
+      </property>
+      <property name="minimum">
+       <double>-273.000000000000000</double>
+      </property>
+      <property name="maximum">
+       <double>1000.000000000000000</double>
+      </property>
+      <property name="value">
+       <double>288.149999999999977</double>
+      </property>
+     </widget>
+     <widget class="QLabel" name="temperature">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>60</y>
+        <width>81</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>temperature</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="pressure">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>110</y>
+        <width>57</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>pressure</string>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="doubleSpinBox_2">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>100</y>
+        <width>151</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="suffix">
+       <string>Pa</string>
+      </property>
+      <property name="decimals">
+       <number>5</number>
+      </property>
+      <property name="maximum">
+       <double>1000000.000000000000000</double>
+      </property>
+      <property name="value">
+       <double>101325.000000000000000</double>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="doubleSpinBox_3">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>140</y>
+        <width>141</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="decimals">
+       <number>8</number>
+      </property>
+      <property name="minimum">
+       <double>-104.000000000000000</double>
+      </property>
+      <property name="value">
+       <double>-0.006499000000000</double>
+      </property>
+     </widget>
+     <widget class="QLabel" name="temp_grad">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>140</y>
+        <width>101</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>temperature gradient</string>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="audio_group">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>280</y>
+       <width>431</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string extracomment="global audio properties"/>
+     </property>
+     <property name="title">
+      <string>audio </string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
+     </property>
+     <widget class="QLabel" name="device_label">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>30</y>
+        <width>81</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Device</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="device_string">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>30</y>
+        <width>321</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>Device to use for audio playback. A value of &quot;default&quot; will use the system's default audio device. 
+ Otherwise, specify an audio device file</string>
+      </property>
+      <property name="inputMask">
+       <string/>
+      </property>
+      <property name="text">
+       <string>default</string>
+      </property>
+      <property name="frame">
+       <bool>false</bool>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="wind_group">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>360</y>
+       <width>431</width>
+       <height>91</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>wind</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
+     </property>
+     <widget class="QLabel" name="w_vec_x">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>20</y>
+        <width>57</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>x</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="w_vec_y">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>20</y>
+        <width>57</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>y</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="w_vec_z">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>20</y>
+        <width>57</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>z</string>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="wind_x">
+      <property name="geometry">
+       <rect>
+        <x>21</x>
+        <y>40</y>
+        <width>121</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="frame">
+       <bool>false</bool>
+      </property>
+      <property name="suffix">
+       <string/>
+      </property>
+      <property name="decimals">
+       <number>5</number>
+      </property>
+      <property name="minimum">
+       <double>-100.000000000000000</double>
+      </property>
+      <property name="value">
+       <double>0.000000000000000</double>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="wind_y">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>40</y>
+        <width>81</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="frame">
+       <bool>false</bool>
+      </property>
+      <property name="decimals">
+       <number>5</number>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="wind_z">
+      <property name="geometry">
+       <rect>
+        <x>290</x>
+        <y>40</y>
+        <width>81</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="frame">
+       <bool>false</bool>
+      </property>
+      <property name="decimals">
+       <number>5</number>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="layoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>20</y>
+       <width>421</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="world_name_HLayout">
+      <item>
+       <widget class="QLabel" name="world_name_label">
+        <property name="text">
+         <string>name</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="world_name_input">
+        <property name="toolTip">
+         <string>Unique name of the world</string>
+        </property>
+        <property name="text">
+         <string>__default__</string>
+        </property>
+        <property name="frame">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QGroupBox" name="magnetic_field_group">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>180</y>
+       <width>431</width>
+       <height>91</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>The magnetic vector in Tesla, expressed in a coordinate frame defined by the spherical_coordinates</string>
+     </property>
+     <property name="title">
+      <string>Magnetic_field</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
+     </property>
+     <widget class="QLabel" name="m_vec_x">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>57</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>x</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="m_vex_y">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>20</y>
+        <width>57</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>y</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="m_vec_z">
+      <property name="geometry">
+       <rect>
+        <x>330</x>
+        <y>20</y>
+        <width>57</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>z</string>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="magn_x">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>40</y>
+        <width>121</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="frame">
+       <bool>false</bool>
+      </property>
+      <property name="suffix">
+       <string>T</string>
+      </property>
+      <property name="decimals">
+       <number>10</number>
+      </property>
+      <property name="minimum">
+       <double>0.000001000000000</double>
+      </property>
+      <property name="value">
+       <double>0.000001000000000</double>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="magn_y">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>40</y>
+        <width>121</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="frame">
+       <bool>false</bool>
+      </property>
+      <property name="suffix">
+       <string>T</string>
+      </property>
+      <property name="decimals">
+       <number>10</number>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="magn_z">
+      <property name="geometry">
+       <rect>
+        <x>300</x>
+        <y>40</y>
+        <width>121</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="frame">
+       <bool>false</bool>
+      </property>
+      <property name="suffix">
+       <string>T</string>
+      </property>
+      <property name="decimals">
+       <number>8</number>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="layoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>680</y>
+       <width>421</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="world_buttons_Hlayout">
+      <item>
+       <widget class="QPushButton" name="world_use_Default_pb">
+        <property name="text">
+         <string>use Defaults</string>
+        </property>
+        <property name="checkable">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="world_apply_pb">
+        <property name="text">
+         <string>apply</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="physics_tab">
+    <attribute name="title">
+     <string>physics</string>
+    </attribute>
+    <widget class="QGroupBox" name="type_group">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>170</y>
+       <width>401</width>
+       <height>71</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>The type of the dynamics engine. Current options are ode, bullet, simbody and dart.  Defaults to ode</string>
+     </property>
+     <property name="title">
+      <string>type</string>
+     </property>
+     <widget class="QRadioButton" name="ode_radio_btn">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>51</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>ode</string>
+      </property>
+      <property name="checked">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="bullet_radio_btn">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>20</y>
+        <width>61</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>bullet</string>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="simbody_radio_btn">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>20</y>
+        <width>81</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>simbody</string>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="dart_radio_btn">
+      <property name="geometry">
+       <rect>
+        <x>320</x>
+        <y>20</y>
+        <width>51</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>dart</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QStackedWidget" name="physics_type_stack">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>250</y>
+       <width>530</width>
+       <height>500</height>
+      </rect>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>530</width>
+       <height>500</height>
+      </size>
+     </property>
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="ode_properties">
+      <widget class="QGroupBox" name="ode_group_box">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>471</width>
+         <height>471</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>ODE</string>
+       </property>
+       <widget class="QGroupBox" name="solver_groupbox">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>30</y>
+          <width>441</width>
+          <height>231</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>solver</string>
+        </property>
+        <widget class="QCheckBox" name="Thread_positon_correction_checkb">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>190</y>
+           <width>184</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>Flag to use threading to speed up position correction computation</string>
+         </property>
+         <property name="text">
+          <string>thread_position_correction</string>
+         </property>
+        </widget>
+        <widget class="QCheckBox" name="dynamic_moi_scaling_checkb">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>160</y>
+           <width>180</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>Flag to enable dynamic rescaling of moment of inertia in constrained directions</string>
+         </property>
+         <property name="text">
+          <string>use_dynamic_moi_scaling</string>
+         </property>
+        </widget>
+        <widget class="QWidget" name="layoutWidget_3">
+         <property name="geometry">
+          <rect>
+           <x>220</x>
+           <y>30</y>
+           <width>171</width>
+           <height>26</height>
+          </rect>
+         </property>
+         <layout class="QHBoxLayout" name="iters_Hlayout">
+          <item>
+           <widget class="QLabel" name="ode_iters_label">
+            <property name="text">
+             <string>iters</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QDoubleSpinBox" name="ode_iters">
+            <property name="toolTip">
+             <string>Number of iterations for each step. A higher number produces greater accuracy at a performance cost</string>
+            </property>
+            <property name="value">
+             <double>50.000000000000000</double>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="layoutWidget_5">
+         <property name="geometry">
+          <rect>
+           <x>220</x>
+           <y>60</y>
+           <width>171</width>
+           <height>26</height>
+          </rect>
+         </property>
+         <layout class="QHBoxLayout" name="precon_iters_Hlayout">
+          <item>
+           <widget class="QLabel" name="precon_iters_label">
+            <property name="text">
+             <string>precon_iters</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QDoubleSpinBox" name="ode_precon_iters">
+            <property name="toolTip">
+             <string>experimental</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="layoutWidget_8">
+         <property name="geometry">
+          <rect>
+           <x>220</x>
+           <y>90</y>
+           <width>161</width>
+           <height>26</height>
+          </rect>
+         </property>
+         <layout class="QHBoxLayout" name="sor_Hlayout">
+          <item>
+           <widget class="QLabel" name="sor_label">
+            <property name="text">
+             <string>sor</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QDoubleSpinBox" name="ode_sor">
+            <property name="toolTip">
+             <string>Set the successive over-relaxation parameter</string>
+            </property>
+            <property name="value">
+             <double>1.300000000000000</double>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="layoutWidget_9">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>90</y>
+           <width>155</width>
+           <height>26</height>
+          </rect>
+         </property>
+         <layout class="QHBoxLayout" name="island_threads_Hlayout">
+          <item>
+           <widget class="QLabel" name="island_threads_label">
+            <property name="text">
+             <string>island threads</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QDoubleSpinBox" name="ode_island_threads">
+            <property name="toolTip">
+             <string>Number of threads to use for &quot;islands&quot; of disconnected models</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="layoutWidget_10">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>60</y>
+           <width>169</width>
+           <height>26</height>
+          </rect>
+         </property>
+         <layout class="QHBoxLayout" name="min_step_Hlayout">
+          <item>
+           <widget class="QLabel" name="ode_minstepsize_label">
+            <property name="text">
+             <string>min step size </string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QDoubleSpinBox" name="ode_minstep_size">
+            <property name="decimals">
+             <number>4</number>
+            </property>
+            <property name="value">
+             <double>0.000100000000000</double>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="layoutWidget_11">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>30</y>
+           <width>161</width>
+           <height>25</height>
+          </rect>
+         </property>
+         <layout class="QHBoxLayout" name="type_Hlayout">
+          <item>
+           <widget class="QLabel" name="ode_solver_type_label">
+            <property name="text">
+             <string>type</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="ode_solver_type_cb">
+            <item>
+             <property name="text">
+              <string>world</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>quick</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="layoutWidget_12">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>120</y>
+           <width>216</width>
+           <height>25</height>
+          </rect>
+         </property>
+         <layout class="QHBoxLayout" name="friction_Hlayout">
+          <item>
+           <widget class="QLabel" name="ode_friction_model_label">
+            <property name="text">
+             <string>friction_model</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="ode_friction_model">
+            <property name="toolTip">
+             <string>Name of ODE friction model to use</string>
+            </property>
+            <item>
+             <property name="text">
+              <string>pyramid_model</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>box_model</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>cone_model</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="constraints_groupbox">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>260</y>
+          <width>331</width>
+          <height>184</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>constraints</string>
+        </property>
+        <widget class="QLabel" name="cfm_label">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>30</y>
+           <width>57</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>cfm</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="cfm">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>30</y>
+           <width>77</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>Constraint force mixing parameter. See the ODE page for more information</string>
+         </property>
+         <property name="decimals">
+          <number>4</number>
+         </property>
+        </widget>
+        <widget class="QLabel" name="erp_label">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>60</y>
+           <width>57</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>erp</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="contact_max_correcting_vel_label">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>100</y>
+           <width>168</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>contact_max_correcting_vel</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="contact_surface_layer_label">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>130</y>
+           <width>132</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>contact_surface_layer</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="erp">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>60</y>
+           <width>77</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>Error reduction parameter.</string>
+         </property>
+         <property name="decimals">
+          <number>4</number>
+         </property>
+         <property name="value">
+          <double>0.200000000000000</double>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="contact_max_correcting_vel">
+         <property name="geometry">
+          <rect>
+           <x>180</x>
+           <y>100</y>
+           <width>85</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>The maximum correcting velocities allowed when resolving contacts</string>
+         </property>
+         <property name="decimals">
+          <number>2</number>
+         </property>
+         <property name="maximum">
+          <double>200.000000000000000</double>
+         </property>
+         <property name="value">
+          <double>100.000000000000000</double>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="contact_surface_layer">
+         <property name="geometry">
+          <rect>
+           <x>150</x>
+           <y>130</y>
+           <width>77</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>The depth of the surface layer around all geometry objects.
+ Contacts are allowed to sink into the surface layer up to the given depth before coming to rest. 
+The default value is zero. 
+Increasing this to some small value (e.g. 0.001) can help prevent jittering problems due to contacts being repeatedly made and broken</string>
+         </property>
+         <property name="decimals">
+          <number>4</number>
+         </property>
+         <property name="value">
+          <double>0.001000000000000</double>
+         </property>
+        </widget>
+       </widget>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="bullet_properties">
+      <widget class="QGroupBox" name="bullet_group_box">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>20</y>
+         <width>501</width>
+         <height>381</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>BULLET</string>
+       </property>
+       <widget class="QGroupBox" name="bullet_solver_groupbox">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>30</y>
+          <width>441</width>
+          <height>111</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>solver</string>
+        </property>
+        <widget class="QWidget" name="layoutWidget_2">
+         <property name="geometry">
+          <rect>
+           <x>240</x>
+           <y>30</y>
+           <width>171</width>
+           <height>26</height>
+          </rect>
+         </property>
+         <layout class="QHBoxLayout" name="bullet_iters_Hlayout">
+          <item>
+           <widget class="QLabel" name="bullet_iters_label">
+            <property name="text">
+             <string>iters</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QDoubleSpinBox" name="bullet_iters">
+            <property name="value">
+             <double>50.000000000000000</double>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="layoutWidget_4">
+         <property name="geometry">
+          <rect>
+           <x>240</x>
+           <y>60</y>
+           <width>161</width>
+           <height>26</height>
+          </rect>
+         </property>
+         <layout class="QHBoxLayout" name="bullet_sor_Hlayout">
+          <item>
+           <widget class="QLabel" name="bullet_sor_label">
+            <property name="text">
+             <string>sor</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QDoubleSpinBox" name="bullet_sor">
+            <property name="value">
+             <double>1.300000000000000</double>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="layoutWidget_6">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>60</y>
+           <width>169</width>
+           <height>26</height>
+          </rect>
+         </property>
+         <layout class="QHBoxLayout" name="min_step_Hlayout_2">
+          <item>
+           <widget class="QLabel" name="bullet_minstepsize_label">
+            <property name="text">
+             <string>min step size </string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QDoubleSpinBox" name="bullet_minstep_size">
+            <property name="decimals">
+             <number>4</number>
+            </property>
+            <property name="value">
+             <double>0.000100000000000</double>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="layoutWidget_7">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>30</y>
+           <width>191</width>
+           <height>25</height>
+          </rect>
+         </property>
+         <layout class="QHBoxLayout" name="type_Hlayout_2">
+          <item>
+           <widget class="QLabel" name="bullet_solver_type_label">
+            <property name="text">
+             <string>type</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="bullet_solver_type">
+            <item>
+             <property name="text">
+              <string>sequential_impulse</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="bullet_constraints_groupbox">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>140</y>
+          <width>481</width>
+          <height>211</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>constraints</string>
+        </property>
+        <widget class="QLabel" name="bullet_cfm_label">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>30</y>
+           <width>57</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string/>
+         </property>
+         <property name="text">
+          <string>cfm</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="bullet_cfm">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>30</y>
+           <width>77</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>Constraint force mixing parameter. See the ODE page for more information</string>
+         </property>
+         <property name="decimals">
+          <number>4</number>
+         </property>
+        </widget>
+        <widget class="QLabel" name="bullet_erp_label">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>60</y>
+           <width>57</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>erp</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="bullet_erp">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>60</y>
+           <width>77</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>Error reduction parameter.</string>
+         </property>
+         <property name="decimals">
+          <number>4</number>
+         </property>
+         <property name="value">
+          <double>0.200000000000000</double>
+         </property>
+        </widget>
+        <widget class="QCheckBox" name="bullet_split_impulse">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>90</y>
+           <width>102</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>split impulse</string>
+         </property>
+        </widget>
+        <widget class="QWidget" name="layoutWidget_13">
+         <property name="geometry">
+          <rect>
+           <x>230</x>
+           <y>30</y>
+           <width>217</width>
+           <height>26</height>
+          </rect>
+         </property>
+         <layout class="QHBoxLayout" name="bullet_contact_surface_layer_Hlayout">
+          <item>
+           <widget class="QLabel" name="bullet_contact_surface_layer_label">
+            <property name="text">
+             <string>contact_surface_layer</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QDoubleSpinBox" name="bullet_contact_surface_layer">
+            <property name="decimals">
+             <number>4</number>
+            </property>
+            <property name="value">
+             <double>0.001000000000000</double>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="layoutWidget_14">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>120</y>
+           <width>314</width>
+           <height>26</height>
+          </rect>
+         </property>
+         <layout class="QHBoxLayout" name="split_impulse_penetration_threshold_Hlayout">
+          <item>
+           <widget class="QLabel" name="bullet_split_impulse_penetration_threshold_label">
+            <property name="text">
+             <string>split_impulse_penetration_threshold</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QDoubleSpinBox" name="bullet_split_impulse_penetration_threshold">
+            <property name="decimals">
+             <number>4</number>
+            </property>
+            <property name="minimum">
+             <double>-100.000000000000000</double>
+            </property>
+            <property name="value">
+             <double>-0.010000000000000</double>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="simbody_properties">
+      <widget class="QGroupBox" name="simbody_group_box">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>471</width>
+         <height>491</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>SIMBODY</string>
+       </property>
+       <widget class="QGroupBox" name="simbody_contact_groupbox">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>130</y>
+          <width>451</width>
+          <height>351</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>contact</string>
+        </property>
+        <widget class="QLabel" name="simbody_stiffness_label">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>40</y>
+           <width>57</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>stiffness</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="simbody_stiffness">
+         <property name="geometry">
+          <rect>
+           <x>80</x>
+           <y>40</y>
+           <width>116</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>Default contact material stiffness 
+ (force/dist or torque/radian)</string>
+         </property>
+         <property name="maximum">
+          <double>100000000.000000000000000</double>
+         </property>
+         <property name="value">
+          <double>10000000.000000000000000</double>
+         </property>
+        </widget>
+        <widget class="QLabel" name="simbody_dissipation_label">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>70</y>
+           <width>65</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>dissipation</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="simbody_dissipation">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>70</y>
+           <width>77</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>dissipation coefficient to be used in compliant contact;
+ if not given it is (1-min_cor)/plastic_impact_velocity</string>
+         </property>
+         <property name="maximum">
+          <double>1000.000000000000000</double>
+         </property>
+         <property name="value">
+          <double>100.000000000000000</double>
+         </property>
+        </widget>
+        <widget class="QLabel" name="simbody_plastic_coef_restitution_label">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>100</y>
+           <width>139</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>plastic_coef_restitution</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="simbody_plastic_coef_restitution">
+         <property name="geometry">
+          <rect>
+           <x>160</x>
+           <y>100</y>
+           <width>62</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>This is the COR to be used at high velocities for rigid
+ impacts; if not given it is 1 - dissipation*plastic_impact_velocity</string>
+         </property>
+         <property name="value">
+          <double>0.500000000000000</double>
+         </property>
+        </widget>
+        <widget class="QLabel" name="simbody_plastic_impact_velocity_label">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>130</y>
+           <width>140</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>plastic_impact_velocity</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="simbody_plastic_impact_velocity">
+         <property name="geometry">
+          <rect>
+           <x>160</x>
+           <y>130</y>
+           <width>62</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>smallest impact velocity at which min COR is reached; set
+to zero if you want the min COR always to be used</string>
+         </property>
+         <property name="value">
+          <double>0.500000000000000</double>
+         </property>
+        </widget>
+        <widget class="QLabel" name="simbody_static_friction_label">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>170</y>
+           <width>81</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>static_friction</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="simbody_static_friction">
+         <property name="geometry">
+          <rect>
+           <x>110</x>
+           <y>160</y>
+           <width>77</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>static friction (mu_s)</string>
+         </property>
+         <property name="decimals">
+          <number>4</number>
+         </property>
+         <property name="value">
+          <double>0.900000000000000</double>
+         </property>
+        </widget>
+        <widget class="QLabel" name="simbody_dynamic_friction_label">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>210</y>
+           <width>100</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>dynamic_friction</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="simbody_dynamic_friction">
+         <property name="geometry">
+          <rect>
+           <x>130</x>
+           <y>200</y>
+           <width>77</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>dynamic friction (mu_d)</string>
+         </property>
+         <property name="decimals">
+          <number>4</number>
+         </property>
+         <property name="value">
+          <double>0.900000000000000</double>
+         </property>
+        </widget>
+        <widget class="QLabel" name="simbody_viscous_friction_label">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>240</y>
+           <width>93</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>viscous_friction</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="simbody_viscous_friction">
+         <property name="geometry">
+          <rect>
+           <x>120</x>
+           <y>240</y>
+           <width>77</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="decimals">
+          <number>4</number>
+         </property>
+        </widget>
+        <widget class="QLabel" name="simbody_override_impact_capture_velocity_label">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>270</y>
+           <width>202</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>override_impact_capture_velocity</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="simbody_override_impact_capture_velocity">
+         <property name="geometry">
+          <rect>
+           <x>230</x>
+           <y>270</y>
+           <width>77</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>for rigid impacts only, impact velocity at which
+          COR is set to zero; normally inherited from global default but can
+          be overridden here. Combining rule: use larger velocit</string>
+         </property>
+         <property name="decimals">
+          <number>4</number>
+         </property>
+         <property name="value">
+          <double>0.001000000000000</double>
+         </property>
+        </widget>
+        <widget class="QLabel" name="simbody_override_stiction_transition_velocity_label">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>310</y>
+           <width>216</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>override_stiction_transition_velocity</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="simbody_override_stiction_transition_velocity">
+         <property name="geometry">
+          <rect>
+           <x>240</x>
+           <y>310</y>
+           <width>77</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>This is the largest slip velocity at which
+ we'll consider a transition to stiction. Normally inherited
+ from a global default setting. For a continuous friction model
+ this is the velocity at which the max static friction force
+  is reached.  Combining rule: use larger velocity</string>
+         </property>
+         <property name="decimals">
+          <number>4</number>
+         </property>
+         <property name="value">
+          <double>0.001000000000000</double>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QLabel" name="simbody_min_step_size_label">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>40</y>
+          <width>84</width>
+          <height>15</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>min_step_size</string>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="simbody_min_step_size">
+        <property name="geometry">
+         <rect>
+          <x>120</x>
+          <y>40</y>
+          <width>85</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="statusTip">
+         <string>(Currently not used in simbody)\n The time duration which advances with each iteration of the dynamics engine,\n this has to be no bigger than max_step_size under physics block.  If left unspecified, \nmin_step_size defaults to max_step_size</string>
+        </property>
+        <property name="decimals">
+         <number>5</number>
+        </property>
+        <property name="minimum">
+         <double>0.000100000000000</double>
+        </property>
+        <property name="value">
+         <double>0.000100000000000</double>
+        </property>
+       </widget>
+       <widget class="QLabel" name="simbody_accuracy_label">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>70</y>
+          <width>57</width>
+          <height>15</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>accuracy</string>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="simbody_accuracy">
+        <property name="geometry">
+         <rect>
+          <x>120</x>
+          <y>70</y>
+          <width>85</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="statusTip">
+         <string>Roughly the relative error of the system.\n-LOG(accuracy) is roughly the number of significant digit</string>
+        </property>
+        <property name="decimals">
+         <number>5</number>
+        </property>
+        <property name="value">
+         <double>0.001000000000000</double>
+        </property>
+       </widget>
+       <widget class="QLabel" name="simbody_max_transient_velocity_label">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>100</y>
+          <width>139</width>
+          <height>15</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>max_transient_velocity</string>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="simbody_max_transient_velocity">
+        <property name="geometry">
+         <rect>
+          <x>160</x>
+          <y>100</y>
+          <width>77</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="statusTip">
+         <string>Tolerable &quot;slip&quot; velocity allowed by the solver when static \nfriction is supposed to hold object in place</string>
+        </property>
+        <property name="decimals">
+         <number>4</number>
+        </property>
+        <property name="value">
+         <double>0.010000000000000</double>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="dart_properties">
+      <widget class="QGroupBox" name="dart_group_box">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>40</y>
+         <width>331</width>
+         <height>161</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>DART</string>
+       </property>
+       <widget class="QLabel" name="dart_solver_type_label">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>30</y>
+          <width>70</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>solver_type</string>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="dart_solver_type">
+        <property name="geometry">
+         <rect>
+          <x>90</x>
+          <y>30</y>
+          <width>79</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <item>
+         <property name="text">
+          <string>pgs</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>dantzig</string>
+         </property>
+        </item>
+       </widget>
+       <widget class="QLabel" name="dart_collision_detector_label">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>70</y>
+          <width>121</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>collision_detector</string>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="comboBox_2">
+        <property name="geometry">
+         <rect>
+          <x>140</x>
+          <y>70</y>
+          <width>79</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <item>
+         <property name="text">
+          <string>dart</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>fcl</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>bullet</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>ode</string>
+         </property>
+        </item>
+       </widget>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="layoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>331</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="physics_name_Hlayout">
+      <item>
+       <widget class="QLabel" name="physics_name_label">
+        <property name="text">
+         <string>name</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="physics_name">
+        <property name="text">
+         <string>default_physics</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="layoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>50</y>
+       <width>331</width>
+       <height>26</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="max_step_Hlayout">
+      <item>
+       <widget class="QLabel" name="max_step_label">
+        <property name="text">
+         <string>max step size</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QDoubleSpinBox" name="doubleSpinBox_4">
+        <property name="toolTip">
+         <string>Maximum time step size at which every system in simulation can interact with the states of the world</string>
+        </property>
+        <property name="decimals">
+         <number>4</number>
+        </property>
+        <property name="minimum">
+         <double>0.001000000000000</double>
+        </property>
+        <property name="value">
+         <double>0.001000000000000</double>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="layoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>80</y>
+       <width>331</width>
+       <height>26</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="time_factor_Hlayout">
+      <item>
+       <widget class="QLabel" name="real_time_factor_label">
+        <property name="text">
+         <string>real time factor</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QDoubleSpinBox" name="doubleSpinBox_5">
+        <property name="toolTip">
+         <string>target simulation speedup factor, defined by ratio of simulation time to real-time</string>
+        </property>
+        <property name="decimals">
+         <number>4</number>
+        </property>
+        <property name="value">
+         <double>1.000000000000000</double>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="layoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>110</y>
+       <width>331</width>
+       <height>26</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="update_rate_HLayout">
+      <item>
+       <widget class="QLabel" name="real_time_update_rate_label">
+        <property name="text">
+         <string>real time update rate </string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QDoubleSpinBox" name="doubleSpinBox_6">
+        <property name="toolTip">
+         <string>Rate at which to update the physics engine (UpdatePhysics calls per real-time second)</string>
+        </property>
+        <property name="maximum">
+         <double>1100.000000000000000</double>
+        </property>
+        <property name="value">
+         <double>1000.000000000000000</double>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="layoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>140</y>
+       <width>331</width>
+       <height>26</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="max_cont_HLayout">
+      <item>
+       <widget class="QLabel" name="max_contacts_label">
+        <property name="text">
+         <string>max contacts</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QDoubleSpinBox" name="doubleSpinBox_7">
+        <property name="toolTip">
+         <string>Maximum number of contacts allowed between two entities. This value can be over ridden by a max_contacts element in a collision element</string>
+        </property>
+        <property name="minimum">
+         <double>1.000000000000000</double>
+        </property>
+        <property name="value">
+         <double>10.000000000000000</double>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

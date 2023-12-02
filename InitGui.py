@@ -20,9 +20,10 @@ class RobotDescriptor (Workbench):
 	def Initialize(self):
 		"This function is executed when FreeCAD starts"
 		__dirname__ = os.path.join(FreeCAD.getUserAppDataDir(), "Mod", "RobotDescriptor")
-		print("got dir:" + __dirname__);
+		#print("got dir:" + __dirname__);
   
-		from robot_descriptor import initialize ,world
+		from robot_descriptor import initialize 
+		from robot_descriptor.sdf_elements import world
 		#self.list = ['RC_initialize','RC_edit', 'RC_export'] # A list of command names created in the line above
 		self.list = ['RD_initialize','world_properties']
 		self.appendToolbar("RobotDescription",self.list) # creates a new toolbar with your commands

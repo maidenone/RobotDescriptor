@@ -2,13 +2,30 @@ import FreeCAD
 import FreeCADGui
 import os 
 from PySide import QtGui,QtCore
-
-_icon_dir__=os.path.join(FreeCAD.getUserAppDataDir(), "Mod", "RobotDescriptor")+"/robot_descriptor/icons/world_properties.svg"
+from  .. import RD_globals 
+from ..parser import RD_parse_sdf
+_icon_dir__=os.path.join(RD_globals.ICON_PATH,"world_properties.svg")
+class world():
+    def __init__(self):
+        pass 
 
 class world_properties(QtGui.QWidget):
     def __init__(self):
-        pass
+        super(world_properties,self).__init__()
+        self.parent="root"
+        self.name='world'
+        self.world_elems=RD_parse_sdf.sdf_parse(file="world.sdf").data_structure
+        self.initUI()
+        #This  is initialized to allow the restore defaults function
+        #it basically stores the default values for later acces 
     
+    def initUI(self):
+        self.ui_path=os.path.join(RD_globals.UI_PATH,"world_properties.ui")
+        self.world_form=FreeCADGui.PySideUic.loadUi(self.ui_path,self)
+        self.world_form.show()
+
+
+#initialize  class      
 class init_sdf_world:
   
     def GetResources(self):
@@ -19,7 +36,7 @@ class init_sdf_world:
 
     def Activated(self):
         """Do something here"""
-        
+        w=world_properties()
         return
 
     def IsActive(self):
