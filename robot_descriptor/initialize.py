@@ -2,7 +2,10 @@ import FreeCAD
 import FreeCADGui
 import os 
 from PySide import QtGui,QtCore
-from parser import initialize_element_tree
+
+import xml.etree.ElementTree as ET 
+
+from .RD_parser import initialize_element_tree
 #directory to initilize icon 
 __dirname__ = os.path.join(FreeCAD.getUserAppDataDir(), "Mod", "RobotDescriptor")+"/robot_descriptor/icons/initialize.svg"
 #class to store the selected properties
@@ -14,6 +17,7 @@ _SDF_VERSION='1.10'
 class RD_properties:
     def __init__(self):
         self.description_format='sdf'
+        self.Type="ElementTree"
         #this will hold the entire sdf definition of the sdf file 
 #as a dictionary which will then be converted into a .sdf file
         self._element_tree=None
@@ -78,8 +82,11 @@ class initialize_widget(QtGui.QWidget):
 			if description_properties.format=='sdf':
 				group.Proxy=description_properties
 	# create an element tree for the root node 
-				root_et=initialize_element_tree.convdict_2_tree("root.sdf").e_tree
-				group.Proxy._element_tree=root_et
+	# convert to string to allow serialization 
+	#there might be a better way to handle this 
+				root_elem=initialize_element_tree.convdict_2_tree("root.sdf").get_elements
+				group.Proxy._element_tree=root_elem
+				
 			else:
 				pass
 				

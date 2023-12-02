@@ -1,5 +1,10 @@
 
-from . import  RD_parse_sdf
+DEBUG=False
+if DEBUG==False:
+    from . import  RD_parse_sdf
+else:
+    import RD_parse_sdf
+    
 import xml.etree.ElementTree as ET
 
 class convdict_2_tree:
@@ -41,10 +46,18 @@ class convdict_2_tree:
             if len(child["children"]) >0:
                 self.construct_tree(s,child["children"])
     @property
-    def tree(self):
+    def get_tree(self):
         return self.e_tree
+    @property
+    def get_elements(self):
+        return self._root_elem
     
 if __name__=="__main__":
     t=convdict_2_tree("world.sdf")
-    tree=t.tree
+    elems=t.get_elements
+    xml_bytes=ET.tostring(elems,encoding='utf-8')
+    str_en=str(xml_bytes).encode()
+    print(str_en)
+    str_undo=ET.fromstring(str_en.encode('utf8'))
+    tree=ET.ElementTree(str_undo)
     tree.write("out.xml",encoding='utf8',xml_declaration=True)

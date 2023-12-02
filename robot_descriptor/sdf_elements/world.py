@@ -3,7 +3,7 @@ import FreeCADGui
 import os 
 from PySide import QtGui,QtCore
 from  .. import RD_globals 
-from ..parser import RD_parse_sdf
+from ..RD_parser import RD_parse_sdf
 _icon_dir__=os.path.join(RD_globals.ICON_PATH,"world_properties.svg")
 class world():
     def __init__(self):
