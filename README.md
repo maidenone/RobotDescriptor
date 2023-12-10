@@ -1,4 +1,4 @@
-# FreeCAD RobotCreator Workbench
+# FreeCAD RobotDescriptor Workbench
 FreeCAD Workbench for URDF &amp; SDF and Gazebo
 
 ## Important Note 
