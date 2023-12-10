@@ -225,4 +225,3 @@ class init_sdf_world:
         return True
 
 FreeCADGui.addCommand("world_properties", init_sdf_world())
-

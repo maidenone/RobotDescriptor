@@ -81,7 +81,8 @@ def get_xml_data(element:ET.Element,tag:str,Is_Attribute:bool)->Union[list,dict,
     see set_xml_data()
     The functions have  similar parameters
     except for the value parameter which is not included and tag \n
-    for attributes a list is used in place of tag with the parent tag at index 0 and attribute name at index 1    '''
+    for attributes a list is used in place of tag with the parent tag at index 0 and attribute name at index 1   
+    for not string values the caller  is responsible for converting to appropriate types'''
     def get_value(elem:ET.Element):
         if assert_vect(elem):
             # equivalent string 
