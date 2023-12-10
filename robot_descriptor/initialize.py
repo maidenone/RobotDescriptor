@@ -17,10 +17,10 @@ _SDF_VERSION='1.10'
 class RD_properties:
     def __init__(self):
         self.description_format='sdf'
-        self.Type="ElementTree"
+        self.Type="Dictionary"
         #this will hold the entire sdf definition of the sdf file 
-#as a dictionary which will then be converted into a .sdf file
-        self._element_tree=None
+		#string representation od the element
+        self._element_dict=None
     
     @property 
     def format(self):
@@ -29,9 +29,17 @@ class RD_properties:
     @format.setter
     def format(self,value):
         self.description_format=value
+    
+    @property
+    def element_dict(self):
+        return self._element_dict
+    
+    @element_dict.setter
+    def element_dict(self,elem_d:dict):
+        '''returns a dictionary {"tag":tag_name,"element_str":element converted to string,"children":[]}'''
+        self._element_dict=elem_d
+        
 
-    
-    
 #
 class initialize_widget(QtGui.QWidget):
 	def __init__(self):
@@ -44,24 +52,27 @@ class initialize_widget(QtGui.QWidget):
 		self.accpt_btn=self.form.accept_button
   
 #create callbacks (slots)
-		
+		# set cobo box callback 
 		self.format_qbox.currentTextChanged.connect(self.format_qb_cb)
+#button clicked callback 
 		self.accpt_btn.clicked.connect(self.accpt_btn_cb)
+  
 		self.form.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
 #set window size and initial position 
 		self.form.setGeometry(400,300,400,300)
 		self.form.show()	
-  
+
+# format callbacks 
 	def format_qb_cb(self):
 #urdf isn not yet implemented  ensure urdf is not selected
 		self.format_item=self.format_qbox.currentText()
 		if self.format_item=="urdf":
 			self.msg=QtGui.QMessageBox.information(self.form,"","urdf is not yet supported switching to sdf")
-			self.format_qbox.setCurrentText("sdf")
+			self.format_qbox.setCurrentIndex(0)
 		else:
 			pass
-#button callback 
 
+#button callback 
 	def accpt_btn_cb(self):
 		#ensure there is an active document
 		try:
@@ -84,9 +95,13 @@ class initialize_widget(QtGui.QWidget):
 	# create an element tree for the root node 
 	# convert to string to allow serialization 
 	#there might be a better way to handle this 
-				root_elem=initialize_element_tree.convdict_2_tree("root.sdf").get_elements
-				group.Proxy._element_tree=root_elem
-				
+				root_elem=initialize_element_tree.convdict_2_tree("root.sdf").get_element
+				root_elem_str=ET.tostring(root_elem,encoding='unicode',xml_declaration=None,)
+# some elements may occur multiple times in a parent element e.g a world can have many models 
+# the recurring key is used to track this , if false the elem_str will be a string , if 
+#true elem_str will be a list of strings where each index will be an instance of the element
+				group.Proxy.element_dict={"sdf":{"elem_str":root_elem_str,"recurring":False,"children":{}}}
+				self.form.close()
 			else:
 				pass
 				

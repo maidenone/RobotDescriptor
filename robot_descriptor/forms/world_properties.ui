@@ -7,19 +7,19 @@
     <x>0</x>
     <y>0</y>
     <width>610</width>
-    <height>822</height>
+    <height>709</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>605</width>
-    <height>820</height>
+    <width>610</width>
+    <height>709</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>610</width>
-    <height>830</height>
+    <height>780</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -38,15 +38,15 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>10</y>
+     <y>20</y>
      <width>571</width>
-     <height>801</height>
+     <height>651</height>
     </rect>
    </property>
    <property name="minimumSize">
     <size>
      <width>571</width>
-     <height>700</height>
+     <height>651</height>
     </size>
    </property>
    <property name="maximumSize">
@@ -59,7 +59,7 @@
     <bool>false</bool>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>0</number>
    </property>
    <property name="tabsClosable">
     <bool>false</bool>
@@ -73,7 +73,7 @@
       <rect>
        <x>20</x>
        <y>80</y>
-       <width>431</width>
+       <width>461</width>
        <height>91</height>
       </rect>
      </property>
@@ -185,12 +185,18 @@
       <rect>
        <x>20</x>
        <y>460</y>
-       <width>421</width>
-       <height>201</height>
+       <width>461</width>
+       <height>111</height>
       </rect>
      </property>
      <property name="title">
       <string>atmosphere</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
      </property>
      <widget class="QLabel" name="type">
       <property name="geometry">
@@ -208,9 +214,9 @@
      <widget class="QComboBox" name="atm_type">
       <property name="geometry">
        <rect>
-        <x>100</x>
+        <x>70</x>
         <y>30</y>
-        <width>131</width>
+        <width>101</width>
         <height>23</height>
        </rect>
       </property>
@@ -223,12 +229,12 @@
        </property>
       </item>
      </widget>
-     <widget class="QDoubleSpinBox" name="doubleSpinBox">
+     <widget class="QDoubleSpinBox" name="atm_temp">
       <property name="geometry">
        <rect>
-        <x>100</x>
-        <y>60</y>
-        <width>151</width>
+        <x>330</x>
+        <y>30</y>
+        <width>111</width>
         <height>31</height>
        </rect>
       </property>
@@ -248,11 +254,11 @@
        <double>288.149999999999977</double>
       </property>
      </widget>
-     <widget class="QLabel" name="temperature">
+     <widget class="QLabel" name="atm_temperature_label">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>60</y>
+        <x>230</x>
+        <y>40</y>
         <width>81</width>
         <height>20</height>
        </rect>
@@ -261,11 +267,11 @@
        <string>temperature</string>
       </property>
      </widget>
-     <widget class="QLabel" name="pressure">
+     <widget class="QLabel" name="atm_pressure_label">
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>110</y>
+        <y>70</y>
         <width>57</width>
         <height>15</height>
        </rect>
@@ -274,12 +280,12 @@
        <string>pressure</string>
       </property>
      </widget>
-     <widget class="QDoubleSpinBox" name="doubleSpinBox_2">
+     <widget class="QDoubleSpinBox" name="atm_pressure">
       <property name="geometry">
        <rect>
-        <x>100</x>
-        <y>100</y>
-        <width>151</width>
+        <x>70</x>
+        <y>60</y>
+        <width>131</width>
         <height>31</height>
        </rect>
       </property>
@@ -296,12 +302,12 @@
        <double>101325.000000000000000</double>
       </property>
      </widget>
-     <widget class="QDoubleSpinBox" name="doubleSpinBox_3">
+     <widget class="QDoubleSpinBox" name="atm_temp_grad">
       <property name="geometry">
        <rect>
-        <x>100</x>
-        <y>140</y>
-        <width>141</width>
+        <x>330</x>
+        <y>60</y>
+        <width>111</width>
         <height>31</height>
        </rect>
       </property>
@@ -315,11 +321,11 @@
        <double>-0.006499000000000</double>
       </property>
      </widget>
-     <widget class="QLabel" name="temp_grad">
+     <widget class="QLabel" name="temp_grad_label">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>140</y>
+        <x>230</x>
+        <y>60</y>
         <width>101</width>
         <height>31</height>
        </rect>
@@ -340,7 +346,7 @@
       <rect>
        <x>20</x>
        <y>280</y>
-       <width>431</width>
+       <width>461</width>
        <height>81</height>
       </rect>
      </property>
@@ -369,7 +375,7 @@
        <string>Device</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="device_string">
+     <widget class="QLineEdit" name="device_string_input">
       <property name="geometry">
        <rect>
         <x>60</x>
@@ -398,7 +404,7 @@
       <rect>
        <x>20</x>
        <y>360</y>
-       <width>431</width>
+       <width>461</width>
        <height>91</height>
       </rect>
      </property>
@@ -513,7 +519,7 @@
       <rect>
        <x>20</x>
        <y>20</y>
-       <width>421</width>
+       <width>461</width>
        <height>51</height>
       </rect>
      </property>
@@ -545,7 +551,7 @@
       <rect>
        <x>20</x>
        <y>180</y>
-       <width>431</width>
+       <width>461</width>
        <height>91</height>
       </rect>
      </property>
@@ -605,7 +611,7 @@
        <rect>
         <x>10</x>
         <y>40</y>
-        <width>121</width>
+        <width>131</width>
         <height>31</height>
        </rect>
       </property>
@@ -619,7 +625,7 @@
        <number>10</number>
       </property>
       <property name="minimum">
-       <double>0.000001000000000</double>
+       <double>-100.000000000000000</double>
       </property>
       <property name="value">
        <double>0.000001000000000</double>
@@ -630,7 +636,7 @@
        <rect>
         <x>160</x>
         <y>40</y>
-        <width>121</width>
+        <width>141</width>
         <height>31</height>
        </rect>
       </property>
@@ -643,13 +649,16 @@
       <property name="decimals">
        <number>10</number>
       </property>
+      <property name="minimum">
+       <double>-100.000000000000000</double>
+      </property>
      </widget>
      <widget class="QDoubleSpinBox" name="magn_z">
       <property name="geometry">
        <rect>
-        <x>300</x>
+        <x>310</x>
         <y>40</y>
-        <width>121</width>
+        <width>141</width>
         <height>31</height>
        </rect>
       </property>
@@ -660,38 +669,25 @@
        <string>T</string>
       </property>
       <property name="decimals">
-       <number>8</number>
+       <number>10</number>
+      </property>
+      <property name="minimum">
+       <double>-100.000000000000000</double>
       </property>
      </widget>
     </widget>
-    <widget class="QWidget" name="layoutWidget">
+    <widget class="QPushButton" name="world_reset">
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>680</y>
-       <width>421</width>
-       <height>31</height>
+       <y>580</y>
+       <width>80</width>
+       <height>23</height>
       </rect>
      </property>
-     <layout class="QHBoxLayout" name="world_buttons_Hlayout">
-      <item>
-       <widget class="QPushButton" name="world_use_Default_pb">
-        <property name="text">
-         <string>use Defaults</string>
-        </property>
-        <property name="checkable">
-         <bool>false</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="world_apply_pb">
-        <property name="text">
-         <string>apply</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
+     <property name="text">
+      <string>Reset</string>
+     </property>
     </widget>
    </widget>
    <widget class="QWidget" name="physics_tab">
@@ -702,8 +698,8 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>170</y>
-       <width>401</width>
+       <y>100</y>
+       <width>481</width>
        <height>71</height>
       </rect>
      </property>
@@ -772,15 +768,15 @@
     <widget class="QStackedWidget" name="physics_type_stack">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>250</y>
-       <width>530</width>
-       <height>500</height>
+       <x>0</x>
+       <y>180</y>
+       <width>541</width>
+       <height>381</height>
       </rect>
      </property>
      <property name="maximumSize">
       <size>
-       <width>530</width>
+       <width>600</width>
        <height>500</height>
       </size>
      </property>
@@ -791,10 +787,10 @@
       <widget class="QGroupBox" name="ode_group_box">
        <property name="geometry">
         <rect>
-         <x>0</x>
-         <y>0</y>
+         <x>20</x>
+         <y>10</y>
          <width>471</width>
-         <height>471</height>
+         <height>371</height>
         </rect>
        </property>
        <property name="title">
@@ -803,10 +799,10 @@
        <widget class="QGroupBox" name="solver_groupbox">
         <property name="geometry">
          <rect>
-          <x>10</x>
-          <y>30</y>
+          <x>0</x>
+          <y>20</y>
           <width>441</width>
-          <height>231</height>
+          <height>221</height>
          </rect>
         </property>
         <property name="title">
@@ -815,8 +811,8 @@
         <widget class="QCheckBox" name="Thread_positon_correction_checkb">
          <property name="geometry">
           <rect>
-           <x>10</x>
-           <y>190</y>
+           <x>240</x>
+           <y>180</y>
            <width>184</width>
            <height>21</height>
           </rect>
@@ -832,7 +828,7 @@
          <property name="geometry">
           <rect>
            <x>10</x>
-           <y>160</y>
+           <y>180</y>
            <width>180</width>
            <height>21</height>
           </rect>
@@ -844,227 +840,227 @@
           <string>use_dynamic_moi_scaling</string>
          </property>
         </widget>
-        <widget class="QWidget" name="layoutWidget_3">
+        <widget class="QDoubleSpinBox" name="ode_precon_iters">
          <property name="geometry">
           <rect>
-           <x>220</x>
-           <y>30</y>
-           <width>171</width>
-           <height>26</height>
+           <x>324</x>
+           <y>65</y>
+           <width>62</width>
+           <height>24</height>
           </rect>
          </property>
-         <layout class="QHBoxLayout" name="iters_Hlayout">
-          <item>
-           <widget class="QLabel" name="ode_iters_label">
-            <property name="text">
-             <string>iters</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QDoubleSpinBox" name="ode_iters">
-            <property name="toolTip">
-             <string>Number of iterations for each step. A higher number produces greater accuracy at a performance cost</string>
-            </property>
-            <property name="value">
-             <double>50.000000000000000</double>
-            </property>
-           </widget>
-          </item>
-         </layout>
+         <property name="toolTip">
+          <string>experimental</string>
+         </property>
         </widget>
-        <widget class="QWidget" name="layoutWidget_5">
+        <widget class="QDoubleSpinBox" name="ode_iters">
          <property name="geometry">
           <rect>
-           <x>220</x>
+           <x>324</x>
+           <y>31</y>
+           <width>62</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>Number of iterations for each step. A higher number produces greater accuracy at a performance cost</string>
+         </property>
+         <property name="value">
+          <double>50.000000000000000</double>
+         </property>
+        </widget>
+        <widget class="QLabel" name="ode_solver_type_label">
+         <property name="geometry">
+          <rect>
+           <x>11</x>
+           <y>31</y>
+           <width>27</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>type</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="sor_label">
+         <property name="geometry">
+          <rect>
+           <x>240</x>
+           <y>110</y>
+           <width>19</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>sor</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="precon_iters_label">
+         <property name="geometry">
+          <rect>
+           <x>240</x>
+           <y>70</y>
+           <width>74</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>precon_iters</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="ode_minstepsize_label">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
            <y>60</y>
-           <width>171</width>
-           <height>26</height>
+           <width>84</width>
+           <height>16</height>
           </rect>
          </property>
-         <layout class="QHBoxLayout" name="precon_iters_Hlayout">
-          <item>
-           <widget class="QLabel" name="precon_iters_label">
-            <property name="text">
-             <string>precon_iters</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QDoubleSpinBox" name="ode_precon_iters">
-            <property name="toolTip">
-             <string>experimental</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="layoutWidget_8">
-         <property name="geometry">
-          <rect>
-           <x>220</x>
-           <y>90</y>
-           <width>161</width>
-           <height>26</height>
-          </rect>
+         <property name="text">
+          <string>min step size </string>
          </property>
-         <layout class="QHBoxLayout" name="sor_Hlayout">
-          <item>
-           <widget class="QLabel" name="sor_label">
-            <property name="text">
-             <string>sor</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QDoubleSpinBox" name="ode_sor">
-            <property name="toolTip">
-             <string>Set the successive over-relaxation parameter</string>
-            </property>
-            <property name="value">
-             <double>1.300000000000000</double>
-            </property>
-           </widget>
-          </item>
-         </layout>
         </widget>
-        <widget class="QWidget" name="layoutWidget_9">
+        <widget class="QDoubleSpinBox" name="ode_minstep_size">
          <property name="geometry">
           <rect>
-           <x>20</x>
-           <y>90</y>
-           <width>155</width>
-           <height>26</height>
-          </rect>
-         </property>
-         <layout class="QHBoxLayout" name="island_threads_Hlayout">
-          <item>
-           <widget class="QLabel" name="island_threads_label">
-            <property name="text">
-             <string>island threads</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QDoubleSpinBox" name="ode_island_threads">
-            <property name="toolTip">
-             <string>Number of threads to use for &quot;islands&quot; of disconnected models</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="layoutWidget_10">
-         <property name="geometry">
-          <rect>
-           <x>20</x>
+           <x>100</x>
            <y>60</y>
-           <width>169</width>
-           <height>26</height>
+           <width>77</width>
+           <height>24</height>
           </rect>
          </property>
-         <layout class="QHBoxLayout" name="min_step_Hlayout">
-          <item>
-           <widget class="QLabel" name="ode_minstepsize_label">
-            <property name="text">
-             <string>min step size </string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QDoubleSpinBox" name="ode_minstep_size">
-            <property name="decimals">
-             <number>4</number>
-            </property>
-            <property name="value">
-             <double>0.000100000000000</double>
-            </property>
-           </widget>
-          </item>
-         </layout>
+         <property name="decimals">
+          <number>4</number>
+         </property>
+         <property name="value">
+          <double>0.000100000000000</double>
+         </property>
         </widget>
-        <widget class="QWidget" name="layoutWidget_11">
+        <widget class="QLabel" name="ode_friction_model_label">
          <property name="geometry">
           <rect>
-           <x>20</x>
+           <x>10</x>
+           <y>140</y>
+           <width>86</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>friction_model</string>
+         </property>
+        </widget>
+        <widget class="QComboBox" name="ode_solver_type_cb">
+         <property name="geometry">
+          <rect>
+           <x>100</x>
            <y>30</y>
-           <width>161</width>
-           <height>25</height>
+           <width>63</width>
+           <height>23</height>
           </rect>
          </property>
-         <layout class="QHBoxLayout" name="type_Hlayout">
-          <item>
-           <widget class="QLabel" name="ode_solver_type_label">
-            <property name="text">
-             <string>type</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QComboBox" name="ode_solver_type_cb">
-            <item>
-             <property name="text">
-              <string>world</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>quick</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-         </layout>
+         <item>
+          <property name="text">
+           <string>world</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>quick</string>
+          </property>
+         </item>
         </widget>
-        <widget class="QWidget" name="layoutWidget_12">
+        <widget class="QLabel" name="island_threads_label">
          <property name="geometry">
           <rect>
-           <x>20</x>
-           <y>120</y>
-           <width>216</width>
-           <height>25</height>
+           <x>10</x>
+           <y>100</y>
+           <width>85</width>
+           <height>16</height>
           </rect>
          </property>
-         <layout class="QHBoxLayout" name="friction_Hlayout">
-          <item>
-           <widget class="QLabel" name="ode_friction_model_label">
-            <property name="text">
-             <string>friction_model</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QComboBox" name="ode_friction_model">
-            <property name="toolTip">
-             <string>Name of ODE friction model to use</string>
-            </property>
-            <item>
-             <property name="text">
-              <string>pyramid_model</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>box_model</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>cone_model</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-         </layout>
+         <property name="text">
+          <string>island threads</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="ode_iters_label">
+         <property name="geometry">
+          <rect>
+           <x>240</x>
+           <y>30</y>
+           <width>27</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>iters</string>
+         </property>
+        </widget>
+        <widget class="QComboBox" name="ode_friction_model">
+         <property name="geometry">
+          <rect>
+           <x>100</x>
+           <y>140</y>
+           <width>122</width>
+           <height>23</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>Name of ODE friction model to use</string>
+         </property>
+         <item>
+          <property name="text">
+           <string>pyramid_model</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>box_model</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>cone_model</string>
+          </property>
+         </item>
+        </widget>
+        <widget class="QDoubleSpinBox" name="ode_island_threads">
+         <property name="geometry">
+          <rect>
+           <x>100</x>
+           <y>100</y>
+           <width>62</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>Number of threads to use for &quot;islands&quot; of disconnected models</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="ode_sor">
+         <property name="geometry">
+          <rect>
+           <x>324</x>
+           <y>108</y>
+           <width>62</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>Set the successive over-relaxation parameter</string>
+         </property>
+         <property name="value">
+          <double>1.300000000000000</double>
+         </property>
         </widget>
        </widget>
        <widget class="QGroupBox" name="constraints_groupbox">
         <property name="geometry">
          <rect>
           <x>10</x>
-          <y>260</y>
-          <width>331</width>
-          <height>184</height>
+          <y>250</y>
+          <width>441</width>
+          <height>111</height>
          </rect>
         </property>
         <property name="title">
@@ -1086,7 +1082,7 @@
         <widget class="QDoubleSpinBox" name="cfm">
          <property name="geometry">
           <rect>
-           <x>90</x>
+           <x>50</x>
            <y>30</y>
            <width>77</width>
            <height>24</height>
@@ -1115,8 +1111,8 @@
         <widget class="QLabel" name="contact_max_correcting_vel_label">
          <property name="geometry">
           <rect>
-           <x>10</x>
-           <y>100</y>
+           <x>170</x>
+           <y>30</y>
            <width>168</width>
            <height>15</height>
           </rect>
@@ -1128,8 +1124,8 @@
         <widget class="QLabel" name="contact_surface_layer_label">
          <property name="geometry">
           <rect>
-           <x>10</x>
-           <y>130</y>
+           <x>170</x>
+           <y>60</y>
            <width>132</width>
            <height>15</height>
           </rect>
@@ -1141,7 +1137,7 @@
         <widget class="QDoubleSpinBox" name="erp">
          <property name="geometry">
           <rect>
-           <x>90</x>
+           <x>50</x>
            <y>60</y>
            <width>77</width>
            <height>24</height>
@@ -1160,8 +1156,8 @@
         <widget class="QDoubleSpinBox" name="contact_max_correcting_vel">
          <property name="geometry">
           <rect>
-           <x>180</x>
-           <y>100</y>
+           <x>340</x>
+           <y>30</y>
            <width>85</width>
            <height>24</height>
           </rect>
@@ -1182,8 +1178,8 @@
         <widget class="QDoubleSpinBox" name="contact_surface_layer">
          <property name="geometry">
           <rect>
-           <x>150</x>
-           <y>130</y>
+           <x>340</x>
+           <y>60</y>
            <width>77</width>
            <height>24</height>
           </rect>
@@ -1498,7 +1494,7 @@ Increasing this to some small value (e.g. 0.001) can help prevent jittering prob
         <rect>
          <x>10</x>
          <y>10</y>
-         <width>471</width>
+         <width>521</width>
          <height>491</height>
         </rect>
        </property>
@@ -1508,270 +1504,198 @@ Increasing this to some small value (e.g. 0.001) can help prevent jittering prob
        <widget class="QGroupBox" name="simbody_contact_groupbox">
         <property name="geometry">
          <rect>
-          <x>10</x>
-          <y>130</y>
-          <width>451</width>
-          <height>351</height>
+          <x>0</x>
+          <y>100</y>
+          <width>511</width>
+          <height>301</height>
          </rect>
         </property>
         <property name="title">
          <string>contact</string>
         </property>
-        <widget class="QLabel" name="simbody_stiffness_label">
+        <widget class="QWidget" name="layoutWidget_16">
          <property name="geometry">
           <rect>
-           <x>20</x>
-           <y>40</y>
-           <width>57</width>
-           <height>15</height>
+           <x>0</x>
+           <y>30</y>
+           <width>291</width>
+           <height>141</height>
           </rect>
          </property>
-         <property name="text">
-          <string>stiffness</string>
-         </property>
-        </widget>
-        <widget class="QDoubleSpinBox" name="simbody_stiffness">
-         <property name="geometry">
-          <rect>
-           <x>80</x>
-           <y>40</y>
-           <width>116</width>
-           <height>24</height>
-          </rect>
-         </property>
-         <property name="toolTip">
-          <string>Default contact material stiffness 
+         <layout class="QGridLayout" name="gridLayout_2">
+          <item row="0" column="0">
+           <widget class="QLabel" name="simbody_stiffness_label">
+            <property name="text">
+             <string>stiffness</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1" colspan="2">
+           <widget class="QDoubleSpinBox" name="simbody_stiffness">
+            <property name="toolTip">
+             <string>Default contact material stiffness 
  (force/dist or torque/radian)</string>
-         </property>
-         <property name="maximum">
-          <double>100000000.000000000000000</double>
-         </property>
-         <property name="value">
-          <double>10000000.000000000000000</double>
-         </property>
-        </widget>
-        <widget class="QLabel" name="simbody_dissipation_label">
-         <property name="geometry">
-          <rect>
-           <x>20</x>
-           <y>70</y>
-           <width>65</width>
-           <height>15</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>dissipation</string>
-         </property>
-        </widget>
-        <widget class="QDoubleSpinBox" name="simbody_dissipation">
-         <property name="geometry">
-          <rect>
-           <x>90</x>
-           <y>70</y>
-           <width>77</width>
-           <height>24</height>
-          </rect>
-         </property>
-         <property name="toolTip">
-          <string>dissipation coefficient to be used in compliant contact;
- if not given it is (1-min_cor)/plastic_impact_velocity</string>
-         </property>
-         <property name="maximum">
-          <double>1000.000000000000000</double>
-         </property>
-         <property name="value">
-          <double>100.000000000000000</double>
-         </property>
-        </widget>
-        <widget class="QLabel" name="simbody_plastic_coef_restitution_label">
-         <property name="geometry">
-          <rect>
-           <x>20</x>
-           <y>100</y>
-           <width>139</width>
-           <height>15</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>plastic_coef_restitution</string>
-         </property>
-        </widget>
-        <widget class="QDoubleSpinBox" name="simbody_plastic_coef_restitution">
-         <property name="geometry">
-          <rect>
-           <x>160</x>
-           <y>100</y>
-           <width>62</width>
-           <height>24</height>
-          </rect>
-         </property>
-         <property name="toolTip">
-          <string>This is the COR to be used at high velocities for rigid
+            </property>
+            <property name="maximum">
+             <double>100000000.000000000000000</double>
+            </property>
+            <property name="value">
+             <double>10000000.000000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="simbody_plastic_coef_restitution_label">
+            <property name="text">
+             <string>plastic_coef_restitution</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QDoubleSpinBox" name="simbody_plastic_coef_restitution">
+            <property name="toolTip">
+             <string>This is the COR to be used at high velocities for rigid
  impacts; if not given it is 1 - dissipation*plastic_impact_velocity</string>
-         </property>
-         <property name="value">
-          <double>0.500000000000000</double>
-         </property>
-        </widget>
-        <widget class="QLabel" name="simbody_plastic_impact_velocity_label">
-         <property name="geometry">
-          <rect>
-           <x>20</x>
-           <y>130</y>
-           <width>140</width>
-           <height>15</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>plastic_impact_velocity</string>
-         </property>
-        </widget>
-        <widget class="QDoubleSpinBox" name="simbody_plastic_impact_velocity">
-         <property name="geometry">
-          <rect>
-           <x>160</x>
-           <y>130</y>
-           <width>62</width>
-           <height>24</height>
-          </rect>
-         </property>
-         <property name="toolTip">
-          <string>smallest impact velocity at which min COR is reached; set
+            </property>
+            <property name="value">
+             <double>0.500000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="simbody_plastic_impact_velocity_label">
+            <property name="text">
+             <string>plastic_impact_velocity</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="2">
+           <widget class="QDoubleSpinBox" name="simbody_plastic_impact_velocity">
+            <property name="toolTip">
+             <string>smallest impact velocity at which min COR is reached; set
 to zero if you want the min COR always to be used</string>
-         </property>
-         <property name="value">
-          <double>0.500000000000000</double>
-         </property>
-        </widget>
-        <widget class="QLabel" name="simbody_static_friction_label">
-         <property name="geometry">
-          <rect>
-           <x>20</x>
-           <y>170</y>
-           <width>81</width>
-           <height>15</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>static_friction</string>
-         </property>
-        </widget>
-        <widget class="QDoubleSpinBox" name="simbody_static_friction">
-         <property name="geometry">
-          <rect>
-           <x>110</x>
-           <y>160</y>
-           <width>77</width>
-           <height>24</height>
-          </rect>
-         </property>
-         <property name="toolTip">
-          <string>static friction (mu_s)</string>
-         </property>
-         <property name="decimals">
-          <number>4</number>
-         </property>
-         <property name="value">
-          <double>0.900000000000000</double>
-         </property>
-        </widget>
-        <widget class="QLabel" name="simbody_dynamic_friction_label">
-         <property name="geometry">
-          <rect>
-           <x>20</x>
-           <y>210</y>
-           <width>100</width>
-           <height>15</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>dynamic_friction</string>
-         </property>
-        </widget>
-        <widget class="QDoubleSpinBox" name="simbody_dynamic_friction">
-         <property name="geometry">
-          <rect>
-           <x>130</x>
-           <y>200</y>
-           <width>77</width>
-           <height>24</height>
-          </rect>
-         </property>
-         <property name="toolTip">
-          <string>dynamic friction (mu_d)</string>
-         </property>
-         <property name="decimals">
-          <number>4</number>
-         </property>
-         <property name="value">
-          <double>0.900000000000000</double>
-         </property>
-        </widget>
-        <widget class="QLabel" name="simbody_viscous_friction_label">
-         <property name="geometry">
-          <rect>
-           <x>20</x>
-           <y>240</y>
-           <width>93</width>
-           <height>15</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>viscous_friction</string>
-         </property>
-        </widget>
-        <widget class="QDoubleSpinBox" name="simbody_viscous_friction">
-         <property name="geometry">
-          <rect>
-           <x>120</x>
-           <y>240</y>
-           <width>77</width>
-           <height>24</height>
-          </rect>
-         </property>
-         <property name="decimals">
-          <number>4</number>
-         </property>
-        </widget>
-        <widget class="QLabel" name="simbody_override_impact_capture_velocity_label">
-         <property name="geometry">
-          <rect>
-           <x>20</x>
-           <y>270</y>
-           <width>202</width>
-           <height>15</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>override_impact_capture_velocity</string>
-         </property>
-        </widget>
-        <widget class="QDoubleSpinBox" name="simbody_override_impact_capture_velocity">
-         <property name="geometry">
-          <rect>
-           <x>230</x>
-           <y>270</y>
-           <width>77</width>
-           <height>24</height>
-          </rect>
-         </property>
-         <property name="toolTip">
-          <string>for rigid impacts only, impact velocity at which
+            </property>
+            <property name="value">
+             <double>0.500000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0" colspan="2">
+           <widget class="QLabel" name="simbody_override_impact_capture_velocity_label">
+            <property name="text">
+             <string>override_impact_capture_velocity</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="2">
+           <widget class="QDoubleSpinBox" name="simbody_override_impact_capture_velocity">
+            <property name="toolTip">
+             <string>for rigid impacts only, impact velocity at which
           COR is set to zero; normally inherited from global default but can
           be overridden here. Combining rule: use larger velocit</string>
+            </property>
+            <property name="decimals">
+             <number>4</number>
+            </property>
+            <property name="value">
+             <double>0.001000000000000</double>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="layoutWidget_17">
+         <property name="geometry">
+          <rect>
+           <x>300</x>
+           <y>30</y>
+           <width>201</width>
+           <height>141</height>
+          </rect>
          </property>
-         <property name="decimals">
-          <number>4</number>
-         </property>
-         <property name="value">
-          <double>0.001000000000000</double>
-         </property>
+         <layout class="QGridLayout" name="gridLayout">
+          <item row="0" column="0">
+           <widget class="QLabel" name="simbody_dissipation_label">
+            <property name="text">
+             <string>dissipation</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QDoubleSpinBox" name="simbody_dissipation">
+            <property name="toolTip">
+             <string>dissipation coefficient to be used in compliant contact;
+ if not given it is (1-min_cor)/plastic_impact_velocity</string>
+            </property>
+            <property name="maximum">
+             <double>1000.000000000000000</double>
+            </property>
+            <property name="value">
+             <double>100.000000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="simbody_static_friction_label">
+            <property name="text">
+             <string>static_friction</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QDoubleSpinBox" name="simbody_static_friction">
+            <property name="toolTip">
+             <string>static friction (mu_s)</string>
+            </property>
+            <property name="decimals">
+             <number>4</number>
+            </property>
+            <property name="value">
+             <double>0.900000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="simbody_dynamic_friction_label">
+            <property name="text">
+             <string>dynamic_friction</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QDoubleSpinBox" name="simbody_dynamic_friction">
+            <property name="toolTip">
+             <string>dynamic friction (mu_d)</string>
+            </property>
+            <property name="decimals">
+             <number>4</number>
+            </property>
+            <property name="value">
+             <double>0.900000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="simbody_viscous_friction_label">
+            <property name="text">
+             <string>viscous_friction</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QDoubleSpinBox" name="simbody_viscous_friction">
+            <property name="decimals">
+             <number>4</number>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </widget>
         <widget class="QLabel" name="simbody_override_stiction_transition_velocity_label">
          <property name="geometry">
           <rect>
-           <x>20</x>
-           <y>310</y>
+           <x>0</x>
+           <y>190</y>
            <width>216</width>
            <height>15</height>
           </rect>
@@ -1783,8 +1707,8 @@ to zero if you want the min COR always to be used</string>
         <widget class="QDoubleSpinBox" name="simbody_override_stiction_transition_velocity">
          <property name="geometry">
           <rect>
-           <x>240</x>
-           <y>310</y>
+           <x>230</x>
+           <y>190</y>
            <width>77</width>
            <height>24</height>
           </rect>
@@ -1842,7 +1766,7 @@ to zero if you want the min COR always to be used</string>
        <widget class="QLabel" name="simbody_accuracy_label">
         <property name="geometry">
          <rect>
-          <x>10</x>
+          <x>20</x>
           <y>70</y>
           <width>57</width>
           <height>15</height>
@@ -1874,8 +1798,8 @@ to zero if you want the min COR always to be used</string>
        <widget class="QLabel" name="simbody_max_transient_velocity_label">
         <property name="geometry">
          <rect>
-          <x>10</x>
-          <y>100</y>
+          <x>220</x>
+          <y>40</y>
           <width>139</width>
           <height>15</height>
          </rect>
@@ -1887,8 +1811,8 @@ to zero if you want the min COR always to be used</string>
        <widget class="QDoubleSpinBox" name="simbody_max_transient_velocity">
         <property name="geometry">
          <rect>
-          <x>160</x>
-          <y>100</y>
+          <x>370</x>
+          <y>40</y>
           <width>77</width>
           <height>24</height>
          </rect>
@@ -1997,50 +1921,24 @@ to zero if you want the min COR always to be used</string>
       </widget>
      </widget>
     </widget>
-    <widget class="QWidget" name="layoutWidget">
+    <widget class="QWidget" name="layoutWidget_15">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>20</y>
-       <width>331</width>
-       <height>25</height>
+       <y>10</y>
+       <width>481</width>
+       <height>91</height>
       </rect>
      </property>
-     <layout class="QHBoxLayout" name="physics_name_Hlayout">
-      <item>
-       <widget class="QLabel" name="physics_name_label">
-        <property name="text">
-         <string>name</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="physics_name">
-        <property name="text">
-         <string>default_physics</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-    <widget class="QWidget" name="layoutWidget">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>50</y>
-       <width>331</width>
-       <height>26</height>
-      </rect>
-     </property>
-     <layout class="QHBoxLayout" name="max_step_Hlayout">
-      <item>
+     <layout class="QGridLayout" name="physics_grid_0">
+      <item row="0" column="0">
        <widget class="QLabel" name="max_step_label">
         <property name="text">
          <string>max step size</string>
         </property>
        </widget>
       </item>
-      <item>
+      <item row="0" column="1">
        <widget class="QDoubleSpinBox" name="doubleSpinBox_4">
         <property name="toolTip">
          <string>Maximum time step size at which every system in simulation can interact with the states of the world</string>
@@ -2056,58 +1954,14 @@ to zero if you want the min COR always to be used</string>
         </property>
        </widget>
       </item>
-     </layout>
-    </widget>
-    <widget class="QWidget" name="layoutWidget">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>80</y>
-       <width>331</width>
-       <height>26</height>
-      </rect>
-     </property>
-     <layout class="QHBoxLayout" name="time_factor_Hlayout">
-      <item>
-       <widget class="QLabel" name="real_time_factor_label">
-        <property name="text">
-         <string>real time factor</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QDoubleSpinBox" name="doubleSpinBox_5">
-        <property name="toolTip">
-         <string>target simulation speedup factor, defined by ratio of simulation time to real-time</string>
-        </property>
-        <property name="decimals">
-         <number>4</number>
-        </property>
-        <property name="value">
-         <double>1.000000000000000</double>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-    <widget class="QWidget" name="layoutWidget">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>110</y>
-       <width>331</width>
-       <height>26</height>
-      </rect>
-     </property>
-     <layout class="QHBoxLayout" name="update_rate_HLayout">
-      <item>
+      <item row="0" column="2">
        <widget class="QLabel" name="real_time_update_rate_label">
         <property name="text">
          <string>real time update rate </string>
         </property>
        </widget>
       </item>
-      <item>
+      <item row="0" column="3">
        <widget class="QDoubleSpinBox" name="doubleSpinBox_6">
         <property name="toolTip">
          <string>Rate at which to update the physics engine (UpdatePhysics calls per real-time second)</string>
@@ -2120,26 +1974,34 @@ to zero if you want the min COR always to be used</string>
         </property>
        </widget>
       </item>
-     </layout>
-    </widget>
-    <widget class="QWidget" name="layoutWidget">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>140</y>
-       <width>331</width>
-       <height>26</height>
-      </rect>
-     </property>
-     <layout class="QHBoxLayout" name="max_cont_HLayout">
-      <item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="real_time_factor_label">
+        <property name="text">
+         <string>real time factor</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QDoubleSpinBox" name="doubleSpinBox_5">
+        <property name="toolTip">
+         <string>target simulation speedup factor, defined by ratio of simulation time to real-time</string>
+        </property>
+        <property name="decimals">
+         <number>4</number>
+        </property>
+        <property name="value">
+         <double>1.000000000000000</double>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
        <widget class="QLabel" name="max_contacts_label">
         <property name="text">
          <string>max contacts</string>
         </property>
        </widget>
       </item>
-      <item>
+      <item row="1" column="3">
        <widget class="QDoubleSpinBox" name="doubleSpinBox_7">
         <property name="toolTip">
          <string>Maximum number of contacts allowed between two entities. This value can be over ridden by a max_contacts element in a collision element</string>
@@ -2154,6 +2016,24 @@ to zero if you want the min COR always to be used</string>
       </item>
      </layout>
     </widget>
+    <widget class="QPushButton" name="Physics_reset_button">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>570</y>
+       <width>80</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Reset</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="spherical_coordinates_tab">
+    <attribute name="title">
+     <string>spherical coordinates</string>
+    </attribute>
    </widget>
    <widget class="QWidget" name="light_tab">
     <attribute name="title">
@@ -2165,11 +2045,43 @@ to zero if you want the min COR always to be used</string>
      <string>scene</string>
     </attribute>
    </widget>
-   <widget class="QWidget" name="spherical_coordinates_tab">
+   <widget class="QWidget" name="frame_tab">
     <attribute name="title">
-     <string>spherical coordinates</string>
+     <string>frame</string>
     </attribute>
    </widget>
+  </widget>
+  <widget class="QPushButton" name="ok_pb">
+   <property name="geometry">
+    <rect>
+     <x>510</x>
+     <y>680</y>
+     <width>80</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>100</width>
+     <height>40</height>
+    </size>
+   </property>
+   <property name="text">
+    <string>OK</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="apply_pb">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>680</y>
+     <width>80</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Apply</string>
+   </property>
   </widget>
  </widget>
  <resources/>

@@ -1,14 +1,15 @@
 
-DEBUG=False
-if DEBUG==False:
-    from . import  RD_parse_sdf
-else:
-    import RD_parse_sdf
+from .. import RD_globals
+
+from . import  RD_parse_sdf
     
 import xml.etree.ElementTree as ET
 
+
 class convdict_2_tree:
     def __init__(self,sfile:str):
+        '''sfile : file name to read the element properties from  located in ../sdf \n
+        use the get_elem  property  to get the initialized element '''
         #initialize class
         self.struct_class=RD_parse_sdf.sdf_parse(file=sfile)
         #get the dictionary structure
@@ -48,15 +49,14 @@ class convdict_2_tree:
     def get_tree(self)->ET.ElementTree:
         return self.e_tree
     @property
-    def get_elements(self)->ET.Element:
+    def get_element(self)->ET.Element:
         return self._root_elem
     
 if __name__=="__main__":
     t=convdict_2_tree("world.sdf")
-    elems=t.get_elements
-    xml_bytes=ET.tostring(elems,encoding='utf-8')
-    str_en=str(xml_bytes).encode()
-    print(str_en)
-    str_undo=ET.fromstring(str_en.encode('utf8'))
-    tree=ET.ElementTree(str_undo)
+    tree=t.get_tree
+    elm=t.get_elements
+    e_elem=RD_globals.set_xml_data('linear_velocity',elm,False,[12,9,8])
+    e_elem_t=ET.ElementTree(e_elem)
     tree.write("out.xml",encoding='utf8',xml_declaration=True)
+    e_elem_t.write("out.xml",encoding='utf8',xml_declaration=True)

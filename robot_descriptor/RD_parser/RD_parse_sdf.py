@@ -1,17 +1,13 @@
 import xml.etree.ElementTree as ET
 import os 
+from .. import RD_globals
 
 
-DEBUG=False
 
+import FreeCAD 
+_dir=os.path.join(FreeCAD.getUserAppDataDir(),"Mod","RobotDescriptor","robot_descriptor","sdf")
 
-if DEBUG==False:
-	import FreeCAD 
-	_dir=os.path.join(FreeCAD.getUserAppDataDir(),"Mod","RobotDescriptor","robot_descriptor","sdf")
-else:
-	_dir=os.path.join(os.path.expanduser("~"),'Documents/RobotDescriptor/robot_descriptor/sdf')
-
-
+#_dir=os.path.join(os.path.expanduser("~"),'Documents/RobotDescriptor/robot_descriptor/sdf')
 
 #this class will store element attributes to allow ease of access later 
 class Element_Attributes:
