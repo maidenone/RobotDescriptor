@@ -10,11 +10,7 @@ class atmosphere_properties:
             
     @property
     def type(self):
-        ''' returns none it item group it not checked'''
-        if self.checked():
-            return self.form.atm_type.currentText()
-        else:
-            return None
+        return self.form.atm_type.currentText()
     
     @type.setter
     def type (self,atm_txt):
@@ -25,31 +21,23 @@ class atmosphere_properties:
     @property
     def temperature(self):
         '''returns none if group id disabled'''
-        if self.checked():
-            return self._ui_form.atm_temp.value()
-        else: 
-            return None   
+        return self._ui_form.atm_temp.value()
+         
     @temperature.setter
     def temperature(self,temp:float):
         self._ui_form.atm_temp.setValue(temp)
 #pressure 
     @property
     def pressure(self):
-        if self.checked():
             return self._ui_form.atm_pressure.value()
-        else:
-            return None
     @pressure.setter
     def pressure(self,temp:float):
         self._ui_form.atm_pressure.setValue(temp)
 #temperature gradient 
     @property
     def temp_gradient(self):
-        if self.checked():
-            return self._ui_form.atm_temp_grad.value()
-        else:
-            return None
-        
+        return self._ui_form.atm_temp_grad.value()
+      
     @temp_gradient.setter
     def temp_gradient(self,grad:float):
         self._ui_form.atm_temp_grad.setValue(grad)

@@ -10,7 +10,7 @@ UI_PATH
 ICON_PATH
 
 '''
-DEBUG=True
+DEBUG=False
 
 
 
@@ -76,12 +76,14 @@ def set_xml_data(element:ET.Element,tag:str,Is_Attribute:bool,value:Union[dict,f
 
 
 #  getter  
-def get_xml_data(element:ET.Element,tag:str,Is_Attribute:bool)->Union[list,dict,str]:
+def get_xml_data(element:ET.Element,tag:str,Is_Attribute:bool=False)->Union[list,dict,str]:
     '''
     see set_xml_data()
     The functions have  similar parameters
     except for the value parameter which is not included and tag \n
-    for attributes a list is used in place of tag with the parent tag at index 0 and attribute name at index 1    '''
+    for attributes a list is used in place of tag with the parent tag at index 0 and attribute name at index 1  \n
+    This e.g ['world','name'] will return the name attribute of the world element\n
+    ->for none string values the caller  is responsible for converting to appropriate types'''
     def get_value(elem:ET.Element):
         if assert_vect(elem):
             # equivalent string 
@@ -142,19 +144,7 @@ def parse_dict(root_dict:dict,path:list):
             return parse_dict(root_dict[parent_key]["children"],path[current_idx:])
         else:
             return None
-        
-# check if the element is found
-#         found=False
-#         for child in root_dict["children"]:
-#             if child["tag"]==path[current_idx]:
-#                 found=True
-#                 return parse_dict(child,path[current_idx+1:])
-# # no need to proceed once  the dictionary if found 
-#             if found:
-#                 break
-#         if found==False:
-#             return None
-
+ 
 #the path parameter helps with navigating the  dictionary
 def update_dictionary(path:list,child_tag:Union[str,None],elem:Union[list,ET.Element])->Union[bool,None]:
     '''
@@ -177,12 +167,14 @@ def update_dictionary(path:list,child_tag:Union[str,None],elem:Union[list,ET.Ele
         else:
             
             if isinstance(elem,list):
-                #child 
-                ch={child_tag:{'elem_str':list(map(lambda e:ET.tostring(e,encoding="unicode"),elem)),"recurring":True,"children":{}}}
-                parent_dict["children"]=ch
+                #check if child is available then create it if not 
+                parent_dict["children"][child_tag]=None
+                parent_dict["children"][child_tag]={'elem_str':list(map(lambda e:ET.tostring(e,encoding="unicode"),elem)),"recurring":True,"children":{}}
+                    
             else:
-                ch={child_tag:{'elem_str':ET.tostring(elem,encoding="unicode"),"recurring":False,"children":{}}}
-                parent_dict["children"]=ch
+                parent_dict["children"][child_tag]=None
+                parent_dict["children"][child_tag]={'elem_str':ET.tostring(elem,encoding="unicode"),"recurring":False,"children":{}}
+
                 
 #I dont know if this is necessary 
         DOCUMENT.Robot_Description.Proxy.element_dict=elem_dict

@@ -101,10 +101,10 @@ class initialize_widget(QtGui.QWidget):
 # the recurring key is used to track this , if false the elem_str will be a string , if 
 #true elem_str will be a list of strings where each index will be an instance of the element
 				group.Proxy.element_dict={"sdf":{"elem_str":root_elem_str,"recurring":False,"children":{}}}
-				self.form.close()
+				
 			else:
 				pass
-				
+		self.form.close()	
 				
 
 class RD_init:
