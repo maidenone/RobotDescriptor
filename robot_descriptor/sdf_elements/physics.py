@@ -2,6 +2,7 @@
 import xml.etree.ElementTree as ET
 from ..RD_parser import initialize_element_tree
 from .. import RD_globals
+import copy
 
 class ode_solver_properties:
     def __init__(self,ui):
@@ -16,35 +17,35 @@ class ode_solver_properties:
 #iters
     @property
     def iters(self):
-        return self.ui.ode_iters.Value()
+        return self.ui.ode_iters.value()
     @iters.setter
     def iters(self,value):
         self.ui.ode_iters.setValue(value)
 #min step size
     @property
     def min_step_size(self):
-        return self.ui.ode_minstep_size.Value()
+        return self.ui.ode_minstep_size.value()
     @min_step_size.setter
     def min_step_size(self,value):
         self.ui.ode_minstep_size.setValue(value)
 #precon iters
     @property
     def precon_iters(self):
-        return self.ui.ode_precon_iters.Value()
+        return self.ui.ode_precon_iters.value()
     @precon_iters.setter
     def precon_iters(self,value):
         self.ui.ode_precon_iters.setValue(value)
 #island threads
     @property
     def island_threads(self):
-        return self.ui.ode_island_threads.Value()
+        return self.ui.ode_island_threads.value()
     @island_threads.setter
     def island_threads(self,value):
         self.ui.ode_island_threads.setValue(value)
 #sor 
     @property 
     def sor(self):
-        return self.ui.ode_sor.Value()
+        return self.ui.ode_sor.value()
     @sor.setter
     def sor(self,value):
         self.ui.ode_sor.setValue(value)
@@ -59,14 +60,14 @@ class ode_solver_properties:
         
 #use dynamic moi scaling
     @property
-    def use_dynameic_moi_rescaling(self):
+    def use_dynamic_moi_rescaling(self):
         state=self.ui.dynamic_moi_rescaling_checkb.checkState()
-        if state==True:
+        if state:
             return 1
         else:
             return 0
     
-    @use_dynameic_moi_rescaling.setter
+    @use_dynamic_moi_rescaling.setter
     def use_dynamic_moi_rescaling(self,state:bool):
         self.ui.dynamic_moi_rescaling_checkb.setCheckState(state)
 #thread position correction 
@@ -87,21 +88,21 @@ class ode_constraints_properties:
 #cfm
     @property
     def cfm(self):
-        return self.ui.ode_cfm.Value()
+        return self.ui.ode_cfm.value()
     @cfm.setter
     def cfm(self,value):
         self.ui.ode_cfm.setValue(value)
 #erp
     @property
     def erp(self):
-        return self.ui.ode_erp.Value()
+        return self.ui.ode_erp.value()
     @erp.setter
     def erp(self,value):
         self.ui.ode_erp.setValue(value)
 #contact_max_correcting_vel
     @property 
     def contact_max_correcting_vel(self):
-        return self.ui.contact_max_correcting_vel()
+        return self.ui.contact_max_correcting_vel.value()
     @contact_max_correcting_vel.setter
     def contact_max_correcting_vel(self,value):
         self.ui.contact_max_correcting_vel.setValue(value)
@@ -109,7 +110,7 @@ class ode_constraints_properties:
 #contact_surface_layer
     @property
     def contact_surface_layer(self):
-        return self.ui.contact_surface_layer.Value()
+        return self.ui.contact_surface_layer.value()
     @contact_surface_layer.setter
     def contact_surface_layer(self,value):
         self.uicontact_surface_layer.setValue(value)
@@ -130,7 +131,7 @@ class bullet_solver_properties:
 #iters 
     @property
     def iters(self):
-        return self.ui.bullet_iters.Value()
+        return self.ui.bullet_iters.value()
     @iters.setter
     def iters(self,value):
         self.ui.bullet_iters.setValue(value)
@@ -138,7 +139,7 @@ class bullet_solver_properties:
 #min step size
     @property
     def min_step_size(self):
-        return self.ui.bullet_minstep_size.Value()
+        return self.ui.bullet_minstep_size.value()
     @min_step_size.setter
     def min_step_size(self,value):
         self.ui.bullet_minstep_size.setValue(value)
@@ -146,7 +147,7 @@ class bullet_solver_properties:
 #sor 
     @property
     def sor(self):
-        return self.ui.bullet_sor.Value()
+        return self.ui.bullet_sor.value()
     @sor.setter
     def sor(self,value):
         self.ui.bullet_sor.setValue(value)
@@ -158,35 +159,39 @@ class bullet_constraint_properties:
 #cfm 
     @property
     def cfm(self):
-        return self.ui.bullet_cfm.Value()
+        return self.ui.bullet_cfm.value()
     @cfm.setter
     def cfm(self,value):
         self.ui.bullet_cfm.setValue(value)
 #contact surface layer
     @property
     def contact_surface_layer(self):
-        return self.ui.bullet_contact_surface_layer.Value()
+        return self.ui.bullet_contact_surface_layer.value()
     @contact_surface_layer.setter
     def contact_surface_layer(self,value):
         self.ui.bullet_contact_surface_layer.setValue(value)
 #erp 
     @property
     def erp(self):
-        return self.ui.bullet_erp.Value()
+        return self.ui.bullet_erp.value()
     @erp.setter
     def erp(self,value):
         self.ui.bullet_erp.setValue(value)
 # split impulse  penetration threshold
     @property
     def split_impulse_penetration_threshold(self):
-        return self.ui.bullet_split_impulse_penetration_threshold.Value()
+        return self.ui.bullet_split_impulse_penetration_threshold.value()
     @split_impulse_penetration_threshold.setter
     def split_impulse_penetration_threshold(self,value):
         self.ui.bullet_split_impulse_penetration_threshold.setValue(value)
 #split impulse
     @property
     def split_impulse(self):
-        return self.ui.bullet_split_impulse.checkState()
+        state= self.ui.bullet_split_impulse.checkState()
+        if state:
+            return 1
+        else:
+            return 0
     @split_impulse.setter
     def split_impulse(self,state:bool):
         self.ui.bullet_split_impulse.setCheckState(state)
@@ -199,7 +204,7 @@ class simbody_contact_properties:
 #stiffness
     @property
     def stiffness(self):
-        return self.ui.simbody_stiffness.Value()
+        return self.ui.simbody_stiffness.value()
     @stiffness.setter
     def stiffness(self,value):
         self.ui.simbody_stiffness.setValue(value)
@@ -207,7 +212,7 @@ class simbody_contact_properties:
 #plastic coefficient restitution
     @property
     def plastic_coef_restitution(self):
-        return self.ui.simbody_plastic_coef_restitution.Value()
+        return self.ui.simbody_plastic_coef_restitution.value()
     @plastic_coef_restitution.setter
     def plastic_coef_restitution(self,value):
         self.ui.simbody_plastic_coef_restitution.setValue()
@@ -215,7 +220,7 @@ class simbody_contact_properties:
 #plastic impact velocity 
     @property
     def plastic_impact_velocity(self):
-        return self.ui.simbody_plastic_impact_velocity.Value()
+        return self.ui.simbody_plastic_impact_velocity.value()
     @plastic_impact_velocity.setter
     def plastic_impact_velocity(self,value):
         self.ui.simbody_plastic_impact_velocity.setValue(value)
@@ -223,7 +228,7 @@ class simbody_contact_properties:
 #override impact capture velocity 
     @property
     def override_impact_capture_velocity(self):
-        return self.ui.simbody_override_impact_capture_velocity.Value()
+        return self.ui.simbody_override_impact_capture_velocity.value()
     @override_impact_capture_velocity.setter
     def override_impact_capture_velocity(self,value):
         self.ui.simbody_override_impact_capture_velocity.setValue(value)
@@ -231,7 +236,7 @@ class simbody_contact_properties:
 #dissipation 
     @property 
     def dissipation(self):
-        return self.ui.simbody_dissipation.Value()
+        return self.ui.simbody_dissipation.value()
     @dissipation.setter
     def dissipation(self,value):
         self.ui.simbody_dissipation.setValue(value)
@@ -239,7 +244,7 @@ class simbody_contact_properties:
 #static friction 
     @property 
     def static_friction(self):
-        return self.ui.simbody_static_friction.Value()
+        return self.ui.simbody_static_friction.value()
     @static_friction.setter
     def static_friction(self,value):
         self.ui.simbody_static_friction.setValue(value)
@@ -247,7 +252,7 @@ class simbody_contact_properties:
 # dynamic friction 
     @property 
     def dynamic_friction(self):
-        return self.ui.simbody_dynamic_friction.Value()
+        return self.ui.simbody_dynamic_friction.value()
     @dynamic_friction.setter
     def dynamic_friction(self,value):
         self.ui.simbody_dynamic_friction.setValue(value)
@@ -255,7 +260,7 @@ class simbody_contact_properties:
 #viscous friction 
     @property
     def viscous_friction(self):
-        return self.ui.simbody_viscous_friction.Value()
+        return self.ui.simbody_viscous_friction.value()
     @viscous_friction.setter
     def viscous_friction(self,value):
         self.ui.simbody_viscous_friction.setValue(value)
@@ -263,7 +268,7 @@ class simbody_contact_properties:
 # override_stiction_transition_velocity      
     @property
     def override_stiction_transition_velocity(self):
-        return self.ui.simbody_override_stiction_transition_velocity.Value()
+        return self.ui.simbody_override_stiction_transition_velocity.value()
     @override_impact_capture_velocity.setter
     def override_impact_capture_velocity(self,value):
         self.ui.simbody_override_stiction_transition_velocity.setValue(value)
@@ -276,7 +281,7 @@ class simbody_properties:
 # min step size
     @property
     def min_step_size(self):
-        return self.ui.simbody_min_step_size.Value()
+        return self.ui.simbody_min_step_size.value()
     @min_step_size.setter
     def min_step_size(self,value):
         self.ui.simbody_min_step_size.setValue(value)
@@ -284,14 +289,14 @@ class simbody_properties:
 # maximum transient velocity 
     @property 
     def maximum_transient_velocity(self):
-        return self.ui.simbody_max_transient_velocity.Value()
+        return self.ui.simbody_max_transient_velocity.value()
     @maximum_transient_velocity.setter
     def max_transient_velocity(self,value):
         self.ui.simbody_max_transient_velocity.setValue(value)
 # accuracy 
     @property
     def accuracy(self):
-        return self.ui.simbody_accuracy.Value()
+        return self.ui.simbody_accuracy.value()
     @accuracy.setter
     def accuracy(self,value):
         self.ui.simbody_accuracy.setValue(value)
@@ -300,15 +305,34 @@ class dart_properties:
     def __init__(self,ui) -> None:
         self.ui=ui
 
+#solver type
+    @property
+    def solver_type(self):
+        return self.ui.dart_solver_type.currentText()
+    @solver_type.setter
+    def solver_type(self,text):
+        self.ui.dart_solver_type.setCurrentText(text)
+#collision detector
+    @property
+    def collison_detector(self):
+        return self.ui.dart_collison_detector.currentText()
+    @collison_detector.setter
+    def collision_detector(self,text):
+        self.ui.dart_collison_detector.setCurrentText(text)
+
 class ode:
     def __init__(self,ui,element:ET.Element):
         self.ui=ui
         self.solver=ode_solver_properties(ui)
         self.constraints=ode_constraints_properties(ui)
-        self._ode_elem=element
+        self._get_ode_elem(element)
         self.configUI()
 
-#define callbacks       
+#define callbacks 
+#store own local copy of solver element
+    def _get_ode_elem(self,el:ET.Element):
+        self._ode_elem= copy.deepcopy(el.iter("ode").__next__())
+
     def configUI(self):
         self.ui.ode_solver_type_cb.currentIndexChanged.connect(self.on_type)
         self.ui.ode_minstep_size.valueChanged.connect(self.on_min_step_size)
@@ -317,12 +341,12 @@ class ode:
         self.ui.ode_iters.valueChanged.connect(self.on_iters)
         self.ui.ode_precon_iters.valueChanged.connect(self.on_precon_iters)
         self.ui.ode_sor.valueChanged.connect(self.on_sor)
-        self.ui.dynamic_moi_rescaling_checkb.stateChanged.connect(self.on_dynamic_moi_rrescaling)
+        self.ui.dynamic_moi_rescaling_checkb.stateChanged.connect(self.on_dynamic_moi_rescaling)
         self.ui.ode_cfm.valueChanged.connect(self.on_cfm)
         self.ui.ode_erp.valueChanged.connect(self.on_erp)
         self.ui.contact_max_correcting_vel.valueChanged.connect(self.on_contact_max_correction_vel)
         self.ui.contact_surface_layer.valueChanged.connect(self.on_contact_surface_layer)
-#callbcks 
+#callbacks 
     def on_type(self):
         RD_globals.set_xml_data(self._ode_elem,"type",False,self.solver.type)
     
@@ -341,7 +365,7 @@ class ode:
         RD_globals.set_xml_data(self._ode_elem,"sor",False,self.solver.sor)
         
     def on_dynamic_moi_rescaling(self):
-        RD_globals.set_xml_data(self._ode_elem,"use_dynamic_moi_rescaling",False,self.solver.use_dynameic_moi_rescaling)
+        RD_globals.set_xml_data(self._ode_elem,"use_dynamic_moi_rescaling",False,self.solver.use_dynamic_moi_rescaling)
     
     def on_cfm(self):
         RD_globals.set_xml_data(self._ode_elem,"cfm",False,self.constraints.cfm)
@@ -358,30 +382,254 @@ class ode:
 #end callbacks 
 
     def update_ui(self):
-        pass
+#solver 
+        self.solver.type=RD_globals.get_xml_data(self._ode_elem,"type",False)
+        self.solver.min_step_size=float(RD_globals.get_xml_data(self._ode_elem,"min_step_size",False))
+        self.solver.island_threads=int(RD_globals.get_xml_data(self._ode_elem,"island_threads",False))
+        self.solver.iters=float(RD_globals.get_xml_data(self._ode_elem,"iters",False))
+        self.solver.precon_iters=int(RD_globals.get_xml_data(self._ode_elem,"precon_iters",False))
+        self.solver.sor=float(RD_globals.get_xml_data(self._ode_elem,"sor",False))
+        self.solver.friction_model=float(RD_globals.get_xml_data(self,"friction_model",False))
+        self.solver.use_dynamic_moi_rescaling=bool(RD_globals.get_xml_data(self._ode_elem,"use_dynamic_moi_rescaling",False))
+        self.solver.thread_position_correction=bool(RD_globals.get_xml_data(self._ode_elem,"thread_position_correction",False))
+#constraints
+        self.constraints.cfm=float(RD_globals.get_xml_data(self._ode_elem,"cfm",False))
+        self.constraints.erp=float(RD_globals.get_xml_data(self._ode_elem,"erp"))
+        self.constraints.contact_max_correcting_vel=float(RD_globals.get_xml_data(self._ode_elem,"contact_max_correcting_vel"))
+        self.constraints.contact_surface_layer=float(RD_globals.get_xml_data(self._ode_elem,"contact_surface_layer"))
 #this takes an element  and updates the internal ones 
     def reset(self,new_elem:ET.Element):
-        self._ode_elem=new_elem
-
+        self._get_ode_elem(new_elem)
+    @property
+    def element(self):
+        return self._ode_elem
      
 class bullet:
-    def __init__(self,ui) -> None:
+    def __init__(self,ui,element:ET.Element) -> None:
         self.ui=ui
         self.solver=bullet_solver_properties(ui)
         self.constraints=bullet_constraint_properties(ui)
+        self._get_bullet_element(element)
+        self.configUI()
+
+#will also be used when reset is called
+#store local copy of solver 
+    def _get_bullet_element(self,el:ET.Element):
+        self._bullet_element=copy.deepcopy(el.iter("bullet").__next__())
         
+#create callbacks 
+    def configUI(self):
+        self.ui.bullet_solver_type.currentIndexChanged.connect(self.on_type)
+        self.ui.bullet_minstep_size.valueChanged.connect(self.on_min_step_size)
+        self.ui.bullet_iters.valueChanged.connect(self.on_iters)
+        self.ui.bullet_sor.valueChanged.connect(self.on_sor)
+        self.ui.bullet_cfm.valueChanged.connect(self.on_cfm)
+        self.ui.bullet_erp.valueChanged.connect(self.on_erp)
+        self.ui.bullet_contact_surface_layer.valueChanged.connect(self.on_cont_surf_layer)
+        self.ui.bullet_split_impulse.stateChanged.connect(self.on_split_impulse)
+        self.ui.bullet_split_impulse_penetration_threshold.valueChanged.connect(self.on_splt_impl_pen_tr)
+#solver
+    def on_type(self):
+        RD_globals.set_xml_data(self._bullet_element,"solver",False,self.solver.type)
+
+    def on_min_step_size(self):
+        RD_globals.set_xml_data(self._bullet_element,"min_step_size",False,self.solver.min_step_size)
+    
+    def on_iters(self):
+        RD_globals.set_xml_data(self._bullet_element,"iters",False,self.solver.iters)
+        
+    def on_sor(self):
+        RD_globals.set_xml_data(self._bullet_element,"sor",False,self.solver.sor)
+#constraints 
+    def on_cfm(self):
+        RD_globals.set_xml_data(self._bullet_element,"cfm",False,self.constraints.cfm)
+    
+    def on_erp(self):
+        RD_globals.set_xml_data(self._bullet_element,"erp",False,self.constraints.erp)
+        
+    def on_cont_surf_layer(self):
+        RD_globals.set_xml_data(self._bullet_element,"contact_surface_layer",False,self.constraints.contact_surface_layer)
+        
+    def on_split_impulse(self):
+        RD_globals.set_xml_data(self._bullet_element,"split_impulse",False,self.constraints.split_impulse)
+    
+    def on_splt_impl_pen_tr(self):
+        RD_globals.set_xml_data(self._bullet_element,"split_impulse_penetration_threshold",False,self.constraints.split_impulse_penetration_threshold)
+    
+    def update_ui(self):
+#solver ui
+        self.solver.type=RD_globals.get_xml_data(self._bullet_element,"type",False)
+        self.solver.min_step_size=float(RD_globals.get_xml_data(self._bullet_element,"min_step_size",False))
+        self.solver.iters=int(RD_globals.get_xml_data(self._bullet_element,"iters",False))
+        self.solver.sor=float(RD_globals.get_xml_data(self._bullet_element,"sor",False))
+#constrains ui 
+        self.constraints.cfm=float(RD_globals.get_xml_data(self._bullet_element,"cfm",False))
+        self.constraints.erp=float(RD_globals.get_xml_data(self._bullet_element,"erp",False))
+        self.constraints.contact_surface_layer=float(RD_globals.get_xml_data(self._bullet_element,"contact_surface_layer"))
+        self.constraints.split_impulse_penetration_threshold=float(RD_globals.get_xml_data(self._bullet_element,
+                                                                                           "split_impulse_penetration_threshold"))
+        self.constraints.split_impulse=bool(RD_globals.get_xml_data(self._bullet_element,"split_impulse"))
+    @property
+    def element(self):
+        return self._bullet_element
+    
+    def reset(self,new_element:ET.Element):
+        self._get_bullet_element(new_element)
+        self.update_ui()
+
+
+#simbody
 class simbody:
-    def __init__(self,ui) -> None:
+    def __init__(self,ui,element:ET.Element) -> None:
         self.ui=ui
         self.properties=simbody_properties(ui)
         self.contact=simbody_contact_properties(ui)
+        self._get_simbody_element(element)
+        self.configUI()
         
+#keep local copy of element
+    def _get_simbody_element(self,el:ET.Element):
+        self._simbody_element=copy.deepcopy(el.iter("simbody").__next__())
+    
+    def configUI(self):      
+#properties 
+        self.ui.simbody_min_step_size.valueChanged.connect(self.on_min_step_size)
+        self.ui.simbody_accuracy.valueChanged.connect(self.on_accuracy)
+        self.ui.simbody_max_transient_velocity.valueChanged.connect(self.on_max_trans_vel)
+#contact
+        self.ui.simbody_stiffness.valueChanged.connect(self.on_stiffness)
+        self.ui.simbody_plastic_coef_restitution.valueChanged.connect(self.on_plst_coef_rest)
+        self.ui.simbody_plastic_impact_velocity.valueChanged.connect(self.on_plst_imp_vel)
+        self.ui.simbody_override_impact_capture_velocity.valueChanged.connect(self.on_ovr_imp_cpt_vel)
+        self.ui.simbody_dissipation.valueChanged.connect(self.on_dissipation)
+        self.ui.simbody_static_friction.valueChanged.connect(self.on_static_fric)
+        self.ui.simbody_dynamic_friction.valueChanged.connect(self.on_dyn_fric)
+        self.ui.simbody_viscous_friction.valueChanged.connect(self.on_vsc_fric)
+        self.ui.simbody_override_stiction_transition_velocity.valueChanged.connect(self.on_ovr_st_tr_vel)
+#callbacks 
+    #properties 
+    def on_min_step_size(self):
+        RD_globals.set_xml_data(self._simbody_element,"min_step_size",False,self.properties.min_step_size)
+    
+    def on_accuracy(self):
+        RD_globals.set_xml_data(self._simbody_element,"accuracy",False,self.properties.accuracy)
+    
+    def on_max_trans_vel(self):
+        RD_globals.set_xml_data(self._simbody_element,"max_transient_velocity",False,self.properties.maximum_transient_velocity)
+    
+    #contact 
+    def on_stiffness(self):
+        RD_globals.set_xml_data(self._simbody_element,"stiffness",False,self.contact.stiffness)
+        
+    def on_plst_coef_rest(self):
+        RD_globals.set_xml_data(self._simbody_element,"plastic_coef_restitution",False,self.contact.plastic_coef_restitution)
+        
+    def on_plst_imp_vel(self):
+        RD_globals.set_xml_data(self._simbody_element,"plastic_impact_velocity",False,self.contact.plastic_impact_velocity)
+        
+    def on_ovr_imp_cpt_vel(self):
+        RD_globals.set_xml_data(self._simbody_element,"override_impact_capture_velocity",False,self.contact.override_impact_capture_velocity)
+        
+    def on_dissipation(self):
+        RD_globals.set_xml_data(self._simbody_element,"dissipation",False,self.contact.dissipation)
+        
+    def on_static_fric(self):
+        RD_globals.set_xml_data(self._simbody_element,"static_friction",False,self.contact.static_friction)
+        
+    def on_dyn_fric(self):
+        RD_globals.set_xml_data(self._simbody_element,"dynamic_friction",False,self.contact.dynamic_friction)
+    
+    def on_vsc_fric(self):
+        RD_globals.set_xml_data(self._simbody_element,"viscous_friction",False,self.contact.viscous_friction)
+        
+    def on_ovr_st_tr_vel(self):
+        RD_globals.set_xml_data(self._simbody_element,"override_stiction_transition_velocity",False,self.contact.override_stiction_transition_velocity)
+    
+#update ui 
+    def update_ui(self):
+#properties 
+        self.properties.min_step_size=float(RD_globals.get_xml_data(self._simbody_element,"min_step_size",False))
+        self.properties.accuracy=float(RD_globals.get_xml_data(self._simbody_element,"accuracy",False))
+        self.properties.maximum_transient_velocity=float(RD_globals.get_xml_data(self._simbody_element,"max_transient_velocity",False))
+#contact 
+        self.contact.stiffness=float(RD_globals.get_xml_data(self._simbody_element,"stiffness",False))
+        self.contact.plastic_coef_restitution=float(RD_globals.get_xml_data(self._simbody_element,"plastic_coef_restitution",False))
+        self.contact.plastic_impact_velocity=float(RD_globals.get_xml_data(self._simbody_element,"plastic_impact_velocity",False))
+        self.contact.override_impact_capture_velocity=float(RD_globals.get_xml_data(self._simbody_element,"override_impact_capture_velocity",False))
+        self.contact.dissipation=float(RD_globals.get_xml_data(self._simbody_element,"dissipation",False))
+        self.contact.static_friction=float(RD_globals.get_xml_data(self._simbody_element,"static_friction",False))
+        self.contact.dynamic_friction=float(RD_globals.get_xml_data(self._simbody_element,"dynamic_friction",False))
+        self.contact.viscous_friction=float(RD_globals.get_xml_data(self._simbody_element,"viscous_friction",False))
+        self.contact.override_stiction_transition_velocity=float(RD_globals.get_xml_data(self._simbody_element,"override_stiction_transition_velocity",False))
+    
+    @property
+    def element(self):
+        return self._simbody_element
+    def reset(self,el:ET.Element):
+        self._get_simbody_element(el)
+        self.update_ui()
+#dart
+class dart:
+    def __init__(self,ui,element:ET.Element) -> None:
+        self.ui=ui
+        self.properties=dart_properties(self.ui)
+        self._get_dart_element(element)
+        self.configUI()
+#keep local copy       
+    def _get_dart_element(self,el:ET.Element):
+        self._dart_element=copy.deepcopy(el.iter("dart").__next__())
+        
+    def configUI(self):
+        self.ui.dart_solver_type.currentTextChanged.connect(self.on_type)
+        self.ui.dart_collison_detector.currentTextChanged.connect(self.on_collision)
+#callbacks       
+    def on_type(self):
+        RD_globals.set_xml_data(self._dart_element,"solver_type",False,self.properties.solver_type)
+        
+    def on_collision(self):
+        RD_globals.set_xml_data(self._dart_element,"collision_detector",False,self.properties.collision_detector)
+    
+    def update_ui(self):
+        self.properties.solver_type=RD_globals.get_xml_data(self._dart_element,"solver_type",False)
+        self.properties.collision_detector=RD_globals.get_xml_data(self._dart_element,"collision_detector",False)
+    @property  
+    def element(self):
+        return self._dart_element
+    def reset(self,el:ET.Element):
+        self._get_dart_element(el)
+        self.update_ui() 
+        
+
 #physics configurations 
 class physics_properties:
     def __init__(self,ui) -> None:
         self.ui=ui
-
-#max contacts       
+#type 
+    @property
+    def type(self):
+        if self.ode_r_btn:
+            return 'ode'
+        elif self.bullet_r_btn:
+            return 'bullet'
+        elif self.simbody_r_btn:
+            return 'simbody'
+        else:
+            return 'dart'
+#max contacts  
+    @type.setter
+    def type(self,text):
+        if text=="ode":
+            self.ui.ode_radio_btn.toggle()
+            self.ui.physics_type_stack.setCurrentIndex(0)
+        elif text=='bullet':
+            self.ui.bullet_radio_btn.toggle()
+            self.ui.physics_type_stack.setCurrentIndex(1)
+        elif text=='simbody':
+            self.ui.simbody_radio_btn.toggle()
+            self.ui.physics_type_stack.setCurrentIndex(2)
+        else:
+            self.ui.dart_radio_btn.toggle()
+            self.ui.physics_type_stack.setCurrentIndex(3)
     @property
     def max_contacts(self):
         return self.ui.physics_max_contacts.value()
@@ -392,7 +640,7 @@ class physics_properties:
 # max step size
     @property
     def max_step_size(self):
-        return self.ui.physics_max_step_size.Value()
+        return self.ui.physics_max_step_size.value()
     @max_step_size.setter
     def max_step_size(self,value):
         self.ui.physics_max_step_size.setValue(value)
@@ -400,7 +648,7 @@ class physics_properties:
 # real time factor
     @property
     def real_time_factor(self):
-        return self.ui.physics_real_time_factor.Value()
+        return self.ui.physics_real_time_factor.value()
     @real_time_factor.setter
     def real_time_factor(self,value):
         self.ui.physics_real_time_factor.setValue(value)
@@ -408,22 +656,137 @@ class physics_properties:
 #real time update rate
     @property
     def real_time_update_rate(self):
-        return self.ui.physics_real_time_update_rate.Value()
+        return self.ui.physics_real_time_update_rate.value()
     @real_time_update_rate.setter
     def real_time_update_rate(self,value):
         self.ui.physics_real_time_update_rate.setValue(value)
-
-
+    @property
+    def ode_r_btn(self):
+        return self.ode_radio_btn.isChecked()
+    @property
+    def bullet_r_btn(self):
+        return self.ui.bullet_radio_btn.isChecked()
     
+    @property
+    def simbody_r_btn(self):
+        return self.ui.simbody_radio_btn.isChecked()
     
+    @property 
+    def dart_r_button(self):
+        return self.ui.dart_radio_btn.isChecked()
+#main physics class 
 class physics:
     def __init__(self,ui) -> None:
-        self.parent_PATH=["sdf","world"]
+        self.parent_path=["sdf","world"]
         self.tag='physics'
         self.ui=ui
         self.file_name="physics.sdf"
-        self.physics_elem=initialize_element_tree.convdict_2_tree(self.file_name).get_element
-        self.properties=physics_properties()
-    
-    
-    
+        self._physics_elem=initialize_element_tree.convdict_2_tree(self.file_name).get_element
+        self.properties=physics_properties(self.ui)
+        
+        self._ode=ode(self.ui,self._physics_elem)
+        self._bullet=bullet(self.ui,self._physics_elem)
+        self._dart=dart(self.ui,self._physics_elem)
+        
+        self._simbody=simbody(self.ui,self._physics_elem)
+#set  ode as the default type and remove the rest 
+        self.set_type()
+#confifure the ui 
+        self.configUI()
+#delete the name and default attributes
+#they  are not currently required
+        del self._physics_elem.attrib["name"]
+        del self._physics_elem.attrib["default"]
+        
+# type attribute of the physics element
+    def set_type(self):
+        self.current_type_tag='ode'
+#remove all other type eelements
+        types=["bullet","simbody","dart"]
+        for type in types:
+            el=self._physics_elem.iter(type).__next__()
+            self._physics_elem.remove(el)
+        self.properties.type='ode'
+        
+    def configUI(self):
+        self.ui.physics_max_step_size.valueChanged.connect(self.on_step_sz)
+        self.ui.physics_real_time_factor.valueChanged.connect(self.on_real_time_fct)
+        self.ui.physics_real_time_update_rate.valueChanged.connect(self.on_update_rt)
+        self.ui.physics_max_contacts.valueChanged.connect(self.on_max_cnt)
+#radio buttons
+        self.ui.bullet_radio_btn.toggled.connect(self.on_bullet_radio_button)
+        self.ui.ode_radio_btn.toggled.connect(self.on_ode_radio_button)
+        self.ui.simbody_radio_btn.toggled.connect(self.on_simbody_radio_button)
+        self.ui.dart_radio_btn.toggled.connect(self.on_dart_radio_button)
+        
+        
+    def on_step_sz(self):
+        RD_globals.set_xml_data(self._physics_elem,"max_step_size",False,self.properties.max_step_size)
+        
+    def on_real_time_fct(self):
+        RD_globals.set_xml_data(self._physics_elem,"real_time_factor",False,self.properties.real_time_factor)
+        
+    def on_update_rt(self):
+        RD_globals.set_xml_data(self._physics_elem,"real_time_update_rate",False,self.properties.real_time_update_rate)
+        
+    def on_max_cnt(self):
+        RD_globals.set_xml_data(self._physics_elem,"max_contacts",False,self.properties.max_contacts)
+  
+#ode radio button   
+    def on_ode_radio_button(self):
+#remove curent type
+        self._physics_elem.remove(self._physics_elem.iter(self.current_type_tag).__next__())
+        self.current_type_tag="ode"
+        RD_globals.set_xml_data(self._physics_elem,self.tag,True,{"type":self.current_type_tag})
+        self._physics_elem.append(self._ode.element)
+#ode  is at index 0 
+        self.ui.physics_type_stack.setCurrentIndex(0)
+        
+#bullet radio button
+    def on_bullet_radio_button(self):
+        self._physics_elem.remove(self._physics_elem.iter(self.current_type_tag).__next__())
+        self.current_type_tag="bullet"
+        RD_globals.set_xml_data(self._physics_elem,self.tag,True,{"type":self.current_type_tag})
+        self._physics_elem.append(self._bullet.element)
+#bullet is at index 1 
+        self.ui.physics_type_stack.setCurrentIndex(1)
+
+#simbody radio button     
+    def on_simbody_radio_button(self):
+    #remove current element
+        self._physics_elem.remove(self._physics_elem.iter(self.current_type_tag).__next__())
+        self.current_type_tag="simbody"
+        RD_globals.set_xml_data(self._physics_elem,self.tag,True,{"type":self.current_type_tag})
+        self._physics_elem.append(self._simbody.element)
+#simbody is at index 2
+        self.ui.physics_type_stack.setCurrentIndex(2)
+
+#dart radio button 
+    def on_dart_radio_button(self):
+    #remove current element
+        self._physics_elem.remove(self._physics_elem.iter(self.current_type_tag).__next__())
+        self.current_type_tag="dart"
+        RD_globals.set_xml_data(self._physics_elem,self.tag,True,{"type":self.current_type_tag})
+        self._physics_elem.append(self._dart.element)
+#dart is at index 3
+        self.ui.physics_type_stack.setCurrentIndex(3)
+
+
+    def update_ui(self):
+        self.properties.max_contacts=int(RD_globals.get_xml_data(self._physics_elem,"max_contacts",False))
+        self.properties.real_time_update_rate=(RD_globals.get_xml_data(self._physics_elem,"real_time_update_rate",False))
+        self.properties.real_time_factor=float(RD_globals.get_xml_data(self._physics_elem,"real_time_factor",False))
+        self.properties.max_step_size=float(RD_globals.get_xml_data(self._physics_elem,"max_step_size"))
+        
+    def reset(self):
+        self._physics_elem=initialize_element_tree.convdict_2_tree(self.file_name).get_element
+        self.update_ui()
+        self.set_type()
+        self._bullet.reset(self._physics_elem)
+        self._ode.reset(self._physics_elem)
+        self._dart.reset(self._physics_elem)
+        self._simbody.reset(self._physics_elem)
+
+    @property
+    def element(self):
+        return self._physics_elem

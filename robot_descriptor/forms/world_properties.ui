@@ -926,7 +926,7 @@
           <rect>
            <x>100</x>
            <y>30</y>
-           <width>63</width>
+           <width>91</width>
            <height>23</height>
           </rect>
          </property>
@@ -1833,7 +1833,7 @@ to zero if you want the min COR always to be used</string>
          <x>10</x>
          <y>40</y>
          <width>331</width>
-         <height>161</height>
+         <height>131</height>
         </rect>
        </property>
        <property name="title">
@@ -1885,7 +1885,7 @@ to zero if you want the min COR always to be used</string>
          <string>collision_detector</string>
         </property>
        </widget>
-       <widget class="QComboBox" name="comboBox_2">
+       <widget class="QComboBox" name="dart_collison_detector">
         <property name="geometry">
          <rect>
           <x>140</x>
@@ -1999,7 +1999,7 @@ to zero if you want the min COR always to be used</string>
        </widget>
       </item>
       <item row="1" column="3">
-       <widget class="QSpinBox" name="spinBox">
+       <widget class="QSpinBox" name="physics_max_contacts">
         <property name="value">
          <number>20</number>
         </property>

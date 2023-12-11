@@ -2,6 +2,7 @@ import FreeCAD
 import FreeCADGui
 import os 
 from PySide import QtGui,QtCore
+import copy
 
 import xml.etree.ElementTree as ET
 from  .. import RD_globals 
@@ -74,7 +75,7 @@ class world_properties():
     @property
     def wind(self):
         '''returns none if property is disabled'''
-        if self.form.wind_property.isChecked():
+        if self.form.wind_group.isChecked():
             return [self.form.wind_x.text(),self.form.wind_y.text(),self.form.wind_z.text()]
         else:
             return None
@@ -110,6 +111,8 @@ class world(QtGui.QWidget):
         # initialize atmosphere properties 
         from . import atmosphere
         self.atmosphere=atmosphere.atmosphere(self.world_form)
+        from .import physics
+        self._physics=physics.physics(self.world_form)
 #call initUI  method
         self.configUI()
     def update_ui(self):
@@ -156,7 +159,7 @@ class world(QtGui.QWidget):
                  
     def update_element(self):
 #make a temporary copy to prevent altering the original element 
-        temp_el=self.world_elem
+        temp_el=copy.deepcopy(self.world_elem)
         if not self.world_form.magnetic_field_group.isChecked():
             el=temp_el.iter("magnetic_field").__next__()
             temp_el.remove(el)
@@ -199,10 +202,13 @@ class world(QtGui.QWidget):
 #append elements in hierachy as they are supposed to appear in the tree e.g world is appended 
 #before atmosphere since its atmospheres parent, this helps reduce the complexity 
 #of having to implement a way of  ensuring parents are available 
-
 # dont  add atmosphere element if the group box is not checked
         if self.atmosphere.is_checked():
             RD_globals.update_dictionary(self.atmosphere.parent_path,self.atmosphere.tag,self.atmosphere.atmosphere_element)
+        
+        RD_globals.update_dictionary(self._physics.parent_path,self._physics.tag,self._physics.element)
+        
+        print("changes appended\n")
 #end callbacks
 #initialize  class      
 class init_sdf_world:
