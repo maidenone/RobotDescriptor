@@ -113,7 +113,8 @@ class world(QtGui.QWidget):
         self.atmosphere=atmosphere.atmosphere(self.world_form)
         from .import physics
         self._physics=physics.physics(self.world_form)
-#call initUI  method
+        from . import spherical_coordinates
+        self._spherical_coordinates=spherical_coordinates.spherical_coordinates(self.world_form)
         self.configUI()
     def update_ui(self):
         self.properties.name=RD_globals.get_xml_data(self.world_elem,["world","name"],True)
@@ -206,9 +207,15 @@ class world(QtGui.QWidget):
         if self.atmosphere.is_checked():
             RD_globals.update_dictionary(self.atmosphere.parent_path,self.atmosphere.tag,self.atmosphere.atmosphere_element)
         
+#add physics properties
         RD_globals.update_dictionary(self._physics.parent_path,self._physics.tag,self._physics.element)
+#add spherical coordiates     
+        if self.world_form.spherical_coordinates_groupbox.isChecked():
+            RD_globals.update_dictionary(self._spherical_coordinates.parent_path,self._spherical_coordinates.tag_name,
+                                         self._spherical_coordinates.spherical_cood_elem)
         
-        print("changes appended\n")
+        
+        print("updated\n")
 #end callbacks
 #initialize  class      
 class init_sdf_world:
@@ -220,9 +227,9 @@ class init_sdf_world:
                 "ToolTip" : "edit world properties"}
 
     def Activated(self):
-        """Do something here"""
+        """intiialize workbench"""
         self.w=world()
-        # w.world_form.exec_()
+        
         return
 
     def IsActive(self):

@@ -708,6 +708,7 @@ class physics:
             self._physics_elem.remove(el)
         self.properties.type='ode'
         
+        
     def configUI(self):
         self.ui.physics_max_step_size.valueChanged.connect(self.on_step_sz)
         self.ui.physics_real_time_factor.valueChanged.connect(self.on_real_time_fct)
