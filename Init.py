@@ -28,4 +28,4 @@ FreeCAD.addExportType("SDF (*.sdf)","importSDF")
 FreeCAD.addImportType("URDF (*.urdf)","importURDF")
 FreeCAD.addExportType("URDF (*.urdf)","importURDF")
 
-print ("Just Initial Stuff!")
+print ("Robot Descriptor\n")

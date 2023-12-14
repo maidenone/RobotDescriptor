@@ -10,7 +10,7 @@ UI_PATH
 ICON_PATH
 
 '''
-DEBUG=False
+DEBUG=True
 
 
 
@@ -36,6 +36,7 @@ def extract_vector_n(input_string):
 class tag_not_found(Exception):
     pass
 
+#-----------------------------------------------------------
 
 # this will check if a string is a vector of numbers 
 # will be used bu get_xml_content to validate objects of type vector3,pose ... e.t.c
@@ -44,7 +45,9 @@ def assert_vect(s):
     return bool(re.match(pattern, s))
 
  
-# setter
+# ==============================================================================
+# write data to xml file 
+#===============================================================================
 def set_xml_data(element:ET.Element,tag:str,Is_Attribute:bool,value:Union[dict,float,int,list,str])->ET.Element:
     '''
     tag is the tag name of the element to be edited \n
@@ -75,8 +78,9 @@ def set_xml_data(element:ET.Element,tag:str,Is_Attribute:bool,value:Union[dict,f
     return element
 
 
-#  getter  
-def get_xml_data(element:ET.Element,tag:str,Is_Attribute:bool=False)->Union[list,dict,str]:
+#================================================================================
+#get data from xml file 
+def get_xml_data(element:ET.Element,tag:Union[str,list],Is_Attribute:bool=False)->Union[list,dict,str]:
     '''
     see set_xml_data()
     The functions have  similar parameters
@@ -115,7 +119,9 @@ def del_attribute(elem:ET.Element):
         #  remove the previous ones
         for key in list(elem.attrib.keys()):
             del elem.attrib[key]
-# parse dictionary to find parent element
+#==============================================
+# parse dictionary find parent element and return it 
+#====================================================
 def parse_dict(root_dict:dict,path:list):
     '''
     root_dict is the dictionary to parse
@@ -140,25 +146,31 @@ def parse_dict(root_dict:dict,path:list):
         current_idx+=1
 #child element tag
         e_tag=path[current_idx]
+#check if tag is in list  return none if not 
         if e_tag in list(root_dict[parent_key]["children"].keys()):
             return parse_dict(root_dict[parent_key]["children"],path[current_idx:])
         else:
             return None
  
+#==========================================================================
 #the path parameter helps with navigating the  dictionary
+#=============================================================================
 def update_dictionary(path:list,child_tag:Union[str,None],elem:Union[list,ET.Element])->Union[bool,None]:
     '''
     parameters:
-     1. Element to append to parent 
-     2. path to the parent element implemented a list see RD_globals.parse_dict
-     3. elem: element to be updated or inserted
+     1. first element is a proxy object that stores the elem dictionary 
+     2. Element to append to parent 
+     3. path to the parent element implemented a list see RD_globals.parse_dict
+     4. elem: element to be updated or inserted
     This parses the dictionary stored in the proxy attribute   for a parent with tag parent_elem \n
     and appends elem_str  and returns True
      if the parent with that tag is not found  False is returned''' 
+     
+#get the element dictionary 
+    elem_dict=FreeCAD.ActiveDocument.Robot_Description.Proxy.element_dict
 
-    try:
-        elem_dict=DOCUMENT.Robot_Description.Proxy.element_dict
-        parent_dict=parse_dict(elem_dict,path)
+    parent_dict=parse_dict(elem_dict,path)
+    if parent_dict!=None:
         if child_tag==None:
             if isinstance(elem,list):
                 parent_dict["elem_str"]=list(map(lambda e:ET.tostring(e,encoding="unicode"),elem))
@@ -174,15 +186,37 @@ def update_dictionary(path:list,child_tag:Union[str,None],elem:Union[list,ET.Ele
             else:
                 parent_dict["children"][child_tag]=None
                 parent_dict["children"][child_tag]={'elem_str':ET.tostring(elem,encoding="unicode"),"recurring":False,"children":{}}
-
-                
+               
 #I dont know if this is necessary 
-        DOCUMENT.Robot_Description.Proxy.element_dict=elem_dict
+        FreeCAD.ActiveDocument.Robot_Description.Proxy.element_dict=elem_dict
         return True
-    except:
-        FreeCAD.Console.PrintError("workbench not initailized\n")
-        return None
-        
+    return False
+   
 #deleting elements
 def del_elem(elem:ET.Element,child_identity):
     pass
+
+#==============================================================
+#merge elements 
+#==============================================================
+def merge_elements(destination_el:ET.Element,source_el:ET.Element):
+    '''this function will be used by reset functions to merge elements\n
+    basically this will update the previous element with new values 
+    1.destination element: the element to update \n
+    2.source_el : element to get updated values from '''
+    
+    #iterate through all elements in source element
+    elements_dict = {elem.tag: elem for elem in destination_el}
+    #add attributes 
+    destination_el.attrib.update(source_el.attrib)
+    for elem in source_el:
+        if elem.tag in elements_dict:
+            # If the element exists in destibnation_el, replace attributes and content
+            existing_elem = elements_dict[elem.tag]
+            destination_el.remove(existing_elem)
+            destination_el.append(source_el.find(elem.tag))
+        else:
+            # If the element doesn't exist, add it to destination_el
+    #dont append additional elements 
+            destination_el.append(elem)
+           

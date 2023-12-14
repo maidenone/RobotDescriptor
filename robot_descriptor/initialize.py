@@ -88,6 +88,7 @@ class initialize_widget(QtGui.QWidget):
 				
 		except:
 			group =document.addObject("App::DocumentObjectGroupPython","Robot_Description")
+			
 			description_properties=RD_properties()
 			description_properties.format=self.format_qbox.currentText()
 			if description_properties.format=='sdf':
@@ -104,6 +105,7 @@ class initialize_widget(QtGui.QWidget):
 				
 			else:
 				pass
+			document.recompute()
 		self.form.close()	
 				
 

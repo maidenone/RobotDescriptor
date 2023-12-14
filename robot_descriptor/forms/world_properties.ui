@@ -37,8 +37,8 @@
    </property>
    <property name="geometry">
     <rect>
-     <x>8</x>
-     <y>10</y>
+     <x>10</x>
+     <y>4</y>
      <width>571</width>
      <height>651</height>
     </rect>
@@ -59,7 +59,7 @@
     <bool>false</bool>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>1</number>
    </property>
    <property name="tabsClosable">
     <bool>false</bool>
@@ -257,8 +257,8 @@
      <widget class="QLabel" name="atm_temperature_label">
       <property name="geometry">
        <rect>
-        <x>230</x>
-        <y>40</y>
+        <x>240</x>
+        <y>32</y>
         <width>81</width>
         <height>20</height>
        </rect>
@@ -324,9 +324,9 @@
      <widget class="QLabel" name="temp_grad_label">
       <property name="geometry">
        <rect>
-        <x>230</x>
-        <y>60</y>
-        <width>101</width>
+        <x>242</x>
+        <y>58</y>
+        <width>81</width>
         <height>31</height>
        </rect>
       </property>
@@ -676,17 +676,17 @@
       </property>
      </widget>
     </widget>
-    <widget class="QPushButton" name="world_reset">
+    <widget class="QPushButton" name="world_reset_btn">
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>580</y>
+       <x>10</x>
+       <y>590</y>
        <width>80</width>
        <height>23</height>
       </rect>
      </property>
      <property name="text">
-      <string>Reset</string>
+      <string>reset</string>
      </property>
     </widget>
    </widget>
@@ -2007,11 +2007,11 @@ to zero if you want the min COR always to be used</string>
       </item>
      </layout>
     </widget>
-    <widget class="QPushButton" name="Physics_reset_button">
+    <widget class="QPushButton" name="physics_reset_btn">
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>570</y>
+       <x>2</x>
+       <y>580</y>
        <width>80</width>
        <height>23</height>
       </rect>
@@ -2041,7 +2041,7 @@ to zero if you want the min COR always to be used</string>
       <bool>true</bool>
      </property>
      <property name="checked">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
      <widget class="QComboBox" name="surface_model_cb">
       <property name="geometry">
@@ -2359,6 +2359,19 @@ of degrees</string>
       </widget>
      </widget>
     </widget>
+    <widget class="QPushButton" name="spherical_coord_rst_btn">
+     <property name="geometry">
+      <rect>
+       <x>6</x>
+       <y>584</y>
+       <width>80</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Reset</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="light_tab">
     <attribute name="title">
@@ -2374,7 +2387,7 @@ of degrees</string>
       </rect>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="light_sources_info">
       <widget class="QLabel" name="light_info_label">
@@ -3275,8 +3288,8 @@ of degrees</string>
     <widget class="QSplitter" name="splitter_5">
      <property name="geometry">
       <rect>
-       <x>356</x>
-       <y>128</y>
+       <x>344</x>
+       <y>126</y>
        <width>160</width>
        <height>23</height>
       </rect>
@@ -3336,6 +3349,11 @@ of degrees</string>
      <string>scene</string>
     </attribute>
    </widget>
+   <widget class="QWidget" name="road_tab">
+    <attribute name="title">
+     <string>road</string>
+    </attribute>
+   </widget>
   </widget>
   <widget class="QPushButton" name="ok_pb">
    <property name="geometry">
@@ -3367,6 +3385,19 @@ of degrees</string>
    </property>
    <property name="text">
     <string>Apply</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="reload_button">
+   <property name="geometry">
+    <rect>
+     <x>18</x>
+     <y>674</y>
+     <width>80</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Reload</string>
    </property>
   </widget>
  </widget>

@@ -3,7 +3,7 @@ from FreeCAD import Base
 import FreeCAD, FreeCADGui, Part, os, math
 
 __title__ = "RobotDescriptor Workbench - Init file"
-__author__ = "Anton Fosselius <anton.fosselius@ googles email .com>"
+__author__ = ''
 __url__ = "https://www.freecadweb.org"
 
 class RobotDescriptor (Workbench):
@@ -24,11 +24,10 @@ class RobotDescriptor (Workbench):
   
 		from robot_descriptor import initialize 
 		from robot_descriptor.sdf_elements import world
-		#self.list = ['RC_initialize','RC_edit', 'RC_export'] # A list of command names created in the line above
 		self.list = ['RD_initialize','world_properties']
 		self.appendToolbar("RobotDescription",self.list) # creates a new toolbar with your commands
 		self.appendMenu("Robot Description",self.list) # creates a new menu
-		self.appendMenu(["Robot Description","Tools"],self.list) # appends a submenu to an existing menu
+		#self.appendMenu(["Robot Description","Tools"],self.list) # appends a submenu to an existing menu
 
 	def Activated(self):
 		"This function is executed when the workbench is activated"
@@ -41,7 +40,7 @@ class RobotDescriptor (Workbench):
 	def ContextMenu(self, recipient):
 		"This is executed whenever the user right-clicks on screen"
 		# "recipient" will be either "view" or "tree"
-		self.appendContextMenu("My commands",self.list) # add commands to the context menu
+		self.appendContextMenu("Robot Description",self.list) # add commands to the context menu
 
 	def GetClassName(self): 
 		# this function is mandatory if this is a full python workbench
