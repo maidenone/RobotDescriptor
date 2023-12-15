@@ -781,7 +781,7 @@
       </size>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>3</number>
      </property>
      <widget class="QWidget" name="ode_properties">
       <widget class="QGroupBox" name="ode_group_box">
@@ -838,6 +838,9 @@
          </property>
          <property name="text">
           <string>use_dynamic_moi_rescaling</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
          </property>
         </widget>
         <widget class="QLabel" name="ode_solver_type_label">

@@ -205,7 +205,6 @@ class world(QtGui.QWidget):
 #reset pushbutton
     def on_reset(self):
         print("world resets applied")
-        self.reset(default=True)
 
     def closeEvent(self,event):
         self.widget_active=False
@@ -251,6 +250,7 @@ class world(QtGui.QWidget):
         
         print("updated\n")
 
+                
 
 #==========================================================
 #=========================================================

@@ -199,24 +199,54 @@ def del_elem(elem:ET.Element,child_identity):
 #==============================================================
 #merge elements 
 #==============================================================
-def merge_elements(destination_el:ET.Element,source_el:ET.Element):
+def merge_elements(destination_el:ET.Element,source_el:ET.Element,recursive:bool=False):
     '''this function will be used by reset functions to merge elements\n
     basically this will update the previous element with new values 
     1.destination element: the element to update \n
-    2.source_el : element to get updated values from '''
+    2.source_el : element to get updated values from 
+    3. This will  be used to determine if a '''
     
-    #iterate through all elements in source element
-    elements_dict = {elem.tag: elem for elem in destination_el}
-    #add attributes 
-    destination_el.attrib.update(source_el.attrib)
-    for elem in source_el:
-        if elem.tag in elements_dict:
-            # If the element exists in destibnation_el, replace attributes and content
-            existing_elem = elements_dict[elem.tag]
-            destination_el.remove(existing_elem)
-            destination_el.append(source_el.find(elem.tag))
+#implementatyion for physics element
+#its best to just implement it within the physics class
+#but for consistency 
+#its here 
+    if destination_el.tag=="physics"  and source_el.tag=="physics" :
+    #get the type attribute for both the source and destination
+        dest_type=destination_el.attrib["type"]
+        src_type=source_el.attrib["type"]
+    #just update the data type 
+        destination_el.attrib.update(source_el.attrib)
+    #if the  type are the same do nothing 
+        if dest_type==src_type:
+            pass
         else:
-            # If the element doesn't exist, add it to destination_el
-    #dont append additional elements 
-            destination_el.append(elem)
-           
+            destination_el.remove(destination_el.find(dest_type))
+            destination_el.append(source_el.find(src_type))
+            
+        for child in source_el:
+            if child.tag!=src_type:
+                existing_el=destination_el.find(child.tag)
+                if existing_el is not None:
+                    destination_el.remove(existing_el)
+                    destination_el.append(child)
+                else:
+                    destination_el.append(child)
+    #return the type string to be used to update the current_tag_type variable           
+        return  src_type
+
+    elif recursive==True:
+#implemtatation for recusive elements are implementd here 
+        pass  
+#implemtatation for all other elements 
+#the ones that are not recursive and not physics                 
+    else:
+        destination_el.attrib.update(source_el.attrib)
+        for child in source_el:
+            existing_el=destination_el.find(child.tag)
+            if existing_el is not None:
+                destination_el.remove(existing_el)
+                destination_el.append(child)
+            else:
+                destination_el.append(child);
+                
+                

@@ -67,8 +67,8 @@ class ode_solver_properties:
 #use dynamic moi scaling
     @property
     def use_dynamic_moi_rescaling(self):
-        state=self.ui.dynamic_moi_rescaling_checkb.checkState()
-        if state:
+        state=self.ui.dynamic_moi_rescaling_checkb.isChecked()
+        if state==True:
             return 'true'
         else:
             return 'false'
@@ -78,21 +78,21 @@ class ode_solver_properties:
         if state:
             self.ui.dynamic_moi_rescaling_checkb.setCheckState(QtCore.Qt.Checked)
         else:
-            self.ui.dynamic_moi_rescaling_checkb.setCheckState(QtCore.Qt.UnChecked)
+            self.ui.dynamic_moi_rescaling_checkb.setCheckState(QtCore.Qt.Unchecked)
 #thread position correction 
     @property
     def thread_positon_correction(self):
-        state=self.ui.Thread_positon_correction_checkb.checkState()
+        state=self.ui.Thread_positon_correction_checkb.isChecked()
         if state==True:
             return 'true'
         else:
             return 'false'
     @thread_positon_correction.setter
     def thread_position_correction(self,state:bool):
-        if state:
+        if state==True:
             self.ui.Thread_positon_correction_checkb.setCheckState(QtCore.Qt.Checked)
         else:
-            self.ui.Thread_positon_correction_checkb.setCheckState(QtCore.Qt.UnChecked)
+            self.ui.Thread_positon_correction_checkb.setCheckState(QtCore.Qt.Unchecked)
             
 #=========================================================        
 #ode constraints
@@ -205,17 +205,17 @@ class bullet_constraint_properties:
 #split impulse
     @property
     def split_impulse(self):
-        state= self.ui.bullet_split_impulse.checkState()
+        state= self.ui.bullet_split_impulse.isChecked()
         if state:
             return 'true'
         else:
             return 'false'
     @split_impulse.setter
     def split_impulse(self,state:bool):
-        if state:
+        if state==True:
             self.ui.bullet_split_impulse.setCheckState(QtCore.Qt.Checked)
         else:
-            self.ui.bullet_split_impulse.setCheckState(QtCore.Qt.UnChecked) 
+            self.ui.bullet_split_impulse.setCheckState(QtCore.Qt.Unchecked) 
             
 #=============================================================================
 #simbody contact 
@@ -326,6 +326,11 @@ class simbody_properties:
     @accuracy.setter
     def accuracy(self,value):
         self.ui.simbody_accuracy.setValue(value)
+        
+
+#===================================================
+#dart properties 
+#====================================================
 
 class dart_properties:
     def __init__(self,ui) -> None:
@@ -363,19 +368,21 @@ class ode:
         self._ode_elem= copy.deepcopy(el.iter("ode").__next__())
 
     def configUI(self):
-        self.ui.ode_solver_type_cb.currentIndexChanged.connect(self.on_type)
+        self.ui.ode_solver_type_cb.currentTextChanged.connect(self.on_type)
         self.ui.ode_minstep_size.valueChanged.connect(self.on_min_step_size)
         self.ui.ode_island_threads.valueChanged.connect(self.on_island_threads)
-        self.ui.ode_friction_model.currentIndexChanged.connect(self.on_friction_model)
+        self.ui.ode_friction_model.currentTextChanged.connect(self.on_friction_model)
         self.ui.ode_iters.valueChanged.connect(self.on_iters)
         self.ui.ode_precon_iters.valueChanged.connect(self.on_precon_iters)
         self.ui.ode_sor.valueChanged.connect(self.on_sor)
         self.ui.dynamic_moi_rescaling_checkb.stateChanged.connect(self.on_dynamic_moi_rescaling)
+        self.ui.Thread_positon_correction_checkb.stateChanged.connect(self.on_thread_positon_correction)
         self.ui.ode_cfm.valueChanged.connect(self.on_cfm)
         self.ui.ode_erp.valueChanged.connect(self.on_erp)
         self.ui.contact_max_correcting_vel.valueChanged.connect(self.on_contact_max_correction_vel)
         self.ui.contact_surface_layer.valueChanged.connect(self.on_contact_surface_layer)
 #callbacks 
+
     def on_type(self):
         RD_globals.set_xml_data(self._ode_elem,"type",False,self.solver.type)
     
@@ -395,6 +402,9 @@ class ode:
         
     def on_dynamic_moi_rescaling(self):
         RD_globals.set_xml_data(self._ode_elem,"use_dynamic_moi_rescaling",False,self.solver.use_dynamic_moi_rescaling)
+    
+    def on_thread_positon_correction(self):
+        RD_globals.set_xml_data(self._ode_elem,"thread_position_correction",False,self.solver.thread_position_correction)
     
     def on_cfm(self):
         RD_globals.set_xml_data(self._ode_elem,"cfm",False,self.constraints.cfm)
@@ -419,8 +429,15 @@ class ode:
         self.solver.precon_iters=int(RD_globals.get_xml_data(self._ode_elem,"precon_iters",False))
         self.solver.sor=float(RD_globals.get_xml_data(self._ode_elem,"sor",False))
         self.solver.friction_model=RD_globals.get_xml_data(self._ode_elem,"friction_model",False)
-        self.solver.use_dynamic_moi_rescaling=bool(RD_globals.get_xml_data(self._ode_elem,"use_dynamic_moi_rescaling",False))
-        self.solver.thread_position_correction=bool(RD_globals.get_xml_data(self._ode_elem,"thread_position_correction",False))
+        if RD_globals.get_xml_data(self._ode_elem,"use_dynamic_moi_rescaling",False)=='true':
+            self.solver.use_dynamic_moi_rescaling=True
+        else:
+            self.solver.use_dynamic_moi_rescaling=False
+            
+        if RD_globals.get_xml_data(self._ode_elem,"thread_position_correction",False)=='true':
+            self.solver.thread_position_correction=True
+        else:
+            self.solver.thread_position_correction=False
 #constraints
         self.constraints.cfm=float(RD_globals.get_xml_data(self._ode_elem,"cfm",False))
         self.constraints.erp=float(RD_globals.get_xml_data(self._ode_elem,"erp"))
@@ -502,7 +519,10 @@ class bullet:
         self.constraints.contact_surface_layer=float(RD_globals.get_xml_data(self._bullet_element,"contact_surface_layer"))
         self.constraints.split_impulse_penetration_threshold=float(RD_globals.get_xml_data(self._bullet_element,
                                                                                            "split_impulse_penetration_threshold"))
-        self.constraints.split_impulse=bool(RD_globals.get_xml_data(self._bullet_element,"split_impulse"))
+        if RD_globals.get_xml_data(self._bullet_element,"split_impulse")=='true':
+            self.constraints.split_impulse=True
+        else:
+            self.constraints.split_impulse=False
     @property
     def element(self):
         return self._bullet_element
@@ -622,6 +642,7 @@ class dart:
         self.ui.dart_collison_detector.currentTextChanged.connect(self.on_collision)
 #callbacks       
     def on_type(self):
+        
         RD_globals.set_xml_data(self._dart_element,"solver_type",False,self.properties.solver_type)
         
     def on_collision(self):
@@ -690,7 +711,7 @@ class physics:
         self.file_name="physics.sdf"
 #initialize physics element
         self._physics_elem=initialize_element_tree.convdict_2_tree(self.file_name).get_element
-        
+
 #delete the name and default attributes    
 #they  are not currently required
         del self._physics_elem.attrib["name"]
@@ -708,7 +729,6 @@ class physics:
  #set type is required by configui 
         self.reset(default=False)
         
-
     def make_local_copies(self):
         self._ode=ode(self.ui,self._physics_elem)
         self._bullet=bullet(self.ui,self._physics_elem)
@@ -802,57 +822,55 @@ class physics:
         self.properties.real_time_update_rate=float(RD_globals.get_xml_data(self._physics_elem,"real_time_update_rate",False))
         self.properties.real_time_factor=float(RD_globals.get_xml_data(self._physics_elem,"real_time_factor",False))
         self.properties.max_step_size=float(RD_globals.get_xml_data(self._physics_elem,"max_step_size"))
-        self.type=RD_globals.get_xml_data(self._physics_elem,[self.tag,"type"],True)
+       
        
     def reset(self,default:bool=True):
         if default:
             self._physics_elem=initialize_element_tree.convdict_2_tree(self.file_name).get_element
+            self._ode.reset(self._physics_elem)
+            self._bullet.reset(self._physics_elem)
+            self._simbody.reset(self._physics_elem)
+            self._dart.reset(self._physics_elem)
             self.set_default()
             del self._physics_elem.attrib["name"]
             del self._physics_elem.attrib["default"]
+#update the solver elements
+            
         else:
-#get store elements it they are available  
             doc=FreeCAD.ActiveDocument
             _root_dict=doc.Robot_Description.Proxy.element_dict
             el_dict=RD_globals.parse_dict(_root_dict,self.parent_path+[self.tag])
+
             if el_dict!=None:
                 el_str=el_dict['elem_str']
-                RD_globals.merge_elements(self._physics_elem,ET.fromstring(el_str))
-            #set current type after alements have been retrieved 
-                retrived_type=RD_globals.get_xml_data(ET.fromstring(el_str),[self.tag,"type"],True)
-                
+                self.current_type_tag=RD_globals.merge_elements(self._physics_elem,ET.fromstring(el_str))
+
             #reset individual elements since only one of them will exist in the retrieved element 
-                if retrived_type=='ode':
+            #update ode
+                if self.current_type_tag=='ode':
                     self._ode.reset(self._physics_elem)
                     self.ui.physics_type_stack.setCurrentIndex(0)
                     self.ui.ode_radio_btn.toggle()
-                elif retrived_type=="simbody":
+                #update simbody 
+                elif self.current_type_tag=="simbody":
                     self._simbody.reset(self._physics_elem)
                     self.ui.physics_type_stack.setCurrentIndex(2)
                     self.ui.simbody_radio_btn.toggle()
-                elif retrived_type=="bullet":
+                #update bullet
+                elif self.current_type_tag=="bullet":
                     self._bullet.reset(self._physics_elem)
                     self.ui.physics_type_stack.setCurrentIndex(1)
                     self.ui.bullet_radio_btn.toggle()
+                #update dart
                 else:
                     self._dart.reset(self._physics_elem)
                     self.ui.physics_type_stack.setCurrentIndex(3)
                     self.ui.dart_radio_btn.toggle()
-                    
-            #update informattion 
-                self._physics_elem.remove(self._physics_elem.iter(self.current_type_tag).__next__())  
-                self.current_type_tag=retrived_type
-                
+
             else:
-                pass 
-        
-        
-#call set type after all solvers have acopy of their element 
-#because it deletes all of them except the default 
-#update ui widgets
+                pass     
         self.update_ui()
-        
-        
+            
     @property
     def element(self):
         return self._physics_elem
