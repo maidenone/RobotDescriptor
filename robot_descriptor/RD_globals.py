@@ -212,25 +212,25 @@ def merge_elements(destination_el:ET.Element,source_el:ET.Element,recursive:bool
 #its here 
     if destination_el.tag=="physics"  and source_el.tag=="physics" :
     #get the type attribute for both the source and destination
-        dest_type=destination_el.attrib["type"]
+        # dest_type=destination_el.attrib["type"]
         src_type=source_el.attrib["type"]
     #just update the data type 
         destination_el.attrib.update(source_el.attrib)
     #if the  type are the same do nothing 
-        if dest_type==src_type:
-            pass
-        else:
-            destination_el.remove(destination_el.find(dest_type))
-            destination_el.append(source_el.find(src_type))
-            
+        # if dest_type==src_type:
+        #     pass
+        # else:
+        #     destination_el.remove(destination_el.find(dest_type))
+        #     destination_el.append(source_el.find(src_type))
+          
         for child in source_el:
-            if child.tag!=src_type:
-                existing_el=destination_el.find(child.tag)
-                if existing_el is not None:
-                    destination_el.remove(existing_el)
-                    destination_el.append(child)
-                else:
-                    destination_el.append(child)
+            # if child.tag!=src_type:
+            existing_el=destination_el.find(child.tag)
+            if existing_el is not None:
+                destination_el.remove(existing_el)
+                destination_el.append(child)
+            else:
+                destination_el.append(child)
     #return the type string to be used to update the current_tag_type variable           
         return  src_type
 

@@ -642,7 +642,6 @@ class dart:
         self.ui.dart_collison_detector.currentTextChanged.connect(self.on_collision)
 #callbacks       
     def on_type(self):
-        
         RD_globals.set_xml_data(self._dart_element,"solver_type",False,self.properties.solver_type)
         
     def on_collision(self):
@@ -746,6 +745,12 @@ class physics:
 #set the current stacked widget to the ode one 
         self.ui.physics_type_stack.setCurrentIndex(0)
         self.ui.ode_radio_btn.toggle()
+        #remove and  append the default element so that changes 
+        #made to the local copy be reflected  in the main copy 
+        self._physics_elem.remove(self._physics_elem.iter('ode').__next__())
+        #create reference to the local physics element 
+        self._physics_elem.append(self._ode.element)
+        
         
  #confifure the ui        
     def configUI(self):
