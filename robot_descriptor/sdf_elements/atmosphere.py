@@ -118,14 +118,17 @@ class atmosphere:
             doc=FreeCAD.ActiveDocument
             _root_dict=doc.Robot_Description.Proxy.element_dict
             el_dict=RD_globals.parse_dict(_root_dict,self.parent_path+[self.tag])
-            if el_dict!=None:
+            if el_dict is not None:
                 el_str=el_dict['elem_str']
-                RD_globals.merge_elements(self._atm_elem,ET.fromstring(el_str))  
+                self.merge(el_str)  
                 
             else:
                 pass
                       
         self.update_ui()
+
+    def merge(self, el_str):
+        RD_globals.merge_elements(self._atm_elem,ET.fromstring(el_str))
      
     def is_checked(self):
         status=self.ui.atmosphere_group.isChecked()

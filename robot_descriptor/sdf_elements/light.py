@@ -2,7 +2,6 @@ import xml.etree.ElementTree as ET
 from PySide import QtCore
 import FreeCAD
 
-
 class light_properties:
     def __init__(self,ui) -> None:
         self.ui=ui

@@ -808,41 +808,6 @@
         <property name="title">
          <string>solver</string>
         </property>
-        <widget class="QCheckBox" name="Thread_positon_correction_checkb">
-         <property name="geometry">
-          <rect>
-           <x>240</x>
-           <y>180</y>
-           <width>184</width>
-           <height>21</height>
-          </rect>
-         </property>
-         <property name="toolTip">
-          <string>Flag to use threading to speed up position correction computation</string>
-         </property>
-         <property name="text">
-          <string>thread_position_correction</string>
-         </property>
-        </widget>
-        <widget class="QCheckBox" name="dynamic_moi_rescaling_checkb">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>180</y>
-           <width>201</width>
-           <height>21</height>
-          </rect>
-         </property>
-         <property name="toolTip">
-          <string>Flag to enable dynamic rescaling of moment of inertia in constrained directions</string>
-         </property>
-         <property name="text">
-          <string>use_dynamic_moi_rescaling</string>
-         </property>
-         <property name="checkable">
-          <bool>true</bool>
-         </property>
-        </widget>
         <widget class="QLabel" name="ode_solver_type_label">
          <property name="geometry">
           <rect>
@@ -935,12 +900,12 @@
          </property>
          <item>
           <property name="text">
-           <string>world</string>
+           <string>quick</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>quick</string>
+           <string>world</string>
           </property>
          </item>
         </widget>
@@ -1045,6 +1010,38 @@
            <width>71</width>
            <height>24</height>
           </rect>
+         </property>
+        </widget>
+        <widget class="QCheckBox" name="thread_position_correction_checkb">
+         <property name="geometry">
+          <rect>
+           <x>244</x>
+           <y>182</y>
+           <width>184</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>Flag to use threading to speed up position correction computation</string>
+         </property>
+         <property name="text">
+          <string>thread_position_correction</string>
+         </property>
+        </widget>
+        <widget class="QCheckBox" name="dynamic_moi_rescaling_checkb">
+         <property name="geometry">
+          <rect>
+           <x>14</x>
+           <y>182</y>
+           <width>192</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>Flag to enable dynamic rescaling of moment of inertia in constrained directions.</string>
+         </property>
+         <property name="text">
+          <string>use_dynamic_moi_rescaling</string>
          </property>
         </widget>
        </widget>

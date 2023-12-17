@@ -14,13 +14,12 @@ DEBUG=True
 
 
 
-import os 
 
 import FreeCAD
 ICON_PATH=FreeCAD.getUserAppDataDir()+"Mod/RobotDescriptor/robot_descriptor/icons"
 UI_PATH=FreeCAD.getUserAppDataDir()+"Mod/RobotDescriptor/robot_descriptor/forms"
 DOCUMENT=FreeCAD.ActiveDocument
-
+import copy
 import xml.etree.ElementTree as ET
 
 import re
@@ -64,7 +63,7 @@ def set_xml_data(element:ET.Element,tag:str,Is_Attribute:bool,value:Union[dict,f
     except:
         return None
         # ensure no dictionaries are sent for non attributes 
-    if Is_Attribute== False and isinstance(value,dict)== False:
+    if Is_Attribute is False and isinstance(value,dict) is False:
         if isinstance(value,list):
             # equivalent string 
             string_eq=' '.join(map(str,value))
@@ -88,15 +87,16 @@ def get_xml_data(element:ET.Element,tag:Union[str,list],Is_Attribute:bool=False)
     for attributes a list is used in place of tag with the parent tag at index 0 and attribute name at index 1  \n
     This e.g ['world','name'] will return the name attribute of the world element\n
     ->for none string values the caller  is responsible for converting to appropriate types'''
-    def get_value(elem:ET.Element):
-        if assert_vect(elem):
+    def get_value(elem_data):
+        if assert_vect(elem_data):
             # equivalent string 
-            vect_eq=extract_vector_n(elem)
+            vect_eq=extract_vector_n(elem_data)
             return vect_eq
         else:
             #the caller will handle the conversion of this value to the relevant data type 
-            return elem
-    if Is_Attribute!=True:
+            return elem_data
+    
+    if Is_Attribute is not True:
         elem_iter=element.iter(tag)
     else:
         elem_iter=element.iter(tag[0])
@@ -105,7 +105,7 @@ def get_xml_data(element:ET.Element,tag:Union[str,list],Is_Attribute:bool=False)
         elem=elem_iter.__next__()
     except:
         return None
-    if Is_Attribute== False:
+    if Is_Attribute is False:
         txt=elem.text
         return get_value(txt)  
     else:
@@ -170,8 +170,8 @@ def update_dictionary(path:list,child_tag:Union[str,None],elem:Union[list,ET.Ele
     elem_dict=FreeCAD.ActiveDocument.Robot_Description.Proxy.element_dict
 
     parent_dict=parse_dict(elem_dict,path)
-    if parent_dict!=None:
-        if child_tag==None:
+    if parent_dict is not None:
+        if child_tag is None:
             if isinstance(elem,list):
                 parent_dict["elem_str"]=list(map(lambda e:ET.tostring(e,encoding="unicode"),elem))
             else:
@@ -192,9 +192,6 @@ def update_dictionary(path:list,child_tag:Union[str,None],elem:Union[list,ET.Ele
         return True
     return False
    
-#deleting elements
-def del_elem(elem:ET.Element,child_identity):
-    pass
 
 #==============================================================
 #merge elements 
@@ -210,31 +207,8 @@ def merge_elements(destination_el:ET.Element,source_el:ET.Element,recursive:bool
 #its best to just implement it within the physics class
 #but for consistency 
 #its here 
-    if destination_el.tag=="physics"  and source_el.tag=="physics" :
-    #get the type attribute for both the source and destination
-        # dest_type=destination_el.attrib["type"]
-        src_type=source_el.attrib["type"]
-    #just update the data type 
-        destination_el.attrib.update(source_el.attrib)
-    #if the  type are the same do nothing 
-        # if dest_type==src_type:
-        #     pass
-        # else:
-        #     destination_el.remove(destination_el.find(dest_type))
-        #     destination_el.append(source_el.find(src_type))
-          
-        for child in source_el:
-            # if child.tag!=src_type:
-            existing_el=destination_el.find(child.tag)
-            if existing_el is not None:
-                destination_el.remove(existing_el)
-                destination_el.append(child)
-            else:
-                destination_el.append(child)
-    #return the type string to be used to update the current_tag_type variable           
-        return  src_type
-
-    elif recursive==True:
+#++++++++++++++++++++======================
+    if recursive is True:
 #implemtatation for recusive elements are implementd here 
         pass  
 #implemtatation for all other elements 
@@ -247,6 +221,6 @@ def merge_elements(destination_el:ET.Element,source_el:ET.Element,recursive:bool
                 destination_el.remove(existing_el)
                 destination_el.append(child)
             else:
-                destination_el.append(child);
+                destination_el.append(child)
                 
                 

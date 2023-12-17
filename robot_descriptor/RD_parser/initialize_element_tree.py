@@ -28,7 +28,7 @@ class convdict_2_tree:
     #so no need to add them
     def create_root(self)->ET.Element:
         self._root_elem=ET.Element(self.structured["tag"])
-        if self.structured["attributes"] != None:
+        if self.structured["attributes"] is not None:
             for attr in self.structured["attributes"]:
                 self._root_elem.set(attr.name,attr.attr_value)
         
@@ -36,12 +36,12 @@ class convdict_2_tree:
         
         attr=dict()
         for child in st_lst:
-            if child["attributes"] !=None:
+            if child["attributes"] is not None:
                 for _att in child["attributes"]:
             #recall  attributes are stored as class Element_attributes defined in RD_parse_sdf.py
                     attr[_att.name]=_att.attr_value
             s=ET.SubElement(parent_elem,child["tag"],attr)
-            if child["value"] !=None:
+            if child["value"] is not None:
                 s.text=child["value"]
             if len(child["children"]) >0:
                 self.construct_tree(s,child["children"])

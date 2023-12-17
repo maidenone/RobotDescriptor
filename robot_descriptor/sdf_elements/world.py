@@ -131,6 +131,9 @@ class world(QtGui.QWidget):
 #update ui with previously configured values if available     
         self.reset(False)
 
+    def closeEvent(self, event):
+        event.accept()
+
     def update_ui(self):
         self.properties.name=RD_globals.get_xml_data(self.world_elem,["world","name"],True)
         self.properties.gravity=RD_globals.get_xml_data(self.world_elem,"gravity",False)
@@ -149,14 +152,17 @@ class world(QtGui.QWidget):
             doc=FreeCAD.ActiveDocument
             _root_dict=doc.Robot_Description.Proxy.element_dict
             el_dict=RD_globals.parse_dict(_root_dict,self.parent_path+[self.tag])
-            if el_dict!=None:
+            if el_dict is not None:
                 el_str=el_dict['elem_str']
-                RD_globals.merge_elements(self.world_elem,ET.fromstring(el_str))
+                self.merge(el_str)
             else:
                 pass
             self.atmosphere.reset(False)
 
         self.update_ui()
+
+    def merge(self, el_str):
+        RD_globals.merge_elements(self.world_elem,ET.fromstring(el_str))
        
     def configUI(self):
         self.world_form.world_name_input.textEdited.connect(self.on_world_name)
@@ -204,11 +210,9 @@ class world(QtGui.QWidget):
 #callbacks 
 #reset pushbutton
     def on_reset(self):
+        self.reset()
         print("world resets applied")
-
-    def closeEvent(self,event):
-        self.widget_active=False
-        event.accept()
+ 
         
     def on_world_name(self):
         name=self.properties.name
@@ -222,7 +226,6 @@ class world(QtGui.QWidget):
     def on_audio(self):
         RD_globals.set_xml_data(self.world_elem,"device",False,self.properties.audio)
     def on_ok(self):
-        self.widget_active=False
         self.world_form.close()
 
 #apply pb
@@ -270,7 +273,10 @@ class init_sdf_world:
             # import pdb
             # pdb.set_trace()
         if hasattr(FreeCAD.ActiveDocument, "Robot_Description"):
-            self.w=world()
+            #todo
+            #prevent opening duplicate windows
+                self.w=world()
+        
         else:
             FreeCAD.Console.PrintError("workbench not initialized\n")
             return
@@ -278,6 +284,9 @@ class init_sdf_world:
     def IsActive(self):
         """Here you can define if the command must be active or not (greyed) if certain conditions
         are met or not. This function is optional."""
-        return True
+        if hasattr(FreeCAD.ActiveDocument, "Robot_Description"):
+            return True
+        else:
+            return False
 
 FreeCADGui.addCommand("world_properties", init_sdf_world())
