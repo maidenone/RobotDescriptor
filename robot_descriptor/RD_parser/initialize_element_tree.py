@@ -17,10 +17,12 @@ class convdict_2_tree:
         #a stack of parent elements
         #this stack is provided to allow for  having a parent  key in the dictionary 
         #to help when creating an xnl tree by adding subnode 
-       
         #get stuff started 
         self.create_root()
-        self.construct_tree(self._root_elem,self.structured["children"])
+        if len(self.structured["children"])==0:
+            self._root_elem.text=self.structured["value"]
+        else:
+            self.construct_tree(self._root_elem,self.structured["children"])
     
         self.e_tree=ET.ElementTree(self._root_elem)
     #create the root element 
@@ -36,6 +38,7 @@ class convdict_2_tree:
         
         attr=dict()
         for child in st_lst:
+            
             if child["attributes"] is not None:
                 for _att in child["attributes"]:
             #recall  attributes are stored as class Element_attributes defined in RD_parse_sdf.py
@@ -45,6 +48,7 @@ class convdict_2_tree:
                 s.text=child["value"]
             if len(child["children"]) >0:
                 self.construct_tree(s,child["children"])
+        
     @property
     def get_tree(self)->ET.ElementTree:
         return self.e_tree

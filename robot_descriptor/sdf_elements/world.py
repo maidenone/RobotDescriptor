@@ -126,12 +126,14 @@ class world(QtGui.QWidget):
 #initialize spherical coordinates
         from . import spherical_coordinates
         self._spherical_coordinates=spherical_coordinates.spherical_coordinates(self.world_form)
-
+        from . import light
+        self._lights=light.light(self.world_form)
         self.configUI()
 #update ui with previously configured values if available     
         self.reset(False)
 
     def closeEvent(self, event):
+        print('closing widget\n')
         event.accept()
 
     def update_ui(self):
@@ -235,7 +237,7 @@ class world(QtGui.QWidget):
         RD_globals.update_dictionary(self.parent_path,self.tag,updated_elem)
             
 #append elements in hierachy as they are supposed to appear in the tree e.g world is appended 
-#before atmosphere since its atmospheres parent, this helps reduce the complexity 
+#before atmosphere since its atmospheres parent, this helpsFreeCADGui.PySideUic.loadUi(self.ui_path,self) reduce the complexity 
 #of having to implement a way of  ensuring parents are available 
 # dont  add atmosphere element if the group box is not checked
         if self.atmosphere.is_checked():
@@ -250,10 +252,11 @@ class world(QtGui.QWidget):
                                          self._spherical_coordinates.tag_name,
                                          self._spherical_coordinates.spherical_cood_elem)
         
-        
+        if len(self._lights.lights) >0:
+            RD_globals.update_dictionary(self._lights.parent_path,self._lights.tag,self._lights.element)
+            
         print("updated\n")
-
-                
+    
 
 #==========================================================
 #=========================================================

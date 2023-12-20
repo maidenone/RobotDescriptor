@@ -857,7 +857,7 @@ class physics:
 
             if el_dict is not None:
                 el_str=el_dict['elem_str']
-                self._physics_elem=copy.deepcopy(ET.fromstring(el_str))
+                self.merge(el_str)
                 self.current_type_tag=self._physics_elem.attrib['type']
 
             #reset individual elements since only one of them will exist in the retrieved element 
@@ -886,6 +886,9 @@ class physics:
             else:
                 pass     
         self.update_ui()
+
+    def merge(self, el_str):
+        self._physics_elem=copy.deepcopy(ET.fromstring(el_str))
             
     @property
     def element(self):
