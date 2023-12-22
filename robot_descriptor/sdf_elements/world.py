@@ -57,7 +57,7 @@ class world_properties():
   
     @magnetic_field.setter
     def magnetic_field(self,magn_vec:list):
-        if magn_vec!=None:
+        if magn_vec is not None:
             self.form.magn_x.setValue(magn_vec[0])
             self.form.magn_y.setValue(magn_vec[1])
             self.form.magn_z.setValue(magn_vec[2])
@@ -126,8 +126,14 @@ class world(QtGui.QWidget):
 #initialize spherical coordinates
         from . import spherical_coordinates
         self._spherical_coordinates=spherical_coordinates.spherical_coordinates(self.world_form)
+#innitialize light
         from . import light
         self._lights=light.light(self.world_form)
+        
+#initialize scene 
+        from . import scene
+        self._scene=scene.scene(self.world_form)
+
         self.configUI()
 #update ui with previously configured values if available     
         self.reset(False)
@@ -251,9 +257,13 @@ class world(QtGui.QWidget):
                                          self._spherical_coordinates.parent_path,
                                          self._spherical_coordinates.tag_name,
                                          self._spherical_coordinates.spherical_cood_elem)
-        
+
+#dont attempt to add a lights if there are no light sources    
         if len(self._lights.lights) >0:
             RD_globals.update_dictionary(self._lights.parent_path,self._lights.tag,self._lights.element)
+#add scene based on state of a checkbox 
+        if  self.world_form.enable_scene_checkBox.isChecked():
+            RD_globals.update_dictionary(self._scene.parent_path,self._scene.tag,self._scene.element)
             
         print("updated\n")
     

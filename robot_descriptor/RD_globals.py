@@ -28,7 +28,8 @@ from typing import Union
 
 #will be used to extract vectors from element types of vector3,pose ....
 def extract_vector_n(input_string):
-    numbers = re.findall(r'-?\d+(?:\.\d+)?(?:e-?\d+)?', input_string)
+    numbers=re.findall(r'-?(?:\d+\.\d+|\.\d+|\d+)(?:e-?\d+)?',input_string)
+
     return [float(num) for num in numbers]
 
 #define and exception()
@@ -78,8 +79,7 @@ def set_xml_data(element:ET.Element,tag:str,Is_Attribute:bool,value:Union[dict,f
     if Is_Attribute is False and isinstance(value,dict) is False:
         if isinstance(value,list):
             # equivalent string 
-            string_eq=' '.join(map(str,value))
-            elem.text=string_eq
+            elem.text=' '.join(map(str,value))
         else:
             elem.text=str(value)
     else:
@@ -105,8 +105,14 @@ def get_xml_data(element:ET.Element,tag:Union[str,list],Is_Attribute:bool=False)
             vect_eq=extract_vector_n(elem_data)
             return vect_eq
         else:
-            #the caller will handle the conversion of this value to the relevant data type 
-            return elem_data
+            #try converting to int or float date type 
+            try:
+                try:
+                    return int(elem_data)
+                except:
+                    return float(elem_data)    
+            except:
+                return elem_data
     
     if Is_Attribute is not True:
         elem_iter=element.iter(tag)
@@ -119,10 +125,18 @@ def get_xml_data(element:ET.Element,tag:Union[str,list],Is_Attribute:bool=False)
         return None
     if Is_Attribute is False:
         txt=elem.text
+        if txt is None:
+            txt=''
         return get_value(txt)  
     else:
         # return the  the attribute dictionary 
-        return   elem.attrib[tag[1]]
+        try:
+            try:
+                return   int(elem.attrib[tag[1]])
+            except:
+                return float(elem.attrib[tag[1]])
+        except:
+            return   elem.attrib[tag[1]]
 
 #deleting attributes
 def del_attribute(elem:ET.Element):

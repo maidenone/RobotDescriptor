@@ -46,11 +46,13 @@ class light_properties:
         else:
             return  str('false')
     @light_on.setter
-    def light_on(self,state:bool):
-        if state:
+    def light_on(self,state):
+        if state=='true':
             self.ui.light_on_check_b.setCheckState(QtCore.Qt.Checked)
-        else:
+        elif state=='false':
             self.ui.light_on_check_b.setCheckState(QtCore.Qt.Unchecked)
+        else:
+            print("unsuported state\n")
 #visualize
     @property
     def visualize(self):
@@ -60,11 +62,13 @@ class light_properties:
         else:
             return str('false')
     @visualize.setter
-    def visualize(self,state:bool):
-        if state is True:
+    def visualize(self,state):
+        if state =='true':
             self.ui.visualize_checkBox.setCheckState(QtCore.Qt.Checked)
-        else:
+        elif state=='false':
             self.ui.visualize_checkBox.setCheckState(QtCore.Qt.Unchecked)
+        else:
+            print("unsuported state\n")
             
 #cast shadows 
     @property
@@ -75,11 +79,13 @@ class light_properties:
         else:
             return str('false')
     @cast_shadows.setter
-    def cast_shadows(self,state:bool):
-        if state:
+    def cast_shadows(self,state):
+        if state=='true':
             self.ui.cast_shadows_check_b.setCheckState(QtCore.Qt.Checked)
-        else:
+        elif state=='false':
             self.ui.cast_shadows_check_b.setCheckState(QtCore.Qt.Unchecked)
+        else:
+            print("unsuported state\n")
 #diffuse
     @property
     def diffuse(self):
@@ -228,8 +234,15 @@ class light:
         sun=copy.deepcopy(self._light_element)
         sun.attrib['type']='directional'
         sun.attrib['name']='sun'
-        sun_properties={'direction':[-0.5,0.5,1],'pose':[0,0,10,0,0,0],'cast_shadows':'true','diffuse':[0.8,0.8,0.8,1],'specular':[0.1,0.1,0.1,1],
-         "range":1000,'constant':0.9,'linear':0.01,'quadratic':0.001}
+        
+        sun_properties={'direction':[-0.5,0.5,1],
+                        'pose':[0,0,10,0,0,0],
+                        'cast_shadows':'true',
+                        'diffuse':[0.8,0.8,0.8,1],
+                        'specular':[0.1,0.1,0.1,1],
+                        "range":1000,'constant':0.9,
+                        'linear':0.01,
+                        'quadratic':0.001}
         
         for key in sun_properties.keys():
             RD_globals.set_xml_data(sun,key,False,sun_properties[key])
@@ -244,6 +257,7 @@ class light:
         self.ui.light_listWidget.setCurrentItem(item)
 #set the current light element 
         self._current_light_element=sun
+        self.current_light=sun.attrib['name']
         #disable spot groupbox
         self.ui.spot_groupbox.setEnabled(False)
         #disable directional groupbox
@@ -441,6 +455,7 @@ class light:
         self.lights[name]=new_elem
         #set current item to new item 
         self._current_light_element=self.lights[name]
+        self.current_light=name
         self.ui.light_listWidget.addItem(name)
         #select the item
         item=self.ui.light_listWidget.item(self.ui.light_listWidget.count()-1)
@@ -460,7 +475,7 @@ class light:
         item=self.ui.light_listWidget.item(current_index)
         current_light_name=item.text()
         if item is not None:
-            question=QMessageBox.question(None,"Delete light","remove "+item.text()+" ?",QMessageBox.Yes | QMessageBox.No,QMessageBox.No)
+            question=QMessageBox.question(self.ui,"Delete light","remove "+item.text()+" ?",QMessageBox.Yes | QMessageBox.No,QMessageBox.No)
             if question==QMessageBox.Yes:
                 item=self.ui.light_listWidget.takeItem(current_index)
                 #this will call on_list_row_change callback 
@@ -510,16 +525,7 @@ class light:
             self.initialize()
             self.add_sun()
         else:
-            #reset lights
-            #==============================================
-            #============================================
-            #==============================================
-            if RD_globals.DEBUG is True:
-                import pdb 
-                pdb.set_trace()
-            #=================================================
-            #==================================================
-            #=================================================
+            #reset list widget
             spot=self._light_element.find('spot')
             direction=self._light_element.find('direction')
             doc=FreeCAD.ActiveDocument
