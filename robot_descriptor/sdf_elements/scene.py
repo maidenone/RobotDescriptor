@@ -4,7 +4,8 @@ import xml.etree.ElementTree as ET
 import FreeCAD
 from ..RD_parser import initialize_element_tree
 from PySide import QtCore
-
+from PySide.QtGui import QColorDialog
+import math
 #===================================
 #scene properties
 #======================================
@@ -286,9 +287,40 @@ class scene:
         self.ui.Reset_pb.clicked.connect(self.on_reset)
 #scene checkbox 
         self.ui.enable_scene_checkBox.stateChanged.connect(self.on_scene)
+        
+#color picker callback
+        self.ui.fog_color_picker_btn.clicked.connect(self.on_fog_color_picker)
+        self.ui.cloud_ambient_color_pkr.clicked.connect(self.on_cloud_ambient_color_pkr)
+        self.ui.scene_background_color_pkr.clicked.connect(self.on_scene_background_color_pkr)
+        self.ui.scene_ambient_color_pkr.clicked.connect(self.on_scene_ambient_color_pkr)
 
+    def color_picker(self,prop,widget):
+        '''
+        prop: property string e.g 'fog color'
+        widget: the widget to edit its style sheet
+                e.g self.ui.fog color picker
+
+        '''
+        col_dialog = QColorDialog(self.ui)
+        col=col_dialog.getColor()
+        if col.isValid():
+            color=[col.redF(),col.blueF(),col.greenF(),col.alphaF()]
+            setattr(self.properties,prop,color)
+            widget.setStyleSheet(f" background-color: {col.name()}; ")
+        
 #callbacks 
 #start
+#start of  color picker methods 
+    def on_fog_color_picker(self):
+        self.color_picker('fog_color',self.ui.fog_color_picker_btn)
+    def on_cloud_ambient_color_pkr(self):
+        self.color_picker('clouds_ambient',self.ui.cloud_ambient_color_pkr)
+    def on_scene_background_color_pkr(self):
+        self.color_picker('background',self.ui.scene_background_color_pkr)
+    def on_scene_ambient_color_pkr(self):
+        self.color_picker('scene_ambient',self.ui.scene_ambient_color_pkr)
+    
+        
     def on_scene(self):
         state=self.ui.enable_scene_checkBox.isChecked()
         if state:
@@ -391,7 +423,17 @@ class scene:
         self.properties.fog_end=RD_globals.get_xml_data(self._scene_element,"end",False)
         self.properties.fog_density=RD_globals.get_xml_data(self._scene_element,"density",False)
         
-    
+        #update color  of the  color picker buttons 
+        color_list=[['fog_color',self.ui.fog_color_picker_btn],['clouds_ambient',self.ui.cloud_ambient_color_pkr],
+                    ['background',self.ui.scene_background_color_pkr],['scene_ambient',self.ui.scene_ambient_color_pkr]]
+        for val in color_list:
+            self.set_widget_color(val[0],val[1])
+
+#used to set color properties of color picker buttons 
+    def set_widget_color(self,prop:str,widget):
+        color_str=','.join([str(math.ceil(i*255)) for i in getattr(self.properties,prop)])
+        widget.setStyleSheet(f"background-color: rgba({color_str});")
+        
     def reset(self,default:bool=True):
         if default:
             self._scene_element=initialize_element_tree.convdict_2_tree(self.file_name).get_element
@@ -405,10 +447,6 @@ class scene:
             if el_dict is not None:
                 el_str=el_dict["elem_str"]
                 self.merge_elements(self._scene_element,ET.fromstring(el_str))
-            if RD_globals.DEBUG is True:
-                import pdb
-                pdb.set_trace()
-                
         self.update_ui()
                 
     def merge_elements(self,destination_el, source_el):

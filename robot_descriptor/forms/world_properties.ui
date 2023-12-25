@@ -59,7 +59,7 @@
     <bool>false</bool>
    </property>
    <property name="currentIndex">
-    <number>4</number>
+    <number>3</number>
    </property>
    <property name="tabsClosable">
     <bool>false</bool>
@@ -1936,7 +1936,7 @@ of degrees</string>
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>-329</y>
+          <y>0</y>
           <width>551</width>
           <height>771</height>
          </rect>
@@ -2067,10 +2067,101 @@ of degrees</string>
              <height>98</height>
             </size>
            </property>
+           <property name="maximumSize">
+            <size>
+             <width>533</width>
+             <height>16777215</height>
+            </size>
+           </property>
            <property name="title">
             <string>Diffuse</string>
            </property>
            <layout class="QGridLayout" name="gridLayout_13">
+            <item row="1" column="2">
+             <widget class="QDoubleSpinBox" name="diffuse_B">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>25</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>64</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="maximum">
+               <double>1.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>0.100000000000000</double>
+              </property>
+              <property name="value">
+               <double>1.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QDoubleSpinBox" name="diffuse_R">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>25</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>64</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="maximum">
+               <double>1.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>0.100000000000000</double>
+              </property>
+              <property name="value">
+               <double>1.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="3">
+             <widget class="QDoubleSpinBox" name="diffuse_A">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>25</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>64</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="maximum">
+               <double>1.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>0.100000000000000</double>
+              </property>
+              <property name="value">
+               <double>1.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="3">
+             <widget class="QLabel" name="diffuse_A_label">
+              <property name="text">
+               <string>A</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
             <item row="0" column="0">
              <widget class="QLabel" name="diffuse_R_label">
               <property name="text">
@@ -2078,6 +2169,31 @@ of degrees</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QDoubleSpinBox" name="diffuse_G">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>25</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>64</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="maximum">
+               <double>1.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>0.100000000000000</double>
+              </property>
+              <property name="value">
+               <double>1.000000000000000</double>
               </property>
              </widget>
             </item>
@@ -2101,89 +2217,16 @@ of degrees</string>
               </property>
              </widget>
             </item>
-            <item row="0" column="3">
-             <widget class="QLabel" name="diffuse_A_label">
+            <item row="1" column="4">
+             <widget class="QPushButton" name="light_diffuse_color_pkr">
+              <property name="maximumSize">
+               <size>
+                <width>45</width>
+                <height>16777215</height>
+               </size>
+              </property>
               <property name="text">
-               <string>A</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="0">
-             <widget class="QDoubleSpinBox" name="diffuse_R">
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>25</height>
-               </size>
-              </property>
-              <property name="maximum">
-               <double>1.000000000000000</double>
-              </property>
-              <property name="singleStep">
-               <double>0.100000000000000</double>
-              </property>
-              <property name="value">
-               <double>1.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="QDoubleSpinBox" name="diffuse_G">
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>25</height>
-               </size>
-              </property>
-              <property name="maximum">
-               <double>1.000000000000000</double>
-              </property>
-              <property name="singleStep">
-               <double>0.100000000000000</double>
-              </property>
-              <property name="value">
-               <double>1.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="2">
-             <widget class="QDoubleSpinBox" name="diffuse_B">
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>25</height>
-               </size>
-              </property>
-              <property name="maximum">
-               <double>1.000000000000000</double>
-              </property>
-              <property name="singleStep">
-               <double>0.100000000000000</double>
-              </property>
-              <property name="value">
-               <double>1.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="3">
-             <widget class="QDoubleSpinBox" name="diffuse_A">
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>25</height>
-               </size>
-              </property>
-              <property name="maximum">
-               <double>1.000000000000000</double>
-              </property>
-              <property name="singleStep">
-               <double>0.100000000000000</double>
-              </property>
-              <property name="value">
-               <double>1.000000000000000</double>
+               <string/>
               </property>
              </widget>
             </item>
@@ -2202,24 +2245,8 @@ of degrees</string>
             <string>specular</string>
            </property>
            <layout class="QGridLayout" name="gridLayout_14">
-            <item row="0" column="0">
-             <widget class="QLabel" name="specular_R_label">
-              <property name="maximumSize">
-               <size>
-                <width>16777215</width>
-                <height>22</height>
-               </size>
-              </property>
-              <property name="text">
-               <string>R</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="QLabel" name="specular_G_label">
+            <item row="0" column="3">
+             <widget class="QLabel" name="specular_A_label">
               <property name="minimumSize">
                <size>
                 <width>0</width>
@@ -2233,10 +2260,32 @@ of degrees</string>
                </size>
               </property>
               <property name="text">
-               <string>G</string>
+               <string>A</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="3">
+             <widget class="QDoubleSpinBox" name="specular_A">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>25</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>64</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="maximum">
+               <double>1.000000000000000</double>
+              </property>
+              <property name="value">
+               <double>0.100000000000000</double>
               </property>
              </widget>
             </item>
@@ -2262,8 +2311,49 @@ of degrees</string>
               </property>
              </widget>
             </item>
-            <item row="0" column="3">
-             <widget class="QLabel" name="specular_A_label">
+            <item row="0" column="0">
+             <widget class="QLabel" name="specular_R_label">
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>22</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>R</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="QDoubleSpinBox" name="specular_B">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>25</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>64</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="maximum">
+               <double>1.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>0.100000000000000</double>
+              </property>
+              <property name="value">
+               <double>0.100000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLabel" name="specular_G_label">
               <property name="minimumSize">
                <size>
                 <width>0</width>
@@ -2277,7 +2367,7 @@ of degrees</string>
                </size>
               </property>
               <property name="text">
-               <string>A</string>
+               <string>G</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>
@@ -2290,6 +2380,12 @@ of degrees</string>
                <size>
                 <width>0</width>
                 <height>25</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>64</width>
+                <height>16777215</height>
                </size>
               </property>
               <property name="maximum">
@@ -2311,23 +2407,10 @@ of degrees</string>
                 <height>25</height>
                </size>
               </property>
-              <property name="maximum">
-               <double>1.000000000000000</double>
-              </property>
-              <property name="singleStep">
-               <double>0.100000000000000</double>
-              </property>
-              <property name="value">
-               <double>0.100000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="2">
-             <widget class="QDoubleSpinBox" name="specular_B">
-              <property name="minimumSize">
+              <property name="maximumSize">
                <size>
-                <width>0</width>
-                <height>25</height>
+                <width>64</width>
+                <height>16777215</height>
                </size>
               </property>
               <property name="maximum">
@@ -2341,19 +2424,16 @@ of degrees</string>
               </property>
              </widget>
             </item>
-            <item row="1" column="3">
-             <widget class="QDoubleSpinBox" name="specular_A">
-              <property name="minimumSize">
+            <item row="1" column="4">
+             <widget class="QPushButton" name="light_specular_color_pkr">
+              <property name="maximumSize">
                <size>
-                <width>0</width>
-                <height>25</height>
+                <width>45</width>
+                <height>16777215</height>
                </size>
               </property>
-              <property name="maximum">
-               <double>1.000000000000000</double>
-              </property>
-              <property name="value">
-               <double>0.100000000000000</double>
+              <property name="text">
+               <string/>
               </property>
              </widget>
             </item>
@@ -2368,36 +2448,16 @@ of degrees</string>
              <height>75</height>
             </size>
            </property>
+           <property name="maximumSize">
+            <size>
+             <width>534</width>
+             <height>16777215</height>
+            </size>
+           </property>
            <property name="title">
             <string>attenuation</string>
            </property>
            <layout class="QGridLayout" name="gridLayout_3">
-            <item row="0" column="0">
-             <widget class="QLabel" name="range_label">
-              <property name="text">
-               <string>range</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="QDoubleSpinBox" name="range_sp">
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>25</height>
-               </size>
-              </property>
-              <property name="maximum">
-               <double>100000.000000000000000</double>
-              </property>
-              <property name="singleStep">
-               <double>0.100000000000000</double>
-              </property>
-              <property name="value">
-               <double>10.000000000000000</double>
-              </property>
-             </widget>
-            </item>
             <item row="0" column="2">
              <widget class="QLabel" name="constant_label">
               <property name="text">
@@ -2409,30 +2469,7 @@ of degrees</string>
              <widget class="QDoubleSpinBox" name="constant_sp">
               <property name="minimumSize">
                <size>
-                <width>0</width>
-                <height>25</height>
-               </size>
-              </property>
-              <property name="singleStep">
-               <double>0.100000000000000</double>
-              </property>
-              <property name="value">
-               <double>1.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="4">
-             <widget class="QLabel" name="linear_label">
-              <property name="text">
-               <string>linear</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="5">
-             <widget class="QDoubleSpinBox" name="linear_sp">
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
+                <width>64</width>
                 <height>25</height>
                </size>
               </property>
@@ -2457,7 +2494,7 @@ of degrees</string>
               <widget class="QDoubleSpinBox" name="quadratic_sp">
                <property name="minimumSize">
                 <size>
-                 <width>0</width>
+                 <width>64</width>
                  <height>25</height>
                 </size>
                </property>
@@ -2465,6 +2502,55 @@ of degrees</string>
                 <double>0.100000000000000</double>
                </property>
               </widget>
+             </widget>
+            </item>
+            <item row="0" column="4">
+             <widget class="QLabel" name="linear_label">
+              <property name="text">
+               <string>linear</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="5">
+             <widget class="QDoubleSpinBox" name="linear_sp">
+              <property name="minimumSize">
+               <size>
+                <width>64</width>
+                <height>25</height>
+               </size>
+              </property>
+              <property name="singleStep">
+               <double>0.100000000000000</double>
+              </property>
+              <property name="value">
+               <double>1.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QDoubleSpinBox" name="range_sp">
+              <property name="minimumSize">
+               <size>
+                <width>64</width>
+                <height>25</height>
+               </size>
+              </property>
+              <property name="maximum">
+               <double>100000.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>0.100000000000000</double>
+              </property>
+              <property name="value">
+               <double>10.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="range_label">
+              <property name="text">
+               <string>range</string>
+              </property>
              </widget>
             </item>
            </layout>
@@ -2878,7 +2964,7 @@ of degrees</string>
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>-231</y>
+        <y>0</y>
         <width>563</width>
         <height>792</height>
        </rect>
@@ -2905,6 +2991,22 @@ of degrees</string>
           <string>ambient</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_30">
+          <item row="0" column="2">
+           <widget class="QLabel" name="scene_ambient_B_label">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>24</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>B</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
           <item row="0" column="0">
            <widget class="QLabel" name="scene_ambient_R_label">
             <property name="maximumSize">
@@ -2921,8 +3023,8 @@ of degrees</string>
             </property>
            </widget>
           </item>
-          <item row="0" column="1">
-           <widget class="QLabel" name="scene_ambient_G_label">
+          <item row="0" column="3">
+           <widget class="QLabel" name="scene_ambient_A_label">
             <property name="maximumSize">
              <size>
               <width>16777215</width>
@@ -2930,23 +3032,7 @@ of degrees</string>
              </size>
             </property>
             <property name="text">
-             <string>G</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="2">
-           <widget class="QLabel" name="scene_ambient_B_label">
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>24</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>B</string>
+             <string>A</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -2969,24 +3055,24 @@ of degrees</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="1">
-           <widget class="QDoubleSpinBox" name="scene_ambient_G_sp">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>24</height>
-             </size>
-            </property>
+          <item row="0" column="1">
+           <widget class="QLabel" name="scene_ambient_G_label">
             <property name="maximumSize">
              <size>
               <width>16777215</width>
               <height>24</height>
              </size>
             </property>
+            <property name="text">
+             <string>G</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
            </widget>
           </item>
-          <item row="1" column="2">
-           <widget class="QDoubleSpinBox" name="scene_ambient_B_sp">
+          <item row="1" column="1">
+           <widget class="QDoubleSpinBox" name="scene_ambient_G_sp">
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -3017,19 +3103,32 @@ of degrees</string>
             </property>
            </widget>
           </item>
-          <item row="0" column="3">
-           <widget class="QLabel" name="scene_ambient_A_label">
+          <item row="1" column="2">
+           <widget class="QDoubleSpinBox" name="scene_ambient_B_sp">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>24</height>
+             </size>
+            </property>
             <property name="maximumSize">
              <size>
               <width>16777215</width>
               <height>24</height>
              </size>
             </property>
-            <property name="text">
-             <string>A</string>
+           </widget>
+          </item>
+          <item row="1" column="4">
+           <widget class="QPushButton" name="scene_ambient_color_pkr">
+            <property name="maximumSize">
+             <size>
+              <width>45</width>
+              <height>16777215</height>
+             </size>
             </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
+            <property name="text">
+             <string/>
             </property>
            </widget>
           </item>
@@ -3051,41 +3150,25 @@ of degrees</string>
           </size>
          </property>
          <property name="toolTip">
-          <string>Color of the ambient light</string>
+          <string>background color</string>
          </property>
          <property name="title">
           <string>background</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_25">
-          <item row="0" column="0">
-           <widget class="QLabel" name="scene_background_R_label">
+          <item row="1" column="0">
+           <widget class="QDoubleSpinBox" name="scene_background_R_sp">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>24</height>
+             </size>
+            </property>
             <property name="maximumSize">
              <size>
               <width>16777215</width>
               <height>24</height>
              </size>
-            </property>
-            <property name="text">
-             <string>R</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QLabel" name="scene_background_G_label">
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>24</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>G</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
             </property>
            </widget>
           </item>
@@ -3121,8 +3204,24 @@ of degrees</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="0">
-           <widget class="QDoubleSpinBox" name="scene_background_R_sp">
+          <item row="0" column="0">
+           <widget class="QLabel" name="scene_background_R_label">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>24</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>R</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QDoubleSpinBox" name="scene_background_B_sp">
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -3153,19 +3252,19 @@ of degrees</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="2">
-           <widget class="QDoubleSpinBox" name="scene_background_B_sp">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>24</height>
-             </size>
-            </property>
+          <item row="0" column="1">
+           <widget class="QLabel" name="scene_background_G_label">
             <property name="maximumSize">
              <size>
               <width>16777215</width>
               <height>24</height>
              </size>
+            </property>
+            <property name="text">
+             <string>G</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
             </property>
            </widget>
           </item>
@@ -3182,6 +3281,19 @@ of degrees</string>
               <width>16777215</width>
               <height>24</height>
              </size>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="4">
+           <widget class="QPushButton" name="scene_background_color_pkr">
+            <property name="maximumSize">
+             <size>
+              <width>45</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string/>
             </property>
            </widget>
           </item>
@@ -3302,14 +3414,78 @@ of degrees</string>
                 </size>
                </property>
                <property name="toolTip">
-                <string>Color of the ambient light</string>
+                <string/>
                </property>
                <property name="title">
                 <string>ambient</string>
                </property>
                <layout class="QGridLayout" name="gridLayout_27">
+                <item row="0" column="0">
+                 <widget class="QLabel" name="cloud_ambient_R_label">
+                  <property name="maximumSize">
+                   <size>
+                    <width>16777215</width>
+                    <height>24</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>R</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="2">
+                 <widget class="QLabel" name="cloud_ambient_B_label">
+                  <property name="maximumSize">
+                   <size>
+                    <width>16777215</width>
+                    <height>24</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>B</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
                 <item row="1" column="2">
                  <widget class="QDoubleSpinBox" name="cloud_ambient_B_sp">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>24</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>16777215</width>
+                    <height>24</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="3">
+                 <widget class="QDoubleSpinBox" name="cloud_ambient_A_sp">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>24</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>16777215</width>
+                    <height>24</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QDoubleSpinBox" name="cloud_ambient_R_sp">
                   <property name="minimumSize">
                    <size>
                     <width>0</width>
@@ -3356,22 +3532,6 @@ of degrees</string>
                   </property>
                  </widget>
                 </item>
-                <item row="0" column="0">
-                 <widget class="QLabel" name="cloud_ambient_R_label">
-                  <property name="maximumSize">
-                   <size>
-                    <width>16777215</width>
-                    <height>24</height>
-                   </size>
-                  </property>
-                  <property name="text">
-                   <string>R</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignCenter</set>
-                  </property>
-                 </widget>
-                </item>
                 <item row="0" column="3">
                  <widget class="QLabel" name="cloud_ambient_A_label">
                   <property name="maximumSize">
@@ -3388,51 +3548,16 @@ of degrees</string>
                   </property>
                  </widget>
                 </item>
-                <item row="1" column="3">
-                 <widget class="QDoubleSpinBox" name="cloud_ambient_A_sp">
-                  <property name="minimumSize">
-                   <size>
-                    <width>0</width>
-                    <height>24</height>
-                   </size>
-                  </property>
+                <item row="1" column="4">
+                 <widget class="QPushButton" name="cloud_ambient_color_pkr">
                   <property name="maximumSize">
                    <size>
-                    <width>16777215</width>
-                    <height>24</height>
-                   </size>
-                  </property>
-                 </widget>
-                </item>
-                <item row="1" column="0">
-                 <widget class="QDoubleSpinBox" name="cloud_ambient_R_sp">
-                  <property name="minimumSize">
-                   <size>
-                    <width>0</width>
-                    <height>24</height>
-                   </size>
-                  </property>
-                  <property name="maximumSize">
-                   <size>
-                    <width>16777215</width>
-                    <height>24</height>
-                   </size>
-                  </property>
-                 </widget>
-                </item>
-                <item row="0" column="2">
-                 <widget class="QLabel" name="cloud_ambient_B_label">
-                  <property name="maximumSize">
-                   <size>
-                    <width>16777215</width>
-                    <height>24</height>
+                    <width>45</width>
+                    <height>16777215</height>
                    </size>
                   </property>
                   <property name="text">
-                   <string>B</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignCenter</set>
+                   <string/>
                   </property>
                  </widget>
                 </item>
@@ -3666,44 +3791,12 @@ of degrees</string>
              </size>
             </property>
             <property name="toolTip">
-             <string>Color of the ambient light</string>
+             <string>fog color</string>
             </property>
             <property name="title">
              <string>color</string>
             </property>
             <layout class="QGridLayout" name="gridLayout_29">
-             <item row="0" column="0">
-              <widget class="QLabel" name="fog_color_R_label">
-               <property name="maximumSize">
-                <size>
-                 <width>16777215</width>
-                 <height>24</height>
-                </size>
-               </property>
-               <property name="text">
-                <string>R</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QLabel" name="fog_color_G_label">
-               <property name="maximumSize">
-                <size>
-                 <width>16777215</width>
-                 <height>24</height>
-                </size>
-               </property>
-               <property name="text">
-                <string>G</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
              <item row="0" column="2">
               <widget class="QLabel" name="fog_color_B_label">
                <property name="maximumSize">
@@ -3752,8 +3845,24 @@ of degrees</string>
                </property>
               </widget>
              </item>
-             <item row="1" column="1">
-              <widget class="QDoubleSpinBox" name="fog_color_G_sp">
+             <item row="0" column="1">
+              <widget class="QLabel" name="fog_color_G_label">
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>G</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="2">
+              <widget class="QDoubleSpinBox" name="fog_color_B_sp">
                <property name="minimumSize">
                 <size>
                  <width>0</width>
@@ -3768,8 +3877,8 @@ of degrees</string>
                </property>
               </widget>
              </item>
-             <item row="1" column="2">
-              <widget class="QDoubleSpinBox" name="fog_color_B_sp">
+             <item row="1" column="1">
+              <widget class="QDoubleSpinBox" name="fog_color_G_sp">
                <property name="minimumSize">
                 <size>
                  <width>0</width>
@@ -3797,6 +3906,41 @@ of degrees</string>
                  <width>16777215</width>
                  <height>24</height>
                 </size>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="fog_color_R_label">
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>R</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="4">
+              <widget class="QPushButton" name="fog_color_picker_btn">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>46</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="text">
+                <string/>
                </property>
               </widget>
              </item>
