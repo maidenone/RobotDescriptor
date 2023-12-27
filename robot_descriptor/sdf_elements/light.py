@@ -194,7 +194,7 @@ class light_properties:
 #light
 #=================================================================
    
-class light:
+class light(RD_globals.color_pickr):
     def __init__(self,ui) -> None:
         self.ui=ui
         self.file_name='light.sdf'
@@ -322,23 +322,6 @@ class light:
         self.ui.light_specular_color_pkr.clicked.connect(self.on_light_specular_color_pkr)
         
     
-    def color_picker(self,prop,widget):
-        '''
-        prop: property string e.g 'fog color'
-        widget: the widget to edit its style sheet
-                e.g self.ui.fog color picker
-
-        '''
-        col_dialog = QColorDialog(self.ui)
-        col=col_dialog.getColor()
-        if col.isValid():
-            color=[col.redF(),col.blueF(),col.greenF(),col.alphaF()]
-            setattr(self.properties,prop,color)
-            widget.setStyleSheet(f" background-color: {col.name()}; ") 
-    
-    def set_widget_color(self,prop:str,widget):
-        color_str=','.join([str(math.ceil(i*255)) for i in getattr(self.properties,prop)])
-        widget.setStyleSheet(f"background-color: rgba({color_str});")
         
 #callbacks   
 #color picker callbacks 
@@ -433,9 +416,11 @@ class light:
         
     def on_diffuse(self):
         RD_globals.set_xml_data(self._current_light_element,"diffuse",False,self.properties.diffuse)
+        self.set_widget_color('diffuse',self.ui.light_diffuse_color_pkr)
         
     def on_specular(self):
         RD_globals.set_xml_data(self._current_light_element,"specular",False,self.properties.specular)
+        self.set_widget_color('specular',self.ui.light_specular_color_pkr)
         
     def on_range(self):
         RD_globals.set_xml_data(self._current_light_element,"range",False,self.properties.range)

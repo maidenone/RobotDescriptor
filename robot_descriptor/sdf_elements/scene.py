@@ -217,7 +217,7 @@ class scene_properties:
 #==============================================
 #===============================================
    
-class scene:
+class scene(RD_globals.color_pickr):
     def __init__(self,ui):
         self.ui=ui
         self.parent_path=['sdf','world']
@@ -293,23 +293,10 @@ class scene:
         self.ui.cloud_ambient_color_pkr.clicked.connect(self.on_cloud_ambient_color_pkr)
         self.ui.scene_background_color_pkr.clicked.connect(self.on_scene_background_color_pkr)
         self.ui.scene_ambient_color_pkr.clicked.connect(self.on_scene_ambient_color_pkr)
-
-    def color_picker(self,prop,widget):
-        '''
-        prop: property string e.g 'fog color'
-        widget: the widget to edit its style sheet
-                e.g self.ui.fog color picker
-
-        '''
-        col_dialog = QColorDialog(self.ui)
-        col=col_dialog.getColor()
-        if col.isValid():
-            color=[col.redF(),col.blueF(),col.greenF(),col.alphaF()]
-            setattr(self.properties,prop,color)
-            widget.setStyleSheet(f" background-color: {col.name()}; ")
-        
+    
 #callbacks 
 #start
+
 #start of  color picker methods 
     def on_fog_color_picker(self):
         self.color_picker('fog_color',self.ui.fog_color_picker_btn)
@@ -320,7 +307,8 @@ class scene:
     def on_scene_ambient_color_pkr(self):
         self.color_picker('scene_ambient',self.ui.scene_ambient_color_pkr)
     
-        
+    #end color picker methods 
+    
     def on_scene(self):
         state=self.ui.enable_scene_checkBox.isChecked()
         if state:
@@ -338,9 +326,11 @@ class scene:
         ambient=self._scene_element.find("ambient")
         vect=self.properties.scene_ambient
         ambient.text=' '.join(map(str,vect))
+        self.set_widget_color('scene_ambient',self.ui.scene_ambient_color_pkr)
     
     def on_background(self):
         RD_globals.set_xml_data(self._scene_element,"background",False,self.properties.background)
+        self.set_widget_color('background',self.ui.scene_background_color_pkr)
         
     def on_time(self):
         RD_globals.set_xml_data(self._scene_element,"time",False,self.properties.time)
@@ -363,6 +353,7 @@ class scene:
     def on_cloud_ambient(self):
         #write to the ambient in clouds element 
         RD_globals.set_xml_data(self._scene_element.find("sky"),"ambient",False,self.properties.clouds_ambient)
+        self.set_widget_color('clouds_ambient',self.ui.cloud_ambient_color_pkr)
     
     def on_mean_size(self):
         RD_globals.set_xml_data(self._scene_element,"mean_size",False,self.properties.mean_size)
@@ -381,6 +372,7 @@ class scene:
         
     def on_fog_color(self):
         RD_globals.set_xml_data(self._scene_element,"color",False,self.properties.fog_color)
+        self.set_widget_color('fog_color',self.ui.fog_color_picker_btn)
         
     def on_fog_type(self):
         RD_globals.set_xml_data(self._scene_element,"type",False,self.properties.fog_type)
@@ -430,9 +422,6 @@ class scene:
             self.set_widget_color(val[0],val[1])
 
 #used to set color properties of color picker buttons 
-    def set_widget_color(self,prop:str,widget):
-        color_str=','.join([str(math.ceil(i*255)) for i in getattr(self.properties,prop)])
-        widget.setStyleSheet(f"background-color: rgba({color_str});")
         
     def reset(self,default:bool=True):
         if default:
