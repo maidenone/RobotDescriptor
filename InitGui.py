@@ -35,6 +35,11 @@ class RobotDescriptor (Workbench):
 
 	def Deactivated(self):
 		"This function is executed when the workbench is deactivated"
+		# close all active windows and reset active window variable
+		FreeCAD.ActiveDocument.Robot_Description.Proxy.world_widget_active =False
+		if FreeCAD.ActiveDocument.Robot_Description.Proxy.active_window is not None:
+			FreeCAD.ActiveDocument.Robot_Description.Proxy.active_window.close()
+			FreeCAD.ActiveDocument.Robot_Description.Proxy.active_window=None
 		return
 
 	def ContextMenu(self, recipient):

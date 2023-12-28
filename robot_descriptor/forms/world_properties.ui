@@ -59,7 +59,7 @@
     <bool>false</bool>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>5</number>
    </property>
    <property name="tabsClosable">
     <bool>false</bool>
@@ -1936,7 +1936,7 @@ of degrees</string>
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>-329</y>
+          <y>0</y>
           <width>551</width>
           <height>771</height>
          </rect>
@@ -4257,6 +4257,14 @@ of degrees</string>
             <height>24</height>
            </size>
           </property>
+          <property name="toolTip">
+           <string>csv file should have a header( first row as x,y,z 
+2nd row as 0,0,0 and consecutive rows follow the same pattern
+ e.g 
+ 'x,y,z 
+ 0,0,0 
+ ...</string>
+          </property>
          </widget>
          <widget class="QPushButton" name="points_browse_btn">
           <property name="minimumSize">
@@ -4264,6 +4272,14 @@ of degrees</string>
             <width>0</width>
             <height>24</height>
            </size>
+          </property>
+          <property name="toolTip">
+           <string>csv file should have a header( first row as x,y,z  
+2nd row as 0,0,0 and consecutive rows follow the same pattern
+ e.g 
+ 'x,y,z 
+ 0,0,0 
+ ...</string>
           </property>
           <property name="text">
            <string>browse</string>

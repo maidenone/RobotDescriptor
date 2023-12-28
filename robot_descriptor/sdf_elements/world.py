@@ -111,7 +111,16 @@ class world(QtGui.QWidget):
 
         self.ui_path=os.path.join(RD_globals.UI_PATH,"world_properties.ui")
         self.world_form=FreeCADGui.PySideUic.loadUi(self.ui_path,self)
+         #store the pointer to the active window 
+        FreeCAD.ActiveDocument.Robot_Description.Proxy.active_window=self.world_form
         self.world_form.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
+        
+        #disable the close button (x)  because the closeEvent is not being triggered 
+        #hence  when the (x) button is used active_window variable is never set to false 
+        #as a result the widget cannot be opened again unless  RobotDescription document opbject 
+        #is deleted and workbench re initialized
+        self.world_form.setWindowFlags(self.windowFlags() & ~QtCore.Qt.WindowCloseButtonHint)
+        
         #initialize properties before reset
         self.properties=world_properties(self.world_form)
 # get world element 
@@ -141,10 +150,11 @@ class world(QtGui.QWidget):
 #update ui with previously configured values if available     
         self.reset(False)
         
-#window close event  this is called when the x widget icon is pressed 
+#window close event  this is called when the (x) widget icon is pressed 
     def closeEvent(self, event):
         print('closing widget\n')
         FreeCAD.ActiveDocument.Robot_Description.Proxy.world_widget_active=False
+        FreeCAD.ActiveDocument.Robot_Description.Proxy.active_window=None
         event.accept()
 
     def update_ui(self):
@@ -203,7 +213,7 @@ class world(QtGui.QWidget):
         self.world_form.world_reset_btn.clicked.connect(self.on_reset)
         
         self.world_form.setGeometry(400,250,610,709)
-
+            
         #display window
         #set the state of the window to true before displaying it 
         FreeCAD.ActiveDocument.Robot_Description.Proxy.world_widget_active=True
@@ -247,6 +257,7 @@ class world(QtGui.QWidget):
         self.world_form.close()
         # set the state to false after closing the window 
         FreeCAD.ActiveDocument.Robot_Description.Proxy.world_widget_active=False
+        FreeCAD.ActiveDocument.Robot_Description.Proxy.active_window=None
 
 #apply pb
     def on_apply_pb(self):
@@ -306,7 +317,8 @@ class init_sdf_world:
             if FreeCAD.ActiveDocument.Robot_Description.Proxy.world_widget_active is False:
                 self.w=world()
             else:
-                return
+                FreeCAD.ActiveDocument.Robot_Description.Proxy.active_window.activateWindow()
+                FreeCAD.ActiveDocument.Robot_Description.Proxy.active_window.raise_()
         
         else:
             FreeCAD.Console.PrintError("workbench not initialized\n")
