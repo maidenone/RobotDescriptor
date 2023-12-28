@@ -126,7 +126,7 @@ class world(QtGui.QWidget):
 #initialize spherical coordinates
         from . import spherical_coordinates
         self._spherical_coordinates=spherical_coordinates.spherical_coordinates(self.world_form)
-#innitialize light
+#initialize light
         from . import light
         self._lights=light.light(self.world_form)
         
