@@ -6,6 +6,8 @@ from ..RD_parser import initialize_element_tree
 from .. import RD_globals
 import copy
 import re
+from PySide.QtGui import QColorDialog
+import math
 #=============================================================
 #light properties
 #=============================================================
@@ -192,7 +194,7 @@ class light_properties:
 #light
 #=================================================================
    
-class light:
+class light(RD_globals.color_pickr):
     def __init__(self,ui) -> None:
         self.ui=ui
         self.file_name='light.sdf'
@@ -316,8 +318,19 @@ class light:
         self.ui.light_listWidget.currentRowChanged.connect(self.on_list_row_change)
         #reset 
         self.ui.light_Reset.clicked.connect(self.on_reset)
+        self.ui.light_diffuse_color_pkr.clicked.connect(self.on_light_diffuse_color_pkr)
+        self.ui.light_specular_color_pkr.clicked.connect(self.on_light_specular_color_pkr)
+        
+    
         
 #callbacks   
+#color picker callbacks 
+    def on_light_diffuse_color_pkr(self):
+        self.color_picker('diffuse',self.ui.light_diffuse_color_pkr)
+    def on_light_specular_color_pkr(self):
+        self.color_picker('specular',self.ui.light_specular_color_pkr)
+        
+
     def on_reset(self):
         self.reset()
         print("light reset has been applied \n")
@@ -403,9 +416,11 @@ class light:
         
     def on_diffuse(self):
         RD_globals.set_xml_data(self._current_light_element,"diffuse",False,self.properties.diffuse)
+        self.set_widget_color('diffuse',self.ui.light_diffuse_color_pkr)
         
     def on_specular(self):
         RD_globals.set_xml_data(self._current_light_element,"specular",False,self.properties.specular)
+        self.set_widget_color('specular',self.ui.light_specular_color_pkr)
         
     def on_range(self):
         RD_globals.set_xml_data(self._current_light_element,"range",False,self.properties.range)
@@ -516,6 +531,10 @@ class light:
         self.properties.inner_angle=float(RD_globals.get_xml_data(self._current_light_element,"inner_angle",False))
         self.properties.outer_angle=float(RD_globals.get_xml_data(self._current_light_element,"outer_angle",False))
         self.properties.falloff=float(RD_globals.get_xml_data(self._current_light_element,"falloff",False))
+        
+        #set color picker button colors 
+        self.set_widget_color('diffuse',self.ui.light_diffuse_color_pkr)
+        self.set_widget_color('specular',self.ui.light_specular_color_pkr)
         
     def reset(self,default:bool=True):
         if default:

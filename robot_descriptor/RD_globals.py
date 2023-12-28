@@ -28,6 +28,11 @@ from typing import Union
 
 #will be used to extract vectors from element types of vector3,pose ....
 def extract_vector_n(input_string):
+    '''this extracts a vector from a string of  numbers '''
+    #input_string.strip().split(' ') could aslo work here 
+    #well lets go with some regex 
+    #because this might also be used  for comma separated values 
+    
     numbers=re.findall(r'-?(?:\d+\.\d+|\.\d+|\d+)(?:e-?\d+)?',input_string)
 
     return [float(num) for num in numbers]
@@ -248,5 +253,32 @@ def merge_elements(destination_el:ET.Element,source_el:ET.Element,recursive:bool
                 destination_el.append(child)
             else:
                 destination_el.append(child)
-                
-                
+
+
+import math 
+from PySide.QtGui import QColorDialog
+
+
+class color_pickr:
+    def __init__(self) -> None:
+        pass
+    #color picker
+    def color_picker(self,prop,widget):
+        '''
+        prop: property string e.g 'fog color'
+        widget: the widget to edit its style sheet
+                e.g self.ui.fog color picker
+
+        '''
+        col_dialog = QColorDialog(self.ui)
+        col=col_dialog.getColor()
+        if col.isValid():
+            color=[col.redF(),col.blueF(),col.greenF(),col.alphaF()]
+            setattr(self.properties,prop,color)
+            widget.setStyleSheet(f" background-color: {col.name()}; ")
+            
+    #color seter
+    #used to set color properties of color picker buttons 
+    def set_widget_color(self,prop:str,widget):
+        color_str=','.join([str(math.ceil(i*255)) for i in getattr(self.properties,prop)])
+        widget.setStyleSheet(f"background-color: rgba({color_str});")

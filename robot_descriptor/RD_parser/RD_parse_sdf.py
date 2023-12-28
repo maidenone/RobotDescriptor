@@ -57,6 +57,14 @@ class sdf_parse:
         #populate the dictionary with data 
         # call the tree with the parent  root element
         self.Main_ElemDict=self.populate_structure(self.root)
+        '''
+        main dict structure
+        {
+            tag: element tag name
+            attributes:element attribtes 
+            value:element text 
+            children:[] children is a list that has dictionaries that folow the same structure 
+            }'''
            
     def populate_structure(self,Element:ET.Element):
         #add elements to structure 

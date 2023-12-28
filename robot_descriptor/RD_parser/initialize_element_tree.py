@@ -36,14 +36,17 @@ class convdict_2_tree:
         
     def construct_tree(self,parent_elem:ET.Element,st_lst)->ET.Element:
         
-        attr=dict()
         for child in st_lst:
-            
+            # attr=dict()
+            s=ET.SubElement(parent_elem,child["tag"])
             if child["attributes"] is not None:
-                for _att in child["attributes"]:
+                for attr in child["attributes"]:
             #recall  attributes are stored as class Element_attributes defined in RD_parse_sdf.py
-                    attr[_att.name]=_att.attr_value
-            s=ET.SubElement(parent_elem,child["tag"],attr)
+            #create a dictionary with the attributes name as the key and attribute_value as the value
+            #for each attribute in the list
+                    # attr[_att.name]=_att.attr_value
+                    s.set(attr.name,attr.attr_value)
+
             if child["value"] is not None:
                 s.text=child["value"]
             if len(child["children"]) >0:

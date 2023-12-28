@@ -133,6 +133,10 @@ class world(QtGui.QWidget):
 #initialize scene 
         from . import scene
         self._scene=scene.scene(self.world_form)
+        
+#initialize road
+        from . import road
+        self._road=road.road(self.world_form)
 
         self.configUI()
 #update ui with previously configured values if available     
@@ -264,6 +268,9 @@ class world(QtGui.QWidget):
 #add scene based on state of a checkbox 
         if  self.world_form.enable_scene_checkBox.isChecked():
             RD_globals.update_dictionary(self._scene.parent_path,self._scene.tag,self._scene.element)
+#append the  road element 
+        if self.world_form.enable_road_checkbox.isChecked():
+            RD_globals.update_dictionary(self._road.parent_path,self._road.tag,self._road.element)
             
         print("updated\n")
     

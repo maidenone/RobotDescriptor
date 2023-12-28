@@ -4,7 +4,8 @@ import xml.etree.ElementTree as ET
 import FreeCAD
 from ..RD_parser import initialize_element_tree
 from PySide import QtCore
-
+from PySide.QtGui import QColorDialog
+import math
 #===================================
 #scene properties
 #======================================
@@ -216,7 +217,7 @@ class scene_properties:
 #==============================================
 #===============================================
    
-class scene:
+class scene(RD_globals.color_pickr):
     def __init__(self,ui):
         self.ui=ui
         self.parent_path=['sdf','world']
@@ -286,9 +287,28 @@ class scene:
         self.ui.Reset_pb.clicked.connect(self.on_reset)
 #scene checkbox 
         self.ui.enable_scene_checkBox.stateChanged.connect(self.on_scene)
-
+        
+#color picker callback
+        self.ui.fog_color_picker_btn.clicked.connect(self.on_fog_color_picker)
+        self.ui.cloud_ambient_color_pkr.clicked.connect(self.on_cloud_ambient_color_pkr)
+        self.ui.scene_background_color_pkr.clicked.connect(self.on_scene_background_color_pkr)
+        self.ui.scene_ambient_color_pkr.clicked.connect(self.on_scene_ambient_color_pkr)
+    
 #callbacks 
 #start
+
+#start of  color picker methods 
+    def on_fog_color_picker(self):
+        self.color_picker('fog_color',self.ui.fog_color_picker_btn)
+    def on_cloud_ambient_color_pkr(self):
+        self.color_picker('clouds_ambient',self.ui.cloud_ambient_color_pkr)
+    def on_scene_background_color_pkr(self):
+        self.color_picker('background',self.ui.scene_background_color_pkr)
+    def on_scene_ambient_color_pkr(self):
+        self.color_picker('scene_ambient',self.ui.scene_ambient_color_pkr)
+    
+    #end color picker methods 
+    
     def on_scene(self):
         state=self.ui.enable_scene_checkBox.isChecked()
         if state:
@@ -306,9 +326,11 @@ class scene:
         ambient=self._scene_element.find("ambient")
         vect=self.properties.scene_ambient
         ambient.text=' '.join(map(str,vect))
+        self.set_widget_color('scene_ambient',self.ui.scene_ambient_color_pkr)
     
     def on_background(self):
         RD_globals.set_xml_data(self._scene_element,"background",False,self.properties.background)
+        self.set_widget_color('background',self.ui.scene_background_color_pkr)
         
     def on_time(self):
         RD_globals.set_xml_data(self._scene_element,"time",False,self.properties.time)
@@ -331,6 +353,7 @@ class scene:
     def on_cloud_ambient(self):
         #write to the ambient in clouds element 
         RD_globals.set_xml_data(self._scene_element.find("sky"),"ambient",False,self.properties.clouds_ambient)
+        self.set_widget_color('clouds_ambient',self.ui.cloud_ambient_color_pkr)
     
     def on_mean_size(self):
         RD_globals.set_xml_data(self._scene_element,"mean_size",False,self.properties.mean_size)
@@ -349,6 +372,7 @@ class scene:
         
     def on_fog_color(self):
         RD_globals.set_xml_data(self._scene_element,"color",False,self.properties.fog_color)
+        self.set_widget_color('fog_color',self.ui.fog_color_picker_btn)
         
     def on_fog_type(self):
         RD_globals.set_xml_data(self._scene_element,"type",False,self.properties.fog_type)
@@ -391,7 +415,14 @@ class scene:
         self.properties.fog_end=RD_globals.get_xml_data(self._scene_element,"end",False)
         self.properties.fog_density=RD_globals.get_xml_data(self._scene_element,"density",False)
         
-    
+        #update color  of the  color picker buttons 
+        color_list=[['fog_color',self.ui.fog_color_picker_btn],['clouds_ambient',self.ui.cloud_ambient_color_pkr],
+                    ['background',self.ui.scene_background_color_pkr],['scene_ambient',self.ui.scene_ambient_color_pkr]]
+        for val in color_list:
+            self.set_widget_color(val[0],val[1])
+
+#used to set color properties of color picker buttons 
+        
     def reset(self,default:bool=True):
         if default:
             self._scene_element=initialize_element_tree.convdict_2_tree(self.file_name).get_element
@@ -405,10 +436,6 @@ class scene:
             if el_dict is not None:
                 el_str=el_dict["elem_str"]
                 self.merge_elements(self._scene_element,ET.fromstring(el_str))
-            if RD_globals.DEBUG is True:
-                import pdb
-                pdb.set_trace()
-                
         self.update_ui()
                 
     def merge_elements(self,destination_el, source_el):
