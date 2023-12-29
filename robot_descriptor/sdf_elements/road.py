@@ -404,6 +404,8 @@ class road():
         self.ui.points_browse_btn.clicked.connect(self.on_browse)
         self.ui.road_Reset_btn.clicked.connect(self.on_road_reset)
         self.ui.enable_road_checkbox.clicked.connect(self.on_road_checkbox)
+        #enable drag and drop for road points 
+        self.ui.road_points.setDragEnabled(True)
         
     def on_road_checkbox(self):
         state=self.ui.enable_road_checkbox.isChecked()

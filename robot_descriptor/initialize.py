@@ -18,6 +18,9 @@ class RD_properties:
 	def __init__(self):
 		self.description_format='sdf'
 		self.Type="Dictionary"
+		self.world_widget_active=False
+  
+		self.active_window=None
         #this will hold the entire sdf definition of the sdf file 
 		#string representation od the element
 		self._element_dict=None
