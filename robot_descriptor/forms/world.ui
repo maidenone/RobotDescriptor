@@ -1,44 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>world_properties_form</class>
- <widget class="QWidget" name="world_properties_form">
+ <class>world_properties</class>
+ <widget class="QDialog" name="world_properties">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>620</width>
-    <height>709</height>
+    <width>611</width>
+    <height>715</height>
    </rect>
   </property>
-  <property name="minimumSize">
-   <size>
-    <width>620</width>
-    <height>709</height>
-   </size>
-  </property>
-  <property name="maximumSize">
-   <size>
-    <width>630</width>
-    <height>780</height>
-   </size>
-  </property>
   <property name="windowTitle">
-   <string>world properties</string>
+   <string>Dialog</string>
   </property>
-  <property name="toolTip">
-   <string/>
-  </property>
-  <property name="autoFillBackground">
-   <bool>false</bool>
-  </property>
+  <widget class="QPushButton" name="ok_pb">
+   <property name="geometry">
+    <rect>
+     <x>508</x>
+     <y>684</y>
+     <width>80</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>100</width>
+     <height>40</height>
+    </size>
+   </property>
+   <property name="text">
+    <string>OK</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="apply_pb">
+   <property name="geometry">
+    <rect>
+     <x>408</x>
+     <y>684</y>
+     <width>80</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Apply</string>
+   </property>
+  </widget>
   <widget class="QTabWidget" name="world_tabs">
    <property name="enabled">
     <bool>true</bool>
    </property>
    <property name="geometry">
     <rect>
-     <x>14</x>
-     <y>10</y>
+     <x>12</x>
+     <y>14</y>
      <width>589</width>
      <height>655</height>
     </rect>
@@ -5318,43 +5332,11 @@ of degrees</string>
     </widget>
    </widget>
   </widget>
-  <widget class="QPushButton" name="ok_pb">
-   <property name="geometry">
-    <rect>
-     <x>510</x>
-     <y>680</y>
-     <width>80</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>100</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="text">
-    <string>OK</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="apply_pb">
-   <property name="geometry">
-    <rect>
-     <x>410</x>
-     <y>680</y>
-     <width>80</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Apply</string>
-   </property>
-  </widget>
   <widget class="QPushButton" name="reload_button">
    <property name="geometry">
     <rect>
-     <x>18</x>
-     <y>674</y>
+     <x>16</x>
+     <y>678</y>
      <width>80</width>
      <height>23</height>
     </rect>

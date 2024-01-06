@@ -109,7 +109,7 @@ class world():
         self.tag='world'
         self.file_name="world.sdf"
 
-        self.ui_path=os.path.join(RD_globals.UI_PATH,"world_properties.ui")
+        self.ui_path=os.path.join(RD_globals.UI_PATH,"world.ui")
         self.world_form=FreeCADGui.PySideUic.loadUi(self.ui_path)
         mw=FreeCADGui.getMainWindow()
         #centre dialog to main window 
@@ -205,9 +205,8 @@ class world():
         self.world_form.world_reset_btn.clicked.connect(self.on_reset)
         
         #display window
-        #set the state of the window to true before displaying it 
-        self.world_form.show()
-
+        self.world_form.exec_()
+        
  
     def update_element(self):
 #make a temporary copy to prevent altering the original element 
