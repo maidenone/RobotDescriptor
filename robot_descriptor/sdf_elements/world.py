@@ -102,7 +102,7 @@ class world_properties():
 #------------------------------------------------------
 #world 
 #------------------------------------------------------ 
-class world(QtGui.QWidget):
+class world():
     def __init__(self):
         super(world,self).__init__()
         self.parent_path=["sdf"]
@@ -110,18 +110,12 @@ class world(QtGui.QWidget):
         self.file_name="world.sdf"
 
         self.ui_path=os.path.join(RD_globals.UI_PATH,"world_properties.ui")
-        self.world_form=FreeCADGui.PySideUic.loadUi(self.ui_path,self)
-         #store the pointer to the active window 
-        FreeCAD.ActiveDocument.Robot_Description.Proxy.active_window=self.world_form
-        self.world_form.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
-        
-        #disable the close button (x)  because the closeEvent is not being triggered 
-        #hence  when the (x) button is used active_window variable is never set to false 
-        #as a result the widget cannot be opened again unless  RobotDescription document opbject 
-        #is deleted and workbench re initialized
-        self.world_form.setWindowFlags(self.windowFlags() & ~QtCore.Qt.WindowCloseButtonHint)
-        
-        #initialize properties before reset
+        self.world_form=FreeCADGui.PySideUic.loadUi(self.ui_path)
+        mw=FreeCADGui.getMainWindow()
+        #centre dialog to main window 
+        self.world_form.move(
+            mw.frameGeometry().topLeft() + mw.rect().center() - self.world_form.rect().center()
+        )
         self.properties=world_properties(self.world_form)
 # get world element 
         self.world_elem=initialize_element_tree.convdict_2_tree(self.file_name).get_element
@@ -153,8 +147,6 @@ class world(QtGui.QWidget):
 #window close event  this is called when the (x) widget icon is pressed 
     def closeEvent(self, event):
         print('closing widget\n')
-        FreeCAD.ActiveDocument.Robot_Description.Proxy.world_widget_active=False
-        FreeCAD.ActiveDocument.Robot_Description.Proxy.active_window=None
         event.accept()
 
     def update_ui(self):
@@ -212,11 +204,8 @@ class world(QtGui.QWidget):
  # reset Pb
         self.world_form.world_reset_btn.clicked.connect(self.on_reset)
         
-        self.world_form.setGeometry(400,250,610,709)
-            
         #display window
         #set the state of the window to true before displaying it 
-        FreeCAD.ActiveDocument.Robot_Description.Proxy.world_widget_active=True
         self.world_form.show()
 
  
@@ -255,9 +244,6 @@ class world(QtGui.QWidget):
 #ok push button pressed callback 
     def on_ok(self):
         self.world_form.close()
-        # set the state to false after closing the window 
-        FreeCAD.ActiveDocument.Robot_Description.Proxy.world_widget_active=False
-        FreeCAD.ActiveDocument.Robot_Description.Proxy.active_window=None
 
 #apply pb
     def on_apply_pb(self):
@@ -307,6 +293,8 @@ class init_sdf_world:
 
     def Activated(self):
         """intiialize workbench"""
+
+        
         if FreeCAD.activeDocument() is None:
             return
             # import pdb
@@ -314,11 +302,7 @@ class init_sdf_world:
         if hasattr(FreeCAD.ActiveDocument, "Robot_Description"):
             #todo
             #prevent opening duplicate windows
-            if FreeCAD.ActiveDocument.Robot_Description.Proxy.world_widget_active is False:
-                self.w=world()
-            else:
-                FreeCAD.ActiveDocument.Robot_Description.Proxy.active_window.activateWindow()
-                FreeCAD.ActiveDocument.Robot_Description.Proxy.active_window.raise_()
+            self.w=world()
         
         else:
             FreeCAD.Console.PrintError("workbench not initialized\n")
@@ -327,9 +311,11 @@ class init_sdf_world:
     def IsActive(self):
         """Here you can define if the command must be active or not (greyed) if certain conditions
         are met or not. This function is optional."""
+
         if hasattr(FreeCAD.ActiveDocument, "Robot_Description"):
             return True
         else:
             return False
+
 
 FreeCADGui.addCommand("world_properties", init_sdf_world())
