@@ -6,12 +6,24 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>611</width>
-    <height>715</height>
+    <width>614</width>
+    <height>724</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>614</width>
+    <height>724</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>620</width>
+    <height>730</height>
+   </size>
+  </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>world</string>
   </property>
   <widget class="QPushButton" name="ok_pb">
    <property name="geometry">
