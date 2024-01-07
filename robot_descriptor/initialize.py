@@ -3,6 +3,7 @@ import FreeCADGui
 import os 
 from PySide import QtGui,QtCore
 
+#import Spreadsheet
 import xml.etree.ElementTree as ET 
 
 from .RD_parser import initialize_element_tree
@@ -14,15 +15,11 @@ _DESCRIPTION_FORMAT='sdf'
 _SDF_VERSION='1.10'
 #this will hold the entire sdf definition of the sdf file 
 #as a dictionary which will then be converted into a .sdf file
+
 class RD_properties:
 	def __init__(self):
 		self.description_format='sdf'
 		self.Type="Dictionary"
-		self.world_widget_active=False
-  
-		self.active_window=None
-        #this will hold the entire sdf definition of the sdf file 
-		#string representation od the element
 		self._element_dict=None
 	@property 
 	def format(self):
@@ -49,13 +46,16 @@ class initialize:
     #ensure there is an active document
 		document=FreeCAD.ActiveDocument	
 # check to ensure  a document object exists, if it does not add it
-		try:
-			group=document.Robot_Description
-			group.isValid()
-				
-		except:
+		if not hasattr(FreeCAD.ActiveDocument, "Robot_Description"):
 			group =document.addObject("App::DocumentObjectGroupPython","Robot_Description")
-			
+			#spreadsheet for points of the road 
+			points=document.addObject('Spreadsheet::Sheet','points')
+			group.addObject(points)
+			# label columns 
+			for row,label in [('A','x'),('B','y'),('C','z')]:
+				points.set(f'{row}1',label)
+				points.set(f'{row}2','0')
+				points.setStyle(f'{row}1','bold')
 			description_properties=RD_properties()
 			if description_properties.format=='sdf':
 				group.Proxy=description_properties
@@ -68,7 +68,7 @@ class initialize:
 # the recurring key is used to track this , if false the elem_str will be a string , if 
 #true elem_str will be a list of strings where each index will be an instance of the element
 				group.Proxy.element_dict={"sdf":{"elem_str":root_elem_str,"recurring":False,"children":{}}}
-
+    #object will store a pointer to the active widget
 
 		document.recompute()
 '''
@@ -103,9 +103,14 @@ class RD_init:
 		else:
 			self.rd=initialize()
         
-	def IsActive(slef):
-		if FreeCAD.activeDocument() is not None:
-			return True
+	def IsActive(self):
+		if FreeCAD.activeDocument() is not None :
+			#check if robot description document object is already defined 
+			#return false if its already defined no need to re-initialize again
+			if hasattr(FreeCAD.ActiveDocument, "Robot_Description"):
+				return False
+			else:
+				return True
 		else:
 			return False
 

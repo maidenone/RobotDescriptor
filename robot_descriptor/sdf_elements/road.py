@@ -5,6 +5,7 @@ from PySide import QtGui,QtCore
 import re 
 import math
 import csv
+# import Spreadsheet
 import os
 import  xml.etree.ElementTree as ET
 import FreeCAD
@@ -30,13 +31,6 @@ class road_properties:
     def width(self,value):
         self.ui.road_width_sp.setValue(value)
 
-#point
-    @property
-    def point(self):
-        return self.ui.road_points.text()
-    @point.setter
-    def point(self,text):
-        self.ui.road_points.setText(text)
         
 #==================================================
 # road material 
@@ -99,7 +93,7 @@ class material_properties:
 #shininess
     @property
     def shininess(self):
-        return self.ui.material_shininess_sp.value()
+        return self.ui.materroad_pointsial_shininess_sp.value()
     @shininess.setter
     def shininess(self,value):
         self.ui.material_shininess_sp.setValue(value)
@@ -186,7 +180,7 @@ class material(RD_globals.color_pickr):
         self._material_element.remove(self._material_element.find('.//double_sided'))
         self.configUI()
         self.reset(default=False)
-    
+        
     def configUI(self):
         self.ui.material_script_uri_input.textEdited.connect(self.on_uri)
         self.ui.material_script_name.textEdited.connect(self.on_uri_name)
@@ -309,7 +303,10 @@ class material(RD_globals.color_pickr):
             if el_dict is not None:
                 #find the material element from road 
                 elem=ET.fromstring(el_dict['elem_str']).find('.//material')
-                self.merge_elements(self._material_element,elem)
+                #make check since material might not always be included in the final element tree
+                # since its optional 
+                if elem is not None:
+                    self.merge_elements(self._material_element,elem)
         self.updateUi()
     
              
@@ -386,11 +383,10 @@ class road():
         #material element
         self._material=material(self.ui)
         self.point_element=copy.deepcopy(self._road_element.find('.//point'))
-        #remove point element
-        self._road_element.remove(self._road_element.find('.//point'))
         #disable the scroll widget
         self.ui.road_scroll.setEnabled(False)
-        self.ui.road_points.setEnabled(False)
+        
+
     #remove elements that will not be edited 
         
         #configure the Ui and callbacks 
@@ -400,13 +396,9 @@ class road():
     def configUI(self):
         self.ui.road_name.textEdited.connect(self.on_road_name)
         self.ui.road_width_sp.valueChanged.connect(self.on_road_width)
-        self.ui.road_points.textChanged.connect(self.on_road_points)
-        self.ui.points_browse_btn.clicked.connect(self.on_browse)
         self.ui.road_Reset_btn.clicked.connect(self.on_road_reset)
         self.ui.enable_road_checkbox.clicked.connect(self.on_road_checkbox)
-        #enable drag and drop for road points 
-        self.ui.road_points.setDragEnabled(True)
-        
+
     def on_road_checkbox(self):
         state=self.ui.enable_road_checkbox.isChecked()
         if state:
@@ -424,49 +416,36 @@ class road():
     def on_road_width(self):
         RD_globals.set_xml_data(self._road_element,'width',False,self._road_properties.width)
         
-    def on_road_points(self):
-        text=self._road_properties.point
-        
-        if text is not None and text !='':
-            with open(text, newline='') as csv_file:
-                points_csv=csv.reader(csv_file)
-                header=next(points_csv)
-                print(header)
-                point_list=[]
-                for line in points_csv:
-                    point_list.append(line)
-                if len(point_list)<2:
-                    return
-                else:
-                    #remove all available points
-                    for point in self._road_element.iter('point'):
-                        self._road_element.remove(point)
-                #append the points the  road element
-                for p in point_list:
-                    if len(p)>0:
-                        point=copy.deepcopy(self.point_element)
-                        point.text=' '.join(map(str,p))
-                        self._road_element.append(point)
-                
-    def on_browse(self):
-        fname=QtGui.QFileDialog.getOpenFileName(self.ui,'open file',os.path.expanduser('~'),"CSV Files (*.csv)")
-        if fname:
-            #force the textchanged callback  to be called b
-            #This is in a situation where the same file is selected twice
-            #when updated 
-            self._road_properties.point=''
-            self._road_properties.point=fname[0]
+    def get_sheet_data(self):
+        #get  spread sheet  with points data
+        sheet=FreeCAD.ActiveDocument.points
+        data_cells=sheet.getNonEmptyCells()
+        #ensure all point data is available since a vector 3 is required
+        #all filled cells need to be a multiple of 3 
+        if len(data_cells)%3 !=0:
+            FreeCAD.Console.PrintUserWarning("some data is missing \n points not updated\n")
+        else:
+            #remove all points previously available in the tree
+            for point in self._road_element.iter('point'):
+                self._road_element.remove(point)
+            #use list comprehension to extract  spreadsheet items 3 at a time
+            #produces
+            #start from 3 since the first 3 are the labels
+            for row in [ [sheet.getContents(data_cells[i]),  sheet.getContents(data_cells[i+1]), sheet.getContents(data_cells[i+2])] 
+                                            for i in range(3,len(data_cells),3)]:
+                point=copy.deepcopy(self.point_element)
+                point.text=' '.join(map(str,row))
+                self._road_element.append(point)
     
+            
     def updateUI(self):
         self._road_properties.name=RD_globals.get_xml_data(self._road_element,['road','name'],True)
         self._road_properties.width=RD_globals.get_xml_data(self._road_element,'width',False)
-        
         
     
     def reset(self,default=True):
         if default:
             self._road_element=initialize_element_tree.convdict_2_tree(self.file_name).get_element
-            self._road_element.remove(self._road_element.find('.//point'))
             self._material.reset(default=True)
             self._road_properties.point=None
         else:
@@ -477,11 +456,19 @@ class road():
                 elem=ET.fromstring(el_dict['elem_str'])
                 self._road_element=elem
                 #remove material from the element
-                self._road_element.remove(self._road_element.find('.//material'))
+                mat=self._road_element.find('.//material')
+                #material is an optional element hence might not  be included 
+                
+                if mat is not None:
+                    self._road_element.remove(mat )
         self.updateUI() 
                 
     @property
     def element(self):
+        #update data in sheet before export 
+        self.get_sheet_data()
+        
+        
         _elem=copy.deepcopy(self._road_element)
         #check if materialis enabled 
         if self.ui.road_material_groupbox.isChecked():
