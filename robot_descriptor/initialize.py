@@ -6,7 +6,7 @@ from PySide import QtGui,QtCore
 #import Spreadsheet
 import xml.etree.ElementTree as ET 
 
-from .RD_parser import initialize_element_tree
+from .RD_utils import initialize_element_tree
 #directory to initilize icon 
 __dirname__ = os.path.join(FreeCAD.getUserAppDataDir(), "Mod", "RobotDescriptor")+"/robot_descriptor/icons/initialize.svg"
 #class to store the selected properties

@@ -1,6 +1,6 @@
-from .. import RD_globals
+from .. import common
 import xml.etree.ElementTree as ET
-from ..RD_parser import initialize_element_tree
+from ..RD_utils import initialize_element_tree
 import copy
 import FreeCAD
 
@@ -134,40 +134,40 @@ class spherical_coordinates:
         print("spherical resets applied \n")
 
     def on_surface_model(self):
-        RD_globals.set_xml_data(self._spherical_coord_elem,"surface_model",False,self.properties.surface_model)
+        common.set_xml_data(self._spherical_coord_elem,"surface_model",False,self.properties.surface_model)
     
     def on_world_frame(self):
-        RD_globals.set_xml_data(self._spherical_coord_elem,"world_frame_orientation",False,self.properties.world_frame_orientation)
+        common.set_xml_data(self._spherical_coord_elem,"world_frame_orientation",False,self.properties.world_frame_orientation)
         
     def on_latitude_deg(self):
-        RD_globals.set_xml_data(self._spherical_coord_elem,"latitude_deg",False,self.properties.latitude_deg)
+        common.set_xml_data(self._spherical_coord_elem,"latitude_deg",False,self.properties.latitude_deg)
         
     def on_longitude(self):
-        RD_globals.set_xml_data(self._spherical_coord_elem,"longitude_deg",False,self.properties.longitude_deg)
+        common.set_xml_data(self._spherical_coord_elem,"longitude_deg",False,self.properties.longitude_deg)
         
     def on_elevation(self):
-        RD_globals.set_xml_data(self._spherical_coord_elem,"elevation",False,self.properties.elevation)
+        common.set_xml_data(self._spherical_coord_elem,"elevation",False,self.properties.elevation)
     
     def on_s_a_eq(self):
-        RD_globals.set_xml_data(self._spherical_coord_elem,"surface_axis_equatorial",False,self.properties.surface_axis_equatorial)
+        common.set_xml_data(self._spherical_coord_elem,"surface_axis_equatorial",False,self.properties.surface_axis_equatorial)
         
     def on_s_a_p(self):
-        RD_globals.set_xml_data(self._spherical_coord_elem,"surface_axis_polar",False,self.properties.surface_axis_polar)
+        common.set_xml_data(self._spherical_coord_elem,"surface_axis_polar",False,self.properties.surface_axis_polar)
         
     def on_heading(self):
-        RD_globals.set_xml_data(self._spherical_coord_elem,"heading_deg",False,self.properties.heading_deg)
+        common.set_xml_data(self._spherical_coord_elem,"heading_deg",False,self.properties.heading_deg)
 #end callbacks 
   
     def update_ui(self):
         
-        self.properties.surface_model=RD_globals.get_xml_data(self._spherical_coord_elem,"surface_model",False)
-        self.properties.world_frame_orientation=RD_globals.get_xml_data(self._spherical_coord_elem,"world_frame_orientation",False)
-        self.properties.latitude_deg=float(RD_globals.get_xml_data(self._spherical_coord_elem,"latitude_deg",False))
-        self.properties.longitude_deg=float(RD_globals.get_xml_data(self._spherical_coord_elem,"longitude_deg",False))
-        self.properties.elevation=float(RD_globals.get_xml_data(self._spherical_coord_elem,"elevation",False))
-        self.properties.surface_axis_equatorial=float(RD_globals.get_xml_data(self._spherical_coord_elem,"surface_axis_equatorial",False))
-        self.properties.surface_axis_polar=float(RD_globals.get_xml_data(self._spherical_coord_elem,"surface_axis_polar",False))
-        self.properties.heading_deg=float(RD_globals.get_xml_data(self._spherical_coord_elem,"heading_deg",False))
+        self.properties.surface_model=common.get_xml_data(self._spherical_coord_elem,"surface_model",False)
+        self.properties.world_frame_orientation=common.get_xml_data(self._spherical_coord_elem,"world_frame_orientation",False)
+        self.properties.latitude_deg=float(common.get_xml_data(self._spherical_coord_elem,"latitude_deg",False))
+        self.properties.longitude_deg=float(common.get_xml_data(self._spherical_coord_elem,"longitude_deg",False))
+        self.properties.elevation=float(common.get_xml_data(self._spherical_coord_elem,"elevation",False))
+        self.properties.surface_axis_equatorial=float(common.get_xml_data(self._spherical_coord_elem,"surface_axis_equatorial",False))
+        self.properties.surface_axis_polar=float(common.get_xml_data(self._spherical_coord_elem,"surface_axis_polar",False))
+        self.properties.heading_deg=float(common.get_xml_data(self._spherical_coord_elem,"heading_deg",False))
        
     
     def reset(self,default:bool=True):
@@ -176,7 +176,7 @@ class spherical_coordinates:
         else:
             doc=FreeCAD.ActiveDocument
             _root_dict=doc.Robot_Description.Proxy.element_dict
-            el_dict=RD_globals.parse_dict(_root_dict,self.parent_path+[self.tag_name])
+            el_dict=common.parse_dict(_root_dict,self.parent_path+[self.tag_name])
             if el_dict is not None:
                 el_str=el_dict['elem_str']
                 self.merge(el_str)
@@ -186,7 +186,7 @@ class spherical_coordinates:
         self.update_ui()
 
     def merge(self, el_str):
-        RD_globals.merge_elements(self._spherical_coord_elem,ET.fromstring(el_str))
+        common.merge_elements(self._spherical_coord_elem,ET.fromstring(el_str))
          
      
     @property

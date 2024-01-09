@@ -1,6 +1,6 @@
-from  .. import RD_globals 
+from  .. import common 
 #reponsible for creating an element tree using xml.etree
-from ..RD_parser import  initialize_element_tree
+from ..RD_utils import  initialize_element_tree
 import xml.etree.ElementTree as ET
 
 import FreeCAD
@@ -87,23 +87,23 @@ class atmosphere:
         self.ui.atm_temp_grad.valueChanged.connect(self.on_temp_gradient)
 #callbacks
     def on_atm_temp(self):
-        RD_globals.set_xml_data(self._atm_elem,"temperature",False,self.properties.temperature)
+        common.set_xml_data(self._atm_elem,"temperature",False,self.properties.temperature)
         
         
     def on_type_change(self):
-        RD_globals.set_xml_data(self._atm_elem,"atmosphere",True,{"type":self.properties.type})
+        common.set_xml_data(self._atm_elem,"atmosphere",True,{"type":self.properties.type})
         
     def on_atm_pressure(self):
-        RD_globals.set_xml_data(self._atm_elem,"pressure",False,self.properties.pressure)
+        common.set_xml_data(self._atm_elem,"pressure",False,self.properties.pressure)
         
     
     def on_temp_gradient(self):
-        RD_globals.set_xml_data(self._atm_elem,"temperature_gradient",False,self.properties.temp_gradient)
+        common.set_xml_data(self._atm_elem,"temperature_gradient",False,self.properties.temp_gradient)
 #end callbacks 
     def update_ui(self): 
-        self.properties.temperature=float(RD_globals.get_xml_data(self._atm_elem,"temperature",False))
-        self.properties.pressure=float(RD_globals.get_xml_data(self._atm_elem,"pressure",False))
-        self.properties.temp_gradient=float(RD_globals.get_xml_data(self._atm_elem,"temperature_gradient",False))
+        self.properties.temperature=float(common.get_xml_data(self._atm_elem,"temperature",False))
+        self.properties.pressure=float(common.get_xml_data(self._atm_elem,"pressure",False))
+        self.properties.temp_gradient=float(common.get_xml_data(self._atm_elem,"temperature_gradient",False))
         
 #the reset method should also be used for extracting  previously configured values 
 
@@ -117,7 +117,7 @@ class atmosphere:
 #use RD_globals parse dict to get the element
             doc=FreeCAD.ActiveDocument
             _root_dict=doc.Robot_Description.Proxy.element_dict
-            el_dict=RD_globals.parse_dict(_root_dict,self.parent_path+[self.tag])
+            el_dict=common.parse_dict(_root_dict,self.parent_path+[self.tag])
             if el_dict is not None:
                 el_str=el_dict['elem_str']
                 self.merge(el_str)  
@@ -128,7 +128,7 @@ class atmosphere:
         self.update_ui()
 
     def merge(self, el_str):
-        RD_globals.merge_elements(self._atm_elem,ET.fromstring(el_str))
+        common.merge_elements(self._atm_elem,ET.fromstring(el_str))
      
     def is_checked(self):
         status=self.ui.atmosphere_group.isChecked()

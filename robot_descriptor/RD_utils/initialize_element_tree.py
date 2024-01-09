@@ -1,5 +1,5 @@
 
-from .. import RD_globals
+from .. import common
 
 from . import  RD_parse_sdf
     
@@ -63,7 +63,7 @@ if __name__=="__main__":
     t=convdict_2_tree("world.sdf")
     tree=t.get_tree
     elm=t.get_elements
-    e_elem=RD_globals.set_xml_data('linear_velocity',elm,False,[12,9,8])
+    e_elem=common.set_xml_data('linear_velocity',elm,False,[12,9,8])
     e_elem_t=ET.ElementTree(e_elem)
     tree.write("out.xml",encoding='utf8',xml_declaration=True)
     e_elem_t.write("out.xml",encoding='utf8',xml_declaration=True)

@@ -1,5 +1,5 @@
-from ..import RD_globals
-from ..RD_parser import initialize_element_tree
+from .. import common
+from ..RD_utils import initialize_element_tree
 import copy 
 from PySide import QtGui,QtCore
 import re 
@@ -164,7 +164,7 @@ class material_properties:
 #material element 
 #============================================
 #============================================     
-class material(RD_globals.color_pickr):
+class material(common.color_pickr):
     def __init__(self,ui) -> None:
         super().__init__()
         self.ui=ui
@@ -219,13 +219,13 @@ class material(RD_globals.color_pickr):
         
     
     def on_uri(self):
-        RD_globals.set_xml_data(self._material_element,'uri',False,self.properties.script_uri)
+        common.set_xml_data(self._material_element,'uri',False,self.properties.script_uri)
         
     def on_uri_name(self):
-        RD_globals.set_xml_data(self._material_element,'name',False,self.properties.script_name)
+        common.set_xml_data(self._material_element,'name',False,self.properties.script_name)
         
     def on_shader_type(self):
-        RD_globals.set_xml_data(self._material_element,'shader',True,{'type':self.properties.shader_type})
+        common.set_xml_data(self._material_element,'shader',True,{'type':self.properties.shader_type})
         
 #enable and disable normal map 
     def on_normal_map_state(self):
@@ -236,29 +236,29 @@ class material(RD_globals.color_pickr):
     
 #normal map 
     def on_normal_map(self):
-        RD_globals.set_xml_data(self._material_element,'normal_map',False,self.properties.normal_map)
+        common.set_xml_data(self._material_element,'normal_map',False,self.properties.normal_map)
         
 #material render order  
     def on_material_render_ord(self):
-        RD_globals.set_xml_data(self._material_element,'render_order',False,self.properties.render_order)
+        common.set_xml_data(self._material_element,'render_order',False,self.properties.render_order)
         
     def on_shininess(self):
-        RD_globals.set_xml_data(self._material_element,'shininess',False,self.properties.shininess)
+        common.set_xml_data(self._material_element,'shininess',False,self.properties.shininess)
         
     def on_ambient(self):
-        RD_globals.set_xml_data(self._material_element,'ambient',False,self.properties.ambient)
+        common.set_xml_data(self._material_element,'ambient',False,self.properties.ambient)
         self.set_widget_color('ambient',self.ui.material_ambient_color_pkr)
         
     def on_diffuse(self):
-        RD_globals.set_xml_data(self._material_element,'diffuse',False,self.properties.diffuse)
+        common.set_xml_data(self._material_element,'diffuse',False,self.properties.diffuse)
         self.set_widget_color('diffuse',self.ui.material_diffuse_color_pkr)
     
     def on_specular(self):
-        RD_globals.set_xml_data(self._material_element,'specular',False,self.properties.specular)
+        common.set_xml_data(self._material_element,'specular',False,self.properties.specular)
         self.set_widget_color('specular',self.ui.material_specular_color_pkr)
         
     def on_emissive(self):
-        RD_globals.set_xml_data(self._material_element,'emissive',False,self.properties.emissive)
+        common.set_xml_data(self._material_element,'emissive',False,self.properties.emissive)
         self.set_widget_color('emissive',self.ui.material_emissive_color_pkr)
     
     def on_ambient_color_pkr(self):
@@ -274,16 +274,16 @@ class material(RD_globals.color_pickr):
         self.color_picker('emissive',self.ui.material_emissive_color_pkr)
     
     def updateUi(self):
-        self.properties.script_uri=RD_globals.get_xml_data(self._material_element,'uri',False)
-        self.properties.script_name=RD_globals.get_xml_data(self._material_element,'name',False)
-        self.properties.shader_type=RD_globals.get_xml_data(self._material_element,'type')
-        self.properties.normal_map=RD_globals.get_xml_data(self._material_element,'normal_map',False)
-        self.properties.render_order=RD_globals.get_xml_data(self._material_element,'render_order',False)
-        self.properties.shininess=RD_globals.get_xml_data(self._material_element,'shininess',False)
-        self.properties.ambient=RD_globals.get_xml_data(self._material_element,'ambient',False)
-        self.properties.diffuse=RD_globals.get_xml_data(self._material_element,'diffuse',False)
-        self.properties.specular=RD_globals.get_xml_data(self._material_element,'specular',False)
-        self.properties.emissive=RD_globals.get_xml_data(self._material_element,'emissive',False)
+        self.properties.script_uri=common.get_xml_data(self._material_element,'uri',False)
+        self.properties.script_name=common.get_xml_data(self._material_element,'name',False)
+        self.properties.shader_type=common.get_xml_data(self._material_element,'type')
+        self.properties.normal_map=common.get_xml_data(self._material_element,'normal_map',False)
+        self.properties.render_order=common.get_xml_data(self._material_element,'render_order',False)
+        self.properties.shininess=common.get_xml_data(self._material_element,'shininess',False)
+        self.properties.ambient=common.get_xml_data(self._material_element,'ambient',False)
+        self.properties.diffuse=common.get_xml_data(self._material_element,'diffuse',False)
+        self.properties.specular=common.get_xml_data(self._material_element,'specular',False)
+        self.properties.emissive=common.get_xml_data(self._material_element,'emissive',False)
         #style sheets 
         self.set_widget_color('ambient',self.ui.material_ambient_color_pkr)
         self.set_widget_color('diffuse',self.ui.material_diffuse_color_pkr)
@@ -299,7 +299,7 @@ class material(RD_globals.color_pickr):
         else:
             doc=FreeCAD.ActiveDocument
             _root_dict=doc.Robot_Description.Proxy.element_dict
-            el_dict=RD_globals.parse_dict(_root_dict,self.parent_path+[self.tag])
+            el_dict=common.parse_dict(_root_dict,self.parent_path+[self.tag])
             if el_dict is not None:
                 #find the material element from road 
                 elem=ET.fromstring(el_dict['elem_str']).find('.//material')
@@ -313,19 +313,7 @@ class material(RD_globals.color_pickr):
 #merger 
 #this merge method repeats alot 
     def merge_elements(self,destination_el, source_el):
-    # Update attributes of destination_el with source_el
-        destination_el.attrib.update(source_el.attrib)
-        if source_el.text:
-            destination_el.text = source_el.text
-    # Merge child elements recursively
-        for child in source_el:
-            existing_el = destination_el.find(child.tag)
-            if existing_el is not None:
-                self.merge_elements(existing_el, child)  # Recursively merge the existing element with the new one
-            else:
-            # If the element doesn't exist in destination, simply append it
-                # destination_el.append(child)
-                pass
+        common.merge_elements(destination_el,source_el)
     
     @property
     def element(self):
@@ -411,10 +399,10 @@ class road():
         print('road resets applied\n')
         
     def on_road_name(self):
-        RD_globals.set_xml_data(self._road_element,'road',True,{'name':self._road_properties.name})
+        common.set_xml_data(self._road_element,'road',True,{'name':self._road_properties.name})
         
     def on_road_width(self):
-        RD_globals.set_xml_data(self._road_element,'width',False,self._road_properties.width)
+        common.set_xml_data(self._road_element,'width',False,self._road_properties.width)
         
     def get_sheet_data(self):
         #get  spread sheet  with points data
@@ -439,8 +427,8 @@ class road():
     
             
     def updateUI(self):
-        self._road_properties.name=RD_globals.get_xml_data(self._road_element,['road','name'],True)
-        self._road_properties.width=RD_globals.get_xml_data(self._road_element,'width',False)
+        self._road_properties.name=common.get_xml_data(self._road_element,['road','name'],True)
+        self._road_properties.width=common.get_xml_data(self._road_element,'width',False)
         
     
     def reset(self,default=True):
@@ -451,7 +439,7 @@ class road():
         else:
             doc=FreeCAD.ActiveDocument
             _root_dict=doc.Robot_Description.Proxy.element_dict
-            el_dict=RD_globals.parse_dict(_root_dict,self.parent_path+[self.tag])
+            el_dict=common.parse_dict(_root_dict,self.parent_path+[self.tag])
             if el_dict is not None:
                 elem=ET.fromstring(el_dict['elem_str'])
                 self._road_element=elem

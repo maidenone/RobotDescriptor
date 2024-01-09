@@ -245,14 +245,19 @@ def merge_elements(destination_el:ET.Element,source_el:ET.Element,recursive:bool
 #implemtatation for all other elements 
 #the ones that are not recursive and not physics                 
     else:
+        # Update attributes of destination_el with source_el
         destination_el.attrib.update(source_el.attrib)
+        if source_el.text:
+            destination_el.text = source_el.text
+    # Merge child elements recursively
         for child in source_el:
-            existing_el=destination_el.find(child.tag)
+            existing_el = destination_el.find(child.tag)
             if existing_el is not None:
-                destination_el.remove(existing_el)
-                destination_el.append(child)
+                merge_elements(existing_el, child)  # Recursively merge the existing element with the new one
             else:
-                destination_el.append(child)
+            # If the element doesn't exist in destination, simply append it
+                # destination_el.append(child)
+                pass
 
 
 import math 
@@ -260,6 +265,8 @@ from PySide.QtGui import QColorDialog
 
 
 class color_pickr:
+    '''class that implements color picker methods 
+    '''
     def __init__(self) -> None:
         pass
     #color picker
