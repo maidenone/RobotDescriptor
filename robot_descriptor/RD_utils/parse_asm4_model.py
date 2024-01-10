@@ -11,6 +11,18 @@ https://github.com/Zolko-123/FreeCAD_Assembly4/blob/master/TECHMANUAL.md
 
 def read_assembly():
     links=FreeCAD.ActiveDocument.findObjects("App::Link")
+    
+    #get all objects of type part feature 
+    objs=FreeCAD.ActiveDocument.findObjects("Part::Feature")
+    #get objects in the parts group 
+    parts=FreeCAD.ActiveDocument.Parts.Group
+    #get fasteners since fasteners might not be  accesed through links 
+    #remove objects in parts , coordinate systems 
+    #coordinate systems are removed by checking the MapMode attribute
+    #hopefully this is will get only fasteners 
+    fasteners=[fast for fast in objs if fast not in parts and not hasattr(fast,'MapMode')]
+    links= links+fasteners
+   
         #links in Assembly4 are of type "App::Link" 
         #this is a list 
         #this will store a list of dictionaries 
@@ -33,13 +45,15 @@ def read_assembly():
             #hence separating by the the '#' and  taking the first element will be the parent 
             #the 2nd the coordinate system its attached to 
         parent,attachement=child.AttachedTo.split('#')
-            #Attachmensts are usually made with reference to coordiante systems of type "PartDesign::CoordinateSystem" find them in all links
-            # and remove  lcs with label 'LCS_Origin' in case it exists in model 
-        coordinate_systems=[ lcs for lcs in child.Document.findObjects("PartDesign::CoordinateSystem") if lcs.Label !='LCS_Origin' ]
-        link_data.append({"link":child,"name":name,"parent":parent,"attachment":attachement,"coordinate_systems":coordinate_systems,'children':[]})
+        #returned type has '#' preceeding the coordinate remove it 
+        attached_by=child.AttachedBy.replace('#','')
+        link_data.append({"link":child,"name":name,"parent":parent,"attached_to":attachement,"attached_by":attached_by,'children':[]})
         #
         #create a  hierarchial data 
-        
+        if hasattr(child,"LinkedObject"):
+            if hasattr(child.LinkedObject.Document,"Assembly"):
+                FreeCAD.Console.PrintError("Sub assemblies not supported yet \n")
+                return None
         root_lcs=FreeCAD.ActiveDocument.findObjects("PartDesign::CoordinateSystem")
         structured_data={"link":None,'name':"Parent Assembly","attachment":None,"coordinate_systems":root_lcs,"children":[]}
         

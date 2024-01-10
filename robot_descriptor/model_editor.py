@@ -6,18 +6,24 @@ import os
 from .RD_utils import parse_asm4_model
 from PySide.QtGui import QStandardItemModel,QStandardItem
 
-
+#start standard item
 class standard_item(QStandardItem):
     def __init__(self,text):
         super().__init__()
         self.model_elem=None
         self.setText(text)
-        
+        self.setEditable(False)
+#end standard Item   
+#==============================================
+#model editor 
 class ModelEditor:
     def __init__(self):
         # find all objects of type 'App::Link'
         #doc=FreeCAD.ActiveDocument
+        
         self.links_hierarchy=parse_asm4_model.read_assembly()
+        if self.links_hierarchy is None:
+            return 
         self.ModelEditorUi=FreeCADGui.PySideUic.loadUi(os.path.join(common.UI_PATH,'model_editor.ui'))
         self.link_model=QStandardItemModel()
         self.root_node=self.link_model.invisibleRootItem()
@@ -28,8 +34,10 @@ class ModelEditor:
         self.ModelEditorUi.exec()
         
     def tree_setup(self,link_hierarchy,item):
+        #iterate throuhg all children create items and the to tree
         for child in link_hierarchy:
             row=standard_item(child["name"])
+            
             item.appendRow(row)
             self.tree_setup(child["children"],row)
         return 
@@ -46,7 +54,10 @@ class Model_properties():
                 "ToolTip" : "Edit link and joint properties"}
 
     def Activated(self):
-        self.edits=ModelEditor()
+        if hasattr(FreeCAD.ActiveDocument,"Assembly"):
+            self.edits=ModelEditor()
+        else:
+            FreeCAD.Console.PrintMessage("document does not contain an assembly\n")
         return 
 
     def IsActive(self):
