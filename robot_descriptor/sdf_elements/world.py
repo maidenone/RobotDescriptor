@@ -108,9 +108,9 @@ class world():
         self.parent_path=["sdf"]
         self.tag='world'
         self.file_name="world.sdf"
-
         self.ui_path=os.path.join(common.UI_PATH,"world.ui")
         self.world_form=FreeCADGui.PySideUic.loadUi(self.ui_path)
+        #get main window for  use in aligning 
         mw=FreeCADGui.getMainWindow()
         #centre dialog to main window 
         self.world_form.move(
@@ -142,8 +142,10 @@ class world():
 
         self.configUI()
 #update ui with previously configured values if available     
+       
         self.reset(False)
-        
+        #display window
+        self.world_form.exec_()
 #window close event  this is called when the (x) widget icon is pressed 
     def closeEvent(self, event):
         print('closing widget\n')
@@ -204,8 +206,7 @@ class world():
  # reset Pb
         self.world_form.world_reset_btn.clicked.connect(self.on_reset)
         
-        #display window
-        self.world_form.exec_()
+        
         
  
     def update_element(self):
@@ -273,7 +274,7 @@ class world():
         if  self.world_form.enable_scene_checkBox.isChecked():
             common.update_dictionary(self._scene.parent_path,self._scene.tag,self._scene.element)
 #append the  road element 
-        if self.world_form.enable_road_checkbox.isChecked():
+        if self.world_form.include_material_info.isChecked():
             common.update_dictionary(self._road.parent_path,self._road.tag,self._road.element)
             
         print("updated\n")

@@ -221,6 +221,7 @@ class light(common.color_pickr):
         del self.pose.attrib["degrees"]
         # append pose to  light 
         self._light_element.append(self.pose)
+        #this variable will store all the lights added to th world
         self.lights={}
       #the lights dictionary format
       #
@@ -583,6 +584,7 @@ class light(common.color_pickr):
 
     @property
     def element(self):
+        #get all the lights 
         el_dict=copy.deepcopy(self.lights)
         el_list=[]
     #remove elements depending on type selection 

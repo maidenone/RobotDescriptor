@@ -21,7 +21,14 @@ def read_assembly():
     #coordinate systems are removed by checking the MapMode attribute
     #hopefully this is will get only fasteners 
     fasteners=[fast for fast in objs if fast not in parts and not hasattr(fast,'MapMode')]
-    links= links+fasteners
+
+    #ensure that the link and the fastener are not the same object 
+    #this might occur when the parts folder contains some parts that are used in the  assembly 
+    #get link documents 
+    lnk_docs=[lnk.LinkedObject.Document for lnk in links]
+    for fastener in fasteners:
+        if fastener.Document not  in lnk_docs:
+            links.append(fastener) 
    
         #links in Assembly4 are of type "App::Link" 
         #this is a list 
