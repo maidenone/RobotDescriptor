@@ -1,7 +1,7 @@
 import FreeCAD
 from .. import common
 from ..RD_utils import initialize_element_tree
-
+import copy
 from PySide import QtCore
 
 class link_properties:
@@ -74,6 +74,173 @@ class link_properties:
     @angular.setter
     def angular(self,value):
         self.ui.link_angular_vel_decay_sp.setValue(value)
+        
+#inertial 
+#fam -> fluid added mass
+#xx
+    @property
+    def fam_xx(self):
+        return self.ui.fam_xx_sp.value()
+    @fam_xx.setter
+    def fam_xx(self,value):
+        self.ui.fam_xx_sp.setValue(value)
+#xy    
+    @property
+    def fam_xy(self):
+        return self.ui.fam_xy_sp.value()
+    @fam_xy.setter
+    def fam_xy(self,value):
+        self.ui.fam_xy_sp.setValue(value)
+#xz  
+    @property
+    def fam_xz(self):
+        return self.ui.fam_xz_sp.value()
+    @fam_xz.setter
+    def fam_xz(self,value):
+        self.ui.fam_xz_sp.setValue(value)
+        
+#p       
+    @property
+    def fam_xp(self):
+        return self.ui.fam_xp_sp.value()
+    @fam_xp.setter
+    def fam_xp(self,value):
+        self.ui.fam_xp_sp.setValue(value)
+        
+#xq
+    @property
+    def fam_xq(self):
+        return self.ui.fam_xq_sp.value()
+    
+    @fam_xq.setter
+    def fam_xq(self,value):
+        self.ui.fam_xq_sp.setValue(value)
+        
+#xr
+    @property
+    def fam_xr(self):
+        return self.ui.value()
+    @fam_xr.setter
+    def fam_xr(self,value):
+        self.ui.fam_xr_sp.setValue(value)
+        
+#yy
+    @property
+    def fam_yy(self):
+        return self.ui.fam_yy_sp.value()
+    @fam_yy.setter
+    def fam_yy(self,val):
+        self.ui.fam_yy_sp.setValue(val)
+        
+#yz 
+    @property
+    def fam_yz(self):
+        return self.ui.fam_yz_sp.value()
+    @fam_yz.setter
+    def fam_yz(self,val):
+        self.ui.fam_yz_sp.setValue(val)
+        
+#yp 
+    @property 
+    def fam_yp(self):
+        return self.ui.fam_yp_sp.value()
+    @fam_yp.setter
+    def fam_yp(self,value):
+        self.ui.fam_yp_sp.setValue(value)
+        
+#yq
+    @property
+    def fam_yq(self):
+        return self.ui.fam_yq_sp.value()
+    @fam_yq.setter
+    def fam_yq(self,val):
+        self.ui.fam_yq.setValue(val)
+#yr
+    @property
+    def fam_yr(self):
+        return self.ui.fam_yr_sp.value()
+    @fam_yr.setter
+    def fam_yr(self,val):
+        self.ui.fam_yr_sp.setValue(val)
+
+#zz
+    @property
+    def fam_zz(self):
+        return self.ui.fam_zz_sp.value()
+    @fam_zz.setter
+    def fam_zz(self,value):
+        self.ui.fam_zz_sp.setValue(value)
+#zp  
+    @property
+    def fam_zp(self):
+        return self.ui.fam_zp_sp.value()
+    @fam_zp.setter
+    def fam_zp(self,val):
+        self.ui.fam_zp_sp.setValue(val)
+
+#zq
+    @property
+    def fam_zq(self):
+        return self.ui.fam_zq_sp.value()
+    @fam_zq.setter
+    def fam_zp(self,val):
+        self.ui.fam_zq_sp.setValue(val)
+        
+#zr
+    @property
+    def fam_zr(self):
+        return self.ui.fam_zr_sp.value()
+    @fam_zr.setter
+    def fam_zr(self,val):
+        return self.ui.fam_zr_sp.setValue(val)
+
+#pp 
+    @property
+    def fam_pp(self):
+        return self.ui.fam_pp_sp.value()
+    @fam_pp.setter
+    def fam_pp(self,value):
+        self.ui.fam_pp_sp.setValue(value)
+
+#pq
+    @property
+    def fam_pq(self):
+        return self.ui.fam_pq_sp.value()
+    @fam_pq.setter
+    def fam_pq(self,val):
+        self.ui.fam_pq_sp.setValue(val)
+        
+#pr 
+    @property
+    def fam_pr(self):
+        return self.ui.fam_pr_sp.value()
+    @fam_pr.setter
+    def fam_pr(self,val):
+        self.ui.fam_pr_sp.setValue(val)
+#qq
+    @property
+    def fam_qq(self):
+        return self.ui.fam_qq_sp.value()
+    @fam_qq.setter
+    def fam_qq(self,val):
+        self.ui.fam_qq_sp.setValue(val)
+        
+#qr
+    @property
+    def fam_qr(self):
+        return self.ui.fam_qr_sp.value()
+    @fam_qr.setter
+    def fam_qr(self,val):
+        self.ui.fam_qr_sp.setValue(val)
+
+#rr 
+    @property
+    def fam_rr(self):
+        return self.ui.fam_rr_sp.value()
+    @fam_rr.setter
+    def fam_rr(self,val):
+        self.ui.fam_rr_sp.setValue(val)
+
 #======================
 #link
 #====================
@@ -85,7 +252,10 @@ class link:
         #models will be store as children of sdf 
         self.parent_path=['sdf','model']
         self.properties=link_properties(self.ui)
-        self.link_element=initialize_element_tree.convdict_2_tree(self.file_name)
+        self._inertial_element=initialize_element_tree.convdict_2_tree("inertial.sdf").get_element
+        
+        self.link_element=initialize_element_tree.convdict_2_tree(self.file_name).get_element
+        # self.link_element.append(self._inertial_element)
         self._root_dict=elem_struct
         self.configUI()
         
@@ -96,7 +266,44 @@ class link:
         self.ui.link_kinematic_checkbox.stateChanged.conned(self.onKinematic)
         self.ui.velocity_decay_linear_sp.clicked.connect(self.onLinear)
         self.ui.link_angular_vel_decay_sp.clicked.connect(self.onAngular)
+        #inertial
+        # fam=self.link_element.find(".//inertia/fluid_added_mass")
+        # fam  every time the lmbda is called fam gets updated 
+        self.ui.fam_xx_sp.valuechanged.connect(lambda fam=self.link_element.find(".//inertia/fluid_added_mass"): common.set_xml_data(fam,'xx',False,self.properties.fam_xx) )
+        self.ui.fam_xy_sp.valuechanged.connect(lambda fam=self.link_element.find(".//inertia/fluid_added_mass"): common.set_xml_data(fam,'xy',False,self.properties.fam_xy) )
+        self.ui.fam_xz_sp.valuechanged.connect(lambda fam=self.link_element.find(".//inertia/fluid_added_mass"): common.set_xml_data(fam,'xz',False,self.properties.fam_xz) )
         
+        self.ui.fam_xp_sp.valuechanged.connect(lambda fam=self.link_element.find(".//inertia/fluid_added_mass"): common.set_xml_data(fam,'xp',False,self.properties.fam_xp) )
+        self.ui.fam_xq_sp.valuechanged.connect(lambda fam=self.link_element.find(".//inertia/fluid_added_mass"): common.set_xml_data(fam,'xq',False,self.properties.fam_xq) )
+        self.ui.fam_xr_sp.valuechanged.connect(lambda fam=self.link_element.find(".//inertia/fluid_added_mass"): common.set_xml_data(fam,'xr',False,self.properties.fam_xr) )
+        
+        #y
+        self.ui.fam_yy_sp.valueChanged.connect(lambda fam=self.link_element.find(".//inertia/fluid_added_mass"):common.set_xml_data(fam,'yy',False,self.properties.fam_yy))
+        self.ui.fam_yz_sp.valueChanged.connect(lambda fam=self.link_element.find(".//inertia/fluid_added_mass"):common.set_xml_data(fam,'yz',False,self.properties.fam_yz))
+        
+        self.ui.fam_yp_sp.valueChanged.connect(lambda fam=self.link_element.find(".//inertia/fluid_added_mass"):common.set_xml_data(fam,'yp',False,self.properties.fam_yp))
+        self.ui.fam_yq_sp.valueChanged.connect(lambda fam=self.link_element.find(".//inertia/fluid_added_mass"):common.set_xml_data(fam,'yq',False,self.properties.fam_yq))
+        self.ui.fam_yr_sp.valueChanged.connect(lambda fam=self.link_element.find(".//inertia/fluid_added_mass"):common.set_xml_data(fam,'yr',False,self.properties.fam_yr))
+        
+        #z
+        self.ui.fam_zz_sp.valueChanged.conneect(lambda fam=self.link_element.find(".//inertia/fluid_added_mass"): common.set_xml_data(fam,'zz',False,self.properties.fam_zz))
+        self.ui.fam_zp_sp.valueChanged.conneect(lambda fam=self.link_element.find(".//inertia/fluid_added_mass"): common.set_xml_data(fam,'zp',False,self.properties.fam_zp))
+        self.ui.fam_zq_sp.valueChanged.conneect(lambda fam=self.link_element.find(".//inertia/fluid_added_mass"): common.set_xml_data(fam,'zq',False,self.properties.fam_zq))
+        self.ui.fam_zr_sp.valueChanged.conneect(lambda fam=self.link_element.find(".//inertia/fluid_added_mass"): common.set_xml_data(fam,'zr',False,self.properties.fam_zr))
+        
+        #p 
+        self.ui.fam_pp_sp.valueChanged.connect(lambda fam=self.link_element.find(".//inertia/fluid_added_mass"): common.set_xml_data(fam,'pp',False,self.properties.fam_pp))
+        self.ui.fam_pq_sp.valueChanged.connect(lambda fam=self.link_element.find(".//inertia/fluid_added_mass"): common.set_xml_data(fam,'pq',False,self.properties.fam_pq))
+        self.ui.fam_pr_sp.valueChanged.connect(lambda fam=self.link_element.find(".//inertia/fluid_added_mass"): common.set_xml_data(fam,'pr',False,self.properties.fam_pr))
+        
+        self.ui.fam_qq_sp.valueChanged.connect(lambda fam=self.link_element.find(".//inertia/fluid_added_mass"): common.set_xml_data(fam,'qq',False,self.properties.fam_qq))
+        self.ui.fam_qr_sp.valueChanged.connect(lambda fam=self.link_element.find(".//inertia/fluid_added_mass"): common.set_xml_data(fam,'qr',False,self.properties.fam_qr))
+        self.ui.fam_rr_sp.valueChanged.connect(lambda fam=self.link_element.find(".//inertia/fluid_added_mass"): common.set_xml_data(fam,'rr',False,self.properties.fam_rr))
+        
+        
+  
+        
+#end configUI
     def onGravity(self):
         common.set_xml_data(self.link_element,'gravity',False,self.properties.gravity)
     
@@ -123,12 +330,31 @@ class link:
         self.properties.kinematic= common.get_xml_data(element,'kinematic')
         self.properties.linear=common.set_xml_data(element,'linear')
         self.properties.angular=common.set_xml_data(element,'angular')
-    
+        fam=self._inertial_element.find(".//inertia/fluid_added_mass")
+        elem_ui_pairs={"xx":"fam_xx_sp","xy":"fam_xy_sp","xz":"fam_xz_sp","xp":"fam_xp_sp","xq":"fam_xq_sp","xr":"fam_xr_sp",
+                       "yy":"fam_yy_sp","yz":"fam_yz_sp","yp":"fam_yp_sp","yq":"fam_yq_sp","yr":"fam_yr_sp","zz":"fam_zz_sp",
+                       "zp":"fam_zp_sp","zq":"fam_zq_sp","zr":"fam_zr_sp","pp":"fam_pp_sp","pr":"fam_pr_sp","pq":"fam_pq_sp",
+                       "qq":"fam_qq_sp","qr":"fam_qr_sp","rr":"fam_rr_sp"}
+        for tag in elem_ui_pairs.keys():
+            setattr(self.properties,elem_ui_pairs[tag],common.get_xml_data(fam,tag,False))
+            
     #this needs to reset the  data of all links in the model 
     #how will this information be extracted 
     def reset(self,default=True):
-        if default:
-            self.link_element=initialize_element_tree.convdict_2_tree(self.file_name)
-        else:
-            elem_dict=common.parse_dict(self._root_dict,self.parent_path+[self.tag])
+       pass 
+    @property
+    def element(self):
+        t_link_elem=copy.deepcopy(self.link_element)
+        
+        if not self.ui.link_state_groupbox.isChecked():
+            for tag in ["gravity","enable_wind","self_collide","kinematic"]:
+                t_link_elem.remove(t_link_elem.find(tag))
+                
+        if self.ui.link_velocity_decay_groupbox.isChecked():
+            t_link_elem.remove(t_link_elem.find("velocity_decay"))
+        
+        t_inertial_elem=copy.deepcopy(self._inertial_element)
+        if self.ui.self.link_elementfluid_added_mass_groupbox.isChecked():
+            t_inertial_elem.remove(t_inertial_elem.find("fluid_added_mass"))
             
+        return t_link_elem.append(t_inertial_elem)

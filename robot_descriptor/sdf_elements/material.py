@@ -10,7 +10,6 @@ import os
 import  xml.etree.ElementTree as ET
 import FreeCAD ,FreeCADGui
 
-
 #matreial 
 class material_properties:
     def __init__(self,ui) -> None:
@@ -46,16 +45,6 @@ class material_properties:
     def normal_map(self,text):
         self.ui.material_normal_map_input.setText(text)
 
-#this checkebox is not part of the sdf data its just used to enable and disable the normal_map input 
-# so no need to convert bool to strinf 
-    @property
-    def normal_map_checkbox(self):
-        return str('true') if self.ui.normal_map_checkBox.isChecked() else str('false')
-        
-    @normal_map_checkbox.setter
-    def normal_map_checkbox(self,state):
-            self.ui.normal_map_checkBox.setState(QtCore.Qt.Checked) if state else self.ui.normal_map_checkBox.setState(QtCore.Qt.Unchecked)
-     
             
             
 #render order
@@ -84,10 +73,10 @@ class material_properties:
             return str('false')
     @lighting.setter
     def lighting(self,state):
-        if state is True:
-            self.ui.material_lighting_checkbox.setState(QtCore.Qt.Checked)
+        if state =='true':
+            self.ui.material_lighting_checkbox.setCheckState(QtCore.Qt.Checked)
         else:
-            self.ui.material_lighting_checkbox.setState(QtCore.Qt.Unchecked)
+            self.ui.material_lighting_checkbox.setCheckState(QtCore.Qt.Unchecked)
             
     
 #ambient 
@@ -369,7 +358,7 @@ class material_properties:
         return self.ui.metal_emissive_map_checkBox.isChecked()
     @property
     def metal_normal_map_cb(self):
-        return self.ui.normal_map_groupBox.isChecked()
+        return self.ui.metal_normal_map_groupBox.isChecked()
     
     @property
     def metal_light_map_cb(self):
@@ -411,7 +400,7 @@ class material_properties:
     #metal cb 
     @property
     def metal_enabled(self):
-        return self.ui.material_matal_groupbox.isChecked()
+        return self.ui.material_metal_groupbox.isChecked()
     #speculat cb 
     @property
     def specular_enabled(self):
@@ -444,10 +433,13 @@ class material(common.color_pickr):
         self.ui.material_script_uri_input.textEdited.connect(self.on_uri)
         self.ui.material_script_name.textEdited.connect(self.on_uri_name)
         self.ui.shader_type.currentTextChanged.connect(self.on_shader_type)
-        self.ui.normal_map_checkBox.stateChanged.connect(self.on_normal_map_state)
         self.ui.material_normal_map_input.textEdited.connect(self.on_normal_map)
         self.ui.material_render_order_sp.valueChanged.connect(self.on_material_render_ord)
         self.ui.material_shininess_sp.valueChanged.connect(self.on_shininess)
+        
+        self.ui.material_lighting_checkbox.stateChanged.connect(
+            lambda : common.set_xml_data(self._material_element,"lighting",False,self.properties.lighting)
+        )
         
         #ambient
         self.ui.material_ambient_R_sp.valueChanged.connect(self.on_ambient)
@@ -476,83 +468,155 @@ class material(common.color_pickr):
         self.ui.material_specular_color_pkr.clicked.connect(self.on_specular_color_pkr)
         self.ui.material_emissive_color_pkr.clicked.connect(self.on_emissive_color_pkr)
         
+        
 #pbr
     #metal 
     #properties under the metal element 
-        metal=self._material_element.find('.//pbr/metal')
-        self.ui.metal_albedo_map_lineEdit.textEdited.connect(
-            lambda :common.set_xml_data(metal,'albedo_map',False,self.properties.metal_albedo_map))
+        self.ui.metal_albedo_map_lineEdit.textEdited.connect(self.on_metal_albedo_map)
         
-        self.ui.metal_roughness_map_lineEdit.textEdited.connect(
-            lambda : common.set_xml_data(metal,'roughness_map',False,self.properties.metal_roughness_map))
-        self.ui.metal_roughness_lineEdit.textEdited.connect(lambda :common.set_xml_data(metal,
-                                                                                    "roughness",False,self.properties.metal_roughness))
+        self.ui.metal_roughness_map_lineEdit.textEdited.connect(self.on_metal_roughness_map)
+        self.ui.metal_roughness_lineEdit.textEdited.connect(self.on_metal_roughness)
         
-        self.ui.metalness_map_lineEdit.textEdited.connect(
-            lambda : common.set_xml_data(metal,"metalness_map",False,self.properties.metalness_map))
+        self.ui.metalness_map_lineEdit.textEdited.connect(self.on_metalness_map)
         
-        self.ui.metalness_sp.valueChanged.connect(lambda :
-            common.set_xml_data(metal,"metalness",False,self.properties.metalness))
+        self.ui.metalness_sp.valueChanged.connect(self.on_metalness)
         
-        self.ui.metal_environment_map_lineEdit.textEdited.connect(lambda :
-            common.set_xml_data(metal,"environment_map",False,self.properties.metal_environment_map))
+        self.ui.metal_environment_map_lineEdit.textEdited.connect(self.on_metal_environment_map)
         
-        self.ui.metal_ambient_occlusion_map_lineEdit.textEdited.connect(lambda :
-            common.set_xml_data(metal,"ambient_occlusion_map",False,self.properties.metal_ambient_occlusion_map))
+        self.ui.metal_ambient_occlusion_map_lineEdit.textEdited.connect(self.on_metal_ambient_occlusion_map)
         
-        self.ui.metal_emissive_map_lineEdit.textEdited.connect(lambda :
-            common.set_xml_data(metal,"emissive_map",False,self.properties.metal_emissive_map))
+        self.ui.metal_emissive_map_lineEdit.textEdited.connect(self.on_metal_emissive_map)
         
-        self.ui.metal_light_map_lineEdit.textEdited.connect(lambda :
-            common.set_xml_data(metal,"light_map",False,self.properties.metal_light_map))
+        self.ui.metal_light_map_lineEdit.textEdited.connect(self.on_metal_light_map)
         
-        self.ui.metal_uv_set_sp.valueChanged.connect(lambda :
-            common.set_xml_data(metal,"light_map",True,{"uv_set":self.properties.metal_uv_set}))
+        self.ui.metal_uv_set_sp.valueChanged.connect(self.on_metal_uv_set)
         
-        self.ui.metal_normal_map_lineEdit.textEdited.connect(lambda :
-            common.set_xml_data(metal,"normal_map",False,self.properties.metal_normal_map))
-        self.ui.metal_normal_map_type_comboBox.currentTextChanged.connect(lambda :
-            common.set_xml_data(metal,"normal_map",True,{"type":self.properties.metal_normal_map_type}))
+        self.ui.metal_normal_map_lineEdit.textEdited.connect(self.on_metal_normal_map)
+        self.ui.metal_normal_map_type_comboBox.currentTextChanged.connect(self.on_metal_normal_map_type)
         
     #specular
     #elements under the specular subelement
         specular=self._material_element.find(".//pbr/specular")
-        self.ui.specular_albedo_map_lineEdit.textEdited.connect(lambda :
-            common.set_xml_data(specular,"albedo_map",False,self.properties.specular_albedo_map))
+        self.ui.specular_albedo_map_lineEdit.textEdited.connect(self.on_specular_albdedo_map)
         
-        self.ui.specular_map_lineEdit.textEdited.connect(lambda :
-            common.set_xml_data(specular,"specular_map",False,self.properties.specular_map))
+        self.ui.specular_map_lineEdit.textEdited.connect(self.on_specular_map)
         
-        self.ui.specular_glossiness_sp.valueChanged.connect(lambda :
-            common.set_xml_data(specular,"glossiness",False,self.properties.specular_glossiness))
+        self.ui.specular_glossiness_sp.valueChanged.connect(self.on_specular_glossiness)
         
-        self.ui.specular_environment_map_lineEdit.textEdited.connect(
-            lambda : common.set_xml_data(specular,"environment_map",False,self.properties.specular_environment_map)
+        self.ui.specular_environment_map_lineEdit.textEdited.connect(self.on_specular_environment_map)
+        self.ui.specular_ambient_occlusion_map_lineEdit.textEdited.connect(self.on_specular_ambient_occlusion_map)
+        self.ui.specular_emissive_map_lineEdit.textEdited.connect(self.on_specular_emissive_map)
+        self.ui.specular_glossiness_map_lineEdit.textEdited.connect(self.on_specular_glossiness_map)
+        self.ui.specular_light_map_lineEdit.textEdited.connect(self.on_specular_light_map)
+        
+        self.ui.specular_uv_set_sp.valueChanged.connect(self.on_specular_uv_set)
+        
+        self.ui.specular_normal_map_lineEdit.textEdited.connect(self.on_specular_normal_map
         )
-        self.ui.specular_ambient_occlusion_map_lineEdit.textEdited.connect(
-            lambda : common.set_xml_data(specular,"ambient_occlusion_map",False,self.properties.specular_ambient_occlusion_map)
-        )
-        self.ui.specular_emissive_map_lineEdit.textEdited.connect(
-            lambda : common.set_xml_data(specular,"emissive_map",False,self.properties.specular_emissive_map)
-        )
-        self.ui.specular_glossiness_map_lineEdit.textEdited.connect(
-            lambda : common.set_xml_data(specular,"glossiness_map",False,self.properties.specular_glossiness_map)
-        )
-        self.ui.specular_light_map_lineEdit.textEdited.connect(
-            lambda :common.set_xml_data(specular,"light_map",False,self.properties.specular_light_map)
-        )
-        self.ui.specular_uv_set_sp.valueChanged.connect(
-            lambda : common.set_xml_data(specular,"light_map",True,{"uv_set":self.properties.specular_uv_set})
-        )
-        self.ui.specular_normal_map_lineEdit.textEdited.connect(
-            lambda : common.set_xml_data(specular,"normal_map",False,self.properties.specular_normal_map)
-        )
-        self.ui.specular_normal_map_type_comboBox.currentTextChanged.connect(
-            lambda : common.set_xml_data(specular,"normal_map",True,{"type":self.properties.specular_normal_map_type})
+        self.ui.specular_normal_map_type_comboBox.currentTextChanged.connect(self.on_specular_normal_map_type
         )
        
-     
+#callbacks 
+    #metal 
+    def on_metal_albedo_map(self):
+        metal=self._material_element.find('.//pbr/metal')
+        common.set_xml_data(metal,'albedo_map',False,self.properties.metal_albedo_map)
+        
+    def on_metal_roughness_map(self):
+        metal=self._material_element.find('.//pbr/metal')
+        common.set_xml_data(metal,'roughness_map',False,self.properties.metal_roughness_map)
+        
+    def on_metal_roughness(self):
+        metal=self._material_element.find('.//pbr/metal')
+        common.set_xml_data(metal,"roughness",False,self.properties.metal_roughness)
+        
     
+    def on_metalness_map(self):
+        metal=self._material_element.find('.//pbr/metal')
+        common.set_xml_data(metal,"metalness_map",False,self.properties.metalness_map)
+        
+    def on_metalness(self):
+        metal=self._material_element.find('.//pbr/metal')
+        common.set_xml_data(metal,"metalness",False,self.properties.metalness)
+        
+    def on_metal_environment_map(self):
+        metal=self._material_element.find('.//pbr/metal')
+        common.set_xml_data(metal,"environment_map",False,self.properties.metal_environment_map)
+        
+    def on_metal_ambient_occlusion_map(self):
+        metal=self._material_element.find('.//pbr/metal')
+        common.set_xml_data(metal,"ambient_occlusion_map",False,self.properties.metal_ambient_occlusion_map)
+        
+    def on_metal_emissive_map(self):
+        metal=self._material_element.find('.//pbr/metal')
+        common.set_xml_data(metal,"emissive_map",False,self.properties.metal_emissive_map)
+    
+    def on_metal_light_map(self):
+        metal=self._material_element.find('.//pbr/metal')
+        common.set_xml_data(metal,"light_map",False,self.properties.metal_light_map)
+        
+    def on_metal_uv_set(self):
+        metal=self._material_element.find('.//pbr/metal')
+        common.set_xml_data(metal,"light_map",True,{"uv_set":self.properties.metal_uv_set})
+    
+    
+    def on_metal_normal_map(self):
+        metal=self._material_element.find(' common.set_xml_data(specular,"albedo_map",False,self.properties.specular_albedo_map).//pbr/metal')
+        common.set_xml_data(metal,"normal_map",False,self.properties.metal_normal_map)
+    
+    
+    def on_metal_normal_map_type(self):
+        metal=self._material_element.find('.//pbr/metal')
+        common.set_xml_data(metal,"normal_map",True,{"type":self.properties.metal_normal_map_type})
+        
+    #specular
+    
+    def on_specular_albdedo_map(self):
+        specular=self._material_element.find(".//pbr/specular")
+        common.set_xml_data(specular,"albedo_map",False,self.properties.specular_albedo_map)
+    
+    def on_specular_map(self):
+        specular=self._material_element.find(".//pbr/specular")
+        common.set_xml_data(specular,"specular_map",False,self.properties.specular_map)
+        
+    def on_specular_glossiness(self):
+        specular=self._material_element.find(".//pbr/specular")
+        common.set_xml_data(specular,"glossiness",False,self.properties.specular_glossiness)
+        
+        
+    def on_specular_environment_map(self):
+        specular=self._material_element.find(".//pbr/specular")
+        common.set_xml_data(specular,"environment_map",False,self.properties.specular_environment_map)
+        
+    def on_specular_ambient_occlusion_map(self):
+        specular=self._material_element.find(".//pbr/specular")
+        common.set_xml_data(specular,"ambient_occlusion_map",False,self.properties.specular_ambient_occlusion_map)
+        
+    def on_specular_emissive_map(self):
+        specular=self._material_element.find(".//pbr/specular")
+        common.set_xml_data(specular,"emissive_map",False,self.properties.specular_emissive_map)
+          
+    def on_specular_glossiness_map(self):
+        specular=self._material_element.find(".//pbr/specular")
+        common.set_xml_data(specular,"glossiness_map",False,self.properties.specular_glossiness_map)
+        
+    def on_specular_light_map(self):
+        specular=self._material_element.find(".//pbr/specular")
+        common.set_xml_data(specular,"light_map",False,self.properties.specular_light_map)
+
+    def on_specular_uv_set(self):
+        specular=self._material_element.find(".//pbr/specular")
+        common.set_xml_data(specular,"light_map",True,{"uv_set":self.properties.specular_uv_set})
+    
+    def on_specular_normal_map(self):
+        specular=self._material_element.find(".//pbr/specular")
+        common.set_xml_data(specular,"normal_map",False,self.properties.specular_normal_map)
+    
+    def on_specular_normal_map_type(self):
+        specular=self._material_element.find(".//pbr/specular")
+        common.set_xml_data(specular,"normal_map",True,{"type":self.properties.specular_normal_map_type})
+    
+
     def on_uri(self):
         common.set_xml_data(self._material_element,'uri',False,self.properties.script_uri)
         
@@ -562,12 +626,6 @@ class material(common.color_pickr):
     def on_shader_type(self):
         common.set_xml_data(self._material_element,'shader',True,{'type':self.properties.shader_type})
         
-#enable and disable normal map 
-    def on_normal_map_state(self):
-        if self.properties.normal_map_checkbox:
-            self.ui.material_normal_map_input.setEnabled(True)
-        else:
-            self.ui.material_normal_map_input.setEnabled(False)
     
 #normal map 
     def on_normal_map(self):
@@ -619,6 +677,7 @@ class material(common.color_pickr):
         self.properties.diffuse=common.get_xml_data(self._material_element,'diffuse',False)
         self.properties.specular=common.get_xml_data(self._material_element,'specular',False)
         self.properties.emissive=common.get_xml_data(self._material_element,'emissive',False)
+        self.properties.lighting=common.get_xml_data(self._material_element,"lighting",False)
         #pbr 
             #metal
         metal=self._material_element.find('.//pbr/metal')
@@ -711,7 +770,8 @@ class material(common.color_pickr):
                 temp_el.remove(temp_el.find('.//emissive'))
             
             #logic for materials related to pbr 
-            if self.properties.pbr_enabled and temp_el.find('pbr') is not None:
+            pbr=temp_el.find('pbr')
+            if self.properties.pbr_enabled and pbr is not None:
                 metal=temp_el.find('.//pbr/metal')
                 if self.properties.metal_enabled and metal is not None:
                     #{tag : property}
@@ -725,7 +785,7 @@ class material(common.color_pickr):
                             metal.remove(metal.find('.//'+tag))
                 else:
                     if metal is not None:
-                        temp_el.remove(metal)
+                       temp_el.find('.//pbr').remove(metal)
                 #related to specular 
                 specular=temp_el.find(".//pbr/specular")
                 if self.properties.specular_enabled and specular is not None:
@@ -741,6 +801,9 @@ class material(common.color_pickr):
                             specular.remove(specular.find('.//'+tag))
                 else:
                     if specular is not None:
-                        temp_el.remove(specular)
+                        temp_el.find('.//pbr').remove(specular)
+            else:
+                if pbr is not None:
+                    temp_el.remove(pbr)
         
         return temp_el

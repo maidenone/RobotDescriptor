@@ -1,3 +1,4 @@
+from typing import Any
 import xml.etree.ElementTree as ET
 from PySide import QtCore
 from PySide.QtGui import  QMessageBox
@@ -273,7 +274,7 @@ class light(common.color_pickr):
         #type
         self.ui.light_type.currentTextChanged.connect(self.on_type)
         #intensity
-        self.ui.intensity_sp.valueChanged.connect(self.on_intensity)
+        self.ui.intensity_sp.valueChanged.connect(lambda : common.set_xml_data(self._current_light_element,"intensity",False,self.properties.intensity))
         #shadows
         self.ui.cast_shadows_check_b.stateChanged.connect(self.on_cast_shadows)
         #visualize
@@ -402,9 +403,6 @@ class light(common.color_pickr):
             self.ui.direction_groupbox.setEnabled(True)
         else:
             self.ui.direction_groupbox.setEnabled(False)
-        
-    def on_intensity(self):
-        common.set_xml_data(self._current_light_element,"intensity",False,self.properties.intensity)
         
     def on_cast_shadows(self):
         common.set_xml_data(self._current_light_element,"cast_shadows",False,self.properties.cast_shadows)

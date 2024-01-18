@@ -58,8 +58,6 @@ class ModelEditor:
         return 
         
         
-        
-        
 
 #+===============================
 #start command

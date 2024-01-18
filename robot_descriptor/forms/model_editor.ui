@@ -14,6 +14,63 @@
    <string>Model Editor</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_8">
+   <item row="1" column="3">
+    <widget class="QPushButton" name="ok_pb">
+     <property name="minimumSize">
+      <size>
+       <width>90</width>
+       <height>24</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>100</width>
+       <height>30</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>Ok</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="2">
+    <widget class="QPushButton" name="Apply_pb">
+     <property name="minimumSize">
+      <size>
+       <width>90</width>
+       <height>24</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>95</width>
+       <height>30</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>Apply</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QPushButton" name="reset_pb">
+     <property name="minimumSize">
+      <size>
+       <width>90</width>
+       <height>24</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>95</width>
+       <height>30</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>Reset</string>
+     </property>
+    </widget>
+   </item>
    <item row="0" column="0">
     <widget class="QTreeView" name="link_tree">
      <property name="minimumSize">
@@ -222,6 +279,9 @@ Links connected by a joint will never collide</string>
        </layout>
       </widget>
       <widget class="QGroupBox" name="inertial_groupbox">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="geometry">
         <rect>
          <x>14</x>
@@ -279,6 +339,9 @@ Links connected by a joint will never collide</string>
         <layout class="QGridLayout" name="gridLayout_3">
          <item row="0" column="0">
           <widget class="QGroupBox" name="fluid_added_mass_groupbox">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="minimumSize">
             <size>
              <width>348</width>
@@ -869,7 +932,7 @@ Links connected by a joint will never collide</string>
                </widget>
               </item>
               <item row="0" column="1">
-               <widget class="QDoubleSpinBox" name="fam_xp_sp_2">
+               <widget class="QDoubleSpinBox" name="fam_yp_sp">
                 <property name="minimumSize">
                  <size>
                   <width>90</width>
@@ -1044,9 +1107,9 @@ Links connected by a joint will never collide</string>
              <widget class="QWidget" name="layoutWidget">
               <property name="geometry">
                <rect>
-                <x>78</x>
-                <y>30</y>
-                <width>112</width>
+                <x>81</x>
+                <y>32</y>
+                <width>139</width>
                 <height>26</height>
                </rect>
               </property>
@@ -1074,7 +1137,7 @@ Links connected by a joint will never collide</string>
                 </widget>
                </item>
                <item>
-                <widget class="QDoubleSpinBox" name="fam_yz_sp_2">
+                <widget class="QDoubleSpinBox" name="fam_zz_sp">
                  <property name="minimumSize">
                   <size>
                    <width>90</width>
@@ -1303,7 +1366,7 @@ Links connected by a joint will never collide</string>
                <x>16</x>
                <y>100</y>
                <width>343</width>
-               <height>66</height>
+               <height>67</height>
               </rect>
              </property>
              <property name="minimumSize">
@@ -1324,121 +1387,107 @@ Links connected by a joint will never collide</string>
              <property name="title">
               <string>moment_y</string>
              </property>
-             <widget class="QWidget" name="layoutWidget">
-              <property name="geometry">
-               <rect>
-                <x>12</x>
-                <y>30</y>
-                <width>120</width>
-                <height>26</height>
-               </rect>
-              </property>
-              <layout class="QHBoxLayout" name="horizontalLayout_10">
-               <item>
-                <widget class="QLabel" name="fam_qq_label">
-                 <property name="minimumSize">
-                  <size>
-                   <width>12</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>15</width>
-                   <height>30</height>
-                  </size>
-                 </property>
-                 <property name="text">
-                  <string>y</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignCenter</set>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QDoubleSpinBox" name="fam_qq_sp">
-                 <property name="minimumSize">
-                  <size>
-                   <width>90</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>100</width>
-                   <height>30</height>
-                  </size>
-                 </property>
-                 <property name="toolTip">
-                  <string>Added mass moment about the Y axis due to angular acceleration about the Y axis, in kg * m^2</string>
-                 </property>
-                 <property name="suffix">
-                  <string>kgm^2</string>
-                 </property>
-                 <property name="maximum">
-                  <double>1000.000000000000000</double>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </widget>
-             <widget class="QWidget" name="layoutWidget">
-              <property name="geometry">
-               <rect>
-                <x>149</x>
-                <y>30</y>
-                <width>120</width>
-                <height>26</height>
-               </rect>
-              </property>
-              <layout class="QHBoxLayout" name="horizontalLayout_9">
-               <item>
-                <widget class="QLabel" name="fam_qr_label">
-                 <property name="minimumSize">
-                  <size>
-                   <width>12</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>15</width>
-                   <height>30</height>
-                  </size>
-                 </property>
-                 <property name="text">
-                  <string>z</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignCenter</set>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QDoubleSpinBox" name="fam_qr_sp">
-                 <property name="minimumSize">
-                  <size>
-                   <width>90</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>100</width>
-                   <height>30</height>
-                  </size>
-                 </property>
-                 <property name="toolTip">
-                  <string> Added mass moment about the Y axis due to angular acceleration about the Z axis, and vice-versa, in kg * m^2</string>
-                 </property>
-                 <property name="suffix">
-                  <string>kgm^2</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </widget>
+             <layout class="QGridLayout" name="gridLayout_9">
+              <item row="0" column="0">
+               <layout class="QHBoxLayout" name="horizontalLayout_10">
+                <item>
+                 <widget class="QLabel" name="fam_qq_label">
+                  <property name="minimumSize">
+                   <size>
+                    <width>12</width>
+                    <height>24</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>15</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>y</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QDoubleSpinBox" name="fam_qq_sp">
+                  <property name="minimumSize">
+                   <size>
+                    <width>90</width>
+                    <height>24</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>100</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="toolTip">
+                   <string>Added mass moment about the Y axis due to angular acceleration about the Y axis, in kg * m^2</string>
+                  </property>
+                  <property name="suffix">
+                   <string>kgm^2</string>
+                  </property>
+                  <property name="maximum">
+                   <double>1000.000000000000000</double>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item row="0" column="1">
+               <layout class="QHBoxLayout" name="horizontalLayout_9">
+                <item>
+                 <widget class="QLabel" name="fam_qr_label">
+                  <property name="minimumSize">
+                   <size>
+                    <width>12</width>
+                    <height>24</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>15</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>z</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QDoubleSpinBox" name="fam_qr_sp">
+                  <property name="minimumSize">
+                   <size>
+                    <width>90</width>
+                    <height>24</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>100</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="toolTip">
+                   <string> Added mass moment about the Y axis due to angular acceleration about the Z axis, and vice-versa, in kg * m^2</string>
+                  </property>
+                  <property name="suffix">
+                   <string>kgm^2</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
             </widget>
             <widget class="QGroupBox" name="fluid_moment_x_groupbox">
              <property name="geometry">
@@ -1617,7 +1666,7 @@ Links connected by a joint will never collide</string>
                <x>18</x>
                <y>174</y>
                <width>343</width>
-               <height>66</height>
+               <height>67</height>
               </rect>
              </property>
              <property name="minimumSize">
@@ -1638,62 +1687,56 @@ Links connected by a joint will never collide</string>
              <property name="title">
               <string>moment_z</string>
              </property>
-             <widget class="QWidget" name="layoutWidget">
-              <property name="geometry">
-               <rect>
-                <x>79</x>
-                <y>30</y>
-                <width>118</width>
-                <height>26</height>
-               </rect>
-              </property>
-              <layout class="QHBoxLayout" name="horizontalLayout_8">
-               <item>
-                <widget class="QLabel" name="fam_rr_label">
-                 <property name="minimumSize">
-                  <size>
-                   <width>10</width>
-                   <height>15</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>10</width>
-                   <height>18</height>
-                  </size>
-                 </property>
-                 <property name="text">
-                  <string>z</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignCenter</set>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QDoubleSpinBox" name="fam_rr_sp">
-                 <property name="minimumSize">
-                  <size>
-                   <width>90</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>100</width>
-                   <height>30</height>
-                  </size>
-                 </property>
-                 <property name="toolTip">
-                  <string>Added mass moment about the Z axis due to angular acceleration about the Z axis, in kg * m^2</string>
-                 </property>
-                 <property name="suffix">
-                  <string>kgm^2</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </widget>
+             <layout class="QGridLayout" name="gridLayout_10">
+              <item row="0" column="0">
+               <layout class="QHBoxLayout" name="horizontalLayout_8">
+                <item>
+                 <widget class="QLabel" name="fam_rr_label">
+                  <property name="minimumSize">
+                   <size>
+                    <width>10</width>
+                    <height>15</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>10</width>
+                    <height>18</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>z</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QDoubleSpinBox" name="fam_rr_sp">
+                  <property name="minimumSize">
+                   <size>
+                    <width>90</width>
+                    <height>24</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>100</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="toolTip">
+                   <string>Added mass moment about the Z axis due to angular acceleration about the Z axis, in kg * m^2</string>
+                  </property>
+                  <property name="suffix">
+                   <string>kgm^2</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
             </widget>
            </widget>
           </widget>
@@ -1706,7 +1749,10 @@ Links connected by a joint will never collide</string>
       <attribute name="title">
        <string>collision</string>
       </attribute>
-      <widget class="QScrollArea" name="collsion_scroll">
+      <widget class="QScrollArea" name="collision_scroll">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="geometry">
         <rect>
          <x>16</x>
@@ -1729,140 +1775,240 @@ Links connected by a joint will never collide</string>
         </property>
        </widget>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QCheckBox" name="include_surface_info_cb">
        <property name="geometry">
         <rect>
-         <x>16</x>
-         <y>6</y>
-         <width>455</width>
+         <x>18</x>
+         <y>48</y>
+         <width>148</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>include_surface_info</string>
+       </property>
+      </widget>
+      <widget class="QWidget" name="layoutWidget">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>7</y>
+         <width>467</width>
          <height>26</height>
         </rect>
        </property>
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
-         <widget class="QLabel" name="link_laser_retro">
-          <property name="minimumSize">
-           <size>
-            <width>70</width>
-            <height>24</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>75</width>
-            <height>30</height>
-           </size>
-          </property>
+         <widget class="QCheckBox" name="collision_laser_retro_cb">
           <property name="text">
            <string>laser_retro</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QDoubleSpinBox" name="link_laser_retro_sp"/>
+         <widget class="QDoubleSpinBox" name="collision_laser_retro_sp">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+         </widget>
         </item>
         <item>
-         <widget class="QLabel" name="collison_max_contacts_label">
+         <widget class="QCheckBox" name="collison_max_contacts_cb">
           <property name="text">
            <string>max_contacts</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QSpinBox" name="collision_max_contacts_sp"/>
+         <widget class="QSpinBox" name="collision_max_contacts_sp">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>
      </widget>
-     <widget class="QWidget" name="Link_Material">
+     <widget class="QWidget" name="visual_tab">
       <attribute name="title">
-       <string>Material</string>
+       <string>visual</string>
       </attribute>
-      <widget class="QScrollArea" name="material_scroll">
-       <property name="geometry">
-        <rect>
-         <x>18</x>
-         <y>12</y>
-         <width>567</width>
-         <height>655</height>
-        </rect>
-       </property>
-       <property name="widgetResizable">
-        <bool>true</bool>
-       </property>
-       <widget class="QWidget" name="scrollAreaWidgetContents_2">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>0</y>
-          <width>565</width>
-          <height>653</height>
-         </rect>
-        </property>
-       </widget>
-      </widget>
+      <layout class="QGridLayout" name="gridLayout_11">
+       <item row="0" column="0">
+        <widget class="QCheckBox" name="visual_laser_retro_cb">
+         <property name="text">
+          <string>laser_retro</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QDoubleSpinBox" name="visual_laser_retro_sp">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QCheckBox" name="visual_transparency_cb">
+         <property name="text">
+          <string>transparency</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="3">
+        <widget class="QDoubleSpinBox" name="visual_transparency_sp">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="4">
+        <widget class="QCheckBox" name="visual_visibility_flags_cb">
+         <property name="text">
+          <string>visibility_flags</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="5">
+        <widget class="QSpinBox" name="visual_visibility_flags_sp">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0" colspan="2">
+        <widget class="QCheckBox" name="visual_cast_shadows_checkBox">
+         <property name="text">
+          <string>cast_shadows</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0" colspan="6">
+        <widget class="QScrollArea" name="material_scroll">
+         <property name="minimumSize">
+          <size>
+           <width>660</width>
+           <height>610</height>
+          </size>
+         </property>
+         <property name="widgetResizable">
+          <bool>true</bool>
+         </property>
+         <widget class="QWidget" name="scrollAreaWidgetContents_2">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>661</width>
+            <height>614</height>
+           </rect>
+          </property>
+         </widget>
+        </widget>
+       </item>
+      </layout>
      </widget>
-    </widget>
-   </item>
-   <item row="1" column="1">
-    <widget class="QPushButton" name="reset_pb">
-     <property name="minimumSize">
-      <size>
-       <width>90</width>
-       <height>24</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>95</width>
-       <height>30</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>Reset</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="2">
-    <widget class="QPushButton" name="Apply_pb">
-     <property name="minimumSize">
-      <size>
-       <width>90</width>
-       <height>24</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>95</width>
-       <height>30</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>Apply</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="3">
-    <widget class="QPushButton" name="ok_pb">
-     <property name="minimumSize">
-      <size>
-       <width>90</width>
-       <height>24</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>100</width>
-       <height>30</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>Ok</string>
-     </property>
     </widget>
    </item>
   </layout>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>collision_laser_retro_cb</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>collision_laser_retro_sp</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>333</x>
+     <y>58</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>451</x>
+     <y>58</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>collison_max_contacts_cb</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>collision_max_contacts_sp</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>569</x>
+     <y>58</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>686</x>
+     <y>58</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>include_surface_info_cb</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>collision_scroll</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>358</x>
+     <y>97</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>597</x>
+     <y>416</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>visual_laser_retro_cb</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>visual_laser_retro_sp</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>328</x>
+     <y>59</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>438</x>
+     <y>59</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>visual_transparency_cb</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>visual_transparency_sp</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>549</x>
+     <y>59</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>659</x>
+     <y>59</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>visual_visibility_flags_cb</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>visual_visibility_flags_sp</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>772</x>
+     <y>59</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>886</x>
+     <y>59</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

@@ -2001,16 +2001,6 @@ of degrees</string>
        </property>
       </widget>
      </item>
-     <item row="0" column="0" colspan="3">
-      <widget class="QListWidget" name="light_listWidget">
-       <property name="maximumSize">
-        <size>
-         <width>16777215</width>
-         <height>100</height>
-        </size>
-       </property>
-      </widget>
-     </item>
      <item row="2" column="0" colspan="3">
       <widget class="QScrollArea" name="light_scroll">
        <property name="widgetResizable">
@@ -3026,6 +3016,16 @@ of degrees</string>
          </item>
         </layout>
        </widget>
+      </widget>
+     </item>
+     <item row="0" column="0" colspan="3">
+      <widget class="QListWidget" name="light_listWidget">
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>100</height>
+        </size>
+       </property>
       </widget>
      </item>
     </layout>

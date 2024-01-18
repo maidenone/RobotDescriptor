@@ -14,10 +14,10 @@ DEBUG=True
 
 
 
-
+import os 
 import FreeCAD
-ICON_PATH=FreeCAD.getUserAppDataDir()+"Mod/RobotDescriptor/robot_descriptor/icons"
-UI_PATH=FreeCAD.getUserAppDataDir()+"Mod/RobotDescriptor/robot_descriptor/forms"
+ICON_PATH=os.path.join(FreeCAD.getUserAppDataDir()+"Mod","RobotDescriptor","robot_descriptor","icons")
+UI_PATH=os.path.join(FreeCAD.getUserAppDataDir()+"Mod","RobotDescriptor","robot_descriptor","forms")
 DOCUMENT=FreeCAD.ActiveDocument
 import copy
 import xml.etree.ElementTree as ET
@@ -90,7 +90,7 @@ def set_xml_data(element:ET.Element,tag:str,Is_Attribute:bool,value:Union[dict,f
     else:
         #add/edit  attributes 
         for key in value.keys():
-            elem.set(key,value[key])
+            elem.set(key,str(value[key]))
     return element
 
 

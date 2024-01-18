@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>600</width>
-    <height>816</height>
+    <height>810</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -116,6 +116,9 @@
          </item>
          <item row="1" column="0">
           <widget class="QTabWidget" name="surface_tabs">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
            <property name="minimumSize">
             <size>
              <width>0</width>
@@ -123,878 +126,26 @@
             </size>
            </property>
            <property name="currentIndex">
-            <number>1</number>
+            <number>2</number>
+           </property>
+           <property name="tabsClosable">
+            <bool>false</bool>
+           </property>
+           <property name="movable">
+            <bool>false</bool>
+           </property>
+           <property name="tabBarAutoHide">
+            <bool>false</bool>
            </property>
            <widget class="QWidget" name="friction_tab">
             <attribute name="title">
              <string>friction</string>
             </attribute>
-            <widget class="QGroupBox" name="friction_torsional_groupBox">
-             <property name="geometry">
-              <rect>
-               <x>10</x>
-               <y>14</y>
-               <width>533</width>
-               <height>162</height>
-              </rect>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>160</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>16777215</width>
-               <height>170</height>
-              </size>
-             </property>
-             <property name="title">
-              <string>torsional</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-             <property name="checked">
-              <bool>false</bool>
-             </property>
-             <layout class="QGridLayout" name="gridLayout_2">
-              <item row="0" column="0">
-               <widget class="QLabel" name="torsional_coefficient_label">
-                <property name="minimumSize">
-                 <size>
-                  <width>0</width>
-                  <height>24</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>70</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>coefficient</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="1">
-               <widget class="QDoubleSpinBox" name="torsional_coeff_sp">
-                <property name="minimumSize">
-                 <size>
-                  <width>0</width>
-                  <height>24</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>90</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="toolTip">
-                 <string> Torsional friction coefficient, unitless maximum ratio of
-  tangential stress to normal stress.</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="2" rowspan="4">
-               <widget class="QGroupBox" name="torsional_ode_groupbox">
-                <property name="minimumSize">
-                 <size>
-                  <width>180</width>
-                  <height>120</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>210</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="toolTip">
-                 <string>Torsional friction parameters for ODE</string>
-                </property>
-                <property name="title">
-                 <string>ode</string>
-                </property>
-                <property name="checkable">
-                 <bool>true</bool>
-                </property>
-                <widget class="QLabel" name="torsional_ode_slip_label">
-                 <property name="geometry">
-                  <rect>
-                   <x>16</x>
-                   <y>30</y>
-                   <width>57</width>
-                   <height>15</height>
-                  </rect>
-                 </property>
-                 <property name="text">
-                  <string>slip</string>
-                 </property>
-                </widget>
-                <widget class="QDoubleSpinBox" name="torsional_ode_slip_sp">
-                 <property name="geometry">
-                  <rect>
-                   <x>56</x>
-                   <y>26</y>
-                   <width>111</width>
-                   <height>24</height>
-                  </rect>
-                 </property>
-                 <property name="toolTip">
-                  <string>force dependent slip for torsional friction,
- equivalent to inverse of viscous damping coefficient
- with units of rad/s/(Nm).
- A slip value of 0 is infinitely viscous</string>
-                 </property>
-                </widget>
-               </widget>
-              </item>
-              <item row="1" column="0">
-               <widget class="QCheckBox" name="use_patch_radius_cb">
-                <property name="minimumSize">
-                 <size>
-                  <width>0</width>
-                  <height>24</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>130</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="toolTip">
-                 <string>If this flag is true,
- torsional friction is calculated using the &quot;patch_radius&quot; parameter.
-  If this flag is set to false,
-  &quot;surface_radius&quot; (R) and contact depth (d)
- are used to compute the patch radius as sqrt(R*d).</string>
-                </property>
-                <property name="text">
-                 <string>use_patch_radius</string>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="0">
-               <widget class="QLabel" name="torsional_patch_radius_label">
-                <property name="minimumSize">
-                 <size>
-                  <width>0</width>
-                  <height>24</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>80</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>patch_radius</string>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="1">
-               <widget class="QDoubleSpinBox" name="torsional_patch_radius_sp">
-                <property name="minimumSize">
-                 <size>
-                  <width>0</width>
-                  <height>24</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>90</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="toolTip">
-                 <string>Radius of contact patch surface</string>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="0">
-               <widget class="QLabel" name="torsional_surface_radius_label">
-                <property name="minimumSize">
-                 <size>
-                  <width>0</width>
-                  <height>24</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>130</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>surface_radius</string>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="1">
-               <widget class="QDoubleSpinBox" name="torsional_surface_radius_sp">
-                <property name="minimumSize">
-                 <size>
-                  <width>0</width>
-                  <height>24</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>90</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="toolTip">
-                 <string>Surface radius on the point of contact</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-            <widget class="QGroupBox" name="friction_ode_groupbox">
-             <property name="geometry">
-              <rect>
-               <x>14</x>
-               <y>186</y>
-               <width>541</width>
-               <height>205</height>
-              </rect>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>205</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>16777215</width>
-               <height>220</height>
-              </size>
-             </property>
-             <property name="title">
-              <string>ODE</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-             <property name="checked">
-              <bool>false</bool>
-             </property>
-             <widget class="QDoubleSpinBox" name="surface_ode_mu_sp">
-              <property name="geometry">
-               <rect>
-                <x>100</x>
-                <y>34</y>
-                <width>62</width>
-                <height>24</height>
-               </rect>
-              </property>
-              <property name="toolTip">
-               <string>Coefficient of friction in first friction pyramid direction,
-   the unitless maximum ratio of force in first friction pyramid
- direction to normal force.</string>
-              </property>
-             </widget>
-             <widget class="QDoubleSpinBox" name="surface_ode_mu2_sp">
-              <property name="geometry">
-               <rect>
-                <x>102</x>
-                <y>74</y>
-                <width>62</width>
-                <height>24</height>
-               </rect>
-              </property>
-              <property name="toolTip">
-               <string> Coefficient of friction in second friction pyramid direction,
-  the unitless maximum ratio of force in second friction pyramid
- direction to normal force.</string>
-              </property>
-             </widget>
-             <widget class="QGroupBox" name="ode_friction_dir_groupbox">
-              <property name="geometry">
-               <rect>
-                <x>18</x>
-                <y>104</y>
-                <width>493</width>
-                <height>66</height>
-               </rect>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>500</width>
-                <height>465</height>
-               </size>
-              </property>
-              <property name="toolTip">
-               <string>unit vector specifying first friction pyramid direction in
- collision-fixed reference frame.
-  If the friction pyramid model is in use,
-  and this value is set to a unit vector for one of the
- colliding surfaces</string>
-              </property>
-              <property name="title">
-               <string>fdir1</string>
-              </property>
-              <property name="checkable">
-               <bool>true</bool>
-              </property>
-              <layout class="QGridLayout" name="gridLayout_3">
-               <item row="0" column="0">
-                <widget class="QLabel" name="surface_ode_fdir1_x_label">
-                 <property name="maximumSize">
-                  <size>
-                   <width>27</width>
-                   <height>16777215</height>
-                  </size>
-                 </property>
-                 <property name="text">
-                  <string>x</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignCenter</set>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="1">
-                <widget class="QDoubleSpinBox" name="surface_ode_fdir1_x_sp">
-                 <property name="maximum">
-                  <double>1.000000000000000</double>
-                 </property>
-                 <property name="singleStep">
-                  <double>0.100000000000000</double>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="2">
-                <widget class="QLabel" name="surface_ode_fdir1_y_label">
-                 <property name="maximumSize">
-                  <size>
-                   <width>27</width>
-                   <height>16777215</height>
-                  </size>
-                 </property>
-                 <property name="text">
-                  <string>y</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignCenter</set>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="3">
-                <widget class="QDoubleSpinBox" name="surface_ode_fdir1_y_sp">
-                 <property name="maximum">
-                  <double>1.000000000000000</double>
-                 </property>
-                 <property name="singleStep">
-                  <double>0.100000000000000</double>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="4">
-                <widget class="QLabel" name="surface_ode_fdir1_z_label">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>27</width>
-                   <height>27</height>
-                  </size>
-                 </property>
-                 <property name="text">
-                  <string>z</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignCenter</set>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="5">
-                <widget class="QDoubleSpinBox" name="surface_ode_fdir1_z_sp">
-                 <property name="maximum">
-                  <double>1.000000000000000</double>
-                 </property>
-                 <property name="singleStep">
-                  <double>0.100000000000000</double>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </widget>
-             <widget class="QCheckBox" name="surface_friction_mu_cb">
-              <property name="geometry">
-               <rect>
-                <x>10</x>
-                <y>38</y>
-                <width>85</width>
-                <height>21</height>
-               </rect>
-              </property>
-              <property name="text">
-               <string>mu</string>
-              </property>
-             </widget>
-             <widget class="QCheckBox" name="surface_ode_mu2_cb">
-              <property name="geometry">
-               <rect>
-                <x>10</x>
-                <y>74</y>
-                <width>85</width>
-                <height>21</height>
-               </rect>
-              </property>
-              <property name="text">
-               <string>mu2</string>
-              </property>
-             </widget>
-             <widget class="QCheckBox" name="surface_ode_slip1_cb">
-              <property name="geometry">
-               <rect>
-                <x>218</x>
-                <y>44</y>
-                <width>85</width>
-                <height>21</height>
-               </rect>
-              </property>
-              <property name="text">
-               <string>slip1</string>
-              </property>
-             </widget>
-             <widget class="QCheckBox" name="surface_ode_slip2_cb">
-              <property name="geometry">
-               <rect>
-                <x>214</x>
-                <y>84</y>
-                <width>85</width>
-                <height>21</height>
-               </rect>
-              </property>
-              <property name="text">
-               <string>slip2</string>
-              </property>
-             </widget>
-             <widget class="QDoubleSpinBox" name="surface_ode_slip1_sp">
-              <property name="geometry">
-               <rect>
-                <x>312</x>
-                <y>42</y>
-                <width>62</width>
-                <height>24</height>
-               </rect>
-              </property>
-              <property name="toolTip">
-               <string>Force dependent slip in first friction pyramid direction,
-equivalent to inverse of viscous damping coefficient
- with units of m/s/N.
-  A slip value of 0 is infinitely viscous</string>
-              </property>
-             </widget>
-             <widget class="QDoubleSpinBox" name="surface_ode_slip2_sp">
-              <property name="geometry">
-               <rect>
-                <x>314</x>
-                <y>82</y>
-                <width>62</width>
-                <height>24</height>
-               </rect>
-              </property>
-              <property name="toolTip">
-               <string>Force dependent slip in second friction pyramid direction,
- equivalent to inverse of viscous damping coefficient
- with units of m/s/N.
- A slip value of 0 is infinitely viscous.</string>
-              </property>
-             </widget>
-            </widget>
-            <widget class="QGroupBox" name="surface_friction_bullet_groupbox">
-             <property name="geometry">
-              <rect>
-               <x>12</x>
-               <y>400</y>
-               <width>549</width>
-               <height>138</height>
-              </rect>
-             </property>
-             <property name="title">
-              <string>bullet</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-             <property name="checked">
-              <bool>false</bool>
-             </property>
-             <layout class="QGridLayout" name="gridLayout_5">
-              <item row="0" column="0">
-               <widget class="QCheckBox" name="surface_bullet_friction_cb">
-                <property name="text">
-                 <string>friction</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="1">
-               <widget class="QDoubleSpinBox" name="surface_bullet_friction_sp">
-                <property name="toolTip">
-                 <string> Coefficient of friction in first friction pyramid direction,
- the unitless maximum ratio of force in first friction pyramid
-  direction to normal force</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="2">
-               <widget class="QCheckBox" name="surface_bullet_friction2_cb">
-                <property name="text">
-                 <string>friction2</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="3">
-               <widget class="QDoubleSpinBox" name="surface_bullet_friction2_sp">
-                <property name="toolTip">
-                 <string>Coefficient of friction in second friction pyramid direction,
- the unitless maximum ratio of force in second friction pyramid
- direction to normal force</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="4">
-               <widget class="QCheckBox" name="surface_bullet_rolling_friction_cb">
-                <property name="text">
-                 <string>rolling_friction</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="5">
-               <widget class="QDoubleSpinBox" name="surface_bullet_rolling_friction_sp">
-                <property name="toolTip">
-                 <string>Coefficient of rolling friction</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="0" colspan="6">
-               <widget class="QGroupBox" name="ode_friction_dir_groupbox_2">
-                <property name="maximumSize">
-                 <size>
-                  <width>500</width>
-                  <height>465</height>
-                 </size>
-                </property>
-                <property name="toolTip">
-                 <string>Unit vector specifying first friction pyramid direction in
-  collision-fixed reference frame</string>
-                </property>
-                <property name="title">
-                 <string>fdir1</string>
-                </property>
-                <property name="checkable">
-                 <bool>true</bool>
-                </property>
-                <layout class="QGridLayout" name="gridLayout_4">
-                 <item row="0" column="0">
-                  <widget class="QLabel" name="surface_bullet_fdir1_x_label">
-                   <property name="maximumSize">
-                    <size>
-                     <width>27</width>
-                     <height>16777215</height>
-                    </size>
-                   </property>
-                   <property name="text">
-                    <string>x</string>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignCenter</set>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="1">
-                  <widget class="QDoubleSpinBox" name="surface_bullet_fdir1_x_sp">
-                   <property name="maximum">
-                    <double>1.000000000000000</double>
-                   </property>
-                   <property name="singleStep">
-                    <double>0.100000000000000</double>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="2">
-                  <widget class="QLabel" name="surface_bullet_fdir1_y_label">
-                   <property name="maximumSize">
-                    <size>
-                     <width>27</width>
-                     <height>16777215</height>
-                    </size>
-                   </property>
-                   <property name="text">
-                    <string>y</string>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignCenter</set>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="3">
-                  <widget class="QDoubleSpinBox" name="surface_bullet_fdir1_y_sp">
-                   <property name="maximum">
-                    <double>1.000000000000000</double>
-                   </property>
-                   <property name="singleStep">
-                    <double>0.100000000000000</double>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="4">
-                  <widget class="QLabel" name="surface_bullet_fdir1_z_label">
-                   <property name="minimumSize">
-                    <size>
-                     <width>0</width>
-                     <height>24</height>
-                    </size>
-                   </property>
-                   <property name="maximumSize">
-                    <size>
-                     <width>27</width>
-                     <height>27</height>
-                    </size>
-                   </property>
-                   <property name="text">
-                    <string>z</string>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignCenter</set>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="5">
-                  <widget class="QDoubleSpinBox" name="surface_bullet_fdir1_z_sp">
-                   <property name="maximum">
-                    <double>1.000000000000000</double>
-                   </property>
-                   <property name="singleStep">
-                    <double>0.100000000000000</double>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-           </widget>
-           <widget class="QWidget" name="contact_tab">
-            <attribute name="title">
-             <string>contact</string>
-            </attribute>
-            <layout class="QGridLayout" name="gridLayout_10">
+            <layout class="QGridLayout" name="gridLayout_2">
              <item row="0" column="0">
-              <widget class="QCheckBox" name="contact_collide_without_contact_cb">
-               <property name="maximumSize">
-                <size>
-                 <width>220</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="toolTip">
-                <string>Flag to disable contact force generation, while still allowing collision checks and contact visualization to occur</string>
-               </property>
-               <property name="text">
-                <string>collide_without_contact</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QCheckBox" name="contact_collide_without_contact_bitmask_cb">
-               <property name="maximumSize">
-                <size>
-                 <width>220</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="text">
-                <string>collide_without_contact_bitmask</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="QSpinBox" name="contact_collide_without_contact_bitmask_sp">
-               <property name="minimumSize">
-                <size>
-                 <width>50</width>
-                 <height>24</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>120</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="toolTip">
-                <string>Bitmask for collision filtering when collide_without_contact is on</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QCheckBox" name="contact_collide_bitmask_cb">
-               <property name="maximumSize">
-                <size>
-                 <width>120</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="text">
-                <string>collide_bitmask</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1">
-              <widget class="QSpinBox" name="contact_collide_bitmask_sp">
-               <property name="minimumSize">
-                <size>
-                 <width>50</width>
-                 <height>24</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>120</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="toolTip">
-                <string>Bitmask for collision filtering. This will override collide_without_contact. Parsed as 16-bit unsigned integer</string>
-               </property>
-               <property name="maximum">
-                <number>65535</number>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="0">
-              <widget class="QCheckBox" name="contact_category_bitmask_cb">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>24</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>120</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="text">
-                <string>category_bitmask</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="1">
-              <widget class="QSpinBox" name="contact_category_bitmask_sp">
-               <property name="minimumSize">
-                <size>
-                 <width>50</width>
-                 <height>24</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>120</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="toolTip">
-                <string>Bitmask for category of collision filtering. 
-Collision happens if ((category1 &amp; collision2) | (category2 &amp; collision1)) is not zero. 
-If not specified, the category_bitmask should be interpreted as being the same as collide_bitmask. 
-Parsed as 16-bit unsigned integer</string>
-               </property>
-               <property name="maximum">
-                <number>65535</number>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="0">
-              <widget class="QCheckBox" name="contact_poissons_ratio_cb">
-               <property name="maximumSize">
-                <size>
-                 <width>120</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="text">
-                <string>poissons_ratio</string>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="1">
-              <widget class="QDoubleSpinBox" name="contact_poissons_ratio_sp">
-               <property name="minimumSize">
-                <size>
-                 <width>50</width>
-                 <height>24</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>120</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="toolTip">
-                <string>Poisson's ratio is the unitless ratio between transverse and axial strain.
- This value must lie between (-1, 0.5).  Defaults to 0.3 for typical steel.
-  Note typical silicone elastomers have Poisson's ratio near 0.49 ~ 0.50</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="0">
-              <widget class="QCheckBox" name="contact_elastic_modulus_cb">
-               <property name="maximumSize">
-                <size>
-                 <width>120</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="text">
-                <string>elastic_modulus</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="1">
-              <widget class="QDoubleSpinBox" name="contact_elastic_modulus_sp">
-               <property name="minimumSize">
-                <size>
-                 <width>50</width>
-                 <height>24</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>120</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="toolTip">
-                <string> Young's Modulus in SI derived unit Pascal.
- Defaults to -1.  If value is less or equal to zero,
- contact using elastic modulus (with Poisson's Ratio) is disabled.</string>
-               </property>
-              </widget>
-             </item>
-             <item row="6" column="0" colspan="2">
-              <widget class="QGroupBox" name="contact_ode_groupbox">
+              <widget class="QGroupBox" name="surface_friction_groupBox">
                <property name="title">
-                <string>ode</string>
+                <string/>
                </property>
                <property name="checkable">
                 <bool>true</bool>
@@ -1002,107 +153,645 @@ Parsed as 16-bit unsigned integer</string>
                <property name="checked">
                 <bool>false</bool>
                </property>
-               <layout class="QGridLayout" name="gridLayout_6">
+               <layout class="QGridLayout" name="gridLayout_15">
                 <item row="0" column="0">
-                 <widget class="QCheckBox" name="conbtact_ode_soft_cfm_cb">
-                  <property name="text">
-                   <string>soft_cfm</string>
+                 <widget class="QGroupBox" name="friction_torsional_groupBox">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>160</height>
+                   </size>
                   </property>
-                 </widget>
-                </item>
-                <item row="0" column="1">
-                 <widget class="QDoubleSpinBox" name="contact_ode_soft_cfm_sp">
-                  <property name="toolTip">
-                   <string>Soft constraint force mixing</string>
+                  <property name="maximumSize">
+                   <size>
+                    <width>533</width>
+                    <height>170</height>
+                   </size>
                   </property>
-                 </widget>
-                </item>
-                <item row="0" column="2">
-                 <widget class="QCheckBox" name="contact_ode_kd_cb">
-                  <property name="text">
-                   <string>kd</string>
+                  <property name="title">
+                   <string>torsional</string>
                   </property>
-                 </widget>
-                </item>
-                <item row="0" column="3">
-                 <widget class="QDoubleSpinBox" name="contact_ode_kd_sp">
-                  <property name="toolTip">
-                   <string>dynamically &quot;damping&quot;-equivalent coefficient for contact joints</string>
+                  <property name="checkable">
+                   <bool>true</bool>
                   </property>
+                  <property name="checked">
+                   <bool>false</bool>
+                  </property>
+                  <layout class="QGridLayout" name="gridLayout_4">
+                   <item row="0" column="0">
+                    <widget class="QLabel" name="torsional_coefficient_label">
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>24</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>70</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>coefficient</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="1">
+                    <widget class="QDoubleSpinBox" name="torsional_coeff_sp">
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>24</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>90</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="toolTip">
+                      <string> Torsional friction coefficient, unitless maximum ratio of
+  tangential stress to normal stress.</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="2" rowspan="4">
+                    <widget class="QGroupBox" name="torsional_ode_groupbox">
+                     <property name="minimumSize">
+                      <size>
+                       <width>180</width>
+                       <height>120</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>210</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="toolTip">
+                      <string>Torsional friction parameters for ODE</string>
+                     </property>
+                     <property name="title">
+                      <string>ode</string>
+                     </property>
+                     <property name="checkable">
+                      <bool>true</bool>
+                     </property>
+                     <widget class="QLabel" name="torsional_ode_slip_label">
+                      <property name="geometry">
+                       <rect>
+                        <x>16</x>
+                        <y>30</y>
+                        <width>35</width>
+                        <height>16</height>
+                       </rect>
+                      </property>
+                      <property name="text">
+                       <string>slip</string>
+                      </property>
+                     </widget>
+                     <widget class="QDoubleSpinBox" name="torsional_ode_slip_sp">
+                      <property name="geometry">
+                       <rect>
+                        <x>60</x>
+                        <y>28</y>
+                        <width>111</width>
+                        <height>24</height>
+                       </rect>
+                      </property>
+                      <property name="toolTip">
+                       <string>force dependent slip for torsional friction,
+ equivalent to inverse of viscous damping coefficient
+ with units of rad/s/(Nm).
+ A slip value of 0 is infinitely viscous</string>
+                      </property>
+                     </widget>
+                    </widget>
+                   </item>
+                   <item row="1" column="0">
+                    <widget class="QCheckBox" name="use_patch_radius_cb">
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>24</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>130</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="toolTip">
+                      <string>If this flag is true,
+ torsional friction is calculated using the &quot;patch_radius&quot; parameter.
+  If this flag is set to false,
+  &quot;surface_radius&quot; (R) and contact depth (d)
+ are used to compute the patch radius as sqrt(R*d).</string>
+                     </property>
+                     <property name="text">
+                      <string>use_patch_radius</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="0">
+                    <widget class="QLabel" name="torsional_patch_radius_label">
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>24</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>80</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>patch_radius</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="1">
+                    <widget class="QDoubleSpinBox" name="torsional_patch_radius_sp">
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>24</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>90</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="toolTip">
+                      <string>Radius of contact patch surface</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="3" column="0">
+                    <widget class="QLabel" name="torsional_surface_radius_label">
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>24</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>130</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>surface_radius</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="3" column="1">
+                    <widget class="QDoubleSpinBox" name="torsional_surface_radius_sp">
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>24</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>90</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="toolTip">
+                      <string>Surface radius on the point of contact</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
                  </widget>
                 </item>
                 <item row="1" column="0">
-                 <widget class="QCheckBox" name="contact_ode_soft_erp_cb">
-                  <property name="text">
-                   <string>soft_erp</string>
+                 <widget class="QGroupBox" name="friction_ode_groupbox">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>205</height>
+                   </size>
                   </property>
-                 </widget>
-                </item>
-                <item row="1" column="1">
-                 <widget class="QDoubleSpinBox" name="contact_ode_soft_erp_sp">
-                  <property name="toolTip">
-                   <string>Soft error reduction parameter</string>
+                  <property name="maximumSize">
+                   <size>
+                    <width>505</width>
+                    <height>220</height>
+                   </size>
                   </property>
-                 </widget>
-                </item>
-                <item row="1" column="2">
-                 <widget class="QCheckBox" name="contact_ode_max_vel_cb">
-                  <property name="text">
-                   <string>max_vel</string>
+                  <property name="title">
+                   <string>ODE</string>
                   </property>
-                 </widget>
-                </item>
-                <item row="1" column="3">
-                 <widget class="QDoubleSpinBox" name="contact_ode_max_vel_sp">
-                  <property name="toolTip">
-                   <string>dynamically &quot;damping&quot;-equivalent coefficient for contact joints</string>
+                  <property name="checkable">
+                   <bool>true</bool>
                   </property>
+                  <property name="checked">
+                   <bool>false</bool>
+                  </property>
+                  <layout class="QGridLayout" name="gridLayout_12">
+                   <item row="0" column="0">
+                    <widget class="QCheckBox" name="surface_friction_mu_cb">
+                     <property name="text">
+                      <string>mu</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="1">
+                    <widget class="QDoubleSpinBox" name="surface_ode_mu_sp">
+                     <property name="enabled">
+                      <bool>false</bool>
+                     </property>
+                     <property name="toolTip">
+                      <string>Coefficient of friction in first friction pyramid direction,
+   the unitless maximum ratio of force in first friction pyramid
+ direction to normal force.</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="2">
+                    <widget class="QCheckBox" name="surface_ode_slip1_cb">
+                     <property name="text">
+                      <string>slip1</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="3">
+                    <widget class="QDoubleSpinBox" name="surface_ode_slip1_sp">
+                     <property name="enabled">
+                      <bool>false</bool>
+                     </property>
+                     <property name="toolTip">
+                      <string>Force dependent slip in first friction pyramid direction,
+equivalent to inverse of viscous damping coefficient
+ with units of m/s/N.
+  A slip value of 0 is infinitely viscous</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="0">
+                    <widget class="QCheckBox" name="surface_ode_mu2_cb">
+                     <property name="text">
+                      <string>mu2</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="1">
+                    <widget class="QDoubleSpinBox" name="surface_ode_mu2_sp">
+                     <property name="enabled">
+                      <bool>false</bool>
+                     </property>
+                     <property name="toolTip">
+                      <string> Coefficient of friction in second friction pyramid direction,
+  the unitless maximum ratio of force in second friction pyramid
+ direction to normal force.</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="2">
+                    <widget class="QCheckBox" name="surface_ode_slip2_cb">
+                     <property name="text">
+                      <string>slip2</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="3">
+                    <widget class="QDoubleSpinBox" name="surface_ode_slip2_sp">
+                     <property name="enabled">
+                      <bool>false</bool>
+                     </property>
+                     <property name="toolTip">
+                      <string>Force dependent slip in second friction pyramid direction,
+ equivalent to inverse of viscous damping coefficient
+ with units of m/s/N.
+ A slip value of 0 is infinitely viscous.</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="0" colspan="4">
+                    <widget class="QGroupBox" name="ode_frdir1_groupbox">
+                     <property name="maximumSize">
+                      <size>
+                       <width>500</width>
+                       <height>465</height>
+                      </size>
+                     </property>
+                     <property name="toolTip">
+                      <string>unit vector specifying first friction pyramid direction in
+ collision-fixed reference frame.
+  If the friction pyramid model is in use,
+  and this value is set to a unit vector for one of the
+ colliding surfaces</string>
+                     </property>
+                     <property name="title">
+                      <string>fdir1</string>
+                     </property>
+                     <property name="checkable">
+                      <bool>true</bool>
+                     </property>
+                     <property name="checked">
+                      <bool>false</bool>
+                     </property>
+                     <layout class="QGridLayout" name="gridLayout_3">
+                      <item row="0" column="0">
+                       <widget class="QLabel" name="surface_ode_fdir1_x_label">
+                        <property name="maximumSize">
+                         <size>
+                          <width>27</width>
+                          <height>16777215</height>
+                         </size>
+                        </property>
+                        <property name="text">
+                         <string>x</string>
+                        </property>
+                        <property name="alignment">
+                         <set>Qt::AlignCenter</set>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="1">
+                       <widget class="QDoubleSpinBox" name="surface_ode_fdir1_x_sp">
+                        <property name="maximum">
+                         <double>1.000000000000000</double>
+                        </property>
+                        <property name="singleStep">
+                         <double>0.100000000000000</double>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="2">
+                       <widget class="QLabel" name="surface_ode_fdir1_y_label">
+                        <property name="maximumSize">
+                         <size>
+                          <width>27</width>
+                          <height>16777215</height>
+                         </size>
+                        </property>
+                        <property name="text">
+                         <string>y</string>
+                        </property>
+                        <property name="alignment">
+                         <set>Qt::AlignCenter</set>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="3">
+                       <widget class="QDoubleSpinBox" name="surface_ode_fdir1_y_sp">
+                        <property name="maximum">
+                         <double>1.000000000000000</double>
+                        </property>
+                        <property name="singleStep">
+                         <double>0.100000000000000</double>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="4">
+                       <widget class="QLabel" name="surface_ode_fdir1_z_label">
+                        <property name="minimumSize">
+                         <size>
+                          <width>0</width>
+                          <height>24</height>
+                         </size>
+                        </property>
+                        <property name="maximumSize">
+                         <size>
+                          <width>27</width>
+                          <height>27</height>
+                         </size>
+                        </property>
+                        <property name="text">
+                         <string>z</string>
+                        </property>
+                        <property name="alignment">
+                         <set>Qt::AlignCenter</set>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="5">
+                       <widget class="QDoubleSpinBox" name="surface_ode_fdir1_z_sp">
+                        <property name="maximum">
+                         <double>1.000000000000000</double>
+                        </property>
+                        <property name="singleStep">
+                         <double>0.100000000000000</double>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                  </layout>
                  </widget>
                 </item>
                 <item row="2" column="0">
-                 <widget class="QCheckBox" name="contact_ode_kp_cb">
-                  <property name="text">
-                   <string>kp</string>
+                 <widget class="QGroupBox" name="surface_friction_bullet_groupbox">
+                  <property name="maximumSize">
+                   <size>
+                    <width>508</width>
+                    <height>16777215</height>
+                   </size>
                   </property>
-                 </widget>
-                </item>
-                <item row="2" column="1">
-                 <widget class="QDoubleSpinBox" name="contact_ode_kp_sp">
-                  <property name="toolTip">
-                   <string>dynamically &quot;stiffness&quot;-equivalent coefficient for contact joints</string>
+                  <property name="title">
+                   <string>bullet</string>
                   </property>
-                  <property name="maximum">
-                   <double>2000000000000.000000000000000</double>
+                  <property name="checkable">
+                   <bool>true</bool>
                   </property>
-                 </widget>
-                </item>
-                <item row="2" column="2">
-                 <widget class="QCheckBox" name="contact_ode_min_depth_cb">
-                  <property name="text">
-                   <string>min_depth</string>
+                  <property name="checked">
+                   <bool>false</bool>
                   </property>
-                 </widget>
-                </item>
-                <item row="2" column="3">
-                 <widget class="QDoubleSpinBox" name="contact_ode_min_depth_sp">
-                  <property name="toolTip">
-                   <string>minimum allowable depth before contact correction impulse is applied</string>
-                  </property>
+                  <layout class="QGridLayout" name="gridLayout_5">
+                   <item row="0" column="0">
+                    <widget class="QCheckBox" name="surface_bullet_friction_cb">
+                     <property name="text">
+                      <string>friction</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="1">
+                    <widget class="QDoubleSpinBox" name="surface_bullet_friction_sp">
+                     <property name="enabled">
+                      <bool>false</bool>
+                     </property>
+                     <property name="toolTip">
+                      <string> Coefficient of friction in first friction pyramid direction,
+ the unitless maximum ratio of force in first friction pyramid
+  direction to normal force</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="2">
+                    <widget class="QCheckBox" name="surface_bullet_friction2_cb">
+                     <property name="text">
+                      <string>friction2</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="3">
+                    <widget class="QDoubleSpinBox" name="surface_bullet_friction2_sp">
+                     <property name="enabled">
+                      <bool>false</bool>
+                     </property>
+                     <property name="toolTip">
+                      <string>Coefficient of friction in second friction pyramid direction,
+ the unitless maximum ratio of force in second friction pyramid
+ direction to normal force</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="4">
+                    <widget class="QCheckBox" name="surface_bullet_rolling_friction_cb">
+                     <property name="text">
+                      <string>rolling_friction</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="5">
+                    <widget class="QDoubleSpinBox" name="surface_bullet_rolling_friction_sp">
+                     <property name="enabled">
+                      <bool>false</bool>
+                     </property>
+                     <property name="toolTip">
+                      <string>Coefficient of rolling friction</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="0" colspan="6">
+                    <widget class="QGroupBox" name="bullet_frdir1_groupbox">
+                     <property name="maximumSize">
+                      <size>
+                       <width>500</width>
+                       <height>465</height>
+                      </size>
+                     </property>
+                     <property name="toolTip">
+                      <string>Unit vector specifying first friction pyramid direction in
+  collision-fixed reference frame</string>
+                     </property>
+                     <property name="title">
+                      <string>fdir1</string>
+                     </property>
+                     <property name="checkable">
+                      <bool>true</bool>
+                     </property>
+                     <property name="checked">
+                      <bool>false</bool>
+                     </property>
+                     <layout class="QGridLayout" name="gridLayout_13">
+                      <item row="0" column="0">
+                       <widget class="QLabel" name="surface_bullet_fdir1_x_label">
+                        <property name="maximumSize">
+                         <size>
+                          <width>27</width>
+                          <height>16777215</height>
+                         </size>
+                        </property>
+                        <property name="text">
+                         <string>x</string>
+                        </property>
+                        <property name="alignment">
+                         <set>Qt::AlignCenter</set>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="1">
+                       <widget class="QDoubleSpinBox" name="surface_bullet_fdir1_x_sp">
+                        <property name="maximum">
+                         <double>1.000000000000000</double>
+                        </property>
+                        <property name="singleStep">
+                         <double>0.100000000000000</double>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="2">
+                       <widget class="QLabel" name="surface_bullet_fdir1_y_label">
+                        <property name="maximumSize">
+                         <size>
+                          <width>27</width>
+                          <height>16777215</height>
+                         </size>
+                        </property>
+                        <property name="text">
+                         <string>y</string>
+                        </property>
+                        <property name="alignment">
+                         <set>Qt::AlignCenter</set>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="3">
+                       <widget class="QDoubleSpinBox" name="surface_bullet_fdir1_y_sp">
+                        <property name="maximum">
+                         <double>1.000000000000000</double>
+                        </property>
+                        <property name="singleStep">
+                         <double>0.100000000000000</double>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="4">
+                       <widget class="QLabel" name="surface_bullet_fdir1_z_label">
+                        <property name="minimumSize">
+                         <size>
+                          <width>0</width>
+                          <height>24</height>
+                         </size>
+                        </property>
+                        <property name="maximumSize">
+                         <size>
+                          <width>27</width>
+                          <height>27</height>
+                         </size>
+                        </property>
+                        <property name="text">
+                         <string>z</string>
+                        </property>
+                        <property name="alignment">
+                         <set>Qt::AlignCenter</set>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="5">
+                       <widget class="QDoubleSpinBox" name="surface_bullet_fdir1_z_sp">
+                        <property name="maximum">
+                         <double>1.000000000000000</double>
+                        </property>
+                        <property name="singleStep">
+                         <double>0.100000000000000</double>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                  </layout>
                  </widget>
                 </item>
                </layout>
               </widget>
              </item>
-             <item row="7" column="0" colspan="2">
-              <widget class="QGroupBox" name="contact_bullet_groupbox">
-               <property name="minimumSize">
-                <size>
-                 <width>551</width>
-                 <height>155</height>
-                </size>
-               </property>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="contact_tab">
+            <attribute name="title">
+             <string>contact</string>
+            </attribute>
+            <layout class="QGridLayout" name="gridLayout_6">
+             <item row="0" column="0">
+              <widget class="QGroupBox" name="surface_contact_groupbox">
                <property name="title">
-                <string>bullet</string>
+                <string/>
                </property>
                <property name="checkable">
                 <bool>true</bool>
@@ -1110,152 +799,451 @@ Parsed as 16-bit unsigned integer</string>
                <property name="checked">
                 <bool>false</bool>
                </property>
-               <widget class="QCheckBox" name="contact_bullet_kp_cb">
-                <property name="geometry">
-                 <rect>
-                  <x>10</x>
-                  <y>86</y>
-                  <width>117</width>
-                  <height>21</height>
-                 </rect>
-                </property>
-                <property name="text">
-                 <string>kp</string>
-                </property>
-               </widget>
-               <widget class="QDoubleSpinBox" name="contact_bullet_soft_cfm_sp">
-                <property name="geometry">
-                 <rect>
-                  <x>133</x>
-                  <y>25</y>
-                  <width>146</width>
-                  <height>24</height>
-                 </rect>
-                </property>
-                <property name="toolTip">
-                 <string>Soft constraint force mixing</string>
-                </property>
-               </widget>
-               <widget class="QCheckBox" name="contact_bullet_soft_erp_cb">
-                <property name="geometry">
-                 <rect>
-                  <x>10</x>
-                  <y>56</y>
-                  <width>117</width>
-                  <height>21</height>
-                 </rect>
-                </property>
-                <property name="text">
-                 <string>soft_erp</string>
-                </property>
-               </widget>
-               <widget class="QDoubleSpinBox" name="contact_bullet_soft_erp_sp">
-                <property name="geometry">
-                 <rect>
-                  <x>133</x>
-                  <y>55</y>
-                  <width>146</width>
-                  <height>24</height>
-                 </rect>
-                </property>
-                <property name="toolTip">
-                 <string>see ode</string>
-                </property>
-               </widget>
-               <widget class="QCheckBox" name="contact_bullet_kd_cb">
-                <property name="geometry">
-                 <rect>
-                  <x>285</x>
-                  <y>26</y>
-                  <width>117</width>
-                  <height>21</height>
-                 </rect>
-                </property>
-                <property name="text">
-                 <string>kd</string>
-                </property>
-               </widget>
-               <widget class="QDoubleSpinBox" name="contact_bullet_kd_sp">
-                <property name="geometry">
-                 <rect>
-                  <x>408</x>
-                  <y>25</y>
-                  <width>117</width>
-                  <height>24</height>
-                 </rect>
-                </property>
-                <property name="toolTip">
-                 <string>see ode</string>
-                </property>
-               </widget>
-               <widget class="QDoubleSpinBox" name="contact_bullet_kp_sp">
-                <property name="geometry">
-                 <rect>
-                  <x>133</x>
-                  <y>85</y>
-                  <width>146</width>
-                  <height>24</height>
-                 </rect>
-                </property>
-                <property name="toolTip">
-                 <string>see ode</string>
-                </property>
-                <property name="maximum">
-                 <double>2000000000000.000000000000000</double>
-                </property>
-               </widget>
-               <widget class="QCheckBox" name="conbtact_bullet_soft_cfm_cb">
-                <property name="geometry">
-                 <rect>
-                  <x>10</x>
-                  <y>26</y>
-                  <width>117</width>
-                  <height>21</height>
-                 </rect>
-                </property>
-                <property name="text">
-                 <string>soft_cfm</string>
-                </property>
-               </widget>
-               <widget class="QCheckBox" name="contact_bullet_split_impulse_cb">
-                <property name="geometry">
-                 <rect>
-                  <x>292</x>
-                  <y>60</y>
-                  <width>159</width>
-                  <height>21</height>
-                 </rect>
-                </property>
-                <property name="text">
-                 <string>split_impulse</string>
-                </property>
-               </widget>
-               <widget class="QLabel" name="contact_bullet_split_impulse_penetration_threshold_label">
-                <property name="geometry">
-                 <rect>
-                  <x>10</x>
-                  <y>124</y>
-                  <width>217</width>
-                  <height>15</height>
-                 </rect>
-                </property>
-                <property name="text">
-                 <string>split_impulse_penetration_threshold</string>
-                </property>
-               </widget>
-               <widget class="QDoubleSpinBox" name="doubleSpinBox">
-                <property name="geometry">
-                 <rect>
-                  <x>236</x>
-                  <y>120</y>
-                  <width>71</width>
-                  <height>24</height>
-                 </rect>
-                </property>
-                <property name="toolTip">
-                 <string>imilar to ODE's max_vel implementation</string>
-                </property>
-               </widget>
+               <layout class="QGridLayout" name="gridLayout_16">
+                <item row="0" column="0">
+                 <widget class="QCheckBox" name="contact_collide_without_contact_cb">
+                  <property name="maximumSize">
+                   <size>
+                    <width>220</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="toolTip">
+                   <string>Flag to disable contact force generation, while still allowing collision checks and contact visualization to occur</string>
+                  </property>
+                  <property name="text">
+                   <string>collide_without_contact</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QCheckBox" name="contact_collide_without_contact_bitmask_cb">
+                  <property name="maximumSize">
+                   <size>
+                    <width>220</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>collide_without_contact_bitmask</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QSpinBox" name="contact_collide_without_contact_bitmask_sp">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>50</width>
+                    <height>24</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>120</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="toolTip">
+                   <string>Bitmask for collision filtering when collide_without_contact is on</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="0">
+                 <widget class="QCheckBox" name="contact_collide_bitmask_cb">
+                  <property name="maximumSize">
+                   <size>
+                    <width>120</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>collide_bitmask</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="1">
+                 <widget class="QSpinBox" name="contact_collide_bitmask_sp">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>50</width>
+                    <height>24</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>120</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="toolTip">
+                   <string>Bitmask for collision filtering. This will override collide_without_contact. Parsed as 16-bit unsigned integer</string>
+                  </property>
+                  <property name="maximum">
+                   <number>65535</number>
+                  </property>
+                 </widget>
+                </item>
+                <item row="3" column="0">
+                 <widget class="QCheckBox" name="contact_category_bitmask_cb">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>24</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>150</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>category_bitmask</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="3" column="1">
+                 <widget class="QSpinBox" name="contact_category_bitmask_sp">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>50</width>
+                    <height>24</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>120</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="toolTip">
+                   <string>Bitmask for category of collision filtering. 
+Collision happens if ((category1 &amp; collision2) | (category2 &amp; collision1)) is not zero. 
+If not specified, the category_bitmask should be interpreted as being the same as collide_bitmask. 
+Parsed as 16-bit unsigned integer</string>
+                  </property>
+                  <property name="maximum">
+                   <number>65535</number>
+                  </property>
+                 </widget>
+                </item>
+                <item row="4" column="0">
+                 <widget class="QCheckBox" name="contact_poissons_ratio_cb">
+                  <property name="maximumSize">
+                   <size>
+                    <width>120</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>poissons_ratio</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="4" column="1">
+                 <widget class="QDoubleSpinBox" name="contact_poissons_ratio_sp">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>50</width>
+                    <height>24</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>120</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="toolTip">
+                   <string>Poisson's ratio is the unitless ratio between transverse and axial strain.
+ This value must lie between (-1, 0.5).  Defaults to 0.3 for typical steel.
+  Note typical silicone elastomers have Poisson's ratio near 0.49 ~ 0.50</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="5" column="0">
+                 <widget class="QCheckBox" name="contact_elastic_modulus_cb">
+                  <property name="maximumSize">
+                   <size>
+                    <width>120</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>elastic_modulus</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="5" column="1">
+                 <widget class="QDoubleSpinBox" name="contact_elastic_modulus_sp">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>50</width>
+                    <height>24</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>120</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="toolTip">
+                   <string> Young's Modulus in SI derived unit Pascal.
+ Defaults to -1.  If value is less or equal to zero,
+ contact using elastic modulus (with Poisson's Ratio) is disabled.</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="6" column="0" colspan="2">
+                 <widget class="QGroupBox" name="contact_ode_groupbox">
+                  <property name="title">
+                   <string>ode</string>
+                  </property>
+                  <property name="checkable">
+                   <bool>true</bool>
+                  </property>
+                  <property name="checked">
+                   <bool>false</bool>
+                  </property>
+                  <layout class="QGridLayout" name="gridLayout_10">
+                   <item row="0" column="0">
+                    <widget class="QCheckBox" name="contact_ode_soft_cfm_cb">
+                     <property name="text">
+                      <string>soft_cfm</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="1">
+                    <widget class="QDoubleSpinBox" name="contact_ode_soft_cfm_sp">
+                     <property name="enabled">
+                      <bool>false</bool>
+                     </property>
+                     <property name="toolTip">
+                      <string>Soft constraint force mixing</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="2">
+                    <widget class="QCheckBox" name="contact_ode_kd_cb">
+                     <property name="text">
+                      <string>kd</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="3">
+                    <widget class="QDoubleSpinBox" name="contact_ode_kd_sp">
+                     <property name="enabled">
+                      <bool>false</bool>
+                     </property>
+                     <property name="toolTip">
+                      <string>dynamically &quot;damping&quot;-equivalent coefficient for contact joints</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="0">
+                    <widget class="QCheckBox" name="contact_ode_soft_erp_cb">
+                     <property name="text">
+                      <string>soft_erp</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="1">
+                    <widget class="QDoubleSpinBox" name="contact_ode_soft_erp_sp">
+                     <property name="enabled">
+                      <bool>false</bool>
+                     </property>
+                     <property name="toolTip">
+                      <string>Soft error reduction parameter</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="2">
+                    <widget class="QCheckBox" name="contact_ode_max_vel_cb">
+                     <property name="text">
+                      <string>max_vel</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="3">
+                    <widget class="QDoubleSpinBox" name="contact_ode_max_vel_sp">
+                     <property name="enabled">
+                      <bool>false</bool>
+                     </property>
+                     <property name="toolTip">
+                      <string>dynamically &quot;damping&quot;-equivalent coefficient for contact joints</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="0">
+                    <widget class="QCheckBox" name="contact_ode_kp_cb">
+                     <property name="text">
+                      <string>kp</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="1">
+                    <widget class="QDoubleSpinBox" name="contact_ode_kp_sp">
+                     <property name="enabled">
+                      <bool>false</bool>
+                     </property>
+                     <property name="toolTip">
+                      <string>dynamically &quot;stiffness&quot;-equivalent coefficient for contact joints</string>
+                     </property>
+                     <property name="maximum">
+                      <double>2000000000000.000000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="2">
+                    <widget class="QCheckBox" name="contact_ode_min_depth_cb">
+                     <property name="text">
+                      <string>min_depth</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="3">
+                    <widget class="QDoubleSpinBox" name="contact_ode_min_depth_sp">
+                     <property name="enabled">
+                      <bool>false</bool>
+                     </property>
+                     <property name="toolTip">
+                      <string>minimum allowable depth before contact correction impulse is applied</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item row="7" column="0" colspan="2">
+                 <widget class="QGroupBox" name="contact_bullet_groupbox">
+                  <property name="minimumSize">
+                   <size>
+                    <width>500</width>
+                    <height>155</height>
+                   </size>
+                  </property>
+                  <property name="title">
+                   <string>bullet</string>
+                  </property>
+                  <property name="checkable">
+                   <bool>true</bool>
+                  </property>
+                  <property name="checked">
+                   <bool>false</bool>
+                  </property>
+                  <layout class="QGridLayout" name="gridLayout_14">
+                   <item row="0" column="0">
+                    <widget class="QCheckBox" name="contact_bullet_soft_cfm_cb">
+                     <property name="text">
+                      <string>soft_cfm</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="1">
+                    <widget class="QDoubleSpinBox" name="contact_bullet_soft_cfm_sp">
+                     <property name="enabled">
+                      <bool>false</bool>
+                     </property>
+                     <property name="toolTip">
+                      <string>Soft constraint force mixing</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="0">
+                    <widget class="QCheckBox" name="contact_bullet_soft_erp_cb">
+                     <property name="text">
+                      <string>soft_erp</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="1">
+                    <widget class="QDoubleSpinBox" name="contact_bullet_soft_erp_sp">
+                     <property name="enabled">
+                      <bool>false</bool>
+                     </property>
+                     <property name="toolTip">
+                      <string>see ode</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="0">
+                    <widget class="QCheckBox" name="contact_bullet_kp_cb">
+                     <property name="text">
+                      <string>kp</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="3" column="0" colspan="2">
+                    <widget class="QLabel" name="contact_bullet_split_impulse_penetration_threshold_label">
+                     <property name="text">
+                      <string>split_impulse_penetration_threshold</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="1">
+                    <widget class="QDoubleSpinBox" name="contact_bullet_kp_sp">
+                     <property name="enabled">
+                      <bool>false</bool>
+                     </property>
+                     <property name="toolTip">
+                      <string>see ode</string>
+                     </property>
+                     <property name="maximum">
+                      <double>2000000000000.000000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="3" column="2" colspan="2">
+                    <widget class="QDoubleSpinBox" name="split_impulse_penetration_threshold_sp">
+                     <property name="toolTip">
+                      <string>imilar to ODE's max_vel implementation</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="2">
+                    <widget class="QCheckBox" name="contact_bullet_kd_cb">
+                     <property name="text">
+                      <string>kd</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="3" colspan="2">
+                    <widget class="QDoubleSpinBox" name="contact_bullet_kd_sp">
+                     <property name="enabled">
+                      <bool>false</bool>
+                     </property>
+                     <property name="toolTip">
+                      <string>see ode</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="2">
+                    <widget class="QCheckBox" name="contact_bullet_split_impulse_cb">
+                     <property name="text">
+                      <string>split_impulse</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+               </layout>
               </widget>
              </item>
             </layout>
