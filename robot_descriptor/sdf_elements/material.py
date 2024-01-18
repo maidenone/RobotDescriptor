@@ -416,18 +416,18 @@ class material_properties:
 class material(common.color_pickr):
     #since material has multiple parents let the parent class 
     # the  parent and parent path data 
-    def __init__(self,ui,ParentPath) -> None:
+    def __init__(self,ui) -> None:
         super().__init__()
         self.ui=ui
         #use the road tag since material will be implemented  as part of the road element
         self.tag='road'
-        self.parent_path=ParentPath
+        self.parent_path=''
         self.file_name='material.sdf'
 
         self._material_element=initialize_element_tree.convdict_2_tree(self.file_name).get_element
         self.properties=material_properties(self.ui)
         self.configUI()
-        self.reset(default=False)
+        # self.reset(default=False)
         
     def configUI(self):
         self.ui.material_script_uri_input.textEdited.connect(self.on_uri)
@@ -711,21 +711,7 @@ class material(common.color_pickr):
         self.set_widget_color('emissive',self.ui.material_emissive_color_pkr)
   
     def reset(self,default=True):
-        if default:
-            self._material_element=initialize_element_tree.convdict_2_tree(self.file_name).get_element
-        else:
-            doc=FreeCAD.ActiveDocument
-            _root_dict=doc.Robot_Description.Proxy.element_dict
-            #since material does not exist independently find the parent
-            el_dict=common.parse_dict(_root_dict,self.parent_path)
-            if el_dict is not None:
-                #find the material element  in parent element
-                elem=ET.fromstring(el_dict['elem_str']).find('.//material')
-                #make check since material might not always be included in the final element tree
-                # since its optional 
-                if elem is not None:
-                    self.merge_elements(self._material_element,elem)
-        self.updateUi()
+        pass
     
              
 #merger 

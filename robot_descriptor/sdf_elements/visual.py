@@ -17,7 +17,7 @@ class visual_properties:
         return  str('true') if self.ui.visual_cast_shadows_checkBox.isCheked() else str('false')
     @cast_shadows.setter
     def cast_shadows(self,state):
-        self.ui.visual_laser_retro_sp.setCheckState(QtCore.Qt.Checked) if state=='true' else self.ui.visual_cast_shadows_checkBox.setCheckState(QtCore.Qt.Unchecked)
+        self.ui.visual_cast_shadows_checkBox.setCheckState(QtCore.Qt.Checked) if state=='true' else self.ui.visual_cast_shadows_checkBox.setCheckState(QtCore.Qt.Unchecked)
     
 #transparency     
     @property
@@ -32,7 +32,7 @@ class visual_properties:
         return self.ui.visual_laser_retro_sp.value()
     @laser_retro.setter
     def laser_retro(self,value):
-        self.ui.visual_laser_retro_sp.setValu(value)
+        self.ui.visual_laser_retro_sp.setValue(value)
 
 #visibility flags       
     @property
@@ -40,7 +40,8 @@ class visual_properties:
         return self.ui.visual_visibility_flags_sp.value()
     @visibility_flags.setter
     def visibility_flags(self,value):
-        self.ui.visual_visibility_flags_sp.setValue()
+        print(value)
+        self.ui.visual_visibility_flags_sp.setValue(value)
     
 #check boxes 
     @property
@@ -65,10 +66,11 @@ class visual:
         self._visual_elem=initialize_element_tree.convdict_2_tree(self.file_name).get_element
         self.properties=visual_properties(self.ui)
         #maertial 
-        self._material_ui=FreeCADGui.PySideUic.loadUi(os.path.join(common.UI_PATH,"material_ui"))
+        self._material_ui=FreeCADGui.PySideUic.loadUi(os.path.join(common.UI_PATH,"material.ui"))
         self._material_elem=material.material(self._material_ui)
         #add widget to parent widget 
         self.ui.material_scroll.setWidget(self._material_ui.widget)
+        self.updateUI()
         
     def configUI(self):
         self.ui.visual_laser_retro_sp.valueChanged.connect(self.on_laser_retro)
@@ -92,7 +94,9 @@ class visual:
     def updateUI(self):
         self.properties.laser_retro=common.get_xml_data(self._visual_elem,"laser_retro",False)
         self.properties.transparency=common.get_xml_data(self._visual_elem,"transparency",False)
-        self.properties.visibility_flags=common.get_xml_data(self._visual_elem,"visibility_flags",False)
+        #this causes an overflow  so dont update for now , ui is also disabled ,
+        # t
+        # self.properties.visibility_flags=common.get_xml_data(self._visual_elem,"visibility_flags",False)
         self.properties.cast_shadows=common.get_xml_data(self._visual_elem,"cast_shadows",False)
         
     def update_elem(self,new_elem:ET.Element):
@@ -105,7 +109,7 @@ class visual:
     @property
     def element(self):
         t_visual_elem=copy.deepcopy(self._visual_elem)
-        visual_pairs={"laser_retro":"visual_laser_retro_","transparency":"visual_transparency_cb","visibility_flags":"visual_visibility_flags_cb"}
+        visual_pairs={"laser_retro":"visual_laser_retro_cb","transparency":"visual_transparency_cb","visibility_flags":"visual_visibility_flags_cb"}
         for tag  in visual_pairs.keys():
             if not getattr(self.properties,visual_pairs[tag]):
                 t_visual_elem.remove(t_visual_elem.find(tag))

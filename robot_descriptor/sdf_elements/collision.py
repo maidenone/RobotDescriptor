@@ -16,13 +16,13 @@ class  collision_properties:
         return self.ui.collision_laser_retro_sp.value()
     @laser_retro.setter
     def laser_retro(self,value):
-        self.ui.collision_retro_sp.setValue(value)
+        self.ui.collision_laser_retro_sp.setValue(value)
         
 #max contacts 
     @property 
     def max_contacts(self):
         return self.ui.collision_max_contacts_sp.value()
-    @max_contacts
+    @max_contacts.setter
     def max_contacts(self,value):
         self.ui.collision_max_contacts_sp.setValue(value)
         
@@ -53,13 +53,14 @@ class collison:
         self.ui.collision_scroll.setWidget(self.surface_ui.widget)
         
         self.configUI()
+        self.updateUI()
         
     def configUI(self):
         self.ui.collision_max_contacts_sp.valueChanged.connect(
-            lambda collision_elem=self.collision_elem: common.set_xml_data(collision_elem,"max_contacts",False,self.properties.max_contacts)
+            lambda value,collision_elem=self.collision_elem: common.set_xml_data(collision_elem,"max_contacts",False,self.properties.max_contacts)
             )
         self.ui.collision_laser_retro_sp.valueChanged.connect(
-            lambda collision_elem=self.collision_elem: common.set_xml_data(collision_elem,"laser_retro",False,self.properties.laser_retro)
+            lambda value,collision_elem=self.collision_elem: common.set_xml_data(collision_elem,"laser_retro",False,self.properties.laser_retro)
             )
         
     def updateUI(self):

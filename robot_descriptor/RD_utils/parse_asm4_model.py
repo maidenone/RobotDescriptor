@@ -14,7 +14,7 @@ def read_assembly():
     
     #get all objects of type part feature 
     objs=FreeCAD.ActiveDocument.findObjects("Part::Feature")
-    #get objects in the parts group 
+    #get objects in the parts group  
     parts=FreeCAD.ActiveDocument.Parts.Group
     #get fasteners since fasteners might not be  accesed through links 
     #remove objects in parts , coordinate systems 

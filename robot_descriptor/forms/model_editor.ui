@@ -102,7 +102,7 @@
       </size>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="links">
       <attribute name="title">
@@ -1864,6 +1864,9 @@ Links connected by a joint will never collide</string>
        </item>
        <item row="0" column="4">
         <widget class="QCheckBox" name="visual_visibility_flags_cb">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="text">
           <string>visibility_flags</string>
          </property>
@@ -1873,6 +1876,12 @@ Links connected by a joint will never collide</string>
         <widget class="QSpinBox" name="visual_visibility_flags_sp">
          <property name="enabled">
           <bool>false</bool>
+         </property>
+         <property name="maximum">
+          <number>900000000</number>
+         </property>
+         <property name="stepType">
+          <enum>QAbstractSpinBox::DefaultStepType</enum>
          </property>
         </widget>
        </item>

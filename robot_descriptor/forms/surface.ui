@@ -126,7 +126,7 @@
             </size>
            </property>
            <property name="currentIndex">
-            <number>2</number>
+            <number>1</number>
            </property>
            <property name="tabsClosable">
             <bool>false</bool>
@@ -301,7 +301,7 @@
                     <widget class="QLabel" name="torsional_patch_radius_label">
                      <property name="minimumSize">
                       <size>
-                       <width>0</width>
+                       <width>95</width>
                        <height>24</height>
                       </size>
                      </property>
@@ -401,7 +401,7 @@
                   </property>
                   <layout class="QGridLayout" name="gridLayout_12">
                    <item row="0" column="0">
-                    <widget class="QCheckBox" name="surface_friction_mu_cb">
+                    <widget class="QCheckBox" name="surface_ode_mu_cb">
                      <property name="text">
                       <string>mu</string>
                      </property>
@@ -1086,7 +1086,7 @@ Parsed as 16-bit unsigned integer</string>
                       <bool>false</bool>
                      </property>
                      <property name="toolTip">
-                      <string>dynamically &quot;damping&quot;-equivalent coefficient for contact joints</string>
+                      <string>maximum contact correction velocity truncation term.</string>
                      </property>
                     </widget>
                    </item>
@@ -1347,5 +1347,358 @@ Parsed as 16-bit unsigned integer</string>
   </layout>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>surface_ode_mu_cb</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>surface_ode_mu_sp</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>121</x>
+     <y>425</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>240</x>
+     <y>425</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>surface_ode_mu2_cb</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>surface_ode_mu2_sp</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>121</x>
+     <y>455</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>240</x>
+     <y>455</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>surface_ode_slip1_cb</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>surface_ode_slip1_sp</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>359</x>
+     <y>425</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>478</x>
+     <y>425</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>surface_ode_slip2_cb</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>surface_ode_slip2_sp</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>359</x>
+     <y>455</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>478</x>
+     <y>455</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>surface_bullet_friction_cb</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>surface_bullet_friction_sp</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>98</x>
+     <y>636</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>169</x>
+     <y>636</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>surface_bullet_friction2_cb</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>surface_bullet_friction2_sp</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>244</x>
+     <y>636</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>318</x>
+     <y>636</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>surface_bullet_rolling_friction_cb</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>surface_bullet_rolling_friction_sp</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>411</x>
+     <y>636</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>503</x>
+     <y>636</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>contact_collide_without_contact_bitmask_cb</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>contact_collide_without_contact_bitmask_sp</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>162</x>
+     <y>253</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>434</x>
+     <y>253</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>contact_poissons_ratio_cb</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>contact_poissons_ratio_sp</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>112</x>
+     <y>343</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>434</x>
+     <y>343</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>contact_collide_bitmask_cb</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>contact_collide_bitmask_sp</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>112</x>
+     <y>283</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>434</x>
+     <y>283</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>contact_category_bitmask_cb</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>contact_category_bitmask_sp</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>127</x>
+     <y>313</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>434</x>
+     <y>313</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>contact_elastic_modulus_cb</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>contact_elastic_modulus_sp</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>112</x>
+     <y>373</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>434</x>
+     <y>373</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>contact_ode_soft_cfm_cb</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>contact_ode_soft_cfm_sp</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>115</x>
+     <y>446</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>245</x>
+     <y>446</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>contact_ode_soft_erp_cb</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>contact_ode_soft_erp_sp</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>115</x>
+     <y>489</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>245</x>
+     <y>489</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>contact_ode_kp_cb</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>contact_ode_kp_sp</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>115</x>
+     <y>532</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>245</x>
+     <y>532</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>contact_ode_kd_cb</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>contact_ode_kd_sp</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>375</x>
+     <y>446</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>483</x>
+     <y>446</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>contact_ode_max_vel_cb</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>contact_ode_max_vel_sp</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>375</x>
+     <y>489</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>483</x>
+     <y>489</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>contact_ode_min_depth_cb</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>contact_ode_min_depth_sp</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>375</x>
+     <y>532</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>483</x>
+     <y>532</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>contact_bullet_soft_cfm_cb</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>contact_bullet_soft_cfm_sp</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>102</x>
+     <y>623</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>219</x>
+     <y>623</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>contact_bullet_kp_cb</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>contact_bullet_kp_sp</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>102</x>
+     <y>691</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>219</x>
+     <y>691</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>contact_bullet_soft_erp_cb</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>contact_bullet_soft_erp_sp</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>102</x>
+     <y>657</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>219</x>
+     <y>657</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>contact_bullet_kd_cb</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>contact_bullet_kd_sp</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>350</x>
+     <y>623</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>474</x>
+     <y>623</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

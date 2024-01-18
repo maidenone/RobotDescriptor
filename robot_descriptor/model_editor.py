@@ -1,22 +1,28 @@
+from typing import Any
 import FreeCAD
 import FreeCADGui
 import robot_descriptor.common as common
 import os
 
+
 from .RD_utils import parse_asm4_model
-from PySide.QtGui import QStandardItemModel,QStandardItem,QHeaderView
+from PySide.QtGui import QStandardItemModel,QStandardItem
+from PySide.QtCore import Qt
 
 #start standard item
 class standard_item(QStandardItem):
-    def __init__(self,text,elements):
+    def __init__(self,text,type='link'):
         super().__init__()
         # data to describe the model 
-        self.link_elem=elements[0]
-        self.collision_elem=elements[1]
-        self.material_elem=elements[2]
+        self.text=text
+        self.type=type
         #set the text to be displayed
         self.setText(text)
         self.setEditable(False)
+        
+    def data(self, role: int = ...) -> Any:
+        if role==Qt.DisplayRole:
+            return self.text
     
 #end standard Item   
 #==============================================
@@ -30,17 +36,32 @@ class ModelEditor:
         if self.links_hierarchy is None:
             return 
         self.ModelEditorUi=FreeCADGui.PySideUic.loadUi(os.path.join(common.UI_PATH,'model_editor.ui'))
+        
+        #subelements 
+        from .sdf_elements import link
+        #link
+        self.link=link.link(self.ModelEditorUi)
+        #visual
+        from .sdf_elements import visual
+        self.visual=visual.visual(self.ModelEditorUi)
+        #collision
+        from .sdf_elements import collision
+        self.collision=collision.collison(self.ModelEditorUi)
+        
+        
         self.link_model=QStandardItemModel()
         self.link_model.setColumnCount(1)
         self.root_node=self.link_model.invisibleRootItem()
         self.tree_setup(self.links_hierarchy["children"],self.root_node)
         
+        
+        self.current_elems=[]
+        self.elems={}
+        
     # start header related 
         self.ModelEditorUi.link_tree.setHeaderHidden(False)
         self.link_model.setHorizontalHeaderLabels(["Model Tree"])
         #set the  tree to resize automatically based on the display requirements
-        header = self.ModelEditorUi.link_tree.header()
-        header.setSectionResizeMode(QHeaderView.ResizeToContents)
     #end header related 
     
         self.ModelEditorUi.link_tree.setModel(self.link_model)
@@ -72,7 +93,7 @@ class Model_properties():
                 "ToolTip" : "Edit link and joint properties"}
 
     def Activated(self):
-        if hasattr(FreeCAD.ActiveDocument,"Assembly"):
+        if hasattr(FreeCAD.ActiveDocument,"Assembly") or hasattr(FreeCAD.ActiveDocument,"Model"):
             doc=FreeCAD.ActiveDocument
             self._root_dict=doc.Robot_Description.Proxy.element_dict
             self.edits=ModelEditor(self._root_dict)

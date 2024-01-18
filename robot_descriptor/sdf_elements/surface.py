@@ -53,10 +53,10 @@ class surface_properties:
     #surface_radius
     @property 
     def surface_radius(self):
-        return self.torsional_surface_radius_sp.value()
+        return self.ui.torsional_surface_radius_sp.value()
     @surface_radius.setter
     def surface_radius(self,value):
-        self.ui.torsional_surface_radius_sp.setValue()
+        self.ui.torsional_surface_radius_sp.setValue(value)
         
     #slip 
     @property
@@ -314,8 +314,8 @@ class surface_properties:
     #control checkboxes 
 #friction 
     @property
-    def surface_friction_mu_cb(self):
-        return self.ui.surface_friction_mu_cb.isChecked()
+    def surface_ode_mu_cb(self):
+        return self.ui.surface_ode_mu_cb.isChecked()
         
     @property
     def surface_ode_mu2_cb(self):
@@ -419,50 +419,51 @@ class surface:
         self.tag="surface"
         self.surface_element=initialize_element_tree.convdict_2_tree(self.file_name).get_element
         self.configUI()
+        self.updateUI()
         
     def configUI(self):
         #bounce 
         # bounce=self.surface_element.find('bounce')
-        self.ui.collision_restitution_coefficient_sp.valueChanged.connect(lambda bounce=self.surface_element.find('bounce'): 
+        self.ui.collision_restitution_coefficient_sp.valueChanged.connect(lambda val,bounce=self.surface_element.find('bounce'): 
             common.set_xml_data(bounce,"restitution_coefficient",False,self.properties.restitution_coefficient))
         
-        self.ui.collision_bounce_threshold_sp.valueChanged.connect(lambda bounce=self.surface_element.find('bounce'): 
+        self.ui.collision_bounce_threshold_sp.valueChanged.connect(lambda val,bounce=self.surface_element.find('bounce'): 
             common.set_xml_data(bounce,"threshold",False,self.properties.threshold))
         
         #torsional
         # torsional=self.surface_element.find(".//friction/torsional")
-        self.ui.torsional_coeff_sp.valueChanged.connect(lambda torsional=self.surface_element.find(".//friction/torsional"): 
+        self.ui.torsional_coeff_sp.valueChanged.connect(lambda val,torsional=self.surface_element.find(".//friction/torsional"): 
             common.set_xml_data(torsional,"coefficient",False,self.properties.coefficient))
-        self.ui.use_patch_radius_cb.stateChanged.connect(lambda  torsional=self.surface_element.find(".//friction/torsional"):
+        self.ui.use_patch_radius_cb.stateChanged.connect(lambda  val,torsional=self.surface_element.find(".//friction/torsional"):
             common.set_xml_data(torsional,"use_patch_radius",False,self.properties.use_patch_radius))
         
-        self.ui.torsional_patch_radius_sp.valueChanged.connect(lambda torsional=self.surface_element.find(".//friction/torsional"):
+        self.ui.torsional_patch_radius_sp.valueChanged.connect(lambda val,torsional=self.surface_element.find(".//friction/torsional"):
             common.set_xml_data(torsional,"patch_radius",False,self.properties.patch_radius))
         
-        self.ui.torsional_surface_radius_sp.valueChanged.connect(lambda torsional=self.surface_element.find(".//friction/torsional"): 
+        self.ui.torsional_surface_radius_sp.valueChanged.connect(lambda val,torsional=self.surface_element.find(".//friction/torsional"): 
             common.set_xml_data(torsional,"surface_radius",False,self.properties.surface_radius))
         
-        self.ui.torsional_ode_slip_sp.valueChanged.connect(lambda torsional=self.surface_element.find(".//friction/torsional"):
+        self.ui.torsional_ode_slip_sp.valueChanged.connect(lambda val,torsional=self.surface_element.find(".//friction/torsional"):
             common.set_xml_data(torsional,"slip",False,self.properties.torsional_slip))
         
         #frictional_ode
         # frictional_ode=self.surface_element.find(".//friction/ode")
         
-        self.ui.surface_ode_mu_sp.valueChanged.connect(lambda frictional_ode=self.surface_element.find(".//friction/ode"):
+        self.ui.surface_ode_mu_sp.valueChanged.connect(lambda val,frictional_ode=self.surface_element.find(".//friction/ode"):
             common.set_xml_data(frictional_ode,"mu",False,self.properties.friction_ode_mu))
         
         self.ui.surface_ode_mu2_sp.valueChanged.connect(
-            lambda frictional_ode=self.surface_element.find(".//friction/ode"): 
+            lambda val,frictional_ode=self.surface_element.find(".//friction/ode"): 
                 common.set_xml_data(frictional_ode,"mu2",False,self.properties.friction_ode_mu2)
         )
         
-        self.ui.surface_ode_slip1_sp.valuChanged.connect(
-            lambda frictional_ode=self.surface_element.find(".//friction/ode"): 
+        self.ui.surface_ode_slip1_sp.valueChanged.connect(
+            lambda val,frictional_ode=self.surface_element.find(".//friction/ode"): 
                 common.set_xml_data(frictional_ode,"slip1",False,self.properties.friction_ode_slip1)
         )
         
         self.ui.surface_ode_slip2_sp.valueChanged.connect(
-            lambda frictional_ode=self.surface_element.find(".//friction/ode"): 
+            lambda val,frictional_ode=self.surface_element.find(".//friction/ode"): 
                 common.set_xml_data(frictional_ode,"slip2",False,self.properties.friction_ode_slip2)
         )
         
@@ -473,15 +474,15 @@ class surface:
         #frictional_bullet
         # frictional_bullet=self.surface_element.find(".//fiction/bullet")
         self.ui.surface_bullet_friction_sp.valueChanged.connect(
-            lambda frictional_bullet=self.surface_element.find(".//fiction/bullet"): 
+            lambda val,frictional_bullet=self.surface_element.find(".//friction/bullet"): 
                 common.set_xml_data(frictional_bullet,"friction",False,self.properties.friction_bullet_friction))
         self.ui.surface_bullet_friction2_sp.valueChanged.connect(
-            lambda frictional_bullet=self.surface_element.find(".//fiction/bullet"):
+            lambda val,frictional_bullet=self.surface_element.find(".//friction/bullet"):
                 common.set_xml_data(frictional_bullet,"friction2",False,self.properties.friction_bullet_friction2)
         )
         
         self.ui.surface_bullet_rolling_friction_sp.valueChanged.connect(
-            lambda frictional_bullet=self.surface_element.find(".//fiction/bullet"): 
+            lambda val,frictional_bullet=self.surface_element.find(".//friction/bullet"): 
                 common.set_xml_data(frictional_bullet,"rolling_friction",False,self.properties.friction_bullet_rolling_friction)
         )
         
@@ -505,7 +506,7 @@ class surface:
         #ode
         
         self.ui.contact_ode_soft_cfm_sp.valueChanged.connect(self.on_contact_ode_soft_cfm)
-        self.ui.contact_ode_soft_erp_sp.valueChanged.coneect(self.on_contact_ode_soft_erp)
+        self.ui.contact_ode_soft_erp_sp.valueChanged.connect(self.on_contact_ode_soft_erp)
         self.ui.contact_ode_kp_sp.valueChanged.connect(self.on_contact_ode_kp)
         self.ui.contact_ode_kd_sp.valueChanged.connect(self.on_contact_ode_kd)
         self.ui.contact_ode_max_vel_sp.valueChanged.connect(self.on_contact_ode_max_vel)
@@ -555,19 +556,19 @@ class surface:
         
     #soft contact
     def on_soft_contact_bone_attachment(self):
-        soft_contact=self.surface_element.find(".//surface/soft_contact")
+        soft_contact=self.surface_element.find(".//soft_contact")
         common.set_xml_data(soft_contact,"bone_attachment",False,self.properties.bone_attachment)
         
     def on_soft_contact_stiffness(self):
-        soft_contact=self.surface_element.find(".//surface/soft_contact")
+        soft_contact=self.surface_element.find(".//soft_contact")
         common.set_xml_data(soft_contact,"stiffness",False,self.properties.stiffness)
         
     def on_soft_body_damping(self):
-        soft_contact=self.surface_element.find(".//surface/soft_contact")
+        soft_contact=self.surface_element.find(".//soft_contact")
         common.set_xml_data(soft_contact,"damping",False,self.properties.damping)
         
     def on_soft_contact_flesh_mass_fraction(self):
-        soft_contact=self.surface_element.find(".//surface/soft_contact")
+        soft_contact=self.surface_element.find(".//soft_contact")
         common.set_xml_data(soft_contact,"flesh_mass_fraction",False,self.properties.flesh_mass_fraction)
         
     #ode
@@ -604,7 +605,7 @@ class surface:
     #bullet
     
     def bullet_fdir1(self):
-        frictional_bullet=self.surface_element.find(".//fiction/bullet")
+        frictional_bullet=self.surface_element.find(".//friction/bullet")
         common.set_xml_data(frictional_bullet,"fdir1",False,self.properties.friction_bullet_fdir1)
     
     #contact 
@@ -647,7 +648,7 @@ class surface:
         torsional_pairs={"coefficient":"coefficient","use_patch_radius":"use_patch_radius",
                          "patch_radius":"patch_radius","surface_radius":"surface_radius","slip":"torsional_slip"}
         for tag in torsional_pairs.keys():
-            setattr(self.properties,torsional_pairs[tag],common.set_xml_data(torsional,tag,False))
+            setattr(self.properties,torsional_pairs[tag],common.get_xml_data(torsional,tag,False))
         
         #friction 
         #ode 
@@ -658,7 +659,7 @@ class surface:
             setattr(self.properties,friction_ode_pairs[tag],common.get_xml_data(frictional_ode,tag,False))
             
         #bullet 
-        frictional_bullet=self.surface_element.find(".//fiction/bullet")
+        frictional_bullet=self.surface_element.find(".//friction/bullet")
         friction_bullet_pairs={"friction":"friction_bullet_friction","friction2":"friction_bullet_friction2",
                                "rolling_friction":"friction_bullet_rolling_friction","fdir1":"friction_bullet_fdir1"}
         for tag in friction_bullet_pairs.keys():
@@ -691,7 +692,7 @@ class surface:
             setattr(self.properties,contact_bullet_pairs[tag],common.get_xml_data(contact_bullet,tag,False))
             
         #soft contact 
-        soft_contact=self.surface_element.find(".//surface/soft_contact")
+        soft_contact=self.surface_element.find(".//soft_contact")
         #since properties have the same name as the pairs no need for pairs 
         soft_contact_tags=["bone_attachment","stiffness","damping","flesh_mass_fraction"]
         for tag in  soft_contact_tags:
@@ -727,7 +728,7 @@ class surface:
             friction_ode=friction.find("ode")
             if self.ui.friction_ode_groupbox.isChecked():
                 
-                elems_attrb_pair={"mu":"surface_friction_mu_cb","mu2":"surface_ode_mu2_cb","slip1":"surface_ode_slip1_cb","slip2":"surface_ode_slip2_cb"
+                elems_attrb_pair={"mu":"surface_ode_mu_cb","mu2":"surface_ode_mu2_cb","slip1":"surface_ode_slip1_cb","slip2":"surface_ode_slip2_cb"
                                   ,"fdir1":"ode_frdir1_groupbox"}
                 for tag in elems_attrb_pair.keys():
                     #remove element if its not enabled 
