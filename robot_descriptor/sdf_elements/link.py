@@ -3,6 +3,7 @@ from .. import common
 from ..RD_utils import initialize_element_tree
 import copy
 from PySide import QtCore
+import xml.etree.ElementTree as ET
 
 class link_properties:
     def __init__(self,ui) -> None:
@@ -259,6 +260,18 @@ class link:
         self._root_dict=elem_struct
         self.configUI()
         self.UpdateUi()
+    
+    def get_default_elem(self):
+        default_el=copy.deepcopy(self.link_element)
+        default_el.append(copy.deepcopy(self._inertial_element))
+        return default_el
+    
+    def update_elem(self,new_elem:ET.Element):
+        inertial=new_elem.find("inertial")
+        if inertial is not None:
+            self.link_element=new_elem
+            self._inertial_element=inertial
+        self.UpdateUi()
         
     def configUI(self):
         self.ui.link_gravity_checkbox.stateChanged.connect(self.onGravity)
@@ -358,5 +371,7 @@ class link:
         t_inertial_elem=copy.deepcopy(self._inertial_element)
         if self.ui.fluid_added_mass_groupbox.isChecked():
             t_inertial_elem.remove(t_inertial_elem.find("fluid_added_mass"))
-            
-        return t_link_elem.append(t_inertial_elem)
+        
+        if t_link_elem.find("inertial") is None:
+            t_link_elem.append(t_inertial_elem)
+        return t_link_elem

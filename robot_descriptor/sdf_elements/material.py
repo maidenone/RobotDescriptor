@@ -429,6 +429,13 @@ class material(common.color_pickr):
         self.configUI()
         # self.reset(default=False)
         
+    def get_default_elem(self):
+        return copy.deepcopy(self._material_element)
+    
+    def update_elem(self,new_elem:ET.Element):
+        self._material_element=new_elem
+        self.updateUi()
+    
     def configUI(self):
         self.ui.material_script_uri_input.textEdited.connect(self.on_uri)
         self.ui.material_script_name.textEdited.connect(self.on_uri_name)

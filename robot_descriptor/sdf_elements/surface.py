@@ -303,7 +303,7 @@ class surface_properties:
         
     @property
     def flesh_mass_fraction(self):
-        self.ui.soft_contact_flesh_mass_fraction_sp.value()
+        return self.ui.soft_contact_flesh_mass_fraction_sp.value()
     @flesh_mass_fraction.setter
     def flesh_mass_fraction(self,value):
         self.ui.soft_contact_flesh_mass_fraction_sp.setValue(value)
@@ -421,6 +421,9 @@ class surface:
         self.configUI()
         self.updateUI()
         
+    def get_default_elem(self):
+        return copy.deepcopy(self.surface_element)
+    
     def configUI(self):
         #bounce 
         # bounce=self.surface_element.find('bounce')
@@ -703,6 +706,7 @@ class surface:
     
     def update_elem(self,elem:ET.Element):
         self.surface_element=elem
+        self.updateUI()
         
     #return  element 
     @property

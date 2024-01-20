@@ -67,11 +67,16 @@ class visual:
         self.properties=visual_properties(self.ui)
         #maertial 
         self._material_ui=FreeCADGui.PySideUic.loadUi(os.path.join(common.UI_PATH,"material.ui"))
-        self._material_elem=material.material(self._material_ui)
+        self._material_cls=material.material(self._material_ui)
         #add widget to parent widget 
         self.ui.material_scroll.setWidget(self._material_ui.widget)
         self.updateUI()
-        
+    
+    def get_default_elem(self):
+        default_el=copy.deepcopy(self._visual_elem)
+        default_el.append(self._material_cls.get_default_elem())
+        return default_el
+    
     def configUI(self):
         self.ui.visual_laser_retro_sp.valueChanged.connect(self.on_laser_retro)
         self.ui.visual_transparency_sp.valueChanged.connect(self.on_transparency)
@@ -102,9 +107,9 @@ class visual:
     def update_elem(self,new_elem:ET.Element):
         mat=new_elem.find("material")
         if mat is not None:
-            self._material_elem.update_elem(mat)
-            new_elem.remove(mat)
+            self._material_cls.update_elem(mat)
             self._visual_elem=new_elem
+        self.updateUI()
         
     @property
     def element(self):
@@ -113,7 +118,8 @@ class visual:
         for tag  in visual_pairs.keys():
             if not getattr(self.properties,visual_pairs[tag]):
                 t_visual_elem.remove(t_visual_elem.find(tag))
-
-        return t_visual_elem.append(self._material_elem.element)
+        if t_visual_elem.find("material") is None:
+            t_visual_elem.append(self._material_cls.element)
+        return t_visual_elem
         
     
