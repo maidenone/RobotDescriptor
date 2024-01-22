@@ -1,0 +1,1617 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>link</class>
+ <widget class="QWidget" name="link">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>715</width>
+    <height>668</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>link</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <widget class="QWidget" name="widget" native="true">
+     <property name="minimumSize">
+      <size>
+       <width>697</width>
+       <height>650</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>650</height>
+      </size>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_11">
+      <item row="0" column="0">
+       <widget class="QGroupBox" name="link_state_groupbox">
+        <property name="minimumSize">
+         <size>
+          <width>215</width>
+          <height>100</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>110</height>
+         </size>
+        </property>
+        <property name="title">
+         <string>link states</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_2">
+         <item row="0" column="0">
+          <widget class="QCheckBox" name="link_gravity_checkbox">
+           <property name="toolTip">
+            <string>If true, the link is affected by gravity</string>
+           </property>
+           <property name="text">
+            <string>gravity</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QCheckBox" name="link_enable_wind_checkbox">
+           <property name="toolTip">
+            <string>If true, the link is affected by the wind</string>
+           </property>
+           <property name="text">
+            <string>enable_wind</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QCheckBox" name="link_kinematic_checkbox">
+           <property name="toolTip">
+            <string>If true, the link is kinematic only</string>
+           </property>
+           <property name="text">
+            <string>kinematic</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QCheckBox" name="link_self_collide_checkbox">
+           <property name="toolTip">
+            <string>If true, the link can collide with other links in the model. 
+Two links within a model will collide if link1.self_collide OR link2.self_collide. 
+Links connected by a joint will never collide</string>
+           </property>
+           <property name="text">
+            <string>self_collide</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="0" column="1" rowspan="4">
+       <widget class="QScrollArea" name="fam_scrollArea">
+        <property name="minimumSize">
+         <size>
+          <width>414</width>
+          <height>600</height>
+         </size>
+        </property>
+        <property name="widgetResizable">
+         <bool>true</bool>
+        </property>
+        <widget class="QWidget" name="scrollAreaWidgetContents">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>440</width>
+           <height>918</height>
+          </rect>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_4">
+          <item row="0" column="0">
+           <widget class="QGroupBox" name="fluid_added_mass_groupbox">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>348</width>
+              <height>900</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>413</width>
+              <height>950</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>This link's fluid added mass matrix about the link's origin.
+      This matrix represents the inertia of the fluid that is dislocated when the
+      body moves. Added mass should be zero if the density of the surrounding
+      fluid is negligible with respect to the body's density.
+      The 6x6 matrix is symmetric, therefore only 21 unique elements can be set.
+      The elements of the matrix follow the [x, y, z, p, q, r] notation, where
+      [x, y, z] correspond to translation and [p, q, r] to rotation</string>
+            </property>
+            <property name="title">
+             <string>fluid_added_mass</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_12">
+             <item row="0" column="0">
+              <widget class="QGroupBox" name="fam_x_axis_groupbox">
+               <property name="minimumSize">
+                <size>
+                 <width>370</width>
+                 <height>200</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>372</width>
+                 <height>190</height>
+                </size>
+               </property>
+               <property name="title">
+                <string>x_axis</string>
+               </property>
+               <widget class="QGroupBox" name="fluid_x_linear_acceleration_groupbox">
+                <property name="geometry">
+                 <rect>
+                  <x>18</x>
+                  <y>28</y>
+                  <width>344</width>
+                  <height>75</height>
+                 </rect>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>340</width>
+                  <height>75</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>344</width>
+                  <height>78</height>
+                 </size>
+                </property>
+                <property name="toolTip">
+                 <string> Added mass in the X axis due to linear acceleration in the x,y,z axes</string>
+                </property>
+                <property name="title">
+                 <string>linear_acceleration</string>
+                </property>
+                <layout class="QHBoxLayout" name="horizontalLayout_3">
+                 <item>
+                  <widget class="QLabel" name="fam_xx_label">
+                   <property name="minimumSize">
+                    <size>
+                     <width>12</width>
+                     <height>24</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>15</width>
+                     <height>30</height>
+                    </size>
+                   </property>
+                   <property name="text">
+                    <string>x</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QDoubleSpinBox" name="fam_xx_sp">
+                   <property name="minimumSize">
+                    <size>
+                     <width>90</width>
+                     <height>24</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>100</width>
+                     <height>30</height>
+                    </size>
+                   </property>
+                   <property name="toolTip">
+                    <string>Added mass in the X axis due to linear acceleration in the X axis, in kg</string>
+                   </property>
+                   <property name="suffix">
+                    <string>kg</string>
+                   </property>
+                   <property name="maximum">
+                    <double>1000.000000000000000</double>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="fam_xy_label">
+                   <property name="minimumSize">
+                    <size>
+                     <width>12</width>
+                     <height>24</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>15</width>
+                     <height>30</height>
+                    </size>
+                   </property>
+                   <property name="text">
+                    <string>y</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QDoubleSpinBox" name="fam_xy_sp">
+                   <property name="minimumSize">
+                    <size>
+                     <width>90</width>
+                     <height>24</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>100</width>
+                     <height>30</height>
+                    </size>
+                   </property>
+                   <property name="toolTip">
+                    <string>Added mass in the X axis due to linear acceleration in the Y axis, and vice-versa, in kg.</string>
+                   </property>
+                   <property name="suffix">
+                    <string>kg</string>
+                   </property>
+                   <property name="maximum">
+                    <double>1000.000000000000000</double>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="fam_zz_label_2">
+                   <property name="minimumSize">
+                    <size>
+                     <width>12</width>
+                     <height>24</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>15</width>
+                     <height>30</height>
+                    </size>
+                   </property>
+                   <property name="text">
+                    <string>z</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QDoubleSpinBox" name="fam_xz_sp">
+                   <property name="minimumSize">
+                    <size>
+                     <width>90</width>
+                     <height>24</height>
+                    </size>
+                   </property>
+                   <property name="toolTip">
+                    <string>Added mass in the X axis due to linear acceleration in the Z axis, and vice-versa, in kg.</string>
+                   </property>
+                   <property name="suffix">
+                    <string>kg</string>
+                   </property>
+                   <property name="maximum">
+                    <double>1000.000000000000000</double>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+               <widget class="QGroupBox" name="fluid_x_angular_acceleration_groupbox">
+                <property name="geometry">
+                 <rect>
+                  <x>12</x>
+                  <y>108</y>
+                  <width>345</width>
+                  <height>75</height>
+                 </rect>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>343</width>
+                  <height>75</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>345</width>
+                  <height>78</height>
+                 </size>
+                </property>
+                <property name="toolTip">
+                 <string> Added mass in the X axis due to linear acceleration in the x,y,z axes</string>
+                </property>
+                <property name="title">
+                 <string>angular_acceleration</string>
+                </property>
+                <layout class="QHBoxLayout" name="horizontalLayout_4">
+                 <item>
+                  <widget class="QLabel" name="fam_xp_label_">
+                   <property name="minimumSize">
+                    <size>
+                     <width>12</width>
+                     <height>24</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>15</width>
+                     <height>30</height>
+                    </size>
+                   </property>
+                   <property name="text">
+                    <string>x</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QDoubleSpinBox" name="fam_xp_sp">
+                   <property name="minimumSize">
+                    <size>
+                     <width>90</width>
+                     <height>24</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>100</width>
+                     <height>30</height>
+                    </size>
+                   </property>
+                   <property name="toolTip">
+                    <string>Added mass in the X axis due to angular acceleration about the X axis, and vice-versa, in kg * m.</string>
+                   </property>
+                   <property name="suffix">
+                    <string>kgm</string>
+                   </property>
+                   <property name="maximum">
+                    <double>1000.000000000000000</double>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="fam_xq_label">
+                   <property name="minimumSize">
+                    <size>
+                     <width>12</width>
+                     <height>24</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>15</width>
+                     <height>30</height>
+                    </size>
+                   </property>
+                   <property name="text">
+                    <string>y</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QDoubleSpinBox" name="fam_xq_sp">
+                   <property name="minimumSize">
+                    <size>
+                     <width>90</width>
+                     <height>24</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>100</width>
+                     <height>30</height>
+                    </size>
+                   </property>
+                   <property name="toolTip">
+                    <string>Added mass in the X axis due to angular acceleration about the Y axis, and vice-versa, in kg * m.</string>
+                   </property>
+                   <property name="suffix">
+                    <string>kgm</string>
+                   </property>
+                   <property name="maximum">
+                    <double>1000.000000000000000</double>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="fam_xr_label">
+                   <property name="minimumSize">
+                    <size>
+                     <width>12</width>
+                     <height>24</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>15</width>
+                     <height>30</height>
+                    </size>
+                   </property>
+                   <property name="text">
+                    <string>z</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QDoubleSpinBox" name="fam_xr_sp">
+                   <property name="minimumSize">
+                    <size>
+                     <width>90</width>
+                     <height>24</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>100</width>
+                     <height>30</height>
+                    </size>
+                   </property>
+                   <property name="toolTip">
+                    <string>Added mass in the X axis due to angular acceleration about the Z axis, and vice-versa, in kg * m</string>
+                   </property>
+                   <property name="suffix">
+                    <string>kgm</string>
+                   </property>
+                   <property name="maximum">
+                    <double>1000.000000000000000</double>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QGroupBox" name="fam_y_axis_groupbox">
+               <property name="minimumSize">
+                <size>
+                 <width>370</width>
+                 <height>205</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>372</width>
+                 <height>190</height>
+                </size>
+               </property>
+               <property name="title">
+                <string>y_axis</string>
+               </property>
+               <layout class="QGridLayout" name="gridLayout_14">
+                <item row="0" column="0">
+                 <widget class="QGroupBox" name="fluid_y_linear_acceleration_groupbox">
+                  <property name="minimumSize">
+                   <size>
+                    <width>343</width>
+                    <height>75</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>344</width>
+                    <height>78</height>
+                   </size>
+                  </property>
+                  <property name="toolTip">
+                   <string> Added mass in the X axis due to linear acceleration in the x,y,z axes</string>
+                  </property>
+                  <property name="title">
+                   <string>linear_acceleration</string>
+                  </property>
+                  <layout class="QGridLayout" name="gridLayout_7">
+                   <item row="0" column="0">
+                    <widget class="QLabel" name="fam_yy_label">
+                     <property name="minimumSize">
+                      <size>
+                       <width>12</width>
+                       <height>24</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>15</width>
+                       <height>30</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>y</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="1">
+                    <widget class="QDoubleSpinBox" name="fam_yy_sp">
+                     <property name="minimumSize">
+                      <size>
+                       <width>90</width>
+                       <height>24</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>100</width>
+                       <height>30</height>
+                      </size>
+                     </property>
+                     <property name="toolTip">
+                      <string>Added mass in the Y axis due to linear acceleration in the Y axis, in kg</string>
+                     </property>
+                     <property name="suffix">
+                      <string>kg</string>
+                     </property>
+                     <property name="maximum">
+                      <double>1000.000000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="2">
+                    <widget class="QLabel" name="fam_yz_label">
+                     <property name="minimumSize">
+                      <size>
+                       <width>10</width>
+                       <height>15</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>10</width>
+                       <height>18</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>z</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="3">
+                    <widget class="QDoubleSpinBox" name="fam_yz_sp">
+                     <property name="minimumSize">
+                      <size>
+                       <width>90</width>
+                       <height>24</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>100</width>
+                       <height>30</height>
+                      </size>
+                     </property>
+                     <property name="toolTip">
+                      <string> Added mass in the Y axis due to linear acceleration in the Z axis, and vice-versa, in kg.</string>
+                     </property>
+                     <property name="suffix">
+                      <string>kg</string>
+                     </property>
+                     <property name="maximum">
+                      <double>1000.000000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QGroupBox" name="fluid_y_angular_acceleration_groupbox">
+                  <property name="minimumSize">
+                   <size>
+                    <width>343</width>
+                    <height>75</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>345</width>
+                    <height>78</height>
+                   </size>
+                  </property>
+                  <property name="toolTip">
+                   <string> Added mass in the X axis due to linear acceleration in the x,y,z axes</string>
+                  </property>
+                  <property name="title">
+                   <string>angular_acceleration</string>
+                  </property>
+                  <layout class="QGridLayout" name="gridLayout_6">
+                   <item row="0" column="0">
+                    <widget class="QLabel" name="fam_yp_label">
+                     <property name="minimumSize">
+                      <size>
+                       <width>12</width>
+                       <height>24</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>15</width>
+                       <height>30</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>x</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="1">
+                    <widget class="QDoubleSpinBox" name="fam_yp_sp">
+                     <property name="minimumSize">
+                      <size>
+                       <width>90</width>
+                       <height>24</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>100</width>
+                       <height>30</height>
+                      </size>
+                     </property>
+                     <property name="toolTip">
+                      <string> Added mass in the Y axis due to angular acceleration about the X axis, and vice-versa, in kg * m</string>
+                     </property>
+                     <property name="suffix">
+                      <string>kgm</string>
+                     </property>
+                     <property name="maximum">
+                      <double>1000.000000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="2">
+                    <widget class="QLabel" name="fam_yq_label">
+                     <property name="minimumSize">
+                      <size>
+                       <width>12</width>
+                       <height>24</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>15</width>
+                       <height>30</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>y</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="3">
+                    <widget class="QDoubleSpinBox" name="fam_yq_sp">
+                     <property name="minimumSize">
+                      <size>
+                       <width>90</width>
+                       <height>24</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>100</width>
+                       <height>30</height>
+                      </size>
+                     </property>
+                     <property name="toolTip">
+                      <string>Added mass in the Y axis due to angular acceleration about the Y axis, and vice-versa, in kg * m.</string>
+                     </property>
+                     <property name="suffix">
+                      <string>kgm</string>
+                     </property>
+                     <property name="maximum">
+                      <double>1000.000000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="4">
+                    <widget class="QLabel" name="fam_yr_label">
+                     <property name="minimumSize">
+                      <size>
+                       <width>12</width>
+                       <height>24</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>15</width>
+                       <height>30</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>z</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="5">
+                    <widget class="QDoubleSpinBox" name="fam_yr_sp">
+                     <property name="minimumSize">
+                      <size>
+                       <width>90</width>
+                       <height>24</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>100</width>
+                       <height>30</height>
+                      </size>
+                     </property>
+                     <property name="toolTip">
+                      <string>Added mass in the Y axis due to angular acceleration about the Z axis, and vice-versa, in kg * m.</string>
+                     </property>
+                     <property name="suffix">
+                      <string>kgm</string>
+                     </property>
+                     <property name="maximum">
+                      <double>1000.000000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QGroupBox" name="fam_z_axis_groupbox">
+               <property name="minimumSize">
+                <size>
+                 <width>370</width>
+                 <height>190</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>372</width>
+                 <height>190</height>
+                </size>
+               </property>
+               <property name="title">
+                <string>z_axis</string>
+               </property>
+               <layout class="QGridLayout" name="gridLayout_13">
+                <item row="0" column="0">
+                 <widget class="QGroupBox" name="fluid_z_linear_acceleration_groupbox">
+                  <property name="minimumSize">
+                   <size>
+                    <width>343</width>
+                    <height>75</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>344</width>
+                    <height>78</height>
+                   </size>
+                  </property>
+                  <property name="toolTip">
+                   <string> Added mass in the X axis due to linear acceleration in the x,y,z axes</string>
+                  </property>
+                  <property name="title">
+                   <string>linear_acceleration</string>
+                  </property>
+                  <widget class="QWidget" name="layoutWidget">
+                   <property name="geometry">
+                    <rect>
+                     <x>81</x>
+                     <y>32</y>
+                     <width>139</width>
+                     <height>26</height>
+                    </rect>
+                   </property>
+                   <layout class="QHBoxLayout" name="horizontalLayout_7">
+                    <item>
+                     <widget class="QLabel" name="fam_zz_label">
+                      <property name="minimumSize">
+                       <size>
+                        <width>12</width>
+                        <height>24</height>
+                       </size>
+                      </property>
+                      <property name="maximumSize">
+                       <size>
+                        <width>15</width>
+                        <height>30</height>
+                       </size>
+                      </property>
+                      <property name="text">
+                       <string>z</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignCenter</set>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QDoubleSpinBox" name="fam_zz_sp">
+                      <property name="minimumSize">
+                       <size>
+                        <width>90</width>
+                        <height>24</height>
+                       </size>
+                      </property>
+                      <property name="maximumSize">
+                       <size>
+                        <width>100</width>
+                        <height>30</height>
+                       </size>
+                      </property>
+                      <property name="toolTip">
+                       <string>Added mass in the Z axis due to linear acceleration in the Z axis, in kg.</string>
+                      </property>
+                      <property name="suffix">
+                       <string>kg</string>
+                      </property>
+                      <property name="maximum">
+                       <double>1000.000000000000000</double>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QGroupBox" name="fluid_z_angular_acceleration_groupbox">
+                  <property name="minimumSize">
+                   <size>
+                    <width>343</width>
+                    <height>75</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>345</width>
+                    <height>78</height>
+                   </size>
+                  </property>
+                  <property name="toolTip">
+                   <string> Added mass in the X axis due to linear acceleration in the x,y,z axes</string>
+                  </property>
+                  <property name="title">
+                   <string>angular_acceleration</string>
+                  </property>
+                  <layout class="QGridLayout" name="gridLayout_5">
+                   <item row="0" column="0">
+                    <widget class="QLabel" name="fam_zp_label_">
+                     <property name="minimumSize">
+                      <size>
+                       <width>12</width>
+                       <height>24</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>15</width>
+                       <height>30</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>x</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="1">
+                    <widget class="QDoubleSpinBox" name="fam_zp_sp">
+                     <property name="minimumSize">
+                      <size>
+                       <width>90</width>
+                       <height>24</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>100</width>
+                       <height>30</height>
+                      </size>
+                     </property>
+                     <property name="toolTip">
+                      <string> Added mass in the Z axis due to angular acceleration about the X axis, and vice-versa, in kg * m.</string>
+                     </property>
+                     <property name="suffix">
+                      <string>kgm</string>
+                     </property>
+                     <property name="maximum">
+                      <double>1000.000000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="2">
+                    <widget class="QLabel" name="fam_zq_label">
+                     <property name="minimumSize">
+                      <size>
+                       <width>12</width>
+                       <height>24</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>15</width>
+                       <height>30</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>y</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="3">
+                    <widget class="QDoubleSpinBox" name="fam_zq_sp">
+                     <property name="minimumSize">
+                      <size>
+                       <width>90</width>
+                       <height>24</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>100</width>
+                       <height>30</height>
+                      </size>
+                     </property>
+                     <property name="toolTip">
+                      <string>Added mass in the Z axis due to angular acceleration about the Y axis, and vice-versa, in kg * m.</string>
+                     </property>
+                     <property name="suffix">
+                      <string>kgm</string>
+                     </property>
+                     <property name="maximum">
+                      <double>1000.000000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="4">
+                    <widget class="QLabel" name="fam_zr_label">
+                     <property name="minimumSize">
+                      <size>
+                       <width>12</width>
+                       <height>24</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>15</width>
+                       <height>30</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>z</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="5">
+                    <widget class="QDoubleSpinBox" name="fam_zr_sp">
+                     <property name="minimumSize">
+                      <size>
+                       <width>90</width>
+                       <height>24</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>100</width>
+                       <height>30</height>
+                      </size>
+                     </property>
+                     <property name="toolTip">
+                      <string>Added mass in the Z axis due to angular acceleration about the Z axis, and vice-versa, in kg * m.</string>
+                     </property>
+                     <property name="suffix">
+                      <string>kgm</string>
+                     </property>
+                     <property name="maximum">
+                      <double>1000.000000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QGroupBox" name="fam_moment_groupbox">
+               <property name="minimumSize">
+                <size>
+                 <width>370</width>
+                 <height>255</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>372</width>
+                 <height>300</height>
+                </size>
+               </property>
+               <property name="title">
+                <string>moment</string>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout">
+                <item>
+                 <widget class="QGroupBox" name="fluid_moment_x_groupbox">
+                  <property name="minimumSize">
+                   <size>
+                    <width>343</width>
+                    <height>75</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>345</width>
+                    <height>78</height>
+                   </size>
+                  </property>
+                  <property name="toolTip">
+                   <string> Added mass in the X axis due to linear acceleration in the x,y,z axes</string>
+                  </property>
+                  <property name="title">
+                   <string>moment_x</string>
+                  </property>
+                  <layout class="QGridLayout" name="gridLayout_8">
+                   <item row="0" column="0">
+                    <widget class="QLabel" name="fam_pp_label">
+                     <property name="minimumSize">
+                      <size>
+                       <width>12</width>
+                       <height>24</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>15</width>
+                       <height>30</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>x</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="1">
+                    <widget class="QDoubleSpinBox" name="fam_pp_sp">
+                     <property name="minimumSize">
+                      <size>
+                       <width>90</width>
+                       <height>24</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>100</width>
+                       <height>30</height>
+                      </size>
+                     </property>
+                     <property name="toolTip">
+                      <string>Added mass moment about the X axis due to angular acceleration about the X axis, in kg * m^2.</string>
+                     </property>
+                     <property name="suffix">
+                      <string>kgm^2</string>
+                     </property>
+                     <property name="maximum">
+                      <double>1000.000000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="2">
+                    <widget class="QLabel" name="fam_pq_label">
+                     <property name="minimumSize">
+                      <size>
+                       <width>12</width>
+                       <height>24</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>15</width>
+                       <height>30</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>y</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="3">
+                    <widget class="QDoubleSpinBox" name="fam_pq_sp">
+                     <property name="minimumSize">
+                      <size>
+                       <width>90</width>
+                       <height>24</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>100</width>
+                       <height>30</height>
+                      </size>
+                     </property>
+                     <property name="toolTip">
+                      <string>Added mass moment about the X axis due to angular acceleration about the Y axis, and vice-versa, in kg * m^2</string>
+                     </property>
+                     <property name="suffix">
+                      <string>kgm^2</string>
+                     </property>
+                     <property name="maximum">
+                      <double>1000.000000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="4">
+                    <widget class="QLabel" name="fam_pr_label">
+                     <property name="minimumSize">
+                      <size>
+                       <width>12</width>
+                       <height>24</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>15</width>
+                       <height>30</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>z</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="5">
+                    <widget class="QDoubleSpinBox" name="fam_pr_sp">
+                     <property name="minimumSize">
+                      <size>
+                       <width>90</width>
+                       <height>24</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>100</width>
+                       <height>30</height>
+                      </size>
+                     </property>
+                     <property name="toolTip">
+                      <string>Added mass moment about the X axis due to angular acceleration about the Z axis, and vice-versa, in kg * m^2.</string>
+                     </property>
+                     <property name="suffix">
+                      <string>kgm^2</string>
+                     </property>
+                     <property name="maximum">
+                      <double>1000.000000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QGroupBox" name="fluid_moment_y_groupbox">
+                  <property name="minimumSize">
+                   <size>
+                    <width>343</width>
+                    <height>75</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>345</width>
+                    <height>78</height>
+                   </size>
+                  </property>
+                  <property name="toolTip">
+                   <string> Added mass in the X axis due to linear acceleration in the x,y,z axes</string>
+                  </property>
+                  <property name="title">
+                   <string>moment_y</string>
+                  </property>
+                  <layout class="QGridLayout" name="gridLayout_9">
+                   <item row="0" column="0">
+                    <layout class="QHBoxLayout" name="horizontalLayout_10">
+                     <item>
+                      <widget class="QLabel" name="fam_qq_label">
+                       <property name="minimumSize">
+                        <size>
+                         <width>12</width>
+                         <height>24</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>15</width>
+                         <height>30</height>
+                        </size>
+                       </property>
+                       <property name="text">
+                        <string>y</string>
+                       </property>
+                       <property name="alignment">
+                        <set>Qt::AlignCenter</set>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QDoubleSpinBox" name="fam_qq_sp">
+                       <property name="minimumSize">
+                        <size>
+                         <width>90</width>
+                         <height>24</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>100</width>
+                         <height>30</height>
+                        </size>
+                       </property>
+                       <property name="toolTip">
+                        <string>Added mass moment about the Y axis due to angular acceleration about the Y axis, in kg * m^2</string>
+                       </property>
+                       <property name="suffix">
+                        <string>kgm^2</string>
+                       </property>
+                       <property name="maximum">
+                        <double>1000.000000000000000</double>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                   <item row="0" column="1">
+                    <layout class="QHBoxLayout" name="horizontalLayout_9">
+                     <item>
+                      <widget class="QLabel" name="fam_qr_label">
+                       <property name="minimumSize">
+                        <size>
+                         <width>12</width>
+                         <height>24</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>15</width>
+                         <height>30</height>
+                        </size>
+                       </property>
+                       <property name="text">
+                        <string>z</string>
+                       </property>
+                       <property name="alignment">
+                        <set>Qt::AlignCenter</set>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QDoubleSpinBox" name="fam_qr_sp">
+                       <property name="minimumSize">
+                        <size>
+                         <width>90</width>
+                         <height>24</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>100</width>
+                         <height>30</height>
+                        </size>
+                       </property>
+                       <property name="toolTip">
+                        <string> Added mass moment about the Y axis due to angular acceleration about the Z axis, and vice-versa, in kg * m^2</string>
+                       </property>
+                       <property name="suffix">
+                        <string>kgm^2</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QGroupBox" name="fluid_moment_z_groupbox">
+                  <property name="minimumSize">
+                   <size>
+                    <width>343</width>
+                    <height>75</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>344</width>
+                    <height>78</height>
+                   </size>
+                  </property>
+                  <property name="toolTip">
+                   <string> Added mass in the X axis due to linear acceleration in the x,y,z axes</string>
+                  </property>
+                  <property name="title">
+                   <string>moment_z</string>
+                  </property>
+                  <layout class="QGridLayout" name="gridLayout_10">
+                   <item row="0" column="0">
+                    <layout class="QHBoxLayout" name="horizontalLayout_8">
+                     <item>
+                      <widget class="QLabel" name="fam_rr_label">
+                       <property name="minimumSize">
+                        <size>
+                         <width>10</width>
+                         <height>15</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>10</width>
+                         <height>18</height>
+                        </size>
+                       </property>
+                       <property name="text">
+                        <string>z</string>
+                       </property>
+                       <property name="alignment">
+                        <set>Qt::AlignCenter</set>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QDoubleSpinBox" name="fam_rr_sp">
+                       <property name="minimumSize">
+                        <size>
+                         <width>90</width>
+                         <height>24</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>100</width>
+                         <height>30</height>
+                        </size>
+                       </property>
+                       <property name="toolTip">
+                        <string>Added mass moment about the Z axis due to angular acceleration about the Z axis, in kg * m^2</string>
+                       </property>
+                       <property name="suffix">
+                        <string>kgm^2</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QGroupBox" name="link_velocity_decay_groupbox">
+        <property name="minimumSize">
+         <size>
+          <width>217</width>
+          <height>110</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>120</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>Exponential damping of the link's velocity.</string>
+        </property>
+        <property name="title">
+         <string>velocity_decay</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_3">
+         <item row="0" column="0">
+          <widget class="QLabel" name="linear_velocity_dacay_label">
+           <property name="minimumSize">
+            <size>
+             <width>35</width>
+             <height>15</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>45</width>
+             <height>16</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>linear</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QDoubleSpinBox" name="velocity_decay_linear_sp">
+           <property name="decimals">
+            <number>5</number>
+           </property>
+           <property name="maximum">
+            <double>1000.000000000000000</double>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="angular_velocity_decay_label">
+           <property name="minimumSize">
+            <size>
+             <width>50</width>
+             <height>25</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>55</width>
+             <height>27</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>angular</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QDoubleSpinBox" name="link_angular_vel_decay_sp">
+           <property name="decimals">
+            <number>5</number>
+           </property>
+           <property name="maximum">
+            <double>1000.000000000000000</double>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QGroupBox" name="inertial_groupbox">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>213</width>
+          <height>70</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>70</height>
+         </size>
+        </property>
+        <property name="title">
+         <string>inertial</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_15">
+         <item row="0" column="0">
+          <widget class="QCheckBox" name="auto_inertial_checkbox">
+           <property name="text">
+            <string>auto</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>481</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

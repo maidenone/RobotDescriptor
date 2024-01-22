@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>collision</class>
+ <widget class="QWidget" name="collision">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>662</width>
+    <height>682</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>collision</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <widget class="QWidget" name="widget" native="true">
+     <property name="minimumSize">
+      <size>
+       <width>644</width>
+       <height>650</height>
+      </size>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="0" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QCheckBox" name="collision_laser_retro_cb">
+          <property name="text">
+           <string>laser_retro</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QDoubleSpinBox" name="collision_laser_retro_sp">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="collison_max_contacts_cb">
+          <property name="text">
+           <string>max_contacts</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSpinBox" name="collision_max_contacts_sp">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="1" column="0">
+       <widget class="QCheckBox" name="include_surface_info_cb">
+        <property name="text">
+         <string>include_surface_info</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QScrollArea" name="collision_scroll">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>587</height>
+         </size>
+        </property>
+        <property name="widgetResizable">
+         <bool>true</bool>
+        </property>
+        <widget class="QWidget" name="scrollAreaWidgetContents_3">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>624</width>
+           <height>585</height>
+          </rect>
+         </property>
+        </widget>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>collision_laser_retro_cb</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>collision_laser_retro_sp</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>94</x>
+     <y>30</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>252</x>
+     <y>30</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>collison_max_contacts_cb</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>collision_max_contacts_sp</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>409</x>
+     <y>30</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>567</x>
+     <y>30</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>include_surface_info_cb</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>collision_scroll</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>330</x>
+     <y>60</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>330</x>
+     <y>415</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

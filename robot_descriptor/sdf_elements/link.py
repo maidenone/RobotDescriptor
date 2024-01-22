@@ -4,6 +4,9 @@ from ..RD_utils import initialize_element_tree
 import copy
 from PySide import QtCore
 import xml.etree.ElementTree as ET
+import FreeCADGui
+import os
+
 
 class link_properties:
     def __init__(self,ui) -> None:
@@ -29,7 +32,7 @@ class link_properties:
 #enable wind
     @property
     def enable_wind(self):
-        state=self.ui.link_enable_wind_checkbox.isChecked(QtCore.Qt.Checked)
+        state=self.ui.link_enable_wind_checkbox.isChecked()
         if state:
             return str('true')
         else:
@@ -37,10 +40,9 @@ class link_properties:
         
     @enable_wind.setter
     def enable_wind(self,state):
-        if state=='true':
-            self.ui.link_enable_wind_checkbox.setCheckState(QtCore.Qt.Ckecked)
-        else:
-            self.ui.link_enable_wind_checkbox.setCheckState(QtCore.Qt.Unchecked)
+         self.ui.link_enable_wind_checkbox.setCheckState(QtCore.Qt.Checked)  if state=='true' else self.ui.link_enable_wind_checkbox.setCheckState(QtCore.Qt.Unchecked)
+           
+            
 
 #self_collide
     @property
@@ -49,7 +51,7 @@ class link_properties:
 
     @self_collide.setter
     def self_collide(self,state):
-        self.ui.link_self_collide_checkbox.setCheckState(QtCore.Qt.Ckecked) if state=='true' else self.ui.link_self_collide_checkbox.setCheckState(QtCore.Qt.Unchecked)
+        self.ui.link_self_collide_checkbox.setCheckState(QtCore.Qt.Checked) if state=='true' else self.ui.link_self_collide_checkbox.setCheckState(QtCore.Qt.Unchecked)
         
 #kinematic
     @property
@@ -57,7 +59,7 @@ class link_properties:
         return str('true') if self.ui.link_kinematic_checkbox.isChecked() else str('false')
     @kinematic.setter
     def kinematic(self,state):
-        self.ui.link_kinematic_checkbox.setCheckState(QtCore.Qt.Ckecked) if state=='true' else self.ui.link_kinematic_checkbox.setCheckState(QtCore.Qt.Unchecked)
+        self.ui.link_kinematic_checkbox.setCheckState(QtCore.Qt.Checked) if state=='true' else self.ui.link_kinematic_checkbox.setCheckState(QtCore.Qt.Unchecked)
         
 #velocity decay 
     #linear
@@ -246,8 +248,8 @@ class link_properties:
 #link
 #====================
 class link:
-    def __init__(self,ui,elem_struct=None):
-        self.ui=ui
+    def __init__(self,parent_ui,elem_struct=None):
+        self.ui=parent_ui
         self.file_name='link.sdf'
         self.tag='link'
         #models will be store as children of sdf 

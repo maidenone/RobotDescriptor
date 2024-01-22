@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>730</width>
+    <height>700</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>695</width>
+    <height>700</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <widget class="QWidget" name="widget" native="true">
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="0" column="0">
+       <widget class="QCheckBox" name="visual_laser_retro_cb">
+        <property name="text">
+         <string>laser_retro</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QDoubleSpinBox" name="visual_laser_retro_sp">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QCheckBox" name="visual_transparency_cb">
+        <property name="text">
+         <string>transparency</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QDoubleSpinBox" name="visual_transparency_sp">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="4">
+       <widget class="QCheckBox" name="visual_visibility_flags_cb">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>visibility_flags</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="5">
+       <widget class="QSpinBox" name="visual_visibility_flags_sp">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="maximum">
+         <number>900000000</number>
+        </property>
+        <property name="stepType">
+         <enum>QAbstractSpinBox::DefaultStepType</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0" colspan="2">
+       <widget class="QCheckBox" name="visual_cast_shadows_checkBox">
+        <property name="text">
+         <string>cast_shadows</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0" colspan="6">
+       <widget class="QScrollArea" name="material_scroll">
+        <property name="minimumSize">
+         <size>
+          <width>660</width>
+          <height>600</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>607</height>
+         </size>
+        </property>
+        <property name="widgetResizable">
+         <bool>true</bool>
+        </property>
+        <widget class="QWidget" name="scrollAreaWidgetContents_2">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>692</width>
+           <height>605</height>
+          </rect>
+         </property>
+        </widget>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>visual_laser_retro_cb</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>visual_laser_retro_sp</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>73</x>
+     <y>29</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>189</x>
+     <y>29</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>visual_transparency_cb</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>visual_transparency_sp</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>306</x>
+     <y>29</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>423</x>
+     <y>29</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

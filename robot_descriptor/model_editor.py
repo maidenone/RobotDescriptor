@@ -6,25 +6,96 @@ import os
 from PySide2 import QtGui
 import copy 
 
+import xml.etree.ElementTree as ET
+
 from .RD_utils import parse_asm4_model
 from PySide2.QtGui import QStandardItemModel,QStandardItem
-from PySide2.QtCore import Qt,QModelIndex
-
+from PySide2.QtCore import Qt,QModelIndex,QItemSelectionModel
+from .sdf_elements import link
+from .sdf_elements import visual
+from .sdf_elements import collision
 
 link_img=QtGui.QImage(os.path.join(common.ICON_PATH,"link16.png"))
 ref_img=QtGui.QImage(os.path.join(common.ICON_PATH,"ref16.png"))
+
+
 #start standard item
-class standard_item(QStandardItem):
-    def __init__(self,text,type='link',ref_idx=None):
+class ModelItem(QStandardItem):
+    def __init__(self,Model_editor_ui,text,type='link'):
         super().__init__()
         # data to describe the model 
+        
+        #types   ref,link ... .
         self.text=text
         self.type=type
-        #index of the refered to  link/object 
-        self.ref_idx=ref_idx
         #set the text to be displayed
         self.setText(text)
         self.setEditable(False)
+        #this is the parent ui 
+        self.Model_editor_ui=Model_editor_ui
+        #element ui's 
+        self.collision_ui=None
+        self.link_ui=None
+        self.visual_ui=None
+        
+        #Tasks 
+        # 1. Implement function to 
+                # i. calculate inertia and write the info to the inertial element ,this might  be
+                #   implemented in the inertial class
+                # ii. extract maerial data e.g color of link... , and write to material element
+                # 
+        # 2.  add user roles to get element data after disabled ui icons have been removed 
+        #       so that calling the on the item with the role will return the element  after  appending them as required 
+        # 3. add slot that can be triggered when user breaks reference  so that an element of type reference can 
+        #       create its own links and not refer to parent ref item ,  also  another to  create links to a parent item 
+        #       and one to update ui when to item is selected in the tree view 
+        
+        #linked
+        if self.type !='ref':
+            self.break_ref()
+        
+    def  create_ref(self,item):
+        #item will refer to  data stored in the reference source 
+        if self.collision_ui is not None and self.visual_ui is  not  None and self.link_ui is not None:
+            self.Model_editor_ui.ModelEditorCollisionStack.removeWidget(self.collision_ui)
+            self.Model_editor_ui.ModelEditorLinkStack.removeWidget.removeWidget(self.link_ui)
+            self.Model_editor_ui.ModelEditorVisualStack.removeWidget.removeWidget(self.visual_ui)
+
+        self._link=item._link
+        self._visual=item._visual
+        self._collision=item._collision
+        self.collision_idx=item.collision_idx
+        self.link_idx=item.link_idx
+        self.visual_idx=item.visual_idx
+        self.type='ref'
+        self.emitDataChanged()
+        
+
+    def break_ref(self):
+        #this will be called when reference is to broken 
+        self.collision_ui=FreeCADGui.PySideUic.loadUi(os.path.join(common.UI_PATH,'collision.ui'))
+        self.collision_idx=self.Model_editor_ui.ModelEditorCollisionStack.addWidget(self.collision_ui)
+        
+        self.link_ui=FreeCADGui.PySideUic.loadUi(os.path.join(common.UI_PATH,'link.ui'))
+        self.link_idx=self.Model_editor_ui.ModelEditorLinkStack.addWidget(self.link_ui)
+        
+        self.visual_ui=FreeCADGui.PySideUic.loadUi(os.path.join(common.UI_PATH,'visual.ui'))
+        self.visual_idx=self.Model_editor_ui.ModelEditorVisualStack.addWidget(self.visual_ui)
+        #link
+        self._link=link.link(self.link_ui)
+        #visual
+        self._visual=visual.visual(self.visual_ui)
+        #collision
+        self._collision=collision.collison(self.collision_ui)
+        self.type='link'
+        self.emitDataChanged()
+        
+    def selected(self):
+        #this will called when an item is clicked 
+        #it will basically  add its ui to the  model editor widget 
+        self.Model_editor_ui.ModelEditorLinkStack.setCurrentIndex(self.link_idx)
+        self.Model_editor_ui.ModelEditorCollisionStack.setCurrentIndex(self.collision_idx)
+        self.Model_editor_ui.ModelEditorVisualStack.setCurrentIndex(self.visual_idx)
         
     def data(self, role: int = ...) -> Any:
         if role==Qt.DisplayRole:
@@ -37,32 +108,26 @@ class standard_item(QStandardItem):
                 return ref_img
             else:
                 return 
-            
+
     
 #end standard Item   
 #==============================================
+
+
 #model editor 
 class ModelEditor:
     def __init__(self,elem_struct):
         # find all objects of type 'App::Link'
         #doc=FreeCAD.ActiveDocument
+        
+        
         self._elem_struct=elem_struct
         self.links_hierarchy=parse_asm4_model.read_assembly()
         if self.links_hierarchy is None:
             return 
         self.ModelEditorUi=FreeCADGui.PySideUic.loadUi(os.path.join(common.UI_PATH,'model_editor.ui'))
         
-        #subelements 
-        from .sdf_elements import link
-        #link
-        self._link=link.link(self.ModelEditorUi)
-        #visual
-        from .sdf_elements import visual
-        self._visual=visual.visual(self.ModelEditorUi)
-        #collision
-        from .sdf_elements import collision
-        self._collision=collision.collison(self.ModelEditorUi)
-        
+        #subelements
         self.current_elems=[]
         #dictionary of all links and their  associated elements 
         #{link name: [link,collison,visual], ...}
@@ -75,7 +140,7 @@ class ModelEditor:
         self.link_model.setColumnCount(1)
         self.root_node=self.link_model.invisibleRootItem()
         self.model_tree_config(self.links_hierarchy["children"],self.root_node)
-        
+        self.ModelEditorUi.link_tree.setSelectionMode(self.ModelEditorUi.link_tree.SingleSelection)
         #add callback 
         self.config()
         
@@ -86,22 +151,17 @@ class ModelEditor:
     #end header related 
     
         self.ModelEditorUi.link_tree.setModel(self.link_model)
-        
         self.ModelEditorUi.exec()
         
 #end __init__()
 
     def config(self):
         self.ModelEditorUi.link_tree.clicked[QModelIndex].connect(self.on_tree_item)
-        
+    
     def on_tree_item(self,index):
         item = self.link_model.itemFromIndex(index)
-        label=item.data(Qt.DisplayRole)
-        #update data related  to elems 
-        self.current_elems=self.elems[label]
-        self._link.update_elem(self.current_elems[0])
-        self._collision.update_elem(self.current_elems[1])
-        self._visual.update_elem(self.current_elems[2])
+        # label=item.data(Qt.DisplayRole)
+        item.selected()
         
 
     def model_tree_config(self,link_str,std_itm):
@@ -112,7 +172,7 @@ class ModelEditor:
             #seee parse_asm4_model.py 
             for child in link_hierarchy:
                 name=child["name"]
-                row=standard_item(child["name"],child['type'])
+                row=ModelItem(self.ModelEditorUi,child["name"],child['type'])
                 item.appendRow(row)
                 #make reference to the index of referenced link
                 #This assumes the link already exists in the referenced_elems dictionary 
@@ -128,13 +188,8 @@ class ModelEditor:
                 #store index to referred link
                 elif child['type']=='link':
                     #add to referenced elements 
-                    self.referenced_elems[child['name']]=self.link_model.indexFromItem(row)
-                    # get data and store it in corresponding list 
-                    link_elem=copy.deepcopy(self._link.get_default_elem())
-                    collision_elem=copy.deepcopy(self._collision.get_default_elem())
-                    visual_elem=copy.deepcopy(self._visual.get_default_elem())
-                    #update element data
-                    self.elems[child['name']]=[link_elem,collision_elem,visual_elem]
+                    self.referenced_elems[child['name']]=row
+
                 else:
                     pass 
                 #deb
@@ -145,9 +200,8 @@ class ModelEditor:
         setup(link_str,std_itm)
         #add ref_link related data 
         for item,ref_label,name in ref_links:
-            item.ref_idx=self.referenced_elems[ref_label]
-            self.elems[name]=self.elems[ref_label]
-        
+            # item.ref_idx=self.referenced_elems[ref_label]
+            item.create_ref(self.referenced_elems[ref_label])
 
 #+===============================
 #start command

@@ -4,7 +4,7 @@ from . import surface
 import copy
 import os 
 import xml.etree.ElementTree as ET
-import FreeCADGui 
+import FreeCADGui ,FreeCAD
 
 
 class  collision_properties:
@@ -79,7 +79,7 @@ class collison:
             self.surface_cls.update_elem(surf)
             self.collision_elem=elem
         else:
-            print("collision surf is none \n")
+            FreeCAD.Console.PrintDeveloperWarning("collision surf is none \n")
         #update ui after element updates 
         self.updateUI()
             
