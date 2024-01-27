@@ -14,10 +14,10 @@ DEBUG=True
 
 
 
-
+import os 
 import FreeCAD
-ICON_PATH=FreeCAD.getUserAppDataDir()+"Mod/RobotDescriptor/robot_descriptor/icons"
-UI_PATH=FreeCAD.getUserAppDataDir()+"Mod/RobotDescriptor/robot_descriptor/forms"
+ICON_PATH=os.path.join(FreeCAD.getUserAppDataDir()+"Mod","RobotDescriptor","robot_descriptor","icons")
+UI_PATH=os.path.join(FreeCAD.getUserAppDataDir()+"Mod","RobotDescriptor","robot_descriptor","forms")
 DOCUMENT=FreeCAD.ActiveDocument
 import copy
 import xml.etree.ElementTree as ET
@@ -78,7 +78,7 @@ def set_xml_data(element:ET.Element,tag:str,Is_Attribute:bool,value:Union[dict,f
     #no need for a loop
     try:
         elem=elem_iter.__next__()
-    except:
+    except Exception:
         return None
         # ensure no dictionaries are sent for non attributes 
     if Is_Attribute is False and isinstance(value,dict) is False:
@@ -90,7 +90,7 @@ def set_xml_data(element:ET.Element,tag:str,Is_Attribute:bool,value:Union[dict,f
     else:
         #add/edit  attributes 
         for key in value.keys():
-            elem.set(key,value[key])
+            elem.set(key,str(value[key]))
     return element
 
 
@@ -114,9 +114,9 @@ def get_xml_data(element:ET.Element,tag:Union[str,list],Is_Attribute:bool=False)
             try:
                 try:
                     return int(elem_data)
-                except:
+                except Exception:
                     return float(elem_data)    
-            except:
+            except Exception:
                 return elem_data
     
     if Is_Attribute is not True:
@@ -126,7 +126,7 @@ def get_xml_data(element:ET.Element,tag:Union[str,list],Is_Attribute:bool=False)
     #only a single element exists no need to use a for loop
     try:
         elem=elem_iter.__next__()
-    except:
+    except Exception:
         return None
     if Is_Attribute is False:
         txt=elem.text
@@ -138,9 +138,9 @@ def get_xml_data(element:ET.Element,tag:Union[str,list],Is_Attribute:bool=False)
         try:
             try:
                 return   int(elem.attrib[tag[1]])
-            except:
+            except Exception:
                 return float(elem.attrib[tag[1]])
-        except:
+        except Exception:
             return   elem.attrib[tag[1]]
 
 #deleting attributes
@@ -165,14 +165,17 @@ def parse_dict(root_dict:dict,path:list):
     
 # used to track the current index of the path list  
     current_idx=0
+    #if only  one element is left return it 
     if len(path)==1:
         if path[-1]=='sdf':
                 return root_dict[path[-1]]
+        #check if the element exists
         elif path[-1] in list(root_dict.keys()):
                 return root_dict[path[-1]]
         else: 
             return None
     else:
+        #get the first item in the dictionary
         parent_key=path[current_idx]
         current_idx+=1
 #child element tag
@@ -202,6 +205,7 @@ def update_dictionary(path:list,child_tag:Union[str,None],elem:Union[list,ET.Ele
 
     parent_dict=parse_dict(elem_dict,path)
     if parent_dict is not None:
+        #this allows update of an element  not its children basically None means not the children
         if child_tag is None:
             if isinstance(elem,list):
                 parent_dict["elem_str"]=list(map(lambda e:ET.tostring(e,encoding="unicode"),elem))
@@ -245,14 +249,19 @@ def merge_elements(destination_el:ET.Element,source_el:ET.Element,recursive:bool
 #implemtatation for all other elements 
 #the ones that are not recursive and not physics                 
     else:
+        # Update attributes of destination_el with source_el
         destination_el.attrib.update(source_el.attrib)
+        if source_el.text:
+            destination_el.text = source_el.text
+    # Merge child elements recursively
         for child in source_el:
-            existing_el=destination_el.find(child.tag)
+            existing_el = destination_el.find(child.tag)
             if existing_el is not None:
-                destination_el.remove(existing_el)
-                destination_el.append(child)
+                merge_elements(existing_el, child)  # Recursively merge the existing element with the new one
             else:
-                destination_el.append(child)
+            # If the element doesn't exist in destination, simply append it
+                # destination_el.append(child)
+                pass
 
 
 import math 
@@ -260,6 +269,8 @@ from PySide.QtGui import QColorDialog
 
 
 class color_pickr:
+    '''class that implements color picker methods 
+    '''
     def __init__(self) -> None:
         pass
     #color picker

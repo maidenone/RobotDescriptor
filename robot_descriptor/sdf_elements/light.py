@@ -1,9 +1,10 @@
+from typing import Any
 import xml.etree.ElementTree as ET
 from PySide import QtCore
 from PySide.QtGui import  QMessageBox
 import FreeCAD
-from ..RD_parser import initialize_element_tree
-from .. import RD_globals
+from ..RD_utils import initialize_element_tree
+from .. import common
 import copy
 import re
 from PySide.QtGui import QColorDialog
@@ -194,7 +195,7 @@ class light_properties:
 #light
 #=================================================================
    
-class light(RD_globals.color_pickr):
+class light(common.color_pickr):
     def __init__(self,ui) -> None:
         self.ui=ui
         self.file_name='light.sdf'
@@ -221,6 +222,7 @@ class light(RD_globals.color_pickr):
         del self.pose.attrib["degrees"]
         # append pose to  light 
         self._light_element.append(self.pose)
+        #this variable will store all the lights added to th world
         self.lights={}
       #the lights dictionary format
       #
@@ -247,7 +249,7 @@ class light(RD_globals.color_pickr):
                         'quadratic':0.001}
         
         for key in sun_properties.keys():
-            RD_globals.set_xml_data(sun,key,False,sun_properties[key])
+            common.set_xml_data(sun,key,False,sun_properties[key])
 #append to sun 
 
         self.lights['sun']=copy.deepcopy(sun)
@@ -272,7 +274,7 @@ class light(RD_globals.color_pickr):
         #type
         self.ui.light_type.currentTextChanged.connect(self.on_type)
         #intensity
-        self.ui.intensity_sp.valueChanged.connect(self.on_intensity)
+        self.ui.intensity_sp.valueChanged.connect(lambda : common.set_xml_data(self._current_light_element,"intensity",False,self.properties.intensity))
         #shadows
         self.ui.cast_shadows_check_b.stateChanged.connect(self.on_cast_shadows)
         #visualize
@@ -377,7 +379,7 @@ class light(RD_globals.color_pickr):
         #update the current name 
         self.current_light=name
         #update the values in the ui 
-        self.properties.name=RD_globals.get_xml_data(self._current_light_element,[self.tag,'name'],True)
+        self.properties.name=common.get_xml_data(self._current_light_element,[self.tag,'name'],True)
 #update type name in the list widget 
         #get current iten 
         current_item=self.ui.light_listWidget.currentRow()
@@ -402,52 +404,49 @@ class light(RD_globals.color_pickr):
         else:
             self.ui.direction_groupbox.setEnabled(False)
         
-    def on_intensity(self):
-        RD_globals.set_xml_data(self._current_light_element,"intensity",False,self.properties.intensity)
-        
     def on_cast_shadows(self):
-        RD_globals.set_xml_data(self._current_light_element,"cast_shadows",False,self.properties.cast_shadows)
+        common.set_xml_data(self._current_light_element,"cast_shadows",False,self.properties.cast_shadows)
         
     def on_visualize(self):
-        RD_globals.set_xml_data(self._current_light_element,"visualize",False,self.properties.visualize)
+        common.set_xml_data(self._current_light_element,"visualize",False,self.properties.visualize)
         
     def on_light(self):
-        RD_globals.set_xml_data(self._current_light_element,"light_on",False,self.properties.light_on)
+        common.set_xml_data(self._current_light_element,"light_on",False,self.properties.light_on)
         
     def on_diffuse(self):
-        RD_globals.set_xml_data(self._current_light_element,"diffuse",False,self.properties.diffuse)
+        common.set_xml_data(self._current_light_element,"diffuse",False,self.properties.diffuse)
         self.set_widget_color('diffuse',self.ui.light_diffuse_color_pkr)
         
     def on_specular(self):
-        RD_globals.set_xml_data(self._current_light_element,"specular",False,self.properties.specular)
+        common.set_xml_data(self._current_light_element,"specular",False,self.properties.specular)
         self.set_widget_color('specular',self.ui.light_specular_color_pkr)
         
     def on_range(self):
-        RD_globals.set_xml_data(self._current_light_element,"range",False,self.properties.range)
+        common.set_xml_data(self._current_light_element,"range",False,self.properties.range)
         
     def on_constant(self):
-        RD_globals.set_xml_data(self._current_light_element,"constant",False,self.properties.constant)
+        common.set_xml_data(self._current_light_element,"constant",False,self.properties.constant)
         
     def on_linear(self):
-        RD_globals.set_xml_data(self._current_light_element,"linear",False,self.properties.linear)
+        common.set_xml_data(self._current_light_element,"linear",False,self.properties.linear)
         
     def on_quadratic(self):
-        RD_globals.set_xml_data(self._current_light_element,"quadratic",False,self.properties.quadratic)
+        common.set_xml_data(self._current_light_element,"quadratic",False,self.properties.quadratic)
         
     def on_pose(self):
-        RD_globals.set_xml_data(self._current_light_element,"pose",False,self.properties.pose)
+        common.set_xml_data(self._current_light_element,"pose",False,self.properties.pose)
         
     def on_direction(self):
-        RD_globals.set_xml_data(self._current_light_element,"direction",False,self.properties.direction)
+        common.set_xml_data(self._current_light_element,"direction",False,self.properties.direction)
         
     def on_inner_angle(self):
-        RD_globals.set_xml_data(self._current_light_element,"inner_angle",False,self.properties.inner_angle)
+        common.set_xml_data(self._current_light_element,"inner_angle",False,self.properties.inner_angle)
         
     def on_outer_angle(self):
-        RD_globals.set_xml_data(self._current_light_element,"outer_angle",False,self.properties.outer_angle)
+        common.set_xml_data(self._current_light_element,"outer_angle",False,self.properties.outer_angle)
         
     def on_falloff(self):
-        RD_globals.set_xml_data(self._current_light_element,"falloff",False,self.properties.falloff)
+        common.set_xml_data(self._current_light_element,"falloff",False,self.properties.falloff)
     
 
     def on_add(self):
@@ -512,25 +511,25 @@ class light(RD_globals.color_pickr):
 
 #update ui 
     def update_ui(self):
-        self.properties.name=RD_globals.get_xml_data(self._current_light_element,[self.tag,'name'],True)
-        self.properties.type=RD_globals.get_xml_data(self._current_light_element,['light','type'],True)
-        self.properties.intensity=float(RD_globals.get_xml_data(self._current_light_element,"intensity",False))
-        self.properties.cast_shadows=RD_globals.get_xml_data(self._current_light_element,"cast_shadows",False)
-        self.properties.visualize=RD_globals.get_xml_data(self._current_light_element,"visualize",False)
-        self.properties.light_on=RD_globals.get_xml_data(self._current_light_element,"light_on",False)
-        self.properties.diffuse=RD_globals.get_xml_data(self._current_light_element,"diffuse",False)
+        self.properties.name=common.get_xml_data(self._current_light_element,[self.tag,'name'],True)
+        self.properties.type=common.get_xml_data(self._current_light_element,['light','type'],True)
+        self.properties.intensity=float(common.get_xml_data(self._current_light_element,"intensity",False))
+        self.properties.cast_shadows=common.get_xml_data(self._current_light_element,"cast_shadows",False)
+        self.properties.visualize=common.get_xml_data(self._current_light_element,"visualize",False)
+        self.properties.light_on=common.get_xml_data(self._current_light_element,"light_on",False)
+        self.properties.diffuse=common.get_xml_data(self._current_light_element,"diffuse",False)
 
-        self.properties.specular=RD_globals.get_xml_data(self._current_light_element,"specular",False)
-        self.properties.range=float(RD_globals.get_xml_data(self._current_light_element,"range",False))
-        self.properties.constant=float(RD_globals.get_xml_data(self._current_light_element,"constant",False))
-        self.properties.linear=float(RD_globals.get_xml_data(self._current_light_element,"linear",False))
-        self.properties.quadratic=float(RD_globals.get_xml_data(self._current_light_element,"quadratic",False))
+        self.properties.specular=common.get_xml_data(self._current_light_element,"specular",False)
+        self.properties.range=float(common.get_xml_data(self._current_light_element,"range",False))
+        self.properties.constant=float(common.get_xml_data(self._current_light_element,"constant",False))
+        self.properties.linear=float(common.get_xml_data(self._current_light_element,"linear",False))
+        self.properties.quadratic=float(common.get_xml_data(self._current_light_element,"quadratic",False))
 
-        self.properties.pose=RD_globals.get_xml_data(self._current_light_element,"pose",False)
-        self.properties.direction=RD_globals.get_xml_data(self._current_light_element,"direction",False)
-        self.properties.inner_angle=float(RD_globals.get_xml_data(self._current_light_element,"inner_angle",False))
-        self.properties.outer_angle=float(RD_globals.get_xml_data(self._current_light_element,"outer_angle",False))
-        self.properties.falloff=float(RD_globals.get_xml_data(self._current_light_element,"falloff",False))
+        self.properties.pose=common.get_xml_data(self._current_light_element,"pose",False)
+        self.properties.direction=common.get_xml_data(self._current_light_element,"direction",False)
+        self.properties.inner_angle=float(common.get_xml_data(self._current_light_element,"inner_angle",False))
+        self.properties.outer_angle=float(common.get_xml_data(self._current_light_element,"outer_angle",False))
+        self.properties.falloff=float(common.get_xml_data(self._current_light_element,"falloff",False))
         
         #set color picker button colors 
         self.set_widget_color('diffuse',self.ui.light_diffuse_color_pkr)
@@ -549,7 +548,7 @@ class light(RD_globals.color_pickr):
             direction=self._light_element.find('direction')
             doc=FreeCAD.ActiveDocument
             _root_dict=doc.Robot_Description.Proxy.element_dict
-            el_dict=RD_globals.parse_dict(_root_dict,self.parent_path+[self.tag])
+            el_dict=common.parse_dict(_root_dict,self.parent_path+[self.tag])
             if el_dict is not None:
                 #clear list widget an light 
                 self.ui.light_listWidget.clear()
@@ -583,6 +582,7 @@ class light(RD_globals.color_pickr):
 
     @property
     def element(self):
+        #get all the lights 
         el_dict=copy.deepcopy(self.lights)
         el_list=[]
     #remove elements depending on type selection 

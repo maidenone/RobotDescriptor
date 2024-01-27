@@ -1,6 +1,6 @@
 import xml.etree.ElementTree as ET
 import os 
-from .. import RD_globals
+from .. import common
 
 
 

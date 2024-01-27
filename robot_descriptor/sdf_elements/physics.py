@@ -1,7 +1,7 @@
 
 import xml.etree.ElementTree as ET
-from ..RD_parser import initialize_element_tree
-from .. import RD_globals
+from ..RD_utils import initialize_element_tree
+from .. import common
 import copy
 from PySide import QtCore
 
@@ -394,67 +394,67 @@ class ode:
 #callbacks 
 
     def on_type(self):
-        RD_globals.set_xml_data(self._ode_elem,"type",False,self.solver.type)
+        common.set_xml_data(self._ode_elem,"type",False,self.solver.type)
     
     def on_min_step_size(self):
-        RD_globals.set_xml_data(self._ode_elem,"min_step_size",False,self.solver.min_step_size)
+        common.set_xml_data(self._ode_elem,"min_step_size",False,self.solver.min_step_size)
     def on_island_threads(self):
-        RD_globals.set_xml_data(self._ode_elem,"island_threads",False,self.solver.island_threads)
+        common.set_xml_data(self._ode_elem,"island_threads",False,self.solver.island_threads)
     def on_friction_model(self):
-        RD_globals.set_xml_data(self._ode_elem,"friction_model",False,self.solver.friction_model)
+        common.set_xml_data(self._ode_elem,"friction_model",False,self.solver.friction_model)
     def on_iters(self):
-        RD_globals.set_xml_data(self._ode_elem,"iters",False,self.solver.iters)
+        common.set_xml_data(self._ode_elem,"iters",False,self.solver.iters)
     def on_precon_iters(self):
-        RD_globals.set_xml_data(self._ode_elem,"precon_iters",False,self.solver.precon_iters)
+        common.set_xml_data(self._ode_elem,"precon_iters",False,self.solver.precon_iters)
     
     def on_sor(self):
-        RD_globals.set_xml_data(self._ode_elem,"sor",False,self.solver.sor)
+        common.set_xml_data(self._ode_elem,"sor",False,self.solver.sor)
  
     def on_dynamic_moi_rescaling(self):
-        RD_globals.set_xml_data(self._ode_elem,"use_dynamic_moi_rescaling",False,self.solver.use_dynamic_moi_rescaling)
+        common.set_xml_data(self._ode_elem,"use_dynamic_moi_rescaling",False,self.solver.use_dynamic_moi_rescaling)
 
     def on_thread_position_correction(self):
-        RD_globals.set_xml_data(self._ode_elem,"thread_position_correction",False,self.solver.thread_position_correction)
+        common.set_xml_data(self._ode_elem,"thread_position_correction",False,self.solver.thread_position_correction)
     
     def on_cfm(self):
-        RD_globals.set_xml_data(self._ode_elem,"cfm",False,self.constraints.cfm)
+        common.set_xml_data(self._ode_elem,"cfm",False,self.constraints.cfm)
     
     def on_erp(self):
-        RD_globals.set_xml_data(self._ode_elem,"erp",False,self.constraints.erp)
+        common.set_xml_data(self._ode_elem,"erp",False,self.constraints.erp)
         
     def on_contact_max_correction_vel(self):
-        RD_globals.set_xml_data(self._ode_elem,"contact_max_correcting_vel",False,self.constraints.contact_max_correcting_vel)
+        common.set_xml_data(self._ode_elem,"contact_max_correcting_vel",False,self.constraints.contact_max_correcting_vel)
     
     def on_contact_surface_layer(self):
-        RD_globals.set_xml_data(self._ode_elem,"contact_surface_layer",False,self.constraints.contact_surface_layer)
+        common.set_xml_data(self._ode_elem,"contact_surface_layer",False,self.constraints.contact_surface_layer)
         
 #end callbacks 
 
     def update_ui(self):
 #solver 
-        self.solver.type=RD_globals.get_xml_data(self._ode_elem,"type",False)
-        self.solver.min_step_size=float(RD_globals.get_xml_data(self._ode_elem,"min_step_size",False))
-        self.solver.island_threads=int(RD_globals.get_xml_data(self._ode_elem,"island_threads",False))
-        self.solver.iters=float(RD_globals.get_xml_data(self._ode_elem,"iters",False))
-        self.solver.precon_iters=int(RD_globals.get_xml_data(self._ode_elem,"precon_iters",False))
-        self.solver.sor=float(RD_globals.get_xml_data(self._ode_elem,"sor",False))
-        self.solver.friction_model=RD_globals.get_xml_data(self._ode_elem,"friction_model",False)
+        self.solver.type=common.get_xml_data(self._ode_elem,"type",False)
+        self.solver.min_step_size=float(common.get_xml_data(self._ode_elem,"min_step_size",False))
+        self.solver.island_threads=int(common.get_xml_data(self._ode_elem,"island_threads",False))
+        self.solver.iters=float(common.get_xml_data(self._ode_elem,"iters",False))
+        self.solver.precon_iters=int(common.get_xml_data(self._ode_elem,"precon_iters",False))
+        self.solver.sor=float(common.get_xml_data(self._ode_elem,"sor",False))
+        self.solver.friction_model=common.get_xml_data(self._ode_elem,"friction_model",False)
         
-        if RD_globals.get_xml_data(self._ode_elem,"use_dynamic_moi_rescaling",False)=='true':
+        if common.get_xml_data(self._ode_elem,"use_dynamic_moi_rescaling",False)=='true':
             self.solver.use_dynamic_moi_rescaling=True
         else:
             self.solver.use_dynamic_moi_rescaling=False
         
         
-        if RD_globals.get_xml_data(self._ode_elem,"thread_position_correction",False)=='true':
+        if common.get_xml_data(self._ode_elem,"thread_position_correction",False)=='true':
             self.solver.thread_position_correction=True
         else:
             self.solver.thread_position_correction=False
 #constraints
-        self.constraints.cfm=float(RD_globals.get_xml_data(self._ode_elem,"cfm",False))
-        self.constraints.erp=float(RD_globals.get_xml_data(self._ode_elem,"erp"))
-        self.constraints.contact_max_correcting_vel=float(RD_globals.get_xml_data(self._ode_elem,"contact_max_correcting_vel"))
-        self.constraints.contact_surface_layer=float(RD_globals.get_xml_data(self._ode_elem,"contact_surface_layer"))
+        self.constraints.cfm=float(common.get_xml_data(self._ode_elem,"cfm",False))
+        self.constraints.erp=float(common.get_xml_data(self._ode_elem,"erp"))
+        self.constraints.contact_max_correcting_vel=float(common.get_xml_data(self._ode_elem,"contact_max_correcting_vel"))
+        self.constraints.contact_surface_layer=float(common.get_xml_data(self._ode_elem,"contact_surface_layer"))
 #this takes an element  and updates the internal ones 
     def reset(self,new_elem:ET.Element):
         self._get_ode_elem(new_elem)
@@ -495,45 +495,45 @@ class bullet:
         self.ui.bullet_split_impulse_penetration_threshold.valueChanged.connect(self.on_splt_impl_pen_tr)
 #solver
     def on_type(self):
-        RD_globals.set_xml_data(self._bullet_element,"solver",False,self.solver.type)
+        common.set_xml_data(self._bullet_element,"solver",False,self.solver.type)
 
     def on_min_step_size(self):
-        RD_globals.set_xml_data(self._bullet_element,"min_step_size",False,self.solver.min_step_size)
+        common.set_xml_data(self._bullet_element,"min_step_size",False,self.solver.min_step_size)
     
     def on_iters(self):
-        RD_globals.set_xml_data(self._bullet_element,"iters",False,self.solver.iters)
+        common.set_xml_data(self._bullet_element,"iters",False,self.solver.iters)
         
     def on_sor(self):
-        RD_globals.set_xml_data(self._bullet_element,"sor",False,self.solver.sor)
+        common.set_xml_data(self._bullet_element,"sor",False,self.solver.sor)
 #constraints 
     def on_cfm(self):
-        RD_globals.set_xml_data(self._bullet_element,"cfm",False,self.constraints.cfm)
+        common.set_xml_data(self._bullet_element,"cfm",False,self.constraints.cfm)
     
     def on_erp(self):
-        RD_globals.set_xml_data(self._bullet_element,"erp",False,self.constraints.erp)
+        common.set_xml_data(self._bullet_element,"erp",False,self.constraints.erp)
         
     def on_cont_surf_layer(self):
-        RD_globals.set_xml_data(self._bullet_element,"contact_surface_layer",False,self.constraints.contact_surface_layer)
+        common.set_xml_data(self._bullet_element,"contact_surface_layer",False,self.constraints.contact_surface_layer)
         
     def on_split_impulse(self):
-        RD_globals.set_xml_data(self._bullet_element,"split_impulse",False,self.constraints.split_impulse)
+        common.set_xml_data(self._bullet_element,"split_impulse",False,self.constraints.split_impulse)
     
     def on_splt_impl_pen_tr(self):
-        RD_globals.set_xml_data(self._bullet_element,"split_impulse_penetration_threshold",False,self.constraints.split_impulse_penetration_threshold)
+        common.set_xml_data(self._bullet_element,"split_impulse_penetration_threshold",False,self.constraints.split_impulse_penetration_threshold)
     
     def update_ui(self):
 #solver ui
-        self.solver.type=RD_globals.get_xml_data(self._bullet_element,"type",False)
-        self.solver.min_step_size=float(RD_globals.get_xml_data(self._bullet_element,"min_step_size",False))
-        self.solver.iters=int(RD_globals.get_xml_data(self._bullet_element,"iters",False))
-        self.solver.sor=float(RD_globals.get_xml_data(self._bullet_element,"sor",False))
+        self.solver.type=common.get_xml_data(self._bullet_element,"type",False)
+        self.solver.min_step_size=float(common.get_xml_data(self._bullet_element,"min_step_size",False))
+        self.solver.iters=int(common.get_xml_data(self._bullet_element,"iters",False))
+        self.solver.sor=float(common.get_xml_data(self._bullet_element,"sor",False))
 #constrains ui 
-        self.constraints.cfm=float(RD_globals.get_xml_data(self._bullet_element,"cfm",False))
-        self.constraints.erp=float(RD_globals.get_xml_data(self._bullet_element,"erp",False))
-        self.constraints.contact_surface_layer=float(RD_globals.get_xml_data(self._bullet_element,"contact_surface_layer"))
-        self.constraints.split_impulse_penetration_threshold=float(RD_globals.get_xml_data(self._bullet_element,
+        self.constraints.cfm=float(common.get_xml_data(self._bullet_element,"cfm",False))
+        self.constraints.erp=float(common.get_xml_data(self._bullet_element,"erp",False))
+        self.constraints.contact_surface_layer=float(common.get_xml_data(self._bullet_element,"contact_surface_layer"))
+        self.constraints.split_impulse_penetration_threshold=float(common.get_xml_data(self._bullet_element,
                                                                                            "split_impulse_penetration_threshold"))
-        if RD_globals.get_xml_data(self._bullet_element,"split_impulse")=='true':
+        if common.get_xml_data(self._bullet_element,"split_impulse")=='true':
             self.constraints.split_impulse=True
         else:
             self.constraints.split_impulse=False
@@ -579,58 +579,58 @@ class simbody:
 #callbacks 
     #properties 
     def on_min_step_size(self):
-        RD_globals.set_xml_data(self._simbody_element,"min_step_size",False,self.properties.min_step_size)
+        common.set_xml_data(self._simbody_element,"min_step_size",False,self.properties.min_step_size)
     
     def on_accuracy(self):
-        RD_globals.set_xml_data(self._simbody_element,"accuracy",False,self.properties.accuracy)
+        common.set_xml_data(self._simbody_element,"accuracy",False,self.properties.accuracy)
     
     def on_max_trans_vel(self):
-        RD_globals.set_xml_data(self._simbody_element,"max_transient_velocity",False,self.properties.maximum_transient_velocity)
+        common.set_xml_data(self._simbody_element,"max_transient_velocity",False,self.properties.maximum_transient_velocity)
     
     #contact 
     def on_stiffness(self):
-        RD_globals.set_xml_data(self._simbody_element,"stiffness",False,self.contact.stiffness)
+        common.set_xml_data(self._simbody_element,"stiffness",False,self.contact.stiffness)
         
     def on_plst_coef_rest(self):
-        RD_globals.set_xml_data(self._simbody_element,"plastic_coef_restitution",False,self.contact.plastic_coef_restitution)
+        common.set_xml_data(self._simbody_element,"plastic_coef_restitution",False,self.contact.plastic_coef_restitution)
         
     def on_plst_imp_vel(self):
-        RD_globals.set_xml_data(self._simbody_element,"plastic_impact_velocity",False,self.contact.plastic_impact_velocity)
+        common.set_xml_data(self._simbody_element,"plastic_impact_velocity",False,self.contact.plastic_impact_velocity)
         
     def on_ovr_imp_cpt_vel(self):
-        RD_globals.set_xml_data(self._simbody_element,"override_impact_capture_velocity",False,self.contact.override_impact_capture_velocity)
+        common.set_xml_data(self._simbody_element,"override_impact_capture_velocity",False,self.contact.override_impact_capture_velocity)
         
     def on_dissipation(self):
-        RD_globals.set_xml_data(self._simbody_element,"dissipation",False,self.contact.dissipation)
+        common.set_xml_data(self._simbody_element,"dissipation",False,self.contact.dissipation)
         
     def on_static_fric(self):
-        RD_globals.set_xml_data(self._simbody_element,"static_friction",False,self.contact.static_friction)
+        common.set_xml_data(self._simbody_element,"static_friction",False,self.contact.static_friction)
         
     def on_dyn_fric(self):
-        RD_globals.set_xml_data(self._simbody_element,"dynamic_friction",False,self.contact.dynamic_friction)
+        common.set_xml_data(self._simbody_element,"dynamic_friction",False,self.contact.dynamic_friction)
     
     def on_vsc_fric(self):
-        RD_globals.set_xml_data(self._simbody_element,"viscous_friction",False,self.contact.viscous_friction)
+        common.set_xml_data(self._simbody_element,"viscous_friction",False,self.contact.viscous_friction)
         
     def on_ovr_st_tr_vel(self):
-        RD_globals.set_xml_data(self._simbody_element,"override_stiction_transition_velocity",False,self.contact.override_stiction_transition_velocity)
+        common.set_xml_data(self._simbody_element,"override_stiction_transition_velocity",False,self.contact.override_stiction_transition_velocity)
     
 #update ui 
     def update_ui(self):
 #properties 
-        self.properties.min_step_size=float(RD_globals.get_xml_data(self._simbody_element,"min_step_size",False))
-        self.properties.accuracy=float(RD_globals.get_xml_data(self._simbody_element,"accuracy",False))
-        self.properties.maximum_transient_velocity=float(RD_globals.get_xml_data(self._simbody_element,"max_transient_velocity",False))
+        self.properties.min_step_size=float(common.get_xml_data(self._simbody_element,"min_step_size",False))
+        self.properties.accuracy=float(common.get_xml_data(self._simbody_element,"accuracy",False))
+        self.properties.maximum_transient_velocity=float(common.get_xml_data(self._simbody_element,"max_transient_velocity",False))
 #contact 
-        self.contact.stiffness=float(RD_globals.get_xml_data(self._simbody_element,"stiffness",False))
-        self.contact.plastic_coef_restitution=float(RD_globals.get_xml_data(self._simbody_element,"plastic_coef_restitution",False))
-        self.contact.plastic_impact_velocity=float(RD_globals.get_xml_data(self._simbody_element,"plastic_impact_velocity",False))
-        self.contact.override_impact_capture_velocity=float(RD_globals.get_xml_data(self._simbody_element,"override_impact_capture_velocity",False))
-        self.contact.dissipation=float(RD_globals.get_xml_data(self._simbody_element,"dissipation",False))
-        self.contact.static_friction=float(RD_globals.get_xml_data(self._simbody_element,"static_friction",False))
-        self.contact.dynamic_friction=float(RD_globals.get_xml_data(self._simbody_element,"dynamic_friction",False))
-        self.contact.viscous_friction=float(RD_globals.get_xml_data(self._simbody_element,"viscous_friction",False))
-        self.contact.override_stiction_transition_velocity=float(RD_globals.get_xml_data(self._simbody_element,"override_stiction_transition_velocity",False))
+        self.contact.stiffness=float(common.get_xml_data(self._simbody_element,"stiffness",False))
+        self.contact.plastic_coef_restitution=float(common.get_xml_data(self._simbody_element,"plastic_coef_restitution",False))
+        self.contact.plastic_impact_velocity=float(common.get_xml_data(self._simbody_element,"plastic_impact_velocity",False))
+        self.contact.override_impact_capture_velocity=float(common.get_xml_data(self._simbody_element,"override_impact_capture_velocity",False))
+        self.contact.dissipation=float(common.get_xml_data(self._simbody_element,"dissipation",False))
+        self.contact.static_friction=float(common.get_xml_data(self._simbody_element,"static_friction",False))
+        self.contact.dynamic_friction=float(common.get_xml_data(self._simbody_element,"dynamic_friction",False))
+        self.contact.viscous_friction=float(common.get_xml_data(self._simbody_element,"viscous_friction",False))
+        self.contact.override_stiction_transition_velocity=float(common.get_xml_data(self._simbody_element,"override_stiction_transition_velocity",False))
     
     @property
     def element(self):
@@ -657,14 +657,14 @@ class dart:
         self.ui.dart_collison_detector.currentTextChanged.connect(self.on_collision)
 #callbacks       
     def on_type(self):
-        RD_globals.set_xml_data(self._dart_element,"solver_type",False,self.properties.solver_type)
+        common.set_xml_data(self._dart_element,"solver_type",False,self.properties.solver_type)
         
     def on_collision(self):
-        RD_globals.set_xml_data(self._dart_element,"collision_detector",False,self.properties.collision_detector)
+        common.set_xml_data(self._dart_element,"collision_detector",False,self.properties.collision_detector)
     
     def update_ui(self):
-        self.properties.solver_type=RD_globals.get_xml_data(self._dart_element,"solver_type",False)
-        self.properties.collision_detector=RD_globals.get_xml_data(self._dart_element,"collision_detector",False)
+        self.properties.solver_type=common.get_xml_data(self._dart_element,"solver_type",False)
+        self.properties.collision_detector=common.get_xml_data(self._dart_element,"collision_detector",False)
     @property  
     def element(self):
         return self._dart_element
@@ -781,22 +781,22 @@ class physics:
         print("physics resets applied \n")
         
     def on_step_sz(self):
-        RD_globals.set_xml_data(self._physics_elem,"max_step_size",False,self.properties.max_step_size)
+        common.set_xml_data(self._physics_elem,"max_step_size",False,self.properties.max_step_size)
         
     def on_real_time_fct(self):
-        RD_globals.set_xml_data(self._physics_elem,"real_time_factor",False,self.properties.real_time_factor)
+        common.set_xml_data(self._physics_elem,"real_time_factor",False,self.properties.real_time_factor)
         
     def on_update_rt(self):
-        RD_globals.set_xml_data(self._physics_elem,"real_time_update_rate",False,self.properties.real_time_update_rate)
+        common.set_xml_data(self._physics_elem,"real_time_update_rate",False,self.properties.real_time_update_rate)
         
     def on_max_cnt(self):
-        RD_globals.set_xml_data(self._physics_elem,"max_contacts",False,self.properties.max_contacts)
+        common.set_xml_data(self._physics_elem,"max_contacts",False,self.properties.max_contacts)
   
 #ode radio button   
     def on_ode_radio_button(self):
         self._physics_elem.remove(self._physics_elem.iter(self.current_type_tag).__next__())
         self.current_type_tag="ode"
-        RD_globals.set_xml_data(self._physics_elem,self.tag,True,{"type":self.current_type_tag})
+        common.set_xml_data(self._physics_elem,self.tag,True,{"type":self.current_type_tag})
         self._physics_elem.append(self._ode.element)
 #ode  is at index 0 
         self.ui.physics_type_stack.setCurrentIndex(0)
@@ -805,7 +805,7 @@ class physics:
     def on_bullet_radio_button(self):
         self._physics_elem.remove(self._physics_elem.iter(self.current_type_tag).__next__())
         self.current_type_tag="bullet"
-        RD_globals.set_xml_data(self._physics_elem,self.tag,True,{"type":self.current_type_tag})
+        common.set_xml_data(self._physics_elem,self.tag,True,{"type":self.current_type_tag})
         self._physics_elem.append(self._bullet.element)
 #bullet is at index 1 
         self.ui.physics_type_stack.setCurrentIndex(1)
@@ -815,7 +815,7 @@ class physics:
     #remove current element
         self._physics_elem.remove(self._physics_elem.iter(self.current_type_tag).__next__())
         self.current_type_tag="simbody"
-        RD_globals.set_xml_data(self._physics_elem,self.tag,True,{"type":self.current_type_tag})
+        common.set_xml_data(self._physics_elem,self.tag,True,{"type":self.current_type_tag})
         self._physics_elem.append(self._simbody.element)
 #simbody is at index 2
         self.ui.physics_type_stack.setCurrentIndex(2)
@@ -825,17 +825,17 @@ class physics:
     #remove current element
         self._physics_elem.remove(self._physics_elem.iter(self.current_type_tag).__next__())
         self.current_type_tag="dart"
-        RD_globals.set_xml_data(self._physics_elem,self.tag,True,{"type":self.current_type_tag})
+        common.set_xml_data(self._physics_elem,self.tag,True,{"type":self.current_type_tag})
         self._physics_elem.append(self._dart.element)
 #dart is at index 3
         self.ui.physics_type_stack.setCurrentIndex(3)
 
 
     def update_ui(self):
-        self.properties.max_contacts=int(RD_globals.get_xml_data(self._physics_elem,"max_contacts",False))
-        self.properties.real_time_update_rate=float(RD_globals.get_xml_data(self._physics_elem,"real_time_update_rate",False))
-        self.properties.real_time_factor=float(RD_globals.get_xml_data(self._physics_elem,"real_time_factor",False))
-        self.properties.max_step_size=float(RD_globals.get_xml_data(self._physics_elem,"max_step_size"))
+        self.properties.max_contacts=int(common.get_xml_data(self._physics_elem,"max_contacts",False))
+        self.properties.real_time_update_rate=float(common.get_xml_data(self._physics_elem,"real_time_update_rate",False))
+        self.properties.real_time_factor=float(common.get_xml_data(self._physics_elem,"real_time_factor",False))
+        self.properties.max_step_size=float(common.get_xml_data(self._physics_elem,"max_step_size"))
        
        
     def reset(self,default:bool=True):
@@ -853,7 +853,7 @@ class physics:
         else:
             doc=FreeCAD.ActiveDocument
             _root_dict=doc.Robot_Description.Proxy.element_dict
-            el_dict=RD_globals.parse_dict(_root_dict,self.parent_path+[self.tag])
+            el_dict=common.parse_dict(_root_dict,self.parent_path+[self.tag])
 
             if el_dict is not None:
                 el_str=el_dict['elem_str']

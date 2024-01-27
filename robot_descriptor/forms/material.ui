@@ -1,353 +1,228 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Form</class>
- <widget class="QWidget" name="Form">
+ <class>material</class>
+ <widget class="QWidget" name="material">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>573</width>
-    <height>690</height>
+    <width>548</width>
+    <height>1545</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>material</string>
   </property>
-  <widget class="QGroupBox" name="material_script_groupBox">
+  <widget class="QWidget" name="widget" native="true">
    <property name="geometry">
     <rect>
-     <x>8</x>
-     <y>82</y>
-     <width>259</width>
-     <height>89</height>
+     <x>0</x>
+     <y>14</y>
+     <width>538</width>
+     <height>1536</height>
     </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>0</width>
-     <height>89</height>
-    </size>
-   </property>
-   <property name="title">
-    <string>script</string>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="checked">
-    <bool>false</bool>
-   </property>
-   <widget class="QLabel" name="material_script_uri_label">
-    <property name="geometry">
-     <rect>
-      <x>18</x>
-      <y>28</y>
-      <width>16</width>
-      <height>15</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>uri</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="materia_script_uri_input">
-    <property name="geometry">
-     <rect>
-      <x>52</x>
-      <y>24</y>
-      <width>175</width>
-      <height>23</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLabel" name="material_script_name_label">
-    <property name="geometry">
-     <rect>
-      <x>12</x>
-      <y>56</y>
-      <width>34</width>
-      <height>15</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>name</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="lineEdit_2">
-    <property name="geometry">
-     <rect>
-      <x>52</x>
-      <y>52</y>
-      <width>113</width>
-      <height>23</height>
-     </rect>
-    </property>
-   </widget>
-  </widget>
-  <widget class="QGroupBox" name="material_shader_groupBox">
-   <property name="geometry">
-    <rect>
-     <x>280</x>
-     <y>84</y>
-     <width>259</width>
-     <height>89</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>0</width>
-     <height>89</height>
-    </size>
-   </property>
-   <property name="title">
-    <string>shader</string>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="checked">
-    <bool>false</bool>
-   </property>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>12</x>
-      <y>32</y>
-      <width>57</width>
-      <height>15</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>TextLabel</string>
-    </property>
-   </widget>
-   <widget class="QComboBox" name="comboBox">
-    <property name="geometry">
-     <rect>
-      <x>80</x>
-      <y>28</y>
-      <width>79</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <item>
-     <property name="text">
-      <string>vertex</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>pixel</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>normal_map_object_space</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>normal_map_tangent_space</string>
-     </property>
-    </item>
-   </widget>
-   <widget class="QCheckBox" name="normnal_map_checkBox">
-    <property name="geometry">
-     <rect>
-      <x>8</x>
-      <y>60</y>
-      <width>100</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>normal_map</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="lineEdit">
-    <property name="geometry">
-     <rect>
-      <x>114</x>
-      <y>60</y>
-      <width>113</width>
-      <height>23</height>
-     </rect>
-    </property>
-   </widget>
-  </widget>
-  <widget class="QLabel" name="material_render_order_label">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>184</y>
-     <width>78</width>
-     <height>24</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>0</width>
-     <height>24</height>
-    </size>
-   </property>
-   <property name="text">
-    <string>render_order</string>
-   </property>
-  </widget>
-  <widget class="QDoubleSpinBox" name="material_render_order_sp">
-   <property name="geometry">
-    <rect>
-     <x>94</x>
-     <y>180</y>
-     <width>83</width>
-     <height>24</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>0</width>
-     <height>24</height>
-    </size>
-   </property>
-   <property name="toolTip">
-    <string>Set render order for coplanar polygons. The higher value will be rendered on top of the other coplanar polygons</string>
-   </property>
-  </widget>
-  <widget class="QCheckBox" name="material_lighting_checkbox">
-   <property name="geometry">
-    <rect>
-     <x>8</x>
-     <y>650</y>
-     <width>85</width>
-     <height>24</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>0</width>
-     <height>24</height>
-    </size>
-   </property>
-   <property name="text">
-    <string>lighting</string>
-   </property>
-  </widget>
-  <widget class="QGroupBox" name="material_ambient_groupbox">
-   <property name="geometry">
-    <rect>
-     <x>4</x>
-     <y>210</y>
-     <width>520</width>
-     <height>100</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>520</width>
-     <height>100</height>
-    </size>
    </property>
    <property name="maximumSize">
     <size>
-     <width>520</width>
-     <height>100</height>
+     <width>538</width>
+     <height>2000</height>
     </size>
    </property>
-   <property name="toolTip">
-    <string>background color</string>
-   </property>
-   <property name="title">
-    <string>ambient</string>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="checked">
-    <bool>false</bool>
-   </property>
-   <layout class="QGridLayout" name="gridLayout_25">
+   <layout class="QGridLayout" name="gridLayout_7">
+    <item row="0" column="0" colspan="2">
+     <widget class="QGroupBox" name="material_script_groupBox">
+      <property name="minimumSize">
+       <size>
+        <width>240</width>
+        <height>89</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>240</width>
+        <height>95</height>
+       </size>
+      </property>
+      <property name="title">
+       <string>script</string>
+      </property>
+      <property name="checkable">
+       <bool>true</bool>
+      </property>
+      <property name="checked">
+       <bool>false</bool>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_9">
+       <item row="0" column="0">
+        <widget class="QLabel" name="material_script_uri_label">
+         <property name="text">
+          <string>uri</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1" colspan="2">
+        <widget class="QLineEdit" name="material_script_uri_input">
+         <property name="maximumSize">
+          <size>
+           <width>160</width>
+           <height>16777215</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0" colspan="2">
+        <widget class="QLabel" name="material_script_name_label_2">
+         <property name="minimumSize">
+          <size>
+           <width>50</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>name</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="QLineEdit" name="material_script_name">
+         <property name="maximumSize">
+          <size>
+           <width>115</width>
+           <height>16777215</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="0" column="2" colspan="2">
+     <widget class="QGroupBox" name="material_shader_groupBox">
+      <property name="minimumSize">
+       <size>
+        <width>240</width>
+        <height>95</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>240</width>
+        <height>95</height>
+       </size>
+      </property>
+      <property name="title">
+       <string>shader</string>
+      </property>
+      <property name="checkable">
+       <bool>true</bool>
+      </property>
+      <property name="checked">
+       <bool>false</bool>
+      </property>
+      <widget class="QLabel" name="shader_type_label">
+       <property name="geometry">
+        <rect>
+         <x>12</x>
+         <y>30</y>
+         <width>57</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>type</string>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="shader_type">
+       <property name="geometry">
+        <rect>
+         <x>82</x>
+         <y>26</y>
+         <width>100</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>100</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <item>
+        <property name="text">
+         <string>pixel</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>vertex</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>normal_map_object_space</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>normal_map_tangent_space</string>
+        </property>
+       </item>
+      </widget>
+      <widget class="QCheckBox" name="normal_map_checkBox">
+       <property name="geometry">
+        <rect>
+         <x>12</x>
+         <y>57</y>
+         <width>100</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>normal_map</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="material_normal_map_input">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>118</x>
+         <y>57</y>
+         <width>100</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>100</width>
+         <height>16777215</height>
+        </size>
+       </property>
+      </widget>
+     </widget>
+    </item>
     <item row="1" column="0">
-     <widget class="QDoubleSpinBox" name="material_ambient_R_sp">
+     <widget class="QLabel" name="material_render_order_label">
       <property name="minimumSize">
        <size>
-        <width>0</width>
+        <width>85</width>
         <height>24</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>16777215</width>
-        <height>24</height>
-       </size>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="2">
-     <widget class="QLabel" name="material_ambient_B_label">
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>24</height>
+        <width>85</width>
+        <height>28</height>
        </size>
       </property>
       <property name="text">
-       <string>B</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="3">
-     <widget class="QLabel" name="material_ambient_A_label">
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>24</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>A</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="0">
-     <widget class="QLabel" name="material_ambient_R_label">
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>24</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>R</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="2">
-     <widget class="QDoubleSpinBox" name="material_ambient_B_sp">
-      <property name="minimumSize">
-       <size>
-        <width>0</width>
-        <height>24</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>24</height>
-       </size>
+       <string>render_order</string>
       </property>
      </widget>
     </item>
     <item row="1" column="1">
-     <widget class="QDoubleSpinBox" name="material_ambient_G_sp">
+     <widget class="QDoubleSpinBox" name="material_render_order_sp">
       <property name="minimumSize">
        <size>
         <width>0</width>
@@ -356,384 +231,631 @@
       </property>
       <property name="maximumSize">
        <size>
-        <width>16777215</width>
-        <height>24</height>
+        <width>100</width>
+        <height>105</height>
        </size>
       </property>
-     </widget>
-    </item>
-    <item row="0" column="1">
-     <widget class="QLabel" name="material_ambient_G_label">
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>24</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>G</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="3">
-     <widget class="QDoubleSpinBox" name="material_ambient_A_sp">
-      <property name="minimumSize">
-       <size>
-        <width>0</width>
-        <height>24</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>24</height>
-       </size>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="4">
-     <widget class="QPushButton" name="material_ambient_color_pkr">
-      <property name="maximumSize">
-       <size>
-        <width>45</width>
-        <height>16777215</height>
-       </size>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QGroupBox" name="material_diffuse_groupbox">
-   <property name="geometry">
-    <rect>
-     <x>6</x>
-     <y>322</y>
-     <width>520</width>
-     <height>100</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>520</width>
-     <height>100</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>520</width>
-     <height>100</height>
-    </size>
-   </property>
-   <property name="toolTip">
-    <string>background color</string>
-   </property>
-   <property name="title">
-    <string>diffuse</string>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="checked">
-    <bool>false</bool>
-   </property>
-   <layout class="QGridLayout" name="gridLayout_26">
-    <item row="1" column="0">
-     <widget class="QDoubleSpinBox" name="material_diffuse_R_sp">
-      <property name="minimumSize">
-       <size>
-        <width>0</width>
-        <height>24</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>24</height>
-       </size>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="2">
-     <widget class="QLabel" name="material_diffuse_B_label">
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>24</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>B</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="3">
-     <widget class="QLabel" name="material_diffuse_A_label">
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>24</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>A</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="0">
-     <widget class="QLabel" name="material_diffuse_R_label">
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>24</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>R</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
+      <property name="toolTip">
+       <string>Set render order for coplanar polygons. The higher value will be rendered on top of the other coplanar polygons</string>
       </property>
      </widget>
     </item>
     <item row="1" column="2">
-     <widget class="QDoubleSpinBox" name="material_diffuse_B_sp">
-      <property name="minimumSize">
-       <size>
-        <width>0</width>
-        <height>24</height>
-       </size>
-      </property>
+     <widget class="QLabel" name="material_shininess_label">
       <property name="maximumSize">
        <size>
-        <width>16777215</width>
-        <height>24</height>
-       </size>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="1">
-     <widget class="QDoubleSpinBox" name="material_diffuse_G_sp">
-      <property name="minimumSize">
-       <size>
-        <width>0</width>
-        <height>24</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>24</height>
-       </size>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="1">
-     <widget class="QLabel" name="material_diffuse_G_label">
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>24</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>G</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="3">
-     <widget class="QDoubleSpinBox" name="material_diffuse_A_sp">
-      <property name="minimumSize">
-       <size>
-        <width>0</width>
-        <height>24</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>24</height>
-       </size>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="4">
-     <widget class="QPushButton" name="material_diffuse_color_pkr">
-      <property name="maximumSize">
-       <size>
-        <width>45</width>
+        <width>56</width>
         <height>16777215</height>
        </size>
       </property>
       <property name="text">
-       <string/>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QGroupBox" name="material_specular_groupbox">
-   <property name="geometry">
-    <rect>
-     <x>6</x>
-     <y>434</y>
-     <width>520</width>
-     <height>100</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>520</width>
-     <height>100</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>520</width>
-     <height>100</height>
-    </size>
-   </property>
-   <property name="toolTip">
-    <string>background color</string>
-   </property>
-   <property name="title">
-    <string>specular</string>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="checked">
-    <bool>false</bool>
-   </property>
-   <layout class="QGridLayout" name="gridLayout_27">
-    <item row="1" column="0">
-     <widget class="QDoubleSpinBox" name="material_specular_R_sp">
-      <property name="minimumSize">
-       <size>
-        <width>0</width>
-        <height>24</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>24</height>
-       </size>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="2">
-     <widget class="QLabel" name="material_specular_B_label">
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>24</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>B</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="3">
-     <widget class="QLabel" name="material_specular_A_label">
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>24</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>A</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="0">
-     <widget class="QLabel" name="material_specular_R_label">
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>24</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>R</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="2">
-     <widget class="QDoubleSpinBox" name="material_specular_B_sp">
-      <property name="minimumSize">
-       <size>
-        <width>0</width>
-        <height>24</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>24</height>
-       </size>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="1">
-     <widget class="QDoubleSpinBox" name="material_specular_G_sp">
-      <property name="minimumSize">
-       <size>
-        <width>0</width>
-        <height>24</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>24</height>
-       </size>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="1">
-     <widget class="QLabel" name="material_specular_G_label">
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>24</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>G</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
+       <string>shininess</string>
       </property>
      </widget>
     </item>
     <item row="1" column="3">
-     <widget class="QDoubleSpinBox" name="material_specular_A_sp">
+     <widget class="QDoubleSpinBox" name="material_shininess_sp">
+      <property name="minimumSize">
+       <size>
+        <width>90</width>
+        <height>24</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>100</width>
+        <height>27</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="0" colspan="4">
+     <widget class="QGroupBox" name="material_diffuse_groupbox">
+      <property name="minimumSize">
+       <size>
+        <width>520</width>
+        <height>100</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>520</width>
+        <height>100</height>
+       </size>
+      </property>
+      <property name="toolTip">
+       <string>background color</string>
+      </property>
+      <property name="title">
+       <string>diffuse</string>
+      </property>
+      <property name="checkable">
+       <bool>true</bool>
+      </property>
+      <property name="checked">
+       <bool>false</bool>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_37">
+       <item row="1" column="3">
+        <widget class="QDoubleSpinBox" name="material_diffuse_A_sp">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="maximum">
+          <double>1.000000000000000</double>
+         </property>
+         <property name="singleStep">
+          <double>0.100000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="3">
+        <widget class="QLabel" name="material_diffuse_A_label">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>A</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QDoubleSpinBox" name="material_diffuse_G_sp">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="maximum">
+          <double>1.000000000000000</double>
+         </property>
+         <property name="singleStep">
+          <double>0.100000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QLabel" name="material_diffuse_B_label">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>B</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="4">
+        <widget class="QPushButton" name="material_diffuse_color_pkr">
+         <property name="maximumSize">
+          <size>
+           <width>45</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QDoubleSpinBox" name="material_diffuse_R_sp">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="maximum">
+          <double>1.000000000000000</double>
+         </property>
+         <property name="singleStep">
+          <double>0.100000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLabel" name="material_diffuse_G_label">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>G</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="QDoubleSpinBox" name="material_diffuse_B_sp">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="maximum">
+          <double>1.000000000000000</double>
+         </property>
+         <property name="singleStep">
+          <double>0.100000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="material_diffuse_R_label">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>R</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="4" column="0" colspan="4">
+     <widget class="QGroupBox" name="material_specular_groupbox">
+      <property name="minimumSize">
+       <size>
+        <width>520</width>
+        <height>100</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>520</width>
+        <height>100</height>
+       </size>
+      </property>
+      <property name="toolTip">
+       <string>background color</string>
+      </property>
+      <property name="title">
+       <string>specular</string>
+      </property>
+      <property name="checkable">
+       <bool>true</bool>
+      </property>
+      <property name="checked">
+       <bool>false</bool>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_40">
+       <item row="1" column="0">
+        <widget class="QDoubleSpinBox" name="material_specular_R_sp">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="maximum">
+          <double>1.000000000000000</double>
+         </property>
+         <property name="singleStep">
+          <double>0.100000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QLabel" name="material_specular_B_label">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>B</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="3">
+        <widget class="QLabel" name="material_specular_A_label">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>A</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="material_specular_R_label">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>R</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="QDoubleSpinBox" name="material_specular_B_sp">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="maximum">
+          <double>1.000000000000000</double>
+         </property>
+         <property name="singleStep">
+          <double>0.100000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QDoubleSpinBox" name="material_specular_G_sp">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="maximum">
+          <double>1.000000000000000</double>
+         </property>
+         <property name="singleStep">
+          <double>0.100000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLabel" name="material_specular_G_label">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>G</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="3">
+        <widget class="QDoubleSpinBox" name="material_specular_A_sp">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="maximum">
+          <double>1.000000000000000</double>
+         </property>
+         <property name="singleStep">
+          <double>0.100000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="4">
+        <widget class="QPushButton" name="material_specular_color_pkr">
+         <property name="maximumSize">
+          <size>
+           <width>45</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="5" column="0" colspan="4">
+     <widget class="QGroupBox" name="material_emissive_groupbox">
+      <property name="minimumSize">
+       <size>
+        <width>520</width>
+        <height>100</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>520</width>
+        <height>100</height>
+       </size>
+      </property>
+      <property name="toolTip">
+       <string>background color</string>
+      </property>
+      <property name="title">
+       <string>emissive</string>
+      </property>
+      <property name="checkable">
+       <bool>true</bool>
+      </property>
+      <property name="checked">
+       <bool>false</bool>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_39">
+       <item row="1" column="0">
+        <widget class="QDoubleSpinBox" name="material_emissive_R_sp">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="maximum">
+          <double>1.000000000000000</double>
+         </property>
+         <property name="singleStep">
+          <double>0.100000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QLabel" name="material_emissive_B_label">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>B</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="3">
+        <widget class="QLabel" name="material_emissive_A_label">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>A</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="material_emissive_R_label">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>R</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="QDoubleSpinBox" name="material_emissive_B_sp">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="maximum">
+          <double>1.000000000000000</double>
+         </property>
+         <property name="singleStep">
+          <double>0.100000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QDoubleSpinBox" name="material_emissive_G_sp">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="maximum">
+          <double>1.000000000000000</double>
+         </property>
+         <property name="singleStep">
+          <double>0.100000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLabel" name="material_emissive_G_label">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>G</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="3">
+        <widget class="QDoubleSpinBox" name="material_emissive_A_sp">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="maximum">
+          <double>1.000000000000000</double>
+         </property>
+         <property name="singleStep">
+          <double>0.100000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="4">
+        <widget class="QPushButton" name="material_emissive_color_pkr">
+         <property name="maximumSize">
+          <size>
+           <width>45</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="6" column="0">
+     <widget class="QCheckBox" name="material_lighting_checkbox">
       <property name="minimumSize">
        <size>
         <width>0</width>
@@ -742,377 +864,1110 @@
       </property>
       <property name="maximumSize">
        <size>
-        <width>16777215</width>
-        <height>24</height>
-       </size>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="4">
-     <widget class="QPushButton" name="material_specular_color_pkr">
-      <property name="maximumSize">
-       <size>
-        <width>45</width>
-        <height>16777215</height>
+        <width>120</width>
+        <height>25</height>
        </size>
       </property>
       <property name="text">
-       <string/>
+       <string>lighting</string>
       </property>
+     </widget>
+    </item>
+    <item row="6" column="2">
+     <widget class="QCheckBox" name="material_double_sided_checkBox">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>24</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>120</width>
+        <height>25</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>double_sided</string>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="0" colspan="4">
+     <widget class="QGroupBox" name="material_pbr_groupbox">
+      <property name="minimumSize">
+       <size>
+        <width>470</width>
+        <height>933</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>520</width>
+        <height>1100</height>
+       </size>
+      </property>
+      <property name="title">
+       <string>pbr</string>
+      </property>
+      <property name="checkable">
+       <bool>true</bool>
+      </property>
+      <property name="checked">
+       <bool>false</bool>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_8">
+       <item row="0" column="0">
+        <widget class="QGroupBox" name="material_metal_groupbox">
+         <property name="title">
+          <string>metal</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+         <property name="checked">
+          <bool>false</bool>
+         </property>
+         <layout class="QGridLayout" name="gridLayout">
+          <item row="0" column="0">
+           <widget class="QCheckBox" name="metal_albedo_map_checkBox">
+            <property name="text">
+             <string>albedo_map</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1" colspan="2">
+           <widget class="QLineEdit" name="metal_albedo_map_lineEdit">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QCheckBox" name="metal_roughness_map_checkBox">
+            <property name="text">
+             <string>roughness_map</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1" colspan="2">
+           <widget class="QLineEdit" name="metal_roughness_map_lineEdit">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QCheckBox" name="metal_roughness_checkBox">
+            <property name="text">
+             <string>roughness</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1" colspan="2">
+           <widget class="QLineEdit" name="metal_roughness_lineEdit">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QCheckBox" name="metalness_map_checkBox">
+            <property name="text">
+             <string>metalness_map</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1" colspan="2">
+           <widget class="QLineEdit" name="metalness_map_lineEdit">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QCheckBox" name="metalness_checkBox">
+            <property name="text">
+             <string>metalness</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1" colspan="2">
+           <widget class="QDoubleSpinBox" name="metalness_sp">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>250</width>
+              <height>24</height>
+             </size>
+            </property>
+            <property name="maximum">
+             <double>1.000000000000000</double>
+            </property>
+            <property name="singleStep">
+             <double>0.100000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0">
+           <widget class="QCheckBox" name="metal_environment_map_checkBox">
+            <property name="text">
+             <string>environment_map</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1" colspan="2">
+           <widget class="QLineEdit" name="metal_environment_map_lineEdit">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="0">
+           <widget class="QCheckBox" name="metal_ambient_occlusion_map_checkBox">
+            <property name="text">
+             <string>ambient_occlusion_map</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="1" colspan="2">
+           <widget class="QLineEdit" name="metal_ambient_occlusion_map_lineEdit">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="0">
+           <widget class="QCheckBox" name="metal_emissive_map_checkBox">
+            <property name="text">
+             <string>emissive_map</string>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="1" colspan="2">
+           <widget class="QLineEdit" name="metal_emissive_map_lineEdit">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="8" column="0" colspan="2">
+           <widget class="QGroupBox" name="metal_normal_map_groupBox">
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>140</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>210</width>
+              <height>140</height>
+             </size>
+            </property>
+            <property name="title">
+             <string>normal_map</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_2">
+             <item row="0" column="0" colspan="2">
+              <widget class="QLineEdit" name="metal_normal_map_lineEdit">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>24</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="metal_normal_map_type_label">
+               <property name="minimumSize">
+                <size>
+                 <width>50</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>75</width>
+                 <height>26</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>type</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QComboBox" name="metal_normal_map_type_comboBox">
+               <property name="minimumSize">
+                <size>
+                 <width>105</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>110</width>
+                 <height>27</height>
+                </size>
+               </property>
+               <item>
+                <property name="text">
+                 <string>tangent</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>object</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="8" column="2">
+           <widget class="QGroupBox" name="metal_light_map_groupBox">
+            <property name="minimumSize">
+             <size>
+              <width>220</width>
+              <height>75</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>250</width>
+              <height>140</height>
+             </size>
+            </property>
+            <property name="title">
+             <string>light_map</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_6">
+             <item row="0" column="0" colspan="2">
+              <widget class="QLineEdit" name="metal_light_map_lineEdit">
+               <property name="minimumSize">
+                <size>
+                 <width>135</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>175</width>
+                 <height>27</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="metal_uv_set_checkBox">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>uv_set</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QSpinBox" name="metal_uv_set_sp">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>90</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>120</width>
+                 <height>27</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QGroupBox" name="pbr_specular_groupBox">
+         <property name="minimumSize">
+          <size>
+           <width>400</width>
+           <height>370</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>450</width>
+           <height>370</height>
+          </size>
+         </property>
+         <property name="title">
+          <string>specular</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+         <property name="checked">
+          <bool>false</bool>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_3">
+          <item row="0" column="0">
+           <widget class="QCheckBox" name="specular_albedo_map_checkBox">
+            <property name="text">
+             <string>albedo_map</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QCheckBox" name="specular_map_checkBox">
+            <property name="text">
+             <string>specular_map</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QCheckBox" name="specular_glossiness_checkBox">
+            <property name="text">
+             <string>glossiness</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1" colspan="3">
+           <widget class="QDoubleSpinBox" name="specular_glossiness_sp">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>250</width>
+              <height>24</height>
+             </size>
+            </property>
+            <property name="maximum">
+             <double>1.000000000000000</double>
+            </property>
+            <property name="singleStep">
+             <double>0.100000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QCheckBox" name="specular_environment_map_checkBox">
+            <property name="text">
+             <string>environment_map</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0" colspan="2">
+           <widget class="QCheckBox" name="specular_ambient_occlusion_map_checkBox">
+            <property name="text">
+             <string>ambient_occlusion_map</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="3">
+           <widget class="QLineEdit" name="specular_ambient_occlusion_map_lineEdit">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0">
+           <widget class="QCheckBox" name="specular_emissive_map_checkBox">
+            <property name="text">
+             <string>emissive_map</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="0">
+           <widget class="QCheckBox" name="specular_glossiness_map_checkBox">
+            <property name="text">
+             <string>glossiness_map</string>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="0" colspan="2">
+           <widget class="QGroupBox" name="specular_light_map_groupBox">
+            <property name="minimumSize">
+             <size>
+              <width>200</width>
+              <height>100</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>210</width>
+              <height>130</height>
+             </size>
+            </property>
+            <property name="title">
+             <string>light_map</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_4">
+             <item row="0" column="0" colspan="2">
+              <widget class="QLineEdit" name="specular_light_map_lineEdit">
+               <property name="minimumSize">
+                <size>
+                 <width>100</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>170</width>
+                 <height>30</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="specular_uv_set_checkBox">
+               <property name="minimumSize">
+                <size>
+                 <width>50</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>95</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>uv_set</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QSpinBox" name="specular_uv_set_sp">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>85</width>
+                 <height>24</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="7" column="2" colspan="2">
+           <widget class="QGroupBox" name="specular_normal_map_groupBox">
+            <property name="minimumSize">
+             <size>
+              <width>200</width>
+              <height>94</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>300</width>
+              <height>130</height>
+             </size>
+            </property>
+            <property name="title">
+             <string>normal_map</string>
+            </property>
+            <property name="flat">
+             <bool>false</bool>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_5">
+             <item row="0" column="0" colspan="2">
+              <widget class="QLineEdit" name="specular_normal_map_lineEdit"/>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="specular_normal_map_type_label">
+               <property name="text">
+                <string>type</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QComboBox" name="specular_normal_map_type_comboBox">
+               <item>
+                <property name="text">
+                 <string>tangent</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>object</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="0" column="1" colspan="3">
+           <widget class="QLineEdit" name="specular_albedo_map_lineEdit">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1" colspan="3">
+           <widget class="QLineEdit" name="specular_map_lineEdit">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1" colspan="3">
+           <widget class="QLineEdit" name="specular_environment_map_lineEdit">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1" colspan="3">
+           <widget class="QLineEdit" name="specular_emissive_map_lineEdit">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="1" colspan="3">
+           <widget class="QLineEdit" name="specular_glossiness_map_lineEdit">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="2" column="0" colspan="4">
+     <widget class="QGroupBox" name="material_ambient_groupbox">
+      <property name="minimumSize">
+       <size>
+        <width>520</width>
+        <height>100</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>520</width>
+        <height>100</height>
+       </size>
+      </property>
+      <property name="toolTip">
+       <string>background color</string>
+      </property>
+      <property name="title">
+       <string>ambient</string>
+      </property>
+      <property name="checkable">
+       <bool>true</bool>
+      </property>
+      <property name="checked">
+       <bool>false</bool>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_38">
+       <item row="1" column="0">
+        <widget class="QDoubleSpinBox" name="material_ambient_R_sp">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="maximum">
+          <double>1.000000000000000</double>
+         </property>
+         <property name="singleStep">
+          <double>0.100000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QLabel" name="material_ambient_B_label">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>B</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="3">
+        <widget class="QLabel" name="material_ambient_A_label">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>A</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="material_ambient_R_label">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>R</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="QDoubleSpinBox" name="material_ambient_B_sp">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="maximum">
+          <double>1.000000000000000</double>
+         </property>
+         <property name="singleStep">
+          <double>0.100000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QDoubleSpinBox" name="material_ambient_G_sp">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="maximum">
+          <double>1.000000000000000</double>
+         </property>
+         <property name="singleStep">
+          <double>0.100000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLabel" name="material_ambient_G_label">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>G</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="3">
+        <widget class="QDoubleSpinBox" name="material_ambient_A_sp">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="maximum">
+          <double>1.000000000000000</double>
+         </property>
+         <property name="singleStep">
+          <double>0.100000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="4">
+        <widget class="QPushButton" name="material_ambient_color_pkr">
+         <property name="maximumSize">
+          <size>
+           <width>45</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </item>
    </layout>
-  </widget>
-  <widget class="QGroupBox" name="material_emissive_groupbox">
-   <property name="geometry">
-    <rect>
-     <x>6</x>
-     <y>544</y>
-     <width>520</width>
-     <height>100</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>520</width>
-     <height>100</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>520</width>
-     <height>100</height>
-    </size>
-   </property>
-   <property name="toolTip">
-    <string>background color</string>
-   </property>
-   <property name="title">
-    <string>emissive</string>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="checked">
-    <bool>false</bool>
-   </property>
-   <layout class="QGridLayout" name="gridLayout_28">
-    <item row="1" column="0">
-     <widget class="QDoubleSpinBox" name="material_emissive_R_sp">
-      <property name="minimumSize">
-       <size>
-        <width>0</width>
-        <height>24</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>24</height>
-       </size>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="2">
-     <widget class="QLabel" name="material_emissive_B_label">
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>24</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>B</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="3">
-     <widget class="QLabel" name="material_emissive_A_label">
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>24</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>A</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="0">
-     <widget class="QLabel" name="material_emissive_R_label">
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>24</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>R</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="2">
-     <widget class="QDoubleSpinBox" name="material_emissive_B_sp">
-      <property name="minimumSize">
-       <size>
-        <width>0</width>
-        <height>24</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>24</height>
-       </size>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="1">
-     <widget class="QDoubleSpinBox" name="material_emissive_G_sp">
-      <property name="minimumSize">
-       <size>
-        <width>0</width>
-        <height>24</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>24</height>
-       </size>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="1">
-     <widget class="QLabel" name="material_emissive_G_label">
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>24</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>G</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="3">
-     <widget class="QDoubleSpinBox" name="material_emissive_A_sp">
-      <property name="minimumSize">
-       <size>
-        <width>0</width>
-        <height>24</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>24</height>
-       </size>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="4">
-     <widget class="QPushButton" name="material_emissive_color_pkr">
-      <property name="maximumSize">
-       <size>
-        <width>45</width>
-        <height>16777215</height>
-       </size>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QLabel" name="material_shininess_label">
-   <property name="geometry">
-    <rect>
-     <x>382</x>
-     <y>184</y>
-     <width>57</width>
-     <height>15</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>shininess</string>
-   </property>
-  </widget>
-  <widget class="QDoubleSpinBox" name="material_shininess_sp">
-   <property name="geometry">
-    <rect>
-     <x>446</x>
-     <y>180</y>
-     <width>87</width>
-     <height>24</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>0</width>
-     <height>24</height>
-    </size>
-   </property>
-  </widget>
-  <widget class="QCheckBox" name="material_double_sided_checkBox">
-   <property name="geometry">
-    <rect>
-     <x>116</x>
-     <y>650</y>
-     <width>105</width>
-     <height>24</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>0</width>
-     <height>24</height>
-    </size>
-   </property>
-   <property name="text">
-    <string>double_sided</string>
-   </property>
-  </widget>
-  <widget class="QDoubleSpinBox" name="road_width_sp">
-   <property name="geometry">
-    <rect>
-     <x>60</x>
-     <y>52</y>
-     <width>62</width>
-     <height>24</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>0</width>
-     <height>24</height>
-    </size>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="points_browse_btn">
-   <property name="geometry">
-    <rect>
-     <x>446</x>
-     <y>20</y>
-     <width>80</width>
-     <height>24</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>0</width>
-     <height>24</height>
-    </size>
-   </property>
-   <property name="text">
-    <string>browse</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit_3">
-   <property name="geometry">
-    <rect>
-     <x>326</x>
-     <y>20</y>
-     <width>113</width>
-     <height>24</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>0</width>
-     <height>24</height>
-    </size>
-   </property>
-  </widget>
-  <widget class="QLabel" name="road_points_label">
-   <property name="geometry">
-    <rect>
-     <x>282</x>
-     <y>18</y>
-     <width>37</width>
-     <height>24</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>0</width>
-     <height>24</height>
-    </size>
-   </property>
-   <property name="text">
-    <string>points</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="road_width_label">
-   <property name="geometry">
-    <rect>
-     <x>18</x>
-     <y>52</y>
-     <width>34</width>
-     <height>24</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>0</width>
-     <height>24</height>
-    </size>
-   </property>
-   <property name="text">
-    <string>width</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="road_name">
-   <property name="geometry">
-    <rect>
-     <x>62</x>
-     <y>18</y>
-     <width>113</width>
-     <height>24</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>0</width>
-     <height>24</height>
-    </size>
-   </property>
-  </widget>
-  <widget class="QLabel" name="road_name_label">
-   <property name="geometry">
-    <rect>
-     <x>16</x>
-     <y>18</y>
-     <width>34</width>
-     <height>24</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>0</width>
-     <height>24</height>
-    </size>
-   </property>
-   <property name="text">
-    <string>name</string>
-   </property>
   </widget>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>metal_albedo_map_checkBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>metal_albedo_map_lineEdit</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>140</x>
+     <y>689</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>356</x>
+     <y>689</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>metal_roughness_map_checkBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>metal_roughness_map_lineEdit</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>140</x>
+     <y>728</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>356</x>
+     <y>728</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>metal_roughness_checkBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>metal_roughness_lineEdit</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>140</x>
+     <y>767</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>356</x>
+     <y>767</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>metalness_map_checkBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>metalness_map_lineEdit</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>140</x>
+     <y>806</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>356</x>
+     <y>806</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>metalness_checkBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>metalness_sp</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>140</x>
+     <y>845</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>356</x>
+     <y>845</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>metal_environment_map_checkBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>metal_environment_map_lineEdit</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>140</x>
+     <y>885</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>356</x>
+     <y>885</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>metal_ambient_occlusion_map_checkBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>metal_ambient_occlusion_map_lineEdit</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>140</x>
+     <y>924</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>356</x>
+     <y>924</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>metal_emissive_map_checkBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>metal_emissive_map_lineEdit</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>140</x>
+     <y>963</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>356</x>
+     <y>963</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>metal_uv_set_checkBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>metal_uv_set_sp</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>321</x>
+     <y>1091</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>422</x>
+     <y>1091</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>normal_map_checkBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>material_normal_map_input</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>334</x>
+     <y>89</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>440</x>
+     <y>89</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>specular_albedo_map_checkBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>specular_albedo_map_lineEdit</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>122</x>
+     <y>1200</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>338</x>
+     <y>1200</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>specular_map_checkBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>specular_map_lineEdit</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>122</x>
+     <y>1229</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>338</x>
+     <y>1229</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>specular_glossiness_map_checkBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>specular_glossiness_map_lineEdit</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>122</x>
+     <y>1375</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>338</x>
+     <y>1375</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>specular_glossiness_checkBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>specular_glossiness_sp</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>122</x>
+     <y>1258</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>338</x>
+     <y>1258</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>specular_environment_map_checkBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>specular_environment_map_lineEdit</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>122</x>
+     <y>1288</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>338</x>
+     <y>1288</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>specular_ambient_occlusion_map_checkBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>specular_ambient_occlusion_map_lineEdit</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>155</x>
+     <y>1317</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>374</x>
+     <y>1317</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>specular_emissive_map_checkBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>specular_emissive_map_lineEdit</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>122</x>
+     <y>1346</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>338</x>
+     <y>1346</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>specular_uv_set_checkBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>specular_uv_set_sp</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>110</x>
+     <y>1484</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>201</x>
+     <y>1484</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

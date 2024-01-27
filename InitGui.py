@@ -22,9 +22,9 @@ class RobotDescriptor (Workbench):
 		__dirname__ = os.path.join(FreeCAD.getUserAppDataDir(), "Mod", "RobotDescriptor")
 		#print("got dir:" + __dirname__);
   
-		from robot_descriptor import initialize 
+		from robot_descriptor import initialize ,model_editor
 		from robot_descriptor.sdf_elements import world
-		self.list = ['RD_initialize','world_properties']
+		self.list = ['RD_initialize','world_properties','Model_Editor']
 		self.appendToolbar("RobotDescription",self.list) # creates a new toolbar with your commands
 		self.appendMenu("Robot Description",self.list) # creates a new menu
 		#self.appendMenu(["Robot Description","Tools"],self.list) # appends a submenu to an existing menu

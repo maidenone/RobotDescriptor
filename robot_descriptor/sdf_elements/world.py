@@ -5,11 +5,11 @@ from PySide import QtGui,QtCore
 import copy
 
 import xml.etree.ElementTree as ET
-from  .. import RD_globals 
+from  .. import common 
 #reponsible for creating an element tree using xml.etree
-from ..RD_parser import  initialize_element_tree
+from ..RD_utils import  initialize_element_tree
 
-_icon_dir__=os.path.join(RD_globals.ICON_PATH,"world_properties.svg")
+_icon_dir__=os.path.join(common.ICON_PATH,"world_properties.svg")
 
 
 '''setters will do nothing for optional part '''
@@ -104,13 +104,13 @@ class world_properties():
 #------------------------------------------------------ 
 class world():
     def __init__(self):
-        super(world,self).__init__()
+        
         self.parent_path=["sdf"]
         self.tag='world'
         self.file_name="world.sdf"
-
-        self.ui_path=os.path.join(RD_globals.UI_PATH,"world.ui")
+        self.ui_path=os.path.join(common.UI_PATH,"world.ui")
         self.world_form=FreeCADGui.PySideUic.loadUi(self.ui_path)
+        #get main window for  use in aligning 
         mw=FreeCADGui.getMainWindow()
         #centre dialog to main window 
         self.world_form.move(
@@ -142,19 +142,21 @@ class world():
 
         self.configUI()
 #update ui with previously configured values if available     
+       
         self.reset(False)
-        
+        #display window
+        self.world_form.exec_()
 #window close event  this is called when the (x) widget icon is pressed 
     def closeEvent(self, event):
         print('closing widget\n')
         event.accept()
 
     def update_ui(self):
-        self.properties.name=RD_globals.get_xml_data(self.world_elem,["world","name"],True)
-        self.properties.gravity=RD_globals.get_xml_data(self.world_elem,"gravity",False)
-        self.properties.wind=RD_globals.get_xml_data(self.world_elem,"linear_velocity",False)
-        self.properties.audio=RD_globals.get_xml_data(self.world_elem,"device",False)
-        self.properties.magnetic_field=RD_globals.get_xml_data(self.world_elem,"magnetic_field",False)
+        self.properties.name=common.get_xml_data(self.world_elem,["world","name"],True)
+        self.properties.gravity=common.get_xml_data(self.world_elem,"gravity",False)
+        self.properties.wind=common.get_xml_data(self.world_elem,"linear_velocity",False)
+        self.properties.audio=common.get_xml_data(self.world_elem,"device",False)
+        self.properties.magnetic_field=common.get_xml_data(self.world_elem,"magnetic_field",False)
         
 #this will be called by the reset callback 
     def reset(self,default:bool=True):
@@ -166,7 +168,7 @@ class world():
         else:
             doc=FreeCAD.ActiveDocument
             _root_dict=doc.Robot_Description.Proxy.element_dict
-            el_dict=RD_globals.parse_dict(_root_dict,self.parent_path+[self.tag])
+            el_dict=common.parse_dict(_root_dict,self.parent_path+[self.tag])
             if el_dict is not None:
                 el_str=el_dict['elem_str']
                 self.merge(el_str)
@@ -177,7 +179,7 @@ class world():
         self.update_ui()
 
     def merge(self, el_str):
-        RD_globals.merge_elements(self.world_elem,ET.fromstring(el_str))
+        common.merge_elements(self.world_elem,ET.fromstring(el_str))
        
     def configUI(self):
         self.world_form.world_name_input.textEdited.connect(self.on_world_name)
@@ -204,8 +206,7 @@ class world():
  # reset Pb
         self.world_form.world_reset_btn.clicked.connect(self.on_reset)
         
-        #display window
-        self.world_form.exec_()
+        
         
  
     def update_element(self):
@@ -230,15 +231,15 @@ class world():
         
     def on_world_name(self):
         name=self.properties.name
-        RD_globals.set_xml_data(self.world_elem,"world",True,{"name":name})  
+        common.set_xml_data(self.world_elem,"world",True,{"name":name})  
     def on_gravity(self):
-        RD_globals.set_xml_data(self.world_elem,"gravity",False,self.properties.gravity)
+        common.set_xml_data(self.world_elem,"gravity",False,self.properties.gravity)
     def on_magn(self):
-        RD_globals.set_xml_data(self.world_elem,"magnetic_field",False,self.properties.magnetic_field)
+        common.set_xml_data(self.world_elem,"magnetic_field",False,self.properties.magnetic_field)
     def on_wind(self):
-        RD_globals.set_xml_data(self.world_elem,"linear_velocity",False,self.properties.wind)
+        common.set_xml_data(self.world_elem,"linear_velocity",False,self.properties.wind)
     def on_audio(self):
-        RD_globals.set_xml_data(self.world_elem,"device",False,self.properties.audio)
+        common.set_xml_data(self.world_elem,"device",False,self.properties.audio)
 
 #ok push button pressed callback 
     def on_ok(self):
@@ -248,33 +249,33 @@ class world():
     def on_apply_pb(self):
         #read string element data from RD_description proxy 
         updated_elem=self.update_element()
-        RD_globals.update_dictionary(self.parent_path,self.tag,updated_elem)
+        common.update_dictionary(self.parent_path,self.tag,updated_elem)
             
 #append elements in hierachy as they are supposed to appear in the tree e.g world is appended 
 #before atmosphere since its atmospheres parent, this helpsFreeCADGui.PySideUic.loadUi(self.ui_path,self) reduce the complexity 
 #of having to implement a way of  ensuring parents are available 
 # dont  add atmosphere element if the group box is not checked
         if self.atmosphere.is_checked():
-            RD_globals.update_dictionary(self.atmosphere.parent_path,self.atmosphere.tag,self.atmosphere.atmosphere_element)
+            common.update_dictionary(self.atmosphere.parent_path,self.atmosphere.tag,self.atmosphere.atmosphere_element)
         
 #add physics properties
-        RD_globals.update_dictionary(self._physics.parent_path,self._physics.tag,self._physics.element)
+        common.update_dictionary(self._physics.parent_path,self._physics.tag,self._physics.element)
 #add spherical coordiates     
         if self.world_form.spherical_coordinates_groupbox.isChecked():
-            RD_globals.update_dictionary(
+            common.update_dictionary(
                                          self._spherical_coordinates.parent_path,
                                          self._spherical_coordinates.tag_name,
                                          self._spherical_coordinates.spherical_cood_elem)
 
 #dont attempt to add a lights if there are no light sources    
         if len(self._lights.lights) >0:
-            RD_globals.update_dictionary(self._lights.parent_path,self._lights.tag,self._lights.element)
+            common.update_dictionary(self._lights.parent_path,self._lights.tag,self._lights.element)
 #add scene based on state of a checkbox 
         if  self.world_form.enable_scene_checkBox.isChecked():
-            RD_globals.update_dictionary(self._scene.parent_path,self._scene.tag,self._scene.element)
+            common.update_dictionary(self._scene.parent_path,self._scene.tag,self._scene.element)
 #append the  road element 
-        if self.world_form.enable_road_checkbox.isChecked():
-            RD_globals.update_dictionary(self._road.parent_path,self._road.tag,self._road.element)
+        if self.world_form.include_material_info.isChecked():
+            common.update_dictionary(self._road.parent_path,self._road.tag,self._road.element)
             
         print("updated\n")
     
