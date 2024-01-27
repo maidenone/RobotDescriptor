@@ -6,7 +6,8 @@ from PySide import QtCore
 import xml.etree.ElementTree as ET
 import FreeCADGui
 import os
-
+from PySide2.QtWidgets  import QTreeView
+from PySide2.QtGui import QStandardItemModel
 
 class link_properties:
     def __init__(self,ui) -> None:
@@ -252,6 +253,7 @@ class link:
         self.ui=parent_ui
         self.file_name='link.sdf'
         self.tag='link'
+    
         #models will be store as children of sdf 
         self.parent_path=['sdf','model']
         self.properties=link_properties(self.ui)
@@ -262,17 +264,12 @@ class link:
         self._root_dict=elem_struct
         self.configUI()
         self.UpdateUi()
-    
-    def get_default_elem(self):
-        default_el=copy.deepcopy(self.link_element)
-        default_el.append(copy.deepcopy(self._inertial_element))
-        return default_el
-    
-    def update_elem(self,new_elem:ET.Element):
-        inertial=new_elem.find("inertial")
-        if inertial is not None:
-            self.link_element=new_elem
-            self._inertial_element=inertial
+# this will be called for the item 
+
+    def update_elements(self,item):
+        self.link_element=item._link_element
+        self._inertial_element=item._inertial_element
+        #update the ui after reset
         self.UpdateUi()
         
     def configUI(self):
@@ -283,38 +280,38 @@ class link:
         self.ui.velocity_decay_linear_sp.valueChanged.connect(self.onLinear)
         self.ui.link_angular_vel_decay_sp.valueChanged.connect(self.onAngular)
         #inertial
-        # fam=self.link_element.find(".//inertia/fluid_added_mass")
+        # fam=self._inertial_element.find(".//fluid_added_mass")
         # fam  every time the lmbda is called fam gets updated 
-        self.ui.fam_xx_sp.valueChanged.connect(lambda val,fam=self.link_element.find(".//inertia/fluid_added_mass"): common.set_xml_data(fam,'xx',False,self.properties.fam_xx) )
-        self.ui.fam_xy_sp.valueChanged.connect(lambda val,fam=self.link_element.find(".//inertia/fluid_added_mass"): common.set_xml_data(fam,'xy',False,self.properties.fam_xy) )
-        self.ui.fam_xz_sp.valueChanged.connect(lambda val,fam=self.link_element.find(".//inertia/fluid_added_mass"): common.set_xml_data(fam,'xz',False,self.properties.fam_xz) )
+        self.ui.fam_xx_sp.valueChanged.connect(lambda val,fam=self._inertial_element.find(".//fluid_added_mass"): common.set_xml_data(fam,'xx',False,self.properties.fam_xx) )
+        self.ui.fam_xy_sp.valueChanged.connect(lambda val,fam=self._inertial_element.find(".//fluid_added_mass"): common.set_xml_data(fam,'xy',False,self.properties.fam_xy) )
+        self.ui.fam_xz_sp.valueChanged.connect(lambda val,fam=self._inertial_element.find(".//fluid_added_mass"): common.set_xml_data(fam,'xz',False,self.properties.fam_xz) )
         
-        self.ui.fam_xp_sp.valueChanged.connect(lambda val,fam=self.link_element.find(".//inertia/fluid_added_mass"): common.set_xml_data(fam,'xp',False,self.properties.fam_xp) )
-        self.ui.fam_xq_sp.valueChanged.connect(lambda val,fam=self.link_element.find(".//inertia/fluid_added_mass"): common.set_xml_data(fam,'xq',False,self.properties.fam_xq) )
-        self.ui.fam_xr_sp.valueChanged.connect(lambda val,fam=self.link_element.find(".//inertia/fluid_added_mass"): common.set_xml_data(fam,'xr',False,self.properties.fam_xr) )
+        self.ui.fam_xp_sp.valueChanged.connect(lambda val,fam=self._inertial_element.find(".//fluid_added_mass"): common.set_xml_data(fam,'xp',False,self.properties.fam_xp) )
+        self.ui.fam_xq_sp.valueChanged.connect(lambda val,fam=self._inertial_element.find(".//fluid_added_mass"): common.set_xml_data(fam,'xq',False,self.properties.fam_xq) )
+        self.ui.fam_xr_sp.valueChanged.connect(lambda val,fam=self._inertial_element.find(".//fluid_added_mass"): common.set_xml_data(fam,'xr',False,self.properties.fam_xr) )
         
         #y
-        self.ui.fam_yy_sp.valueChanged.connect(lambda val,fam=self.link_element.find(".//inertia/fluid_added_mass"):common.set_xml_data(fam,'yy',False,self.properties.fam_yy))
-        self.ui.fam_yz_sp.valueChanged.connect(lambda val,fam=self.link_element.find(".//inertia/fluid_added_mass"):common.set_xml_data(fam,'yz',False,self.properties.fam_yz))
+        self.ui.fam_yy_sp.valueChanged.connect(lambda val,fam=self._inertial_element.find(".//fluid_added_mass"):common.set_xml_data(fam,'yy',False,self.properties.fam_yy))
+        self.ui.fam_yz_sp.valueChanged.connect(lambda val,fam=self._inertial_element.find(".//fluid_added_mass"):common.set_xml_data(fam,'yz',False,self.properties.fam_yz))
         
-        self.ui.fam_yp_sp.valueChanged.connect(lambda val,fam=self.link_element.find(".//inertia/fluid_added_mass"):common.set_xml_data(fam,'yp',False,self.properties.fam_yp))
-        self.ui.fam_yq_sp.valueChanged.connect(lambda val,fam=self.link_element.find(".//inertia/fluid_added_mass"):common.set_xml_data(fam,'yq',False,self.properties.fam_yq))
-        self.ui.fam_yr_sp.valueChanged.connect(lambda val,fam=self.link_element.find(".//inertia/fluid_added_mass"):common.set_xml_data(fam,'yr',False,self.properties.fam_yr))
+        self.ui.fam_yp_sp.valueChanged.connect(lambda val,fam=self._inertial_element.find(".//fluid_added_mass"):common.set_xml_data(fam,'yp',False,self.properties.fam_yp))
+        self.ui.fam_yq_sp.valueChanged.connect(lambda val,fam=self._inertial_element.find(".//fluid_added_mass"):common.set_xml_data(fam,'yq',False,self.properties.fam_yq))
+        self.ui.fam_yr_sp.valueChanged.connect(lambda val,fam=self._inertial_element.find(".//fluid_added_mass"):common.set_xml_data(fam,'yr',False,self.properties.fam_yr))
         
         #z
-        self.ui.fam_zz_sp.valueChanged.connect(lambda val,fam=self.link_element.find(".//inertia/fluid_added_mass"): common.set_xml_data(fam,'zz',False,self.properties.fam_zz))
-        self.ui.fam_zp_sp.valueChanged.connect(lambda val,fam=self.link_element.find(".//inertia/fluid_added_mass"): common.set_xml_data(fam,'zp',False,self.properties.fam_zp))
-        self.ui.fam_zq_sp.valueChanged.connect(lambda val,fam=self.link_element.find(".//inertia/fluid_added_mass"): common.set_xml_data(fam,'zq',False,self.properties.fam_zq))
-        self.ui.fam_zr_sp.valueChanged.connect(lambda val,fam=self.link_element.find(".//inertia/fluid_added_mass"): common.set_xml_data(fam,'zr',False,self.properties.fam_zr))
+        self.ui.fam_zz_sp.valueChanged.connect(lambda val,fam=self._inertial_element.find(".//fluid_added_mass"): common.set_xml_data(fam,'zz',False,self.properties.fam_zz))
+        self.ui.fam_zp_sp.valueChanged.connect(lambda val,fam=self._inertial_element.find(".//fluid_added_mass"): common.set_xml_data(fam,'zp',False,self.properties.fam_zp))
+        self.ui.fam_zq_sp.valueChanged.connect(lambda val,fam=self._inertial_element.find(".//fluid_added_mass"): common.set_xml_data(fam,'zq',False,self.properties.fam_zq))
+        self.ui.fam_zr_sp.valueChanged.connect(lambda val,fam=self._inertial_element.find(".//fluid_added_mass"): common.set_xml_data(fam,'zr',False,self.properties.fam_zr))
         
         #p 
-        self.ui.fam_pp_sp.valueChanged.connect(lambda val,fam=self.link_element.find(".//inertia/fluid_added_mass"): common.set_xml_data(fam,'pp',False,self.properties.fam_pp))
-        self.ui.fam_pq_sp.valueChanged.connect(lambda val,fam=self.link_element.find(".//inertia/fluid_added_mass"): common.set_xml_data(fam,'pq',False,self.properties.fam_pq))
-        self.ui.fam_pr_sp.valueChanged.connect(lambda val,fam=self.link_element.find(".//inertia/fluid_added_mass"): common.set_xml_data(fam,'pr',False,self.properties.fam_pr))
+        self.ui.fam_pp_sp.valueChanged.connect(lambda val,fam=self._inertial_element.find(".//fluid_added_mass"): common.set_xml_data(fam,'pp',False,self.properties.fam_pp))
+        self.ui.fam_pq_sp.valueChanged.connect(lambda val,fam=self._inertial_element.find(".//fluid_added_mass"): common.set_xml_data(fam,'pq',False,self.properties.fam_pq))
+        self.ui.fam_pr_sp.valueChanged.connect(lambda val,fam=self._inertial_element.find(".//fluid_added_mass"): common.set_xml_data(fam,'pr',False,self.properties.fam_pr))
         
-        self.ui.fam_qq_sp.valueChanged.connect(lambda val,fam=self.link_element.find(".//inertia/fluid_added_mass"): common.set_xml_data(fam,'qq',False,self.properties.fam_qq))
-        self.ui.fam_qr_sp.valueChanged.connect(lambda val,fam=self.link_element.find(".//inertia/fluid_added_mass"): common.set_xml_data(fam,'qr',False,self.properties.fam_qr))
-        self.ui.fam_rr_sp.valueChanged.connect(lambda val,fam=self.link_element.find(".//inertia/fluid_added_mass"): common.set_xml_data(fam,'rr',False,self.properties.fam_rr))
+        self.ui.fam_qq_sp.valueChanged.connect(lambda val,fam=self._inertial_element.find(".//fluid_added_mass"): common.set_xml_data(fam,'qq',False,self.properties.fam_qq))
+        self.ui.fam_qr_sp.valueChanged.connect(lambda val,fam=self._inertial_element.find(".//fluid_added_mass"): common.set_xml_data(fam,'qr',False,self.properties.fam_qr))
+        self.ui.fam_rr_sp.valueChanged.connect(lambda val,fam=self._inertial_element.find(".//fluid_added_mass"): common.set_xml_data(fam,'rr',False,self.properties.fam_rr))
         
         
   

@@ -14,7 +14,7 @@ class visual_properties:
 #shadows        
     @property
     def cast_shadows(self):
-        return  str('true') if self.ui.visual_cast_shadows_checkBox.isCheked() else str('false')
+        return  str('true') if self.ui.visual_cast_shadows_checkBox.isChecked() else str('false')
     @cast_shadows.setter
     def cast_shadows(self,state):
         self.ui.visual_cast_shadows_checkBox.setCheckState(QtCore.Qt.Checked) if state=='true' else self.ui.visual_cast_shadows_checkBox.setCheckState(QtCore.Qt.Unchecked)
@@ -70,13 +70,11 @@ class visual:
         self._material_cls=material.material(self._material_ui)
         #add widget to parent widget 
         self.ui.material_scroll.setWidget(self._material_ui.widget)
+        self.configUI()
         self.updateUI()
-    
-    def get_default_elem(self):
-        default_el=copy.deepcopy(self._visual_elem)
-        default_el.append(self._material_cls.get_default_elem())
-        return default_el
-    
+        
+        
+  
     def configUI(self):
         self.ui.visual_laser_retro_sp.valueChanged.connect(self.on_laser_retro)
         self.ui.visual_transparency_sp.valueChanged.connect(self.on_transparency)
@@ -84,16 +82,20 @@ class visual:
         self.ui.visual_cast_shadows_checkBox.stateChanged.connect(self.on_cast_shadows)
         
     def on_laser_retro(self):
-        common.set_xml_data(self._visual_elem,"laser_retro",False,self.properties.laser_retro)
+        element=self._visual_elem
+        common.set_xml_data(element,"laser_retro",False,self.properties.laser_retro)
         
     def on_transparency(self):
-        common.set_xml_data(self._visual_elem,"transparency",False,self.properties.transparency)
+        element=self._visual_elem
+        common.set_xml_data(element,"transparency",False,self.properties.transparency)
         
     def on_visibility_flags(self):
-        common.set_xml_data(self._visual_elem,"visibility_flags",False,self.properties.visibility_flags)
+        element=self._visual_elem
+        common.set_xml_data(element,"visibility_flags",False,self.properties.visibility_flags)
         
     def on_cast_shadows(self):
-        common.set_xml_data(self._visual_elem,"cast_shadows",False,self.properties.cast_shadows)
+        element=self._visual_elem
+        common.set_xml_data(element,"cast_shadows",False,self.properties.cast_shadows)
         
     
     def updateUI(self):
@@ -104,11 +106,9 @@ class visual:
         # self.properties.visibility_flags=common.get_xml_data(self._visual_elem,"visibility_flags",False)
         self.properties.cast_shadows=common.get_xml_data(self._visual_elem,"cast_shadows",False)
         
-    def update_elem(self,new_elem:ET.Element):
-        mat=new_elem.find("material")
-        if mat is not None:
-            self._material_cls.update_elem(mat)
-            self._visual_elem=new_elem
+    def update_elements(self,item):
+        self._visual_elem=item._visual_element
+        self._material_cls.update_elements(item)
         self.updateUI()
         
     @property

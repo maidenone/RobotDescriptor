@@ -421,8 +421,6 @@ class surface:
         self.configUI()
         self.updateUI()
         
-    def get_default_elem(self):
-        return copy.deepcopy(self.surface_element)
     
     def configUI(self):
         #bounce 
@@ -435,39 +433,39 @@ class surface:
         
         #torsional
         # torsional=self.surface_element.find(".//friction/torsional")
-        self.ui.torsional_coeff_sp.valueChanged.connect(lambda val,torsional=self.surface_element.find(".//friction/torsional"): 
-            common.set_xml_data(torsional,"coefficient",False,self.properties.coefficient))
-        self.ui.use_patch_radius_cb.stateChanged.connect(lambda  val,torsional=self.surface_element.find(".//friction/torsional"):
-            common.set_xml_data(torsional,"use_patch_radius",False,self.properties.use_patch_radius))
+        self.ui.torsional_coeff_sp.valueChanged.connect(lambda val: 
+            common.set_xml_data(self.surface_element.find(".//friction/torsional"),"coefficient",False,self.properties.coefficient))
+        self.ui.use_patch_radius_cb.stateChanged.connect(lambda  val:
+            common.set_xml_data(self.surface_element.find(".//friction/torsional"),"use_patch_radius",False,self.properties.use_patch_radius))
         
-        self.ui.torsional_patch_radius_sp.valueChanged.connect(lambda val,torsional=self.surface_element.find(".//friction/torsional"):
-            common.set_xml_data(torsional,"patch_radius",False,self.properties.patch_radius))
+        self.ui.torsional_patch_radius_sp.valueChanged.connect(lambda val:
+            common.set_xml_data(self.surface_element.find(".//friction/torsional"),"patch_radius",False,self.properties.patch_radius))
         
-        self.ui.torsional_surface_radius_sp.valueChanged.connect(lambda val,torsional=self.surface_element.find(".//friction/torsional"): 
-            common.set_xml_data(torsional,"surface_radius",False,self.properties.surface_radius))
+        self.ui.torsional_surface_radius_sp.valueChanged.connect(lambda val: 
+            common.set_xml_data(self.surface_element.find(".//friction/torsional"),"surface_radius",False,self.properties.surface_radius))
         
-        self.ui.torsional_ode_slip_sp.valueChanged.connect(lambda val,torsional=self.surface_element.find(".//friction/torsional"):
-            common.set_xml_data(torsional,"slip",False,self.properties.torsional_slip))
+        self.ui.torsional_ode_slip_sp.valueChanged.connect(lambda val:
+            common.set_xml_data(self.surface_element.find(".//friction/torsional"),"slip",False,self.properties.torsional_slip))
         
         #frictional_ode
         # frictional_ode=self.surface_element.find(".//friction/ode")
         
-        self.ui.surface_ode_mu_sp.valueChanged.connect(lambda val,frictional_ode=self.surface_element.find(".//friction/ode"):
-            common.set_xml_data(frictional_ode,"mu",False,self.properties.friction_ode_mu))
+        self.ui.surface_ode_mu_sp.valueChanged.connect(lambda val:
+            common.set_xml_data(self.surface_element.find(".//friction/ode"),"mu",False,self.properties.friction_ode_mu))
         
         self.ui.surface_ode_mu2_sp.valueChanged.connect(
-            lambda val,frictional_ode=self.surface_element.find(".//friction/ode"): 
-                common.set_xml_data(frictional_ode,"mu2",False,self.properties.friction_ode_mu2)
+            lambda val: 
+                common.set_xml_data(self.surface_element.find(".//friction/ode"),"mu2",False,self.properties.friction_ode_mu2)
         )
         
         self.ui.surface_ode_slip1_sp.valueChanged.connect(
-            lambda val,frictional_ode=self.surface_element.find(".//friction/ode"): 
-                common.set_xml_data(frictional_ode,"slip1",False,self.properties.friction_ode_slip1)
+            lambda val: 
+                common.set_xml_data(self.surface_element.find(".//friction/ode"),"slip1",False,self.properties.friction_ode_slip1)
         )
         
         self.ui.surface_ode_slip2_sp.valueChanged.connect(
-            lambda val,frictional_ode=self.surface_element.find(".//friction/ode"): 
-                common.set_xml_data(frictional_ode,"slip2",False,self.properties.friction_ode_slip2)
+            lambda val: 
+                common.set_xml_data(self.surface_element.find(".//friction/ode"),"slip2",False,self.properties.friction_ode_slip2)
         )
         
         self.ui.surface_ode_fdir1_x_sp.valueChanged.connect(self.ode_fdir1)
@@ -477,16 +475,16 @@ class surface:
         #frictional_bullet
         # frictional_bullet=self.surface_element.find(".//fiction/bullet")
         self.ui.surface_bullet_friction_sp.valueChanged.connect(
-            lambda val,frictional_bullet=self.surface_element.find(".//friction/bullet"): 
-                common.set_xml_data(frictional_bullet,"friction",False,self.properties.friction_bullet_friction))
+            lambda val: 
+                common.set_xml_data(self.surface_element.find(".//friction/bullet"),"friction",False,self.properties.friction_bullet_friction))
         self.ui.surface_bullet_friction2_sp.valueChanged.connect(
-            lambda val,frictional_bullet=self.surface_element.find(".//friction/bullet"):
-                common.set_xml_data(frictional_bullet,"friction2",False,self.properties.friction_bullet_friction2)
+            lambda val:
+                common.set_xml_data(self.surface_element.find(".//friction/bullet"),"friction2",False,self.properties.friction_bullet_friction2)
         )
         
         self.ui.surface_bullet_rolling_friction_sp.valueChanged.connect(
-            lambda val,frictional_bullet=self.surface_element.find(".//friction/bullet"): 
-                common.set_xml_data(frictional_bullet,"rolling_friction",False,self.properties.friction_bullet_rolling_friction)
+            lambda val: 
+                common.set_xml_data(self.surface_element.find(".//friction/bullet"),"rolling_friction",False,self.properties.friction_bullet_rolling_friction)
         )
         
 
@@ -621,6 +619,7 @@ class surface:
         common.set_xml_data(contact,"collide_without_contact_bitmask",False,self.properties.collide_without_contact_bitmask)
         
     def on_contact_collide_bitmask(self):
+
         contact=self.surface_element.find(".//contact")
         common.set_xml_data(contact,"collide_bitmask",False,self.properties.collide_bitmask)
         
@@ -672,7 +671,7 @@ class surface:
         #contact
         contact=self.surface_element.find(".//contact")
         contact_pairs={"collide_without_contact":"collide_without_contact","collide_without_contact_bitmask":"collide_without_contact_bitmask",
-                       "category_bitmask":"category_bitmask","poissons_ratio":"poissons_ratio",
+                       "category_bitmask":"category_bitmask","poissons_ratio":"poissons_ratio","collide_bitmask":"collide_bitmask",
                        "elastic_modulus":"elastic_modulus"}
         for tag in contact_pairs.keys():
             setattr(self.properties,contact_pairs[tag],common.get_xml_data(contact,tag,False))
@@ -704,8 +703,8 @@ class surface:
     def reset(self):
         pass 
     
-    def update_elem(self,elem:ET.Element):
-        self.surface_element=elem
+    def update_element(self,item):
+        self.surface_element=item.surface_element
         self.updateUI()
         
     #return  element 

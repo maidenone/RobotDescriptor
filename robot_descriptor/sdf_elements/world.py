@@ -104,7 +104,7 @@ class world_properties():
 #------------------------------------------------------ 
 class world():
     def __init__(self):
-        super(world,self).__init__()
+        
         self.parent_path=["sdf"]
         self.tag='world'
         self.file_name="world.sdf"

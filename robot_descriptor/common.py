@@ -78,7 +78,7 @@ def set_xml_data(element:ET.Element,tag:str,Is_Attribute:bool,value:Union[dict,f
     #no need for a loop
     try:
         elem=elem_iter.__next__()
-    except:
+    except Exception:
         return None
         # ensure no dictionaries are sent for non attributes 
     if Is_Attribute is False and isinstance(value,dict) is False:

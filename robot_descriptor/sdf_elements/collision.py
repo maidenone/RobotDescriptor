@@ -38,7 +38,7 @@ class  collision_properties:
 
     
 class collison:
-    def __init__(self,parent_ui):
+    def __init__(self,parent_ui=None):
         #model editor ui 
         self.ui=parent_ui
         self.tag='collision'
@@ -49,39 +49,34 @@ class collison:
         #surface element 
         self.surface_ui=FreeCADGui.PySideUic.loadUi(os.path.join(common.UI_PATH,"surface.ui"))
         self.surface_cls=surface.surface(self.surface_ui)
-        #add widget to parent 
-        self.ui.collision_scroll.setWidget(self.surface_ui.widget)
-        
+        self.ui.collision_scroll.setWidget(self.surface_ui)
         self.configUI()
         self.updateUI()
         
-    def get_default_elem(self):
-        default_el=copy.deepcopy(self.collision_elem)
-        default_el.append(self.surface_cls.get_default_elem())
-        return  default_el
-    
-    def configUI(self):
-        self.ui.collision_max_contacts_sp.valueChanged.connect(
-            lambda value,collision_elem=self.collision_elem: common.set_xml_data(collision_elem,"max_contacts",False,self.properties.max_contacts)
-            )
-        self.ui.collision_laser_retro_sp.valueChanged.connect(
-            lambda value,collision_elem=self.collision_elem: common.set_xml_data(collision_elem,"laser_retro",False,self.properties.laser_retro)
-            )
+    def update_elements(self,item):
+        self.collision_elem=item.collision_element
+        self.surface_cls.update_element(item)
+        self.updateUI()
         
+    def configUI(self):
+        self.ui.collision_max_contacts_sp.valueChanged.connect(self.on_max_contacts)
+        self.ui.collision_laser_retro_sp.valueChanged.connect(
+            lambda value: common.set_xml_data(self.collision_elem,"laser_retro",False,self.properties.laser_retro)
+            )
+#callabcks 
+
+    def on_max_contacts(self):
+        common.set_xml_data(self.collision_elem,"max_contacts",False,self.properties.max_contacts)
+        
+    
+#end callbacks 
+
     def updateUI(self):
         data=["max_contacts","laser_retro"]
         for item in data:
             setattr(self.properties,item,common.get_xml_data(self.collision_elem,item,False))
     
-    def update_elem(self,elem:ET.Element):
-        surf=elem.find("surface")
-        if surf is not None:
-            self.surface_cls.update_elem(surf)
-            self.collision_elem=elem
-        else:
-            FreeCAD.Console.PrintDeveloperWarning("collision surf is none \n")
-        #update ui after element updates 
-        self.updateUI()
+    
             
     def reset(self):
         pass

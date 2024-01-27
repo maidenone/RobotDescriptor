@@ -5,12 +5,14 @@ import robot_descriptor.common as common
 import os
 from PySide2 import QtGui
 import copy 
+from .RD_utils import initialize_element_tree
 
 import xml.etree.ElementTree as ET
 
 from .RD_utils import parse_asm4_model
 from PySide2.QtGui import QStandardItemModel,QStandardItem
-from PySide2.QtCore import Qt,QModelIndex,QItemSelectionModel
+from PySide2.QtWidgets  import QTreeView,QDialog,QSplitter,QGridLayout,QTabWidget,QHBoxLayout,QWidget
+from PySide2.QtCore import QSize, Qt,QModelIndex,QItemSelectionModel,Signal
 from .sdf_elements import link
 from .sdf_elements import visual
 from .sdf_elements import collision
@@ -21,7 +23,7 @@ ref_img=QtGui.QImage(os.path.join(common.ICON_PATH,"ref16.png"))
 
 #start standard item
 class ModelItem(QStandardItem):
-    def __init__(self,Model_editor_ui,text,type='link'):
+    def __init__(self,model_editor_cls,text,type='link'):
         super().__init__()
         # data to describe the model 
         
@@ -31,13 +33,10 @@ class ModelItem(QStandardItem):
         #set the text to be displayed
         self.setText(text)
         self.setEditable(False)
+        self.model_cls=model_editor_cls
         #this is the parent ui 
-        self.Model_editor_ui=Model_editor_ui
-        #element ui's 
-        self.collision_ui=None
-        self.link_ui=None
-        self.visual_ui=None
-        
+        # self.Model_editor_ui=self.model_cls.Model_editor_ui
+    
         #Tasks 
         # 1. Implement function to 
                 # i. calculate inertia and write the info to the inertial element ,this might  be
@@ -53,50 +52,38 @@ class ModelItem(QStandardItem):
         #linked
         if self.type !='ref':
             self.break_ref()
+    
+    def init_elements(self):
+        self.collision_element=initialize_element_tree.convdict_2_tree('collision.sdf').get_element
+        self._link_element=initialize_element_tree.convdict_2_tree('link.sdf').get_element
+        self._inertial_element=initialize_element_tree.convdict_2_tree("inertial.sdf").get_element
+        self.surface_element=initialize_element_tree.convdict_2_tree("surface.sdf").get_element
+        self._visual_element=initialize_element_tree.convdict_2_tree("visual.sdf").get_element
+        self._material_element=initialize_element_tree.convdict_2_tree('material.sdf').get_element
         
+          
     def  create_ref(self,item):
-        #item will refer to  data stored in the reference source 
-        if self.collision_ui is not None and self.visual_ui is  not  None and self.link_ui is not None:
-            self.Model_editor_ui.ModelEditorCollisionStack.removeWidget(self.collision_ui)
-            self.Model_editor_ui.ModelEditorLinkStack.removeWidget.removeWidget(self.link_ui)
-            self.Model_editor_ui.ModelEditorVisualStack.removeWidget.removeWidget(self.visual_ui)
-
-        self._link=item._link
-        self._visual=item._visual
-        self._collision=item._collision
-        self.collision_idx=item.collision_idx
-        self.link_idx=item.link_idx
-        self.visual_idx=item.visual_idx
-        self.type='ref'
+        
+        self.collision_element=item.collision_element
+        self._link_element=item._link_element
+        self._inertial_element=item._inertial_element
+        self.surface_element=item.surface_element
+        self._visual_element=item._visual_element
+        self._material_element=item._material_element
         self.emitDataChanged()
         
-
     def break_ref(self):
-        #this will be called when reference is to broken 
-        self.collision_ui=FreeCADGui.PySideUic.loadUi(os.path.join(common.UI_PATH,'collision.ui'))
-        self.collision_idx=self.Model_editor_ui.ModelEditorCollisionStack.addWidget(self.collision_ui)
-        
-        self.link_ui=FreeCADGui.PySideUic.loadUi(os.path.join(common.UI_PATH,'link.ui'))
-        self.link_idx=self.Model_editor_ui.ModelEditorLinkStack.addWidget(self.link_ui)
-        
-        self.visual_ui=FreeCADGui.PySideUic.loadUi(os.path.join(common.UI_PATH,'visual.ui'))
-        self.visual_idx=self.Model_editor_ui.ModelEditorVisualStack.addWidget(self.visual_ui)
-        #link
-        self._link=link.link(self.link_ui)
-        #visual
-        self._visual=visual.visual(self.visual_ui)
-        #collision
-        self._collision=collision.collison(self.collision_ui)
-        self.type='link'
+        self.init_elements()
         self.emitDataChanged()
         
     def selected(self):
         #this will called when an item is clicked 
-        #it will basically  add its ui to the  model editor widget 
-        self.Model_editor_ui.ModelEditorLinkStack.setCurrentIndex(self.link_idx)
-        self.Model_editor_ui.ModelEditorCollisionStack.setCurrentIndex(self.collision_idx)
-        self.Model_editor_ui.ModelEditorVisualStack.setCurrentIndex(self.visual_idx)
+        #update  elements 
+        self.model_cls._link.update_elements(self)
+        self.model_cls._visual.update_elements(self)
+        self.model_cls._collision.update_elements(self)
         
+            
     def data(self, role: int = ...) -> Any:
         if role==Qt.DisplayRole:
             return self.text
@@ -115,17 +102,19 @@ class ModelItem(QStandardItem):
 
 
 #model editor 
-class ModelEditor:
+class ModelEditor(QWidget):
+   
+    
     def __init__(self,elem_struct):
         # find all objects of type 'App::Link'
         #doc=FreeCAD.ActiveDocument
-        
+        super(ModelEditor,self).__init__()
         
         self._elem_struct=elem_struct
         self.links_hierarchy=parse_asm4_model.read_assembly()
         if self.links_hierarchy is None:
             return 
-        self.ModelEditorUi=FreeCADGui.PySideUic.loadUi(os.path.join(common.UI_PATH,'model_editor.ui'))
+        # self.ModelEditorUi=FreeCADGui.PySideUic.loadUi(os.path.join(common.UI_PATH,'model_editor.ui'))
         
         #subelements
         self.current_elems=[]
@@ -134,29 +123,72 @@ class ModelEditor:
         self.elems={}
         #used for creating refernces for item of type ref
         self.referenced_elems={}
+    #ui's
+        self.collision_ui=FreeCADGui.PySideUic.loadUi(os.path.join(common.UI_PATH,'collision.ui'))
+        self.link_ui=FreeCADGui.PySideUic.loadUi(os.path.join(common.UI_PATH,'link.ui'))
+        self.visual_ui=FreeCADGui.PySideUic.loadUi(os.path.join(common.UI_PATH,'visual.ui'))
+    #end ui's
+    #elements 
+        self._link=link.link(self.link_ui)
+        self._visual=visual.visual(self.visual_ui)
+        self._collision=collision.collison(self.collision_ui)
+    #end elements 
+    
+        self.setUpUI()
         
         #create model 
         self.link_model=QStandardItemModel()
         self.link_model.setColumnCount(1)
         self.root_node=self.link_model.invisibleRootItem()
         self.model_tree_config(self.links_hierarchy["children"],self.root_node)
-        self.ModelEditorUi.link_tree.setSelectionMode(self.ModelEditorUi.link_tree.SingleSelection)
+        
         #add callback 
         self.config()
         
-    # start header related 
-        self.ModelEditorUi.link_tree.setHeaderHidden(False)
+    # start header related
         self.link_model.setHorizontalHeaderLabels(["Model Tree"])
         #set the  tree to resize automatically based on the display requirements
     #end header related 
     
-        self.ModelEditorUi.link_tree.setModel(self.link_model)
-        self.ModelEditorUi.exec()
-        
+    #set view model 
+        self.view.setModel(self.link_model)
+        mdl_idx0=self.link_model.index(0,0,self.view.rootIndex())
+        self.view.selectionModel().select(mdl_idx0,QItemSelectionModel.Select)
+    #display dialog 
+        self.show()
 #end __init__()
-
+   
+        
+    def sizeHint(self) -> QSize:
+        return QSize(1030,764)
+    
+    def setUpUI(self):
+        self.setWindowTitle("ModelEditor")
+    #splitter
+        self.splitter=QSplitter(self)
+        self.splitter.setOrientation(Qt.Horizontal)
+    #create the treeview 
+        self.view=QTreeView(self.splitter)
+        self.view.setHeaderHidden(False)
+        self.view.setSelectionMode(self.view.SingleSelection)
+    #set layout of the main dialog
+        grid=QGridLayout()
+        self.setLayout(grid)
+        grid.addWidget(self.splitter)
+    #create the tab widget 
+        tab=QTabWidget(self.splitter)
+        tab.addTab(self.link_ui,"link")
+        tab.addTab(self.collision_ui,"collision")
+        tab.addTab(self.visual_ui,"visual")
+        
+        self.splitter.addWidget(self.view)
+        self.splitter.addWidget(tab)
+        
+        
+    
     def config(self):
-        self.ModelEditorUi.link_tree.clicked[QModelIndex].connect(self.on_tree_item)
+        self.view.clicked[QModelIndex].connect(self.on_tree_item)
+      
     
     def on_tree_item(self,index):
         item = self.link_model.itemFromIndex(index)
@@ -172,7 +204,7 @@ class ModelEditor:
             #seee parse_asm4_model.py 
             for child in link_hierarchy:
                 name=child["name"]
-                row=ModelItem(self.ModelEditorUi,child["name"],child['type'])
+                row=ModelItem(self,child["name"],child['type'])
                 item.appendRow(row)
                 #make reference to the index of referenced link
                 #This assumes the link already exists in the referenced_elems dictionary 

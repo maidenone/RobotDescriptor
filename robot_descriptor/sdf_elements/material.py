@@ -210,8 +210,7 @@ class material_properties:
 #metal_uv_set
     @property
     def metal_uv_set(self):
-        def metal_uv_set(self):
-            return self.ui.metal_uv_set_sp.value()
+        return self.ui.metal_uv_set_sp.value()
     @metal_uv_set.setter
     def metal_uv_set(self,value):
         self.ui.metal_uv_set_sp.setValue(value)
@@ -429,11 +428,8 @@ class material(common.color_pickr):
         self.configUI()
         # self.reset(default=False)
         
-    def get_default_elem(self):
-        return copy.deepcopy(self._material_element)
-    
-    def update_elem(self,new_elem:ET.Element):
-        self._material_element=new_elem
+    def update_elements(self,item):
+        self._material_element=item._material_element
         self.updateUi()
     
     def configUI(self):
