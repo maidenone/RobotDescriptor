@@ -93,3 +93,6 @@ def read_assembly():
     return structured_data
 
     
+def get_pose_info():
+    pass
+

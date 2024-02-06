@@ -17,8 +17,8 @@ from .sdf_elements import link
 from .sdf_elements import visual
 from .sdf_elements import collision
 
-link_img=QtGui.QImage(os.path.join(common.ICON_PATH,"link16.png"))
-ref_img=QtGui.QImage(os.path.join(common.ICON_PATH,"ref16.png"))
+link_img=QtGui.QImage(os.path.join(common.ICON_PATH,"link24.png"))
+ref_img=QtGui.QImage(os.path.join(common.ICON_PATH,"ref24.png"))
 
 
 #start standard item
@@ -34,7 +34,7 @@ class ModelItem(QStandardItem):
         self.setText(text)
         self.setEditable(False)
         self.model_cls=model_editor_cls
-        #this is the parent ui 
+        
         # self.Model_editor_ui=self.model_cls.Model_editor_ui
     
         #Tasks 
@@ -48,10 +48,12 @@ class ModelItem(QStandardItem):
         # 3. add slot that can be triggered when user breaks reference  so that an element of type reference can 
         #       create its own links and not refer to parent ref item ,  also  another to  create links to a parent item 
         #       and one to update ui when to item is selected in the tree view 
+        #4. set tooltip for tree view items , i.e  references should give a clue of the parent
+        #5. right click menu will  be responsible for creating and breaking links and jumping to the the parent for references 
         
         #linked
         if self.type !='ref':
-            self.break_ref()
+            self.init_elements()
     
     def init_elements(self):
         self.collision_element=initialize_element_tree.convdict_2_tree('collision.sdf').get_element
@@ -70,10 +72,12 @@ class ModelItem(QStandardItem):
         self.surface_element=item.surface_element
         self._visual_element=item._visual_element
         self._material_element=item._material_element
+        self.type='ref'
         self.emitDataChanged()
         
     def break_ref(self):
         self.init_elements()
+        self.type='link'
         self.emitDataChanged()
         
     def selected(self):
@@ -102,7 +106,7 @@ class ModelItem(QStandardItem):
 
 
 #model editor 
-class ModelEditor(QWidget):
+class ModelEditor(QDialog):
    
     
     def __init__(self,elem_struct):
@@ -152,10 +156,11 @@ class ModelEditor(QWidget):
     
     #set view model 
         self.view.setModel(self.link_model)
+        #select the first item 
         mdl_idx0=self.link_model.index(0,0,self.view.rootIndex())
         self.view.selectionModel().select(mdl_idx0,QItemSelectionModel.Select)
     #display dialog 
-        self.show()
+        self.exec_()
 #end __init__()
    
         
